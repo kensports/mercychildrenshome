@@ -156,6 +156,18 @@ section{padding:88px 5%;}
 .verse-ref{font-size:12px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-top:16px;position:relative;z-index:1;}
 .verse-icon{width:48px;height:48px;margin-bottom:20px;position:relative;z-index:1;}
 
+/* MOTTO ANIMATIONS */
+@keyframes mottoShimmer {
+  0%{transform:translateX(-100%);}
+  100%{transform:translateX(100%);}
+}
+@keyframes mottoPulse {
+  0%,100%{opacity:1;text-shadow:0 0 20px rgba(201,168,76,.4);}
+  50%{opacity:.85;text-shadow:0 0 40px rgba(201,168,76,.8),0 0 60px rgba(201,168,76,.3);}
+}
+/* Force motto background - override any browser defaults */
+#mottoBar { background-color: #0a0e1a !important; }
+
 /* FLOATING DONATE BUTTON */
 @keyframes floatBob {
   0%,100%{transform:translateY(0px) scale(1);}
@@ -407,8 +419,10 @@ section p { line-height: 1.85; }
 </nav>
 
 <!-- MOTTO BAR -->
-<div id="mottoBar" style="position:fixed;top:64px;left:0;right:0;z-index:99;padding:14px 0;text-align:center;background:#0a0e1a;border-bottom:1px solid rgba(201,168,76,.3);box-shadow:0 4px 20px rgba(0,0,0,.2);">
-  <span id="mottoText" style="font-weight:800;letter-spacing:4px;text-transform:uppercase;color:#c9a84c;font-size:clamp(13px,2.5vw,18px);text-shadow:0 0 30px rgba(201,168,76,.5);">✝&nbsp;&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;&nbsp;✝</span>
+<div id="mottoBar" style="position:fixed;top:64px;left:0;right:0;z-index:99;padding:14px 0;text-align:center;background:#0a0e1a !important;border-bottom:1px solid rgba(201,168,76,.3);box-shadow:0 4px 20px rgba(0,0,0,.3);overflow:hidden;">
+  <!-- Animated shimmer background -->
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(201,168,76,.06) 50%,transparent 100%);animation:mottoShimmer 3s ease-in-out infinite;pointer-events:none;"></div>
+  <span id="mottoText" style="position:relative;z-index:1;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:#c9a84c;font-size:clamp(13px,2.5vw,18px);text-shadow:0 0 30px rgba(201,168,76,.5);animation:mottoPulse 2.5s ease-in-out infinite;">✝&nbsp;&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;&nbsp;✝</span>
 </div>
 
 <!-- HERO -->
@@ -2553,7 +2567,8 @@ function applyMotto(d) {
   var font = d.mottoFont || 'uppercase-bold';
   var mottoStr = d.mottoText || '✝   Together We Are The Church   ✝';
 
-  bar.style.background = bg;
+  bar.style.setProperty('background', bg, 'important');
+  bar.style.setProperty('background-color', bg, 'important');
   bar.style.borderBottom = '1px solid ' + color + '44';
   text.textContent = mottoStr;
   text.style.color = color;
@@ -2587,6 +2602,8 @@ function applyMotto(d) {
   }
 }
 
+var mottoSaveTimer = null;
+
 function previewMotto() {
   var preview = document.getElementById('mottoPreviewText');
   if (!preview) return;
@@ -2599,7 +2616,8 @@ function previewMotto() {
   preview.textContent = mottoStr;
   preview.style.color = color;
   preview.style.fontSize = size;
-  document.getElementById('mottoPreview').style.background = bg;
+  var mp = document.getElementById('mottoPreview');
+  if (mp) mp.style.background = bg;
 
   if (font === 'uppercase-bold') {
     preview.style.textTransform = 'uppercase'; preview.style.fontWeight = '800';
@@ -2618,11 +2636,30 @@ function previewMotto() {
     preview.style.fontStyle = 'normal'; preview.style.letterSpacing = '2px';
   }
 
-  // Also preview live on page
-  applyMotto({
-    mottoColor: color, mottoBg: bg, mottoSize: size.replace('px',''),
+  var mottoData = {
+    mottoColor: color, mottoBg: bg,
+    mottoSize: size.replace('px',''),
     mottoFont: font, mottoText: mottoStr
-  });
+  };
+
+  // Apply live on page immediately
+  applyMotto(mottoData);
+
+  // Auto-save to Supabase after 800ms of no changes (debounced)
+  if (mottoSaveTimer) clearTimeout(mottoSaveTimer);
+  mottoSaveTimer = setTimeout(function() {
+    var d = getData();
+    d.mottoColor = mottoData.mottoColor;
+    d.mottoBg = mottoData.mottoBg;
+    d.mottoSize = mottoData.mottoSize;
+    d.mottoFont = mottoData.mottoFont;
+    d.mottoText = mottoData.mottoText;
+    setData(d).then(function() {
+      showToast('Motto synced to all devices! ✅');
+    }).catch(function() {
+      showToast('Saved locally only', true);
+    });
+  }, 800);
 }
 
 // Sync color picker with hex input
