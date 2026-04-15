@@ -883,14 +883,59 @@ function getSupaPhotoURL(filename) {
   return SUPA_URL + '/storage/v1/object/public/' + BUCKET + '/' + filename;
 }
 
-function getPhotoMeta() {
-  try { return JSON.parse(localStorage.getItem(PHOTO_META_KEY) || '{}'); } catch(e) { return {}; }
+// Photo metadata stored in Supabase - works across ALL devices
+var photoCache = null; // local cache to avoid repeated fetches
+
+async function getPhotoMeta() {
+  if (photoCache) return photoCache;
+  try {
+    var res = await fetch(SUPA_URL + '/rest/v1/mch_photos?select=id,filename', {
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY
+      }
+    });
+    var rows = await res.json();
+    var meta = {};
+    if (Array.isArray(rows)) {
+      rows.forEach(function(r) { meta[r.id] = r.filename; });
+    }
+    photoCache = meta;
+    return meta;
+  } catch(e) {
+    console.warn('Failed to load photos:', e);
+    return {};
+  }
 }
-function setPhotoMeta(key, filename) {
-  var meta = getPhotoMeta();
-  if (filename) meta[key] = filename;
-  else delete meta[key];
-  localStorage.setItem(PHOTO_META_KEY, JSON.stringify(meta));
+
+async function setPhotoMeta(key, filename) {
+  photoCache = null; // clear cache
+  if (filename) {
+    // Upsert into Supabase
+    await fetch(SUPA_URL + '/rest/v1/mch_photos', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates'
+      },
+      body: JSON.stringify({ id: key, filename: filename })
+    });
+  } else {
+    // Delete from Supabase
+    await fetch(SUPA_URL + '/rest/v1/mch_photos?id=eq.' + encodeURIComponent(key), {
+      method: 'DELETE',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY
+      }
+    });
+  }
+}
+
+function getPhotoURL(key) {
+  return photoCache ? (photoCache[key] ? getSupaPhotoURL(photoCache[key]) : null) : null;
 }
 
 async function uploadToSupabase(file, key) {
@@ -994,8 +1039,8 @@ function applyData() {
 }
 
 // ===== LOAD ALL PHOTOS FROM SUPABASE =====
-function loadAllPhotos() {
-  var meta = getPhotoMeta();
+async function loadAllPhotos() {
+  var meta = await getPhotoMeta();
   // Gallery photos 0-7
   for (var i = 0; i < 8; i++) {
     (function(idx) {
@@ -1006,7 +1051,11 @@ function loadAllPhotos() {
         var url = getSupaPhotoURL(filename);
         el.style.position = 'relative';
         el.style.background = 'none';
-        el.innerHTML = '<img src="' + url + '?t=' + Date.now() + '" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;" crossorigin="anonymous" />';
+        var img = document.createElement('img');
+        img.src = url;
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;';
+        el.innerHTML = '';
+        el.appendChild(img);
       }
     })(i);
   }
@@ -1017,13 +1066,17 @@ function loadAllPhotos() {
     var url = getSupaPhotoURL(founderFile);
     founderEl.style.position = 'relative';
     founderEl.style.background = 'none';
-    founderEl.innerHTML = '<img src="' + url + '?t=' + Date.now() + '" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;" crossorigin="anonymous" />';
+    var img2 = document.createElement('img');
+    img2.src = url;
+    img2.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;';
+    founderEl.innerHTML = '';
+    founderEl.appendChild(img2);
   }
-  loadSponsorPhotosPublic();
+  loadSponsorPhotosPublic(meta);
 }
 
-function loadSponsorPhotosPublic() {
-  var meta = getPhotoMeta();
+async function loadSponsorPhotosPublic(meta) {
+  if (!meta) meta = await getPhotoMeta();
   var grid = document.getElementById('sponsorPhotosGrid');
   var section = document.getElementById('sponsorPhotosSection');
   if (!grid) return;
@@ -1034,10 +1087,12 @@ function loadSponsorPhotosPublic() {
     var filename = meta['spphoto_' + i];
     if (filename) {
       shown++;
-      var url = getSupaPhotoURL(filename);
       var div = document.createElement('div');
       div.style.cssText = 'border-radius:12px;overflow:hidden;aspect-ratio:1;background:var(--card);border:1px solid var(--border);';
-      div.innerHTML = '<img src="' + url + '" style="width:100%;height:100%;object-fit:cover;display:block;" crossorigin="anonymous" />';
+      var img = document.createElement('img');
+      img.src = getSupaPhotoURL(filename);
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+      div.appendChild(img);
       grid.appendChild(div);
     }
   }
@@ -1045,11 +1100,11 @@ function loadSponsorPhotosPublic() {
 }
 
 // ===== PHOTO GRIDS IN ADMIN =====
-function renderPhotoGrid() {
+async function renderPhotoGrid() {
   var grid = document.getElementById('photoGrid');
   if (!grid) return;
   grid.innerHTML = '';
-  var meta = getPhotoMeta();
+  var meta = await getPhotoMeta();
   for (var i = 0; i < 8; i++) {
     (function(idx) {
       var key = 'gallery_' + idx;
@@ -1098,11 +1153,11 @@ function renderPhotoGrid() {
 }
 
 
-function renderFounderPhotoGrid() {
+async function renderFounderPhotoGrid() {
   var grid = document.getElementById('founderPhotoGrid');
   if (!grid) return;
   grid.innerHTML = '';
-  var meta = getPhotoMeta();
+  var meta = await getPhotoMeta();
   var filename = meta['founder'];
   var slot = document.createElement('div');
   slot.style.cssText = 'background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:10px;display:grid;grid-template-columns:70px 1fr;gap:10px;align-items:center;';
@@ -1141,12 +1196,12 @@ function renderFounderPhotoGrid() {
 }
 
 
-function renderSponsorPhotoGrid() {
+async function renderSponsorPhotoGrid() {
   var count = parseInt(localStorage.getItem('mch_spphotos') || '0');
   var grid = document.getElementById('sponsorPhotoGrid');
   if (!grid) return;
   grid.innerHTML = '';
-  var meta = getPhotoMeta();
+  var meta = await getPhotoMeta();
   for (var i = 0; i < count; i++) {
     (function(idx) {
       var key = 'spphoto_' + idx;
@@ -1199,27 +1254,28 @@ async function handlePhotoUpload(e, key) {
   showToast('Uploading... please wait ⏳');
   try {
     var filename = await uploadToSupabase(file, key);
-    setPhotoMeta(key, filename);
-    loadAllPhotos();
-    renderPhotoGrid();
-    renderFounderPhotoGrid();
-    renderSponsorPhotoGrid();
-    loadSponsorPhotosPublic();
-    showToast('Photo uploaded! ✅ Shows on all devices now');
+    await setPhotoMeta(key, filename);
+    await loadAllPhotos();
+    await renderPhotoGrid();
+    await renderFounderPhotoGrid();
+    await renderSponsorPhotoGrid();
+    showToast('Photo uploaded! ✅ Visible on ALL devices now');
   } catch(err) {
+    console.error(err);
     showToast('Upload failed: ' + err.message, true);
   }
   e.target.value = '';
 }
 
+
 async function deletePhoto(key, filename) {
   if (!confirm('Delete this photo?')) return;
   try {
     await deleteFromSupabase(filename);
-    setPhotoMeta(key, null);
-    loadAllPhotos();
-    renderPhotoGrid();
-    renderFounderPhotoGrid();
+    await setPhotoMeta(key, null);
+    await loadAllPhotos();
+    await renderPhotoGrid();
+    await renderFounderPhotoGrid();
     showToast('Photo deleted');
   } catch(err) {
     showToast('Delete failed', true);
@@ -1230,9 +1286,9 @@ async function deleteSponsorPhoto(idx, filename) {
   if (!confirm('Remove this sponsor photo?')) return;
   try {
     if (filename) await deleteFromSupabase(filename);
-    setPhotoMeta('spphoto_' + idx, null);
-    renderSponsorPhotoGrid();
-    loadSponsorPhotosPublic();
+    await setPhotoMeta('spphoto_' + idx, null);
+    await renderSponsorPhotoGrid();
+    await loadSponsorPhotosPublic();
     showToast('Photo removed');
   } catch(err) {
     showToast('Error removing photo', true);
@@ -1279,7 +1335,7 @@ function showToast(msg, isErr) {
 }
 
 // ===== ADMIN =====
-function openAdmin() {
+async function openAdmin() {
   if (!unlocked) {
     document.getElementById('pwdOverlay').style.display = 'flex';
     setTimeout(function() { document.getElementById('pwdInput').focus(); }, 100);
@@ -1293,7 +1349,7 @@ function openAdmin() {
   }
 }
 function closeAdmin() { document.getElementById('adminOverlay').classList.remove('open'); }
-function checkPwd() {
+async function checkPwd() {
   var v = document.getElementById('pwdInput').value;
   if (v === getPwd()) {
     unlocked = true;
@@ -1301,9 +1357,9 @@ function checkPwd() {
     document.getElementById('pwdInput').value = '';
     document.getElementById('adminOverlay').classList.add('open');
     loadAdmFields();
-    renderPhotoGrid();
-    renderFounderPhotoGrid();
-    renderSponsorPhotoGrid();
+    await renderPhotoGrid();
+    await renderFounderPhotoGrid();
+    await renderSponsorPhotoGrid();
     renderAdminSponsors();
   } else {
     showToast('Wrong password!', true);
@@ -1316,7 +1372,7 @@ function admTab(tab, el) {
   el.classList.add('active');
   document.getElementById('adm-' + tab).classList.add('active');
   if (tab === 'sponsors') renderAdminSponsors();
-  if (tab === 'photos') { renderPhotoGrid(); renderFounderPhotoGrid(); renderSponsorPhotoGrid(); }
+  if (tab === 'photos') { renderPhotoGrid(); renderFounderPhotoGrid(); renderSponsorPhotoGrid(); } // all async
 }
 
 function loadAdmFields() {
@@ -1598,7 +1654,7 @@ function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;'
 
 // ===== INIT =====
 applyData();
-loadAllPhotos();
+loadAllPhotos();  // async - loads from Supabase
 renderPublicSponsors();
 initAnimations();
 
