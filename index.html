@@ -156,6 +156,7 @@ section{padding:88px 5%;}
 .verse-ref{font-size:12px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-top:16px;position:relative;z-index:1;}
 .verse-icon{width:48px;height:48px;margin-bottom:20px;position:relative;z-index:1;}
 
+@media(min-width:900px){#navMotto{display:inline-flex !important;}}
 /* FLOATING DONATE BUTTON */
 @keyframes floatBob {
   0%,100%{transform:translateY(0px) scale(1);}
@@ -395,6 +396,9 @@ section p { line-height: 1.85; }
     </div>
     <div class="nav-name">Mercy Children's Home<small>Kasanda Bukuya · Uganda</small></div>
   </a>
+  <div class="nav-motto" style="display:flex;align-items:center;flex:1;justify-content:center;">
+    <span style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border:1px solid rgba(201,168,76,.3);border-radius:20px;background:rgba(201,168,76,.08);white-space:nowrap;display:none;" id="navMotto">✝ Together We Are The Church</span>
+  </div>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#goal">Goal</a>
@@ -594,7 +598,7 @@ section p { line-height: 1.85; }
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:14px;">
-        <div id="gi-1" style="border-radius:20px;overflow:hidden;aspect-ratio:3/4;background:var(--card);border:1px solid var(--border);cursor:pointer;position:relative;">
+        <div id="gi-1" style="border-radius:20px;overflow:hidden;aspect-ratio:3/4;min-height:350px;background:var(--card);border:1px solid var(--border);cursor:pointer;position:relative;">
           <div id="founderPhotoPlaceholder" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
             <svg style="width:40px;height:40px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             <span style="font-size:13px;color:var(--text2);">Founder Photo</span>
@@ -810,7 +814,7 @@ section p { line-height: 1.85; }
         <div class="fg"><label>First Name</label><input type="text" placeholder="John"/></div>
         <div class="fg"><label>Last Name</label><input type="text" placeholder="Doe"/></div>
       </div>
-      <div class="fg"><label>Email</label><input type="email" placeholder="john@example.com"/></div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com" autocomplete="off"/></div>
       <div class="fg"><label>Subject</label>
         <select style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:14px;font-family:'Outfit',sans-serif;color:var(--text);outline:none;">
           <option>General Inquiry</option>
@@ -833,6 +837,20 @@ section p { line-height: 1.85; }
 <div id="sponsorPhotosSection" style="display:none;background:var(--bg);padding:0 5% 40px;">
   <div id="sponsorPhotosGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;max-width:900px;margin:0 auto;"></div>
 </div>
+
+
+<!-- TEAM SECTION -->
+<section style="background:var(--bg);padding:88px 5%;" id="team">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <div class="sec-tag reveal">Our Team</div>
+      <h2 class="sec-title reveal reveal-delay-1">The People Behind The Mission</h2>
+      <p class="sec-sub reveal reveal-delay-2" style="margin:0 auto;">Dedicated servants of God, working together to bring hope to every child.</p>
+    </div>
+    <div id="teamGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:20px;"></div>
+    <div id="noTeam" style="text-align:center;padding:40px;color:var(--text2);font-size:14px;">Add team members in the Admin Panel → Team tab</div>
+  </div>
+</section>
 
 <!-- SPONSORS WALL -->
 <section style="background:var(--bg2);padding:88px 5%;" id="sponsors">
@@ -911,8 +929,9 @@ section p { line-height: 1.85; }
       <button class="adm-close" onclick="closeAdmin()">✕</button>
     </div>
     <div class="adm-tabs">
-      <button class="adm-tab" onclick="admTab('photos',this)">Photos</button>
+      <button class="adm-tab active" onclick="admTab('photos',this)">Photos</button>
       <button class="adm-tab" onclick="admTab('sponsors',this)">Sponsors</button>
+      <button class="adm-tab" onclick="admTab('team',this)">Team</button>
       <button class="adm-tab" onclick="admTab('content',this)">Content</button>
       <button class="adm-tab" onclick="admTab('contact',this)">Contact</button>
       <button class="adm-tab" onclick="admTab('stats',this)">Stats</button>
@@ -969,6 +988,28 @@ section p { line-height: 1.85; }
           <button class="adm-btn" onclick="saveSponsors()">Save All Sponsors</button>
           <button class="adm-btn danger" onclick="clearSponsors()">Clear All</button>
         </div>
+      </div>
+
+      <div class="adm-sec" id="adm-team">
+        <p style="font-size:12px;color:var(--text2);margin-bottom:16px;">Add staff/team members with photos and names. Shows on the website.</p>
+        <div id="teamAdminList" style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;"></div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px;">
+          <p style="font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">Add New Member</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+            <div class="af" style="margin:0;"><label>Full Name</label><input type="text" id="tm-name" placeholder="e.g. Ssengonzi Alex"/></div>
+            <div class="af" style="margin:0;"><label>Role/Title</label><input type="text" id="tm-role" placeholder="e.g. Founder & Director"/></div>
+          </div>
+          <div class="af" style="margin-bottom:10px;">
+            <label>Photo</label>
+            <label style="display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#000;padding:7px 12px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
+              <svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload Photo<input type="file" accept="image/*" id="tm-photo" style="display:none;"/>
+            </label>
+            <span id="tm-photo-status" style="font-size:11px;color:var(--text2);margin-left:8px;"></span>
+          </div>
+          <button class="adm-btn" onclick="addTeamMember()">+ Add Member</button>
+        </div>
+        <button class="adm-btn danger" onclick="clearTeam()">Clear All Members</button>
       </div>
 
       <div class="adm-sec" id="adm-content">
@@ -1632,6 +1673,7 @@ function admTab(tab, el) {
   el.classList.add('active');
   document.getElementById('adm-' + tab).classList.add('active');
   if (tab === 'sponsors') renderAdminSponsors();
+  if (tab === 'team') { renderTeamAdmin(); }
   if (tab === 'photos') { renderPhotoGrid(); renderFounderPhotoGrid(); renderSponsorPhotoGrid(); } // all async
 }
 
@@ -1896,6 +1938,7 @@ function initAnimations() {
       }
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  window._animObserver = obs;
 
   document.querySelectorAll('.anim').forEach(function(el) { obs.observe(el); });
 
@@ -1921,6 +1964,7 @@ loadAllPhotos();  // async - loads from Supabase
 loadLogo();  // async - load foundation logo
 renderPublicSponsors();
 updateFundsDisplay();  // async
+renderTeamPublic();  // async
 initAnimations();
 initFloatDonate();
 setTimeout(makeGalleryClickable, 2000);  // after photos load
@@ -2115,6 +2159,152 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'ArrowLeft') lightboxNav(-1);
   if (e.key === 'Escape') closeLightbox();
 });
+
+// ===== TEAM MEMBERS =====
+var TEAM_KEY = 'mch_team';
+var teamPhotoUploadPending = null;
+
+async function getTeam() {
+  try {
+    var res = await fetch(SUPA_URL + '/rest/v1/mch_photos?id=eq.team_data&select=filename', {
+      headers: {'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY}
+    });
+    var rows = await res.json();
+    if (Array.isArray(rows) && rows.length > 0) {
+      return JSON.parse(rows[0].filename);
+    }
+  } catch(e) {}
+  try { return JSON.parse(localStorage.getItem(TEAM_KEY) || '[]'); } catch(e) { return []; }
+}
+
+async function setTeam(members) {
+  var json = JSON.stringify(members);
+  localStorage.setItem(TEAM_KEY, json);
+  try {
+    await fetch(SUPA_URL + '/rest/v1/mch_photos', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates'
+      },
+      body: JSON.stringify({id: 'team_data', filename: json})
+    });
+  } catch(e) {}
+}
+
+async function renderTeamPublic() {
+  var members = await getTeam();
+  var grid = document.getElementById('teamGrid');
+  var none = document.getElementById('noTeam');
+  if (!grid) return;
+  if (!members.length) {
+    grid.innerHTML = '';
+    if (none) none.style.display = 'block';
+    return;
+  }
+  if (none) none.style.display = 'none';
+  grid.innerHTML = '';
+  members.forEach(function(m) {
+    var card = document.createElement('div');
+    card.className = 'reveal up';
+    card.style.cssText = 'background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px;text-align:center;transition:transform .3s,box-shadow .3s;';
+    card.onmouseenter = function(){this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(201,168,76,.12)';};
+    card.onmouseleave = function(){this.style.transform='';this.style.boxShadow='';};
+    var photoHtml = m.photoUrl
+      ? '<img src="'+m.photoUrl+'" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin:0 auto 14px;display:block;" />'
+      : '<div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#1a3060,#2563eb);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;"><svg style="width:40px;height:40px;fill:none;stroke:white;stroke-width:1.5;stroke-linecap:round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+    card.innerHTML = photoHtml
+      + '<div style="serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:4px;">'+esc(m.name)+'</div>'
+      + '<div style="font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;font-weight:600;">'+esc(m.role)+'</div>';
+    grid.appendChild(card);
+  });
+  // Re-observe new elements for animations
+  if (window._animObserver) {
+    grid.querySelectorAll('.reveal').forEach(function(el) { window._animObserver.observe(el); });
+  }
+}
+
+async function renderTeamAdmin() {
+  var members = await getTeam();
+  var list = document.getElementById('teamAdminList');
+  if (!list) return;
+  if (!members.length) {
+    list.innerHTML = '<p style="font-size:13px;color:var(--text2);text-align:center;padding:12px;">No team members yet.</p>';
+    return;
+  }
+  list.innerHTML = '';
+  members.forEach(function(m, i) {
+    var row = document.createElement('div');
+    row.style.cssText = 'background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;align-items:center;gap:12px;';
+    var avatar = m.photoUrl
+      ? '<img src="'+m.photoUrl+'" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;" />'
+      : '<div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg style="width:20px;height:20px;fill:none;stroke:white;stroke-width:1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+    row.innerHTML = avatar
+      + '<div style="flex:1;"><div style="font-size:13px;font-weight:700;color:var(--white);">'+esc(m.name)+'</div>'
+      + '<div style="font-size:11px;color:var(--gold);">'+esc(m.role)+'</div></div>';
+    var del = document.createElement('button');
+    del.textContent = 'Remove';
+    del.style.cssText = 'background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:6px 10px;border-radius:7px;font-size:11px;cursor:pointer;';
+    del.onclick = (function(idx){ return async function() {
+      var members2 = await getTeam();
+      members2.splice(idx, 1);
+      await setTeam(members2);
+      renderTeamAdmin();
+      renderTeamPublic();
+      showToast('Member removed');
+    }; })(i);
+    row.appendChild(del);
+    list.appendChild(row);
+  });
+}
+
+// Handle team photo selection
+document.addEventListener('DOMContentLoaded', function() {
+  var tmPhoto = document.getElementById('tm-photo');
+  if (tmPhoto) {
+    tmPhoto.onchange = function(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      var status = document.getElementById('tm-photo-status');
+      if (status) status.textContent = '📎 ' + file.name;
+      teamPhotoUploadPending = file;
+    };
+  }
+});
+
+async function addTeamMember() {
+  var name = document.getElementById('tm-name').value.trim();
+  var role = document.getElementById('tm-role').value.trim();
+  if (!name) { showToast('Enter a name', true); return; }
+  showToast('Adding member... ⏳');
+  var photoUrl = null;
+  if (teamPhotoUploadPending) {
+    try {
+      var filename = await uploadToSupabase(teamPhotoUploadPending, 'team_' + Date.now());
+      photoUrl = getSupaPhotoURL(filename);
+    } catch(e) { showToast('Photo upload failed, member added without photo', true); }
+  }
+  var members = await getTeam();
+  members.push({name: name, role: role || 'Team Member', photoUrl: photoUrl});
+  await setTeam(members);
+  document.getElementById('tm-name').value = '';
+  document.getElementById('tm-role').value = '';
+  document.getElementById('tm-photo').value = '';
+  var status = document.getElementById('tm-photo-status');
+  if (status) status.textContent = '';
+  teamPhotoUploadPending = null;
+  renderTeamAdmin();
+  renderTeamPublic();
+  showToast('Team member added! ✅');
+}
+
+async function clearTeam() {
+  if (!confirm('Remove all team members?')) return;
+  await setTeam([]);
+  renderTeamAdmin();
+  renderTeamPublic();
+  showToast('Team cleared');
+}
 </script>
 </body>
 </html>
