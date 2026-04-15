@@ -41,7 +41,7 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .mob-close{position:absolute;top:20px;right:24px;font-size:24px;cursor:pointer;color:var(--text2);}
 
 /* HERO */
-.hero{min-height:100vh;padding:100px 5% 70px;display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero{min-height:100vh;padding:140px 5% 70px;display:flex;align-items:center;position:relative;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(37,99,235,.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.07) 0%,transparent 50%),var(--bg);}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:60px 60px;}
 .hero-content{position:relative;z-index:1;max-width:640px;}
@@ -156,7 +156,6 @@ section{padding:88px 5%;}
 .verse-ref{font-size:12px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-top:16px;position:relative;z-index:1;}
 .verse-icon{width:48px;height:48px;margin-bottom:20px;position:relative;z-index:1;}
 
-@media(min-width:900px){#navMotto{display:inline-flex !important;}}
 /* FLOATING DONATE BUTTON */
 @keyframes floatBob {
   0%,100%{transform:translateY(0px) scale(1);}
@@ -396,9 +395,6 @@ section p { line-height: 1.85; }
     </div>
     <div class="nav-name">Mercy Children's Home<small>Kasanda Bukuya · Uganda</small></div>
   </a>
-  <div class="nav-motto" style="display:flex;align-items:center;flex:1;justify-content:center;">
-    <span style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border:1px solid rgba(201,168,76,.3);border-radius:20px;background:rgba(201,168,76,.08);white-space:nowrap;display:none;" id="navMotto">✝ Together We Are The Church</span>
-  </div>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#goal">Goal</a>
@@ -409,6 +405,11 @@ section p { line-height: 1.85; }
   </div>
   <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
 </nav>
+
+<!-- MOTTO BAR -->
+<div style="position:fixed;top:64px;left:0;right:0;z-index:99;background:linear-gradient(90deg,rgba(10,14,26,.98),rgba(13,31,60,.98));border-bottom:1px solid rgba(201,168,76,.25);padding:7px 0;text-align:center;">
+  <span style="font-size:11px;font-weight:800;color:var(--gold);letter-spacing:3px;text-transform:uppercase;text-shadow:0 0 20px rgba(201,168,76,.4);">✝&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;✝</span>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -1078,6 +1079,29 @@ section p { line-height: 1.85; }
   <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
 
+<!-- EDIT TEAM MEMBER MODAL -->
+<div id="editMemberOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:900;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:28px;width:100%;max-width:380px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 style="font-size:18px;color:var(--white);">Edit Member</h3>
+      <button onclick="closeEditMember()" style="background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;">✕</button>
+    </div>
+    <div class="af"><label>Full Name</label><input type="text" id="edit-tm-name" style="width:100%;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:14px;color:var(--text);outline:none;"/></div>
+    <div class="af" style="margin-top:12px;"><label>Role/Title</label><input type="text" id="edit-tm-role" style="width:100%;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:14px;color:var(--text);outline:none;"/></div>
+    <div style="margin-top:12px;">
+      <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Change Photo (optional)</div>
+      <label style="display:inline-flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:12px;cursor:pointer;">
+        📷 Choose New Photo<input type="file" accept="image/*" id="edit-tm-photo" style="display:none;"/>
+      </label>
+      <span id="edit-tm-photo-status" style="font-size:11px;color:var(--text2);margin-left:8px;"></span>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px;">
+      <button onclick="saveEditMember()" style="flex:1;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:12px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;">Save Changes</button>
+      <button onclick="closeEditMember()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:12px 16px;border-radius:10px;font-size:14px;cursor:pointer;">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <input type="file" id="fileIn" accept="image/*" style="display:none;" onchange="handlePhoto(event)"/>
 <div class="toast" id="toast"><span class="toast-icon" id="toastIcon"></span><span id="toastMsg"></span></div>
 
@@ -1208,7 +1232,7 @@ var DEF={
   heroDesc:"Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda. Together we can change their story.",
   aboutText:"Mercy Children's Home is a faith-based non-profit organization located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.",
   year:"2020", location:"Kasanda Bukuya, Uganda", phone:"+256 751 442 505",
-  email:"info@mercychildrenshome.org", fb:"https://www.facebook.com/TheloveofJesusfoundation?mibextid=rS40aB7S9Ucbxw6v", ig:"https://www.instagram.com/mercychildrensfamilyuganda", yt:"https://youtube.com/@mercychidrenshomeug4969?si=AUnM9l7ssI3Let6D", tt:"https://www.tiktok.com/@mercy.home.ug?_r=1&_t=ZS-95YTJ705bY0",
+  email:"mercychildrenshomeug2024@gmail.com", fb:"https://www.facebook.com/TheloveofJesusfoundation?mibextid=rS40aB7S9Ucbxw6v", ig:"https://www.instagram.com/mercychildrensfamilyuganda", yt:"https://youtube.com/@mercychidrenshomeug4969?si=AUnM9l7ssI3Let6D", tt:"https://www.tiktok.com/@mercy.home.ug?_r=1&_t=ZS-95YTJ705bY0",
   gfm:"https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968",
   s1n:"50+", s1l:"Children Helped", s2n:"4+", s2l:"Years of Service", s3n:"100%", s3l:"Love & Care"
 };
@@ -2242,10 +2266,17 @@ async function renderTeamAdmin() {
     row.innerHTML = avatar
       + '<div style="flex:1;"><div style="font-size:13px;font-weight:700;color:var(--white);">'+esc(m.name)+'</div>'
       + '<div style="font-size:11px;color:var(--gold);">'+esc(m.role)+'</div></div>';
+    // Edit button
+    var edit = document.createElement('button');
+    edit.textContent = 'Edit';
+    edit.style.cssText = 'background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:6px 10px;border-radius:7px;font-size:11px;cursor:pointer;margin-right:6px;';
+    edit.onclick = (function(idx){ return function() { openEditMember(idx); }; })(i);
+    // Delete button
     var del = document.createElement('button');
     del.textContent = 'Remove';
     del.style.cssText = 'background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:6px 10px;border-radius:7px;font-size:11px;cursor:pointer;';
     del.onclick = (function(idx){ return async function() {
+      if (!confirm('Remove this member?')) return;
       var members2 = await getTeam();
       members2.splice(idx, 1);
       await setTeam(members2);
@@ -2253,7 +2284,11 @@ async function renderTeamAdmin() {
       renderTeamPublic();
       showToast('Member removed');
     }; })(i);
-    row.appendChild(del);
+    var btns = document.createElement('div');
+    btns.style.cssText = 'display:flex;gap:4px;flex-shrink:0;';
+    btns.appendChild(edit);
+    btns.appendChild(del);
+    row.appendChild(btns);
     list.appendChild(row);
   });
 }
@@ -2304,6 +2339,59 @@ async function clearTeam() {
   renderTeamAdmin();
   renderTeamPublic();
   showToast('Team cleared');
+}
+
+// ===== EDIT TEAM MEMBER =====
+var editMemberIndex = -1;
+var editMemberPhotoPending = null;
+
+async function openEditMember(idx) {
+  editMemberIndex = idx;
+  editMemberPhotoPending = null;
+  var members = await getTeam();
+  var m = members[idx];
+  document.getElementById('edit-tm-name').value = m.name || '';
+  document.getElementById('edit-tm-role').value = m.role || '';
+  document.getElementById('edit-tm-photo-status').textContent = '';
+  document.getElementById('edit-tm-photo').value = '';
+  var overlay = document.getElementById('editMemberOverlay');
+  overlay.style.display = 'flex';
+  // Photo change handler
+  document.getElementById('edit-tm-photo').onchange = function(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    editMemberPhotoPending = file;
+    document.getElementById('edit-tm-photo-status').textContent = '📎 ' + file.name;
+  };
+}
+
+function closeEditMember() {
+  document.getElementById('editMemberOverlay').style.display = 'none';
+  editMemberIndex = -1;
+  editMemberPhotoPending = null;
+}
+
+async function saveEditMember() {
+  var name = document.getElementById('edit-tm-name').value.trim();
+  var role = document.getElementById('edit-tm-role').value.trim();
+  if (!name) { showToast('Name cannot be empty', true); return; }
+  showToast('Saving... ⏳');
+  var members = await getTeam();
+  var m = members[editMemberIndex];
+  m.name = name;
+  m.role = role || 'Team Member';
+  if (editMemberPhotoPending) {
+    try {
+      var filename = await uploadToSupabase(editMemberPhotoPending, 'team_' + Date.now());
+      m.photoUrl = getSupaPhotoURL(filename);
+    } catch(e) { showToast('Photo upload failed', true); }
+  }
+  members[editMemberIndex] = m;
+  await setTeam(members);
+  closeEditMember();
+  renderTeamAdmin();
+  renderTeamPublic();
+  showToast('Member updated! ✅');
 }
 </script>
 </body>
