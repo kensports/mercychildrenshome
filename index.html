@@ -484,8 +484,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:14px;">
-        <div id="gi-1" style="border-radius:20px;overflow:hidden;aspect-ratio:3/4;background:var(--card);border:1px solid var(--border);cursor:pointer;">
-          <div class="g-placeholder" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+        <div id="gi-1" style="border-radius:20px;overflow:hidden;aspect-ratio:3/4;background:var(--card);border:1px solid var(--border);cursor:pointer;position:relative;">
+          <div id="founderPhotoPlaceholder" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
             <svg style="width:40px;height:40px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             <span style="font-size:13px;color:var(--text2);">Founder Photo</span>
           </div>
@@ -696,6 +696,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   </div>
 </section>
 
+<!-- SPONSOR PHOTOS -->
+<div id="sponsorPhotosSection" style="display:none;background:var(--bg);padding:0 5% 40px;">
+  <div id="sponsorPhotosGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;max-width:900px;margin:0 auto;"></div>
+</div>
+
 <!-- SPONSORS WALL -->
 <section style="background:var(--bg2);padding:88px 5%;" id="sponsors">
   <div style="max-width:900px;margin:0 auto;">
@@ -783,9 +788,18 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <div class="adm-body">
 
       <div class="adm-sec active" id="adm-photos">
-        <p style="font-size:12px;color:var(--text2);margin-bottom:14px;">Click any slot to upload a photo. Supports up to 8 photos.</p>
+        <p style="font-size:12px;color:var(--text2);margin-bottom:16px;">Tap any slot to upload. Photos save instantly and show on all devices.</p>
+
+        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">📷 Gallery Photos (8 slots)</div>
         <div class="photo-grid" id="photoGrid"></div>
-        <button class="adm-btn" onclick="showToast('Photos saved! ✅')">Save Photos</button>
+
+        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;">👤 Founder Photo</div>
+        <div class="photo-grid" id="founderPhotoGrid" style="grid-template-columns:repeat(2,1fr);"></div>
+
+        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;">🌍 Sponsors Photos</div>
+        <p style="font-size:11px;color:var(--text2);margin-bottom:10px;">Upload photos from your sponsors (USA friends etc.)</p>
+        <div class="photo-grid" id="sponsorPhotoGrid" style="grid-template-columns:repeat(4,1fr);"></div>
+        <button class="adm-btn" style="margin-top:8px;" onclick="addSponsorPhotoSlot()">+ Add Sponsor Photo Slot</button>
       </div>
 
       <div class="adm-sec" id="adm-sponsors">
@@ -858,275 +872,686 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 <div class="toast" id="toast"><span class="toast-icon" id="toastIcon"></span><span id="toastMsg"></span></div>
 
 <script>
-var DKEY='mch_d',PKEY='mch_p',AKEY='mch_pwd',SPKEY='mch_sponsors';
-var unlocked=false,curSlot=null,tapCount=0,tapTimer=null;
-var TOTAL_PHOTOS=8;
+// ===== INDEXEDDB PHOTO STORAGE =====
+// Uses IndexedDB for large photo storage - works on ALL devices
+var DB = null;
+var DB_NAME = 'mercyDB', DB_VER = 1, STORE = 'photos';
 
-var DEF={heroTitle:"Every Child Deserves Love & Hope",heroDesc:"Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda. Together we can change their story.",aboutText:"Mercy Children's Home is a faith-based non-profit organization located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.",year:"2020",location:"Kasanda Bukuya, Uganda",phone:"+256 751 442 505",email:"info@mercychildrenshome.org",fb:"#",ig:"#",yt:"#",tt:"#",gfm:"https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968",s1n:"50+",s1l:"Children Helped",s2n:"4+",s2l:"Years of Service",s3n:"100%",s3l:"Love & Care"};
+function openDB(cb) {
+  if (DB) { cb(DB); return; }
+  var req = indexedDB.open(DB_NAME, DB_VER);
+  req.onupgradeneeded = function(e) {
+    e.target.result.createObjectStore(STORE, { keyPath: 'id' });
+  };
+  req.onsuccess = function(e) { DB = e.target.result; cb(DB); };
+  req.onerror = function() { console.warn('IndexedDB failed, using localStorage fallback'); cb(null); };
+}
+
+function savePhoto(id, dataUrl, cb) {
+  openDB(function(db) {
+    if (!db) { localStorage.setItem('photo_' + id, dataUrl); if(cb)cb(); return; }
+    var tx = db.transaction(STORE, 'readwrite');
+    tx.objectStore(STORE).put({ id: id, data: dataUrl });
+    tx.oncomplete = function() { if(cb)cb(); };
+  });
+}
+
+function getPhoto(id, cb) {
+  openDB(function(db) {
+    if (!db) { cb(localStorage.getItem('photo_' + id)); return; }
+    var req = db.transaction(STORE, 'readonly').objectStore(STORE).get(id);
+    req.onsuccess = function(e) { cb(e.target.result ? e.target.result.data : null); };
+    req.onerror = function() { cb(null); };
+  });
+}
+
+function deletePhoto(id, cb) {
+  openDB(function(db) {
+    if (!db) { localStorage.removeItem('photo_' + id); if(cb)cb(); return; }
+    var tx = db.transaction(STORE, 'readwrite');
+    tx.objectStore(STORE).delete(id);
+    tx.oncomplete = function() { if(cb)cb(); };
+  });
+}
+
+// ===== DATA =====
+var DKEY='mch_d', AKEY='mch_pwd', SPKEY='mch_sponsors', SPPHKEY='mch_spphotos';
+var unlocked=false, curUploadType=null, curUploadIdx=0;
+var tapCount=0, tapTimer=null;
+var GALLERY_COUNT = 8;
+var sponsorPhotoCount = 0;
+
+var DEF={
+  heroTitle:"Every Child Deserves Love & Hope",
+  heroDesc:"Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda. Together we can change their story.",
+  aboutText:"Mercy Children's Home is a faith-based non-profit organization located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.",
+  year:"2020", location:"Kasanda Bukuya, Uganda", phone:"+256 751 442 505",
+  email:"info@mercychildrenshome.org", fb:"#", ig:"#", yt:"#", tt:"#",
+  gfm:"https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968",
+  s1n:"50+", s1l:"Children Helped", s2n:"4+", s2l:"Years of Service", s3n:"100%", s3l:"Love & Care"
+};
 
 function getData(){try{return Object.assign({},DEF,JSON.parse(localStorage.getItem(DKEY)||'{}'));}catch(e){return Object.assign({},DEF);}}
 function setData(d){localStorage.setItem(DKEY,JSON.stringify(d));}
-function getPhotos(){try{var p=JSON.parse(localStorage.getItem(PKEY)||'[]');while(p.length<TOTAL_PHOTOS)p.push(null);return p;}catch(e){var a=[];for(var i=0;i<TOTAL_PHOTOS;i++)a.push(null);return a;}}
-function setPhotos(p){localStorage.setItem(PKEY,JSON.stringify(p));}
 function getPwd(){return localStorage.getItem(AKEY)||'mercy2020';}
 function getSponsors(){try{return JSON.parse(localStorage.getItem(SPKEY)||'[]');}catch(e){return[];}}
 function setSponsors(s){localStorage.setItem(SPKEY,JSON.stringify(s));}
+function getSponsorPhotoCount(){return parseInt(localStorage.getItem(SPPHKEY)||'0');}
+function setSponsorPhotoCount(n){localStorage.setItem(SPPHKEY,String(n));}
 
-function applyAll(){
-  var d=getData();
-  document.getElementById('heroTitle').innerHTML=d.heroTitle.replace('Love & Hope','<em>Love &amp; Hope</em>');
-  document.getElementById('heroDesc').textContent=d.heroDesc;
-  document.getElementById('heroTag').textContent="Serving Uganda's Children Since "+d.year;
-  document.getElementById('stat1n').textContent=d.s1n;
-  document.getElementById('stat1l').textContent=d.s1l;
-  document.getElementById('stat2n').textContent=d.s2n;
-  document.getElementById('stat2l').textContent=d.s2l;
-  document.getElementById('stat3n').textContent=d.s3n;
-  document.getElementById('stat3l').textContent=d.s3l;
-  document.getElementById('aboutText').textContent=d.aboutText;
-  document.getElementById('contactLocation').textContent=d.location;
-  document.getElementById('contactPhone').textContent=d.phone;
-  document.getElementById('contactEmail').textContent=d.email;
-  document.getElementById('socFb').href=d.fb;
-  document.getElementById('socIg').href=d.ig;
-  document.getElementById('socYt').href=d.yt;
-  document.getElementById('socTt').href=d.tt;
-  document.getElementById('socWa').href='https://wa.me/'+d.phone.replace(/\D/g,'');
-  document.getElementById('footerYear').textContent=d.year;
-  document.getElementById('footerYear2').textContent=d.year;
-  // Photos
-  var photos=getPhotos();
-  for(var i=0;i<TOTAL_PHOTOS;i++){
-    var el=document.getElementById('gi-'+i);
-    if(!el)continue;
-    if(photos[i]){
-      el.style.background='none';
-      el.innerHTML='<img src="'+photos[i]+'" alt="Photo '+(i+1)+'" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;"/>';
-      el.style.position='relative';
+// ===== APPLY PAGE DATA =====
+function applyData() {
+  var d = getData();
+  var ht = document.getElementById('heroTitle');
+  if(ht) ht.innerHTML = d.heroTitle.replace('Love & Hope','<em>Love &amp; Hope</em>');
+  var hd = document.getElementById('heroDesc'); if(hd) hd.textContent = d.heroDesc;
+  var hg = document.getElementById('heroTag'); if(hg) hg.textContent = "Serving Uganda's Children Since " + d.year;
+  var s1n=document.getElementById('stat1n'),s1l=document.getElementById('stat1l');
+  var s2n=document.getElementById('stat2n'),s2l=document.getElementById('stat2l');
+  var s3n=document.getElementById('stat3n'),s3l=document.getElementById('stat3l');
+  if(s1n)s1n.textContent=d.s1n; if(s1l)s1l.textContent=d.s1l;
+  if(s2n)s2n.textContent=d.s2n; if(s2l)s2l.textContent=d.s2l;
+  if(s3n)s3n.textContent=d.s3n; if(s3l)s3l.textContent=d.s3l;
+  var at=document.getElementById('aboutText'); if(at)at.textContent=d.aboutText;
+  var cl=document.getElementById('contactLocation'); if(cl)cl.textContent=d.location;
+  var cp=document.getElementById('contactPhone'); if(cp)cp.textContent=d.phone;
+  var ce=document.getElementById('contactEmail'); if(ce)ce.textContent=d.email;
+  var fb=document.getElementById('socFb'); if(fb)fb.href=d.fb;
+  var ig=document.getElementById('socIg'); if(ig)ig.href=d.ig;
+  var yt=document.getElementById('socYt'); if(yt)yt.href=d.yt;
+  var tt=document.getElementById('socTt'); if(tt)tt.href=d.tt;
+  var wa=document.getElementById('socWa'); if(wa)wa.href='https://wa.me/'+d.phone.replace(/\D/g,'');
+  var fy=document.getElementById('footerYear'); if(fy)fy.textContent=d.year;
+  var fy2=document.getElementById('footerYear2'); if(fy2)fy2.textContent=d.year;
+}
+
+// ===== LOAD ALL PHOTOS FROM DB =====
+function loadAllPhotos() {
+  // Gallery photos 0-7
+  for (var i = 0; i < GALLERY_COUNT; i++) {
+    (function(idx) {
+      getPhoto('gallery_' + idx, function(data) {
+        var el = document.getElementById('gi-' + idx);
+        if (!el) return;
+        if (data) {
+          el.style.position = 'relative';
+          el.style.background = 'none';
+          el.innerHTML = '<img src="' + data + '" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;" />';
+        }
+      });
+    })(i);
+  }
+  // Founder photo
+  getPhoto('founder', function(data) {
+    var el = document.getElementById('gi-1');
+    if (!el) return;
+    if (data) {
+      el.style.position = 'relative';
+      el.style.background = 'none';
+      el.innerHTML = '<img src="' + data + '" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;" />';
     }
-  }
-  renderPublicSponsors();
+  });
+  // Sponsor photos
+  sponsorPhotoCount = getSponsorPhotoCount();
+  loadSponsorPhotosPublic();
 }
 
-// SPONSORS PUBLIC
-function renderPublicSponsors(){
-  var sponsors=getSponsors();
-  var tbody=document.getElementById('sponsorTableBody');
-  var pub=document.getElementById('publicSponsors');
-  var none=document.getElementById('noSponsors');
-  var totals=document.getElementById('sponsorTotals');
-  if(!sponsors.length){if(pub)pub.style.display='none';if(none)none.style.display='block';return;}
-  if(pub)pub.style.display='block';
-  if(none)none.style.display='none';
-  if(tbody){
-    tbody.innerHTML=sponsors.map(function(s){
-      var flag=s.country&&s.country.toLowerCase().indexOf('usa')!==-1?'🇺🇸':s.country&&s.country.toLowerCase().indexOf('uk')!==-1?'🇬🇧':s.country&&s.country.toLowerCase().indexOf('uganda')!==-1?'🇺🇬':'🌍';
-      return '<tr><td><strong>'+esc(s.name)+'</strong></td><td><span class="flag">'+flag+'</span> '+esc(s.country||'')+'</td><td class="amount">$'+Number(s.amount||0).toLocaleString()+'</td><td>'+esc(s.date||'')+'</td><td style="color:var(--text2);font-style:italic;">'+esc(s.message||'')+'</td></tr>';
-    }).join('');
-  }
-  if(totals){
-    var total=sponsors.reduce(function(sum,s){return sum+Number(s.amount||0);},0);
-    totals.innerHTML='<div style="display:inline-flex;gap:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 28px;"><div style="text-align:center;"><div style="font-family:\'Cormorant Garamond\',serif;font-size:32px;font-weight:700;color:var(--gold);">'+sponsors.length+'</div><div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;">Sponsors</div></div><div style="width:1px;background:var(--border);"></div><div style="text-align:center;"><div style="font-family:\'Cormorant Garamond\',serif;font-size:32px;font-weight:700;color:var(--gold);">$'+total.toLocaleString()+'</div><div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;">Total Raised</div></div></div>';
+function loadSponsorPhotosPublic() {
+  var count = getSponsorPhotoCount();
+  var grid = document.getElementById('sponsorPhotosGrid');
+  var section = document.getElementById('sponsorPhotosSection');
+  if (!grid) return;
+  grid.innerHTML = '';
+  var loaded = 0;
+  if (count === 0) { if(section)section.style.display='none'; return; }
+  for (var i = 0; i < count; i++) {
+    (function(idx) {
+      getPhoto('spphoto_' + idx, function(data) {
+        if (data) {
+          var div = document.createElement('div');
+          div.style.cssText = 'border-radius:12px;overflow:hidden;aspect-ratio:1;background:var(--card);border:1px solid var(--border);';
+          div.innerHTML = '<img src="' + data + '" style="width:100%;height:100%;object-fit:cover;display:block;" />';
+          grid.appendChild(div);
+          if(section)section.style.display='block';
+        }
+        loaded++;
+      });
+    })(i);
   }
 }
 
-// SPONSORS ADMIN
-function renderAdminSponsors(){
-  var sponsors=getSponsors();
-  var list=document.getElementById('sponsorList');
-  if(!sponsors.length){list.innerHTML='<p style="font-size:13px;color:var(--text2);text-align:center;padding:16px;">No sponsors yet.</p>';return;}
-  list.innerHTML=sponsors.map(function(s,i){
+// ===== UPLOAD HANDLER =====
+function triggerUpload(type, idx) {
+  curUploadType = type;
+  curUploadIdx = idx;
+  document.getElementById('fileIn').click();
+}
+
+function handlePhoto(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  // Compress if too large
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var img = new Image();
+    img.onload = function() {
+      // Compress to max 800px, quality 0.75
+      var canvas = document.createElement('canvas');
+      var MAX = 900;
+      var w = img.width, h = img.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      if (h > MAX) { w = Math.round(w * MAX / h); h = MAX; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      var compressed = canvas.toDataURL('image/jpeg', 0.75);
+
+      // Determine storage key
+      var key;
+      if (curUploadType === 'gallery') key = 'gallery_' + curUploadIdx;
+      else if (curUploadType === 'founder') key = 'founder';
+      else if (curUploadType === 'spphoto') key = 'spphoto_' + curUploadIdx;
+
+      savePhoto(key, compressed, function() {
+        // Update page instantly
+        if (curUploadType === 'gallery') {
+          var el = document.getElementById('gi-' + curUploadIdx);
+          if (el) {
+            el.style.position = 'relative';
+            el.style.background = 'none';
+            el.innerHTML = '<img src="' + compressed + '" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;" />';
+          }
+          renderPhotoGrid();
+        } else if (curUploadType === 'founder') {
+          var el2 = document.getElementById('gi-1');
+          if (el2) {
+            el2.style.position = 'relative';
+            el2.style.background = 'none';
+            el2.innerHTML = '<img src="' + compressed + '" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;" />';
+          }
+          renderFounderPhotoGrid();
+        } else if (curUploadType === 'spphoto') {
+          loadSponsorPhotosPublic();
+          renderSponsorPhotoGrid();
+        }
+        showToast('Photo uploaded! ✅ Shows on all devices');
+      });
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+}
+
+// ===== PHOTO GRIDS IN ADMIN =====
+function renderPhotoGrid() {
+  var grid = document.getElementById('photoGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (var i = 0; i < GALLERY_COUNT; i++) {
+    (function(idx) {
+      var slot = document.createElement('div');
+      slot.className = 'p-slot';
+      slot.onclick = function() { triggerUpload('gallery', idx); };
+      slot.innerHTML = '<svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Photo ' + (idx+1) + '</span>';
+      grid.appendChild(slot);
+      // Load existing photo
+      getPhoto('gallery_' + idx, function(data) {
+        if (data) {
+          slot.innerHTML = '<img src="' + data + '" style="width:100%;height:100%;object-fit:cover;" />'
+            + '<div class="p-hover"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg><span>Change</span></div>';
+        }
+      });
+    })(i);
+  }
+}
+
+function renderFounderPhotoGrid() {
+  var grid = document.getElementById('founderPhotoGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  var slot = document.createElement('div');
+  slot.className = 'p-slot';
+  slot.style.cssText = 'aspect-ratio:3/4;';
+  slot.onclick = function() { triggerUpload('founder', 0); };
+  slot.innerHTML = '<svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Founder Photo</span>';
+  grid.appendChild(slot);
+  getPhoto('founder', function(data) {
+    if (data) {
+      slot.innerHTML = '<img src="' + data + '" style="width:100%;height:100%;object-fit:cover;" />'
+        + '<div class="p-hover"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg><span>Change</span></div>';
+    }
+  });
+}
+
+function renderSponsorPhotoGrid() {
+  var count = getSponsorPhotoCount();
+  sponsorPhotoCount = count;
+  var grid = document.getElementById('sponsorPhotoGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (var i = 0; i < count; i++) {
+    (function(idx) {
+      var wrap = document.createElement('div');
+      wrap.style.cssText = 'position:relative;';
+      var slot = document.createElement('div');
+      slot.className = 'p-slot';
+      slot.onclick = function() { triggerUpload('spphoto', idx); };
+      slot.innerHTML = '<svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Sponsor '+(idx+1)+'</span>';
+      var delBtn = document.createElement('button');
+      delBtn.textContent = '✕';
+      delBtn.style.cssText = 'position:absolute;top:4px;right:4px;z-index:10;background:rgba(239,68,68,.85);color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+      delBtn.onclick = function(ev) { ev.stopPropagation(); deleteSponsorPhoto(idx); };
+      wrap.appendChild(slot);
+      wrap.appendChild(delBtn);
+      grid.appendChild(wrap);
+      getPhoto('spphoto_' + idx, function(data) {
+        if (data) {
+          slot.innerHTML = '<img src="' + data + '" style="width:100%;height:100%;object-fit:cover;" />'
+            + '<div class="p-hover"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg><span>Change</span></div>';
+        }
+      });
+    })(i);
+  }
+}
+
+function addSponsorPhotoSlot() {
+  var count = getSponsorPhotoCount();
+  setSponsorPhotoCount(count + 1);
+  renderSponsorPhotoGrid();
+  showToast('Slot added! Tap it to upload');
+}
+
+function deleteSponsorPhoto(idx) {
+  if (!confirm('Remove this sponsor photo?')) return;
+  deletePhoto('spphoto_' + idx, function() {
+    // Shift remaining photos down
+    var count = getSponsorPhotoCount();
+    var shifted = 0;
+    function shiftNext(i) {
+      if (i >= count) {
+        setSponsorPhotoCount(count - 1);
+        renderSponsorPhotoGrid();
+        loadSponsorPhotosPublic();
+        showToast('Photo removed');
+        return;
+      }
+      if (i <= idx) { shiftNext(i + 1); return; }
+      getPhoto('spphoto_' + i, function(data) {
+        if (data) savePhoto('spphoto_' + (i-1), data, function() { shiftNext(i+1); });
+        else shiftNext(i+1);
+      });
+    }
+    shiftNext(0);
+  });
+}
+
+// ===== NAV =====
+window.addEventListener('scroll', function() {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+function toggleMenu() { document.getElementById('mobMenu').classList.toggle('open'); }
+
+// SECRET TAP (5x on logo)
+function secretTap() {
+  tapCount++;
+  if (tapTimer) clearTimeout(tapTimer);
+  tapTimer = setTimeout(function() { tapCount = 0; }, 2000);
+  if (tapCount >= 5) { tapCount = 0; openAdmin(); }
+}
+
+// ===== DONATE =====
+function setAmt(v, btn) {
+  document.querySelectorAll('.amt-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('donateAmt').value = v;
+}
+function goDonate() {
+  var a = document.getElementById('donateAmt').value;
+  if (!a || a < 1) { showToast('Enter a valid amount', true); return; }
+  window.open(getData().gfm, '_blank');
+  showToast('Opening GoFundMe... 💙');
+}
+function submitForm() { showToast("Message sent! We'll get back to you soon. 🙏"); }
+
+// ===== TOAST =====
+function showToast(msg, isErr) {
+  document.getElementById('toastMsg').textContent = msg;
+  var ic = document.getElementById('toastIcon');
+  ic.innerHTML = isErr ? '<i class="fas fa-exclamation-circle"></i>' : '<i class="fas fa-check-circle"></i>';
+  ic.className = 'toast-icon' + (isErr ? ' err' : '');
+  var t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 3500);
+}
+
+// ===== ADMIN =====
+function openAdmin() {
+  if (!unlocked) {
+    document.getElementById('pwdOverlay').style.display = 'flex';
+    setTimeout(function() { document.getElementById('pwdInput').focus(); }, 100);
+  } else {
+    document.getElementById('adminOverlay').classList.add('open');
+    loadAdmFields();
+    renderPhotoGrid();
+    renderFounderPhotoGrid();
+    renderSponsorPhotoGrid();
+    renderAdminSponsors();
+  }
+}
+function closeAdmin() { document.getElementById('adminOverlay').classList.remove('open'); }
+function checkPwd() {
+  var v = document.getElementById('pwdInput').value;
+  if (v === getPwd()) {
+    unlocked = true;
+    document.getElementById('pwdOverlay').style.display = 'none';
+    document.getElementById('pwdInput').value = '';
+    document.getElementById('adminOverlay').classList.add('open');
+    loadAdmFields();
+    renderPhotoGrid();
+    renderFounderPhotoGrid();
+    renderSponsorPhotoGrid();
+    renderAdminSponsors();
+  } else {
+    showToast('Wrong password!', true);
+    document.getElementById('pwdInput').value = '';
+  }
+}
+function admTab(tab, el) {
+  document.querySelectorAll('.adm-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.adm-sec').forEach(function(s) { s.classList.remove('active'); });
+  el.classList.add('active');
+  document.getElementById('adm-' + tab).classList.add('active');
+  if (tab === 'sponsors') renderAdminSponsors();
+  if (tab === 'photos') { renderPhotoGrid(); renderFounderPhotoGrid(); renderSponsorPhotoGrid(); }
+}
+
+function loadAdmFields() {
+  var d = getData();
+  var fields = {
+    'ei-heroTitle': d.heroTitle, 'ei-heroDesc': d.heroDesc,
+    'ei-aboutText': d.aboutText, 'ei-year': d.year,
+    'ei-location': d.location, 'ei-phone': d.phone,
+    'ei-email': d.email, 'ei-fb': d.fb, 'ei-ig': d.ig,
+    'ei-yt': d.yt, 'ei-tt': d.tt||'#', 'ei-gfm': d.gfm,
+    's1n': d.s1n, 's1l': d.s1l, 's2n': d.s2n,
+    's2l': d.s2l, 's3n': d.s3n, 's3l': d.s3l
+  };
+  Object.keys(fields).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = fields[id];
+  });
+}
+function saveContent() {
+  var d = getData();
+  d.heroTitle = document.getElementById('ei-heroTitle').value;
+  d.heroDesc = document.getElementById('ei-heroDesc').value;
+  d.aboutText = document.getElementById('ei-aboutText').value;
+  d.year = document.getElementById('ei-year').value;
+  setData(d); applyData(); showToast('Content saved! ✅');
+}
+function saveContact() {
+  var d = getData();
+  ['location','phone','email','fb','ig','yt','gfm'].forEach(function(k) {
+    var el = document.getElementById('ei-' + k); if (el) d[k] = el.value;
+  });
+  var tt = document.getElementById('ei-tt'); if(tt) d.tt = tt.value;
+  setData(d); applyData(); showToast('Contact saved! ✅');
+}
+function saveStats() {
+  var d = getData();
+  ['s1n','s1l','s2n','s2l','s3n','s3l'].forEach(function(k) {
+    var el = document.getElementById(k); if(el) d[k] = el.value;
+  });
+  setData(d); applyData(); showToast('Stats saved! ✅');
+}
+function changePwd() {
+  var np = document.getElementById('newPwd').value;
+  var cp = document.getElementById('confPwd').value;
+  if (np.length < 6) { showToast('Min 6 characters', true); return; }
+  if (np !== cp) { showToast('Passwords do not match!', true); return; }
+  localStorage.setItem(AKEY, np);
+  document.getElementById('newPwd').value = '';
+  document.getElementById('confPwd').value = '';
+  showToast('Password changed! ✅');
+}
+function resetAll() {
+  if (!confirm('Reset all content to defaults?')) return;
+  localStorage.removeItem(DKEY);
+  applyData(); loadAdmFields();
+  showToast('Content reset ✅');
+}
+
+// ===== SPONSORS =====
+function renderAdminSponsors() {
+  var sponsors = getSponsors();
+  var list = document.getElementById('sponsorList');
+  if (!list) return;
+  if (!sponsors.length) {
+    list.innerHTML = '<p style="font-size:13px;color:var(--text2);text-align:center;padding:16px;">No sponsors yet.</p>';
+    return;
+  }
+  list.innerHTML = sponsors.map(function(s, i) {
     return '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;">'
-      +'<div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;color:var(--white);">'+esc(s.name)+' — <span style="color:var(--gold);">$'+Number(s.amount||0).toLocaleString()+'</span></div>'
-      +'<div style="font-size:11px;color:var(--text2);">'+esc(s.country||'')+' · '+esc(s.date||'')+(s.message?' · '+esc(s.message):'')+'</div></div>'
-      +'<button onclick="deleteSponsor('+i+')" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:5px 10px;border-radius:7px;cursor:pointer;font-family:\'Outfit\',sans-serif;font-size:12px;">Delete</button>'
-      +'</div>';
+      + '<div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;color:var(--white);">' + esc(s.name) + ' — <span style="color:var(--gold);">$' + Number(s.amount||0).toLocaleString() + '</span></div>'
+      + '<div style="font-size:11px;color:var(--text2);">' + esc(s.country||'') + ' · ' + esc(s.date||'') + (s.message?' · '+esc(s.message):'') + '</div></div>'
+      + '<button onclick="deleteSponsor(' + i + ')" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:5px 10px;border-radius:7px;cursor:pointer;sans-serif;font-size:12px;">Delete</button>'
+      + '</div>';
   }).join('');
 }
-function addSponsor(){
-  var name=document.getElementById('sp-name').value.trim();
-  var country=document.getElementById('sp-country').value.trim();
-  var amount=document.getElementById('sp-amount').value;
-  var date=document.getElementById('sp-date').value;
-  var msg=document.getElementById('sp-msg').value.trim();
-  if(!name||!amount){showToast('Enter name and amount',true);return;}
-  var sponsors=getSponsors();
-  sponsors.unshift({name:name,country:country,amount:amount,date:date,message:msg});
+function addSponsor() {
+  var name = document.getElementById('sp-name').value.trim();
+  var amount = document.getElementById('sp-amount').value;
+  if (!name || !amount) { showToast('Enter name and amount', true); return; }
+  var sponsors = getSponsors();
+  sponsors.unshift({
+    name: name,
+    country: document.getElementById('sp-country').value.trim(),
+    amount: amount,
+    date: document.getElementById('sp-date').value,
+    message: document.getElementById('sp-msg').value.trim()
+  });
   setSponsors(sponsors);
-  document.getElementById('sp-name').value='';
-  document.getElementById('sp-country').value='';
-  document.getElementById('sp-amount').value='';
-  document.getElementById('sp-msg').value='';
+  ['sp-name','sp-country','sp-amount','sp-msg'].forEach(function(id) { document.getElementById(id).value=''; });
   renderAdminSponsors();
   renderPublicSponsors();
   showToast('Sponsor added! ✅');
 }
-function deleteSponsor(i){
-  if(!confirm('Delete this sponsor?'))return;
-  var sponsors=getSponsors();
-  sponsors.splice(i,1);
-  setSponsors(sponsors);
-  renderAdminSponsors();
-  renderPublicSponsors();
+function deleteSponsor(i) {
+  if (!confirm('Delete this sponsor?')) return;
+  var sponsors = getSponsors(); sponsors.splice(i, 1);
+  setSponsors(sponsors); renderAdminSponsors(); renderPublicSponsors();
   showToast('Deleted');
 }
-function saveSponsors(){setSponsors(getSponsors());renderPublicSponsors();showToast('Sponsors saved! ✅');}
-function clearSponsors(){if(!confirm('Clear all sponsors?'))return;setSponsors([]);renderAdminSponsors();renderPublicSponsors();showToast('Cleared');}
-
-// NAV
-window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
-function toggleMenu(){document.getElementById('mobMenu').classList.toggle('open');}
-
-// SECRET TAP
-function secretTap(){
-  tapCount++;
-  if(tapTimer)clearTimeout(tapTimer);
-  tapTimer=setTimeout(function(){tapCount=0;},2000);
-  if(tapCount>=5){tapCount=0;openAdmin();}
+function saveSponsors() { renderPublicSponsors(); showToast('Sponsors saved! ✅'); }
+function clearSponsors() {
+  if (!confirm('Clear all sponsors?')) return;
+  setSponsors([]); renderAdminSponsors(); renderPublicSponsors(); showToast('Cleared');
 }
 
-// DONATE
-function setAmt(v,btn){document.querySelectorAll('.amt-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');document.getElementById('donateAmt').value=v;}
-function goDonate(){var a=document.getElementById('donateAmt').value;if(!a||a<1){showToast('Enter a valid amount',true);return;}var d=getData();window.open(d.gfm,'_blank');showToast('Opening GoFundMe... 💙');}
-function submitForm(){showToast("Message sent! We'll get back to you soon. 🙏");}
-
-// TOAST
-function showToast(msg,isErr){
-  document.getElementById('toastMsg').textContent=msg;
-  var ic=document.getElementById('toastIcon');
-  ic.innerHTML=isErr?'<i class="fas fa-exclamation-circle"></i>':'<i class="fas fa-check-circle"></i>';
-  ic.className='toast-icon'+(isErr?' err':'');
-  var t=document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show');},3500);
-}
-
-// ADMIN
-function openAdmin(){
-  if(!unlocked){document.getElementById('pwdOverlay').style.display='flex';setTimeout(function(){document.getElementById('pwdInput').focus();},100);}
-  else{document.getElementById('adminOverlay').classList.add('open');loadAdmFields();renderPhotoGrid();renderAdminSponsors();}
-}
-function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');}
-function checkPwd(){
-  var v=document.getElementById('pwdInput').value;
-  if(v===getPwd()){unlocked=true;document.getElementById('pwdOverlay').style.display='none';document.getElementById('pwdInput').value='';document.getElementById('adminOverlay').classList.add('open');loadAdmFields();renderPhotoGrid();renderAdminSponsors();}
-  else{showToast('Wrong password!',true);document.getElementById('pwdInput').value='';}
-}
-function admTab(tab,el){
-  document.querySelectorAll('.adm-tab').forEach(function(t){t.classList.remove('active');});
-  document.querySelectorAll('.adm-sec').forEach(function(s){s.classList.remove('active');});
-  el.classList.add('active');
-  document.getElementById('adm-'+tab).classList.add('active');
-  if(tab==='sponsors')renderAdminSponsors();
-}
-
-function loadAdmFields(){
-  var d=getData();
-  document.getElementById('ei-heroTitle').value=d.heroTitle;
-  document.getElementById('ei-heroDesc').value=d.heroDesc;
-  document.getElementById('ei-aboutText').value=d.aboutText;
-  document.getElementById('ei-year').value=d.year;
-  document.getElementById('ei-location').value=d.location;
-  document.getElementById('ei-phone').value=d.phone;
-  document.getElementById('ei-email').value=d.email;
-  document.getElementById('ei-fb').value=d.fb;
-  document.getElementById('ei-ig').value=d.ig;
-  document.getElementById('ei-yt').value=d.yt;
-  var tt=document.getElementById('ei-tt');if(tt)tt.value=d.tt||'#';
-  document.getElementById('ei-gfm').value=d.gfm;
-  document.getElementById('s1n').value=d.s1n;
-  document.getElementById('s1l').value=d.s1l;
-  document.getElementById('s2n').value=d.s2n;
-  document.getElementById('s2l').value=d.s2l;
-  document.getElementById('s3n').value=d.s3n;
-  document.getElementById('s3l').value=d.s3l;
-}
-function saveContent(){var d=getData();d.heroTitle=document.getElementById('ei-heroTitle').value;d.heroDesc=document.getElementById('ei-heroDesc').value;d.aboutText=document.getElementById('ei-aboutText').value;d.year=document.getElementById('ei-year').value;setData(d);applyAll();showToast('Content saved! ✅');}
-function saveContact(){var d=getData();d.location=document.getElementById('ei-location').value;d.phone=document.getElementById('ei-phone').value;d.email=document.getElementById('ei-email').value;d.fb=document.getElementById('ei-fb').value;d.ig=document.getElementById('ei-ig').value;d.yt=document.getElementById('ei-yt').value;var tt=document.getElementById('ei-tt');if(tt)d.tt=tt.value;d.gfm=document.getElementById('ei-gfm').value;setData(d);applyAll();showToast('Contact saved! ✅');}
-function saveStats(){var d=getData();d.s1n=document.getElementById('s1n').value;d.s1l=document.getElementById('s1l').value;d.s2n=document.getElementById('s2n').value;d.s2l=document.getElementById('s2l').value;d.s3n=document.getElementById('s3n').value;d.s3l=document.getElementById('s3l').value;setData(d);applyAll();showToast('Stats saved! ✅');}
-function changePwd(){var np=document.getElementById('newPwd').value,cp=document.getElementById('confPwd').value;if(np.length<6){showToast('Min 6 characters',true);return;}if(np!==cp){showToast('Passwords do not match!',true);return;}localStorage.setItem(AKEY,np);document.getElementById('newPwd').value='';document.getElementById('confPwd').value='';showToast('Password changed! ✅');}
-function resetAll(){if(!confirm('Reset everything to defaults?'))return;localStorage.removeItem(DKEY);localStorage.removeItem(PKEY);applyAll();loadAdmFields();renderPhotoGrid();showToast('Reset done ✅');}
-
-// PHOTO GRID (8 slots)
-function renderPhotoGrid(){
-  var photos=getPhotos(),grid=document.getElementById('photoGrid');
-  if(!grid)return;
-  grid.innerHTML='';
-  for(var i=0;i<TOTAL_PHOTOS;i++){
-    var slot=document.createElement('div');
-    slot.className='p-slot';
-    (function(idx){slot.onclick=function(){curSlot=idx;document.getElementById('fileIn').click();};})(i);
-    if(photos[i]){
-      slot.innerHTML='<img src="'+photos[i]+'" alt="Photo '+(i+1)+'" style="width:100%;height:100%;object-fit:cover;"/>'
-        +'<div class="p-hover"><svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg><span>Change</span></div>';
-    }else{
-      slot.innerHTML='<svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Photo '+(i+1)+'</span>';
-    }
-    grid.appendChild(slot);
+function renderPublicSponsors() {
+  var sponsors = getSponsors();
+  var tbody = document.getElementById('sponsorTableBody');
+  var pub = document.getElementById('publicSponsors');
+  var none = document.getElementById('noSponsors');
+  var totals = document.getElementById('sponsorTotals');
+  if (!sponsors.length) { if(pub)pub.style.display='none'; if(none)none.style.display='block'; return; }
+  if(pub)pub.style.display='block'; if(none)none.style.display='none';
+  if (tbody) {
+    tbody.innerHTML = sponsors.map(function(s) {
+      var flag = (s.country||'').toLowerCase().indexOf('usa')!==-1?'🇺🇸':(s.country||'').toLowerCase().indexOf('uk')!==-1?'🇬🇧':(s.country||'').toLowerCase().indexOf('uganda')!==-1?'🇺🇬':'🌍';
+      return '<tr><td><strong>' + esc(s.name) + '</strong></td><td><span class="flag">' + flag + '</span> ' + esc(s.country||'') + '</td><td class="amount">$' + Number(s.amount||0).toLocaleString() + '</td><td>' + esc(s.date||'') + '</td><td style="color:var(--text2);font-style:italic;">' + esc(s.message||'') + '</td></tr>';
+    }).join('');
+  }
+  if (totals) {
+    var total = sponsors.reduce(function(sum, s) { return sum + Number(s.amount||0); }, 0);
+    totals.innerHTML = '<div style="display:inline-flex;gap:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 28px;"><div style="text-align:center;"><div style="serif;font-size:32px;font-weight:700;color:var(--gold);">' + sponsors.length + '</div><div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Sponsors</div></div><div style="width:1px;background:var(--border);"></div><div style="text-align:center;"><div style="serif;font-size:32px;font-weight:700;color:var(--gold);">$' + total.toLocaleString() + '</div><div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Total Raised</div></div></div>';
   }
 }
-function handlePhoto(e){
-  var file=e.target.files[0];if(!file)return;
-  var reader=new FileReader();
-  reader.onload=function(ev){
-    var photos=getPhotos();
-    photos[curSlot]=ev.target.result;
-    setPhotos(photos);
-    applyAll();
-    renderPhotoGrid();
-    showToast('Photo '+(curSlot+1)+' updated! ✅');
-  };
-  reader.readAsDataURL(file);
-  e.target.value='';
-}
 
-// SCROLL REVEAL
-function initReveal(){
-  var els=document.querySelectorAll('.reveal');
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
+// ===== SCROLL ANIMATIONS =====
+function initAnimations() {
+  var style = document.createElement('style');
+  style.textContent = `
+    .anim { opacity: 0; transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1); will-change: transform, opacity; }
+    .anim.up { transform: translateY(70px); }
+    .anim.down { transform: translateY(-40px); }
+    .anim.left { transform: translateX(-80px); }
+    .anim.right { transform: translateX(80px); }
+    .anim.scale { transform: scale(0.85); }
+    .anim.rotate { transform: translateY(50px) rotate(-3deg); }
+    .anim.visible { opacity: 1 !important; transform: none !important; }
+    .anim.d1 { transition-delay: 0.08s; }
+    .anim.d2 { transition-delay: 0.18s; }
+    .anim.d3 { transition-delay: 0.28s; }
+    .anim.d4 { transition-delay: 0.38s; }
+    .anim.d5 { transition-delay: 0.48s; }
+    .anim.d6 { transition-delay: 0.58s; }
+
+    /* Floating hero badge */
+    @keyframes floatBadge {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .hero-badge { animation: floatBadge 3s ease-in-out infinite; }
+
+    /* Pulsing gold border on cards on hover */
+    .m-card { transition: border-color 0.3s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s; }
+    .m-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 60px rgba(201,168,76,0.15); }
+
+    /* Stat number count-up glow */
+    @keyframes goldGlow {
+      0%,100% { text-shadow: 0 0 0px rgba(201,168,76,0); }
+      50% { text-shadow: 0 0 30px rgba(201,168,76,0.6); }
+    }
+    .stat-num { animation: goldGlow 2.5s ease-in-out infinite; }
+
+    /* Shimmer on gold buttons */
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold2), #f5d98a, var(--gold));
+      background-size: 300% auto;
+      animation: shimmer 3s linear infinite;
+    }
+
+    /* Hero grid pulse */
+    @keyframes gridPulse {
+      0%,100% { opacity: 0.015; }
+      50% { opacity: 0.04; }
+    }
+    .hero-grid { animation: gridPulse 4s ease-in-out infinite; }
+
+    /* Section image reveal */
+    .g-item { transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s; }
+    .g-item:hover { transform: scale(1.04) translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+
+    /* Nav logo subtle spin on tap */
+    @keyframes navPop { 0%{transform:scale(1)} 50%{transform:scale(1.15)} 100%{transform:scale(1)} }
+    .nav-icon:active { animation: navPop 0.3s ease; }
+
+    /* Verse card shimmer border */
+    @keyframes borderGlow {
+      0%,100% { box-shadow: 0 0 0px rgba(201,168,76,0); }
+      50% { box-shadow: 0 0 30px rgba(201,168,76,0.2), inset 0 0 30px rgba(201,168,76,0.05); }
+    }
+    .verse-card { animation: borderGlow 4s ease-in-out infinite; }
+
+    /* Donate box entrance */
+    .donate-box { transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s; }
+    .donate-box:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+
+    /* Smooth section bg transition */
+    section { position: relative; }
+  `;
+  document.head.appendChild(style);
+
+  // Assign animation classes with more variety
+  document.querySelectorAll('.m-card').forEach(function(el, i) {
+    var types = ['up', 'up', 'rotate'];
+    el.classList.add('anim', types[i % 3], 'd' + Math.min(i % 6 + 1, 6));
+  });
+  document.querySelectorAll('.c-item').forEach(function(el, i) {
+    el.classList.add('anim', i % 2 === 0 ? 'left' : 'right', 'd' + Math.min(i + 1, 6));
+  });
+  document.querySelectorAll('.sec-title').forEach(function(el) {
+    if (!el.closest('.hero')) el.classList.add('anim', 'up');
+  });
+  document.querySelectorAll('.sec-tag').forEach(function(el) {
+    el.classList.add('anim', 'up');
+  });
+  document.querySelectorAll('.sec-sub').forEach(function(el) {
+    el.classList.add('anim', 'up', 'd1');
+  });
+  document.querySelectorAll('.about-card').forEach(function(el) {
+    el.classList.add('anim', 'left');
+  });
+  document.querySelectorAll('.about-text').forEach(function(el) {
+    el.classList.add('anim', 'right');
+  });
+  document.querySelectorAll('.verse-card').forEach(function(el) {
+    el.classList.add('anim', 'scale');
+  });
+  document.querySelectorAll('.donate-wrap').forEach(function(el) {
+    el.classList.add('anim', 'up');
+  });
+  document.querySelectorAll('.donate-box').forEach(function(el) {
+    el.classList.add('anim', 'right', 'd2');
+  });
+  document.querySelectorAll('.donate-text').forEach(function(el) {
+    el.classList.add('anim', 'left');
+  });
+  document.querySelectorAll('.donate-perks li').forEach(function(el, i) {
+    el.classList.add('anim', 'left', 'd' + Math.min(i + 1, 6));
+  });
+  document.querySelectorAll('.about-list li').forEach(function(el, i) {
+    el.classList.add('anim', 'up', 'd' + Math.min(i + 1, 6));
+  });
+  document.querySelectorAll('.g-item').forEach(function(el, i) {
+    el.classList.add('anim', i % 2 === 0 ? 'up' : 'scale', 'd' + Math.min(i % 3 + 1, 6));
+  });
+  document.querySelectorAll('.footer-col').forEach(function(el, i) {
+    el.classList.add('anim', 'up', 'd' + (i + 1));
+  });
+
+  // Intersection Observer with better settings
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
       }
     });
-  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
-  els.forEach(function(el){obs.observe(el);});
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.anim').forEach(function(el) { obs.observe(el); });
+
+  // Parallax effect on hero
+  window.addEventListener('scroll', function() {
+    var scrolled = window.scrollY;
+    var heroContent = document.querySelector('.hero-content');
+    if (heroContent && scrolled < window.innerHeight) {
+      heroContent.style.transform = 'translateY(' + (scrolled * 0.15) + 'px)';
+      heroContent.style.opacity = 1 - (scrolled / window.innerHeight * 0.6);
+    }
+  }, { passive: true });
 }
 
-// ADD REVEAL CLASSES TO ELEMENTS
-function addRevealClasses(){
-  // Mission cards
-  document.querySelectorAll('.m-card').forEach(function(el,i){
-    el.classList.add('reveal');
-    el.classList.add('reveal-delay-'+(i%3+1));
-  });
-  // Contact items
-  document.querySelectorAll('.c-item').forEach(function(el,i){
-    el.classList.add('reveal');
-    el.classList.add('reveal-delay-'+(i+1));
-  });
-  // About card
-  var ac=document.querySelector('.about-card');
-  if(ac)ac.classList.add('reveal','left');
-  var at=document.querySelector('.about-text');
-  if(at)at.classList.add('reveal','right');
-  // Sections titles
-  document.querySelectorAll('.sec-title:not(.hero h1 *)').forEach(function(el){
-    if(!el.classList.contains('reveal'))el.classList.add('reveal');
-  });
-}
+  // Intersection Observer with better settings
 
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\'\'/g,'&#39;'); }
 
-// INIT
-addRevealClasses();
-applyAll();
-initReveal();
+// ===== INIT =====
+applyData();
+loadAllPhotos();
+renderPublicSponsors();
+initAnimations();
 
-// Set today's date in sponsor form
-var today=new Date().toISOString().split('T')[0];
-var spDate=document.getElementById('sp-date');
-if(spDate)spDate.value=today;
+// Set today date in sponsor form
+var today = new Date().toISOString().split('T')[0];
+var spDate = document.getElementById('sp-date');
+if (spDate) spDate.value = today;
 </script>
 </body>
 </html>
