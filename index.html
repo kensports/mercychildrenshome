@@ -156,7 +156,42 @@ section{padding:88px 5%;}
 .verse-ref{font-size:12px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-top:16px;position:relative;z-index:1;}
 .verse-icon{width:48px;height:48px;margin-bottom:20px;position:relative;z-index:1;}
 
-/* SCROLL ANIMATIONS */
+/* FLOATING DONATE BUTTON */
+@keyframes floatBob {
+  0%,100%{transform:translateY(0px) scale(1);}
+  50%{transform:translateY(-8px) scale(1.04);}
+}
+@keyframes floatPulseRing {
+  0%{transform:scale(1);opacity:.6;}
+  100%{transform:scale(1.9);opacity:0;}
+}
+@keyframes slideInBtn {
+  0%{opacity:0;transform:translateX(80px);}
+  100%{opacity:1;transform:translateX(0);}
+}
+.float-donate{position:fixed;bottom:24px;right:20px;z-index:400;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none;opacity:0;transition:opacity .4s ease;}
+.float-donate.visible{opacity:1;pointer-events:auto;}
+.float-btn-wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:0;}
+.float-pulse-ring{position:absolute;width:60px;height:60px;border-radius:50%;background:rgba(201,168,76,.4);animation:floatPulseRing 1.8s ease-out infinite;top:0;left:0;}
+.float-pulse-ring2{animation-delay:.6s;}
+.float-circle{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(201,168,76,.5);animation:floatBob 2.5s ease-in-out infinite;cursor:pointer;border:none;position:relative;z-index:1;}
+.float-circle svg{width:26px;height:26px;fill:none;stroke:#0a0e1a;stroke-width:2.5;stroke-linecap:round;}
+.float-label{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;font-size:11px;font-weight:800;padding:5px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;box-shadow:0 4px 15px rgba(201,168,76,.4);animation:floatBob 2.5s ease-in-out infinite;animation-delay:.2s;}
+.float-raised-badge{background:rgba(10,14,26,.9);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px;backdrop-filter:blur(8px);white-space:nowrap;text-align:center;animation:slideInBtn .5s ease forwards;}
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:800;display:none;align-items:center;justify-content:center;padding:20px;}
+.lightbox.open{display:flex;}
+.lightbox-img{max-width:100%;max-height:88vh;border-radius:12px;object-fit:contain;touch-action:pinch-zoom;}
+.lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:white;width:42px;height:42px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:white;width:44px;height:44px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.lightbox-prev{left:12px;}
+.lightbox-next{right:12px;}
+.lightbox-counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:13px;}
+/* FUNDS BAR */
+.funds-raised-bar{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:32px;}
+.funds-bar-track{background:var(--bg3);border-radius:30px;height:10px;margin:12px 0 6px;overflow:hidden;}
+.funds-bar-fill{height:100%;border-radius:30px;background:linear-gradient(90deg,var(--gold),var(--gold2));width:0%;transition:width 1.5s cubic-bezier(0.22,1,0.36,1);}
+
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.left{transform:translateX(-30px);}
 .reveal.right{transform:translateX(30px);}
@@ -284,8 +319,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 <!-- NAV -->
 <nav id="navbar">
   <a class="nav-brand" href="#" onclick="secretTap()">
-    <div class="nav-icon">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <div class="nav-icon" id="navLogoIcon">
+      <svg id="navLogoSvg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <img id="navLogoImg" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:10px;" />
     </div>
     <div class="nav-name">Mercy Children's Home<small>Kasanda Bukuya · Uganda</small></div>
   </a>
@@ -582,6 +618,23 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
       Join Our Sponsors — Donate Today
     </a>
+    <!-- FUNDS RAISED BAR -->
+    <div class="funds-raised-bar" id="fundsRaisedBar" style="display:none;margin-top:32px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div>
+          <div style="font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Total Raised by God's People</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--gold);" id="goalRaisedAmt">$0</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Sponsors</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--white);" id="goalSponsorCount">0</div>
+        </div>
+      </div>
+      <div class="funds-bar-track"><div class="funds-bar-fill" id="fundsBarFill"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2);">
+        <span>$0 raised</span><span id="goalTarget">Goal: $10,000</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -793,6 +846,19 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
           <p style="font-size:12px;color:var(--text2);line-height:1.7;">1. Upload photo to <strong style="color:var(--white);">imgbb.com</strong> or <strong style="color:var(--white);">postimages.org</strong> (free, no account needed)<br>2. Copy the <strong style="color:var(--white);">Direct link</strong> URL<br>3. Paste it below and tap Save<br>✅ Shows instantly on ALL phones &amp; laptops worldwide</p>
         </div>
 
+        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🏠 Foundation Logo (Nav Icon)</div>
+        <div class="logo-slot" style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px;display:grid;grid-template-columns:60px 1fr;gap:12px;align-items:center;margin-bottom:18px;" id="logoSlot">
+          <div id="logoPreview" style="width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <svg style="width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--text2);margin-bottom:6px;font-weight:600;">Appears in top-left navigation</div>
+            <label style="display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#000;padding:7px 12px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
+              Upload Logo<input type="file" accept="image/*" style="display:none;" onchange="handleLogoUpload(event)" />
+            </label>
+          </div>
+        </div>
+
         <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">📷 Gallery Photos (8 slots)</div>
         <div id="photoGrid" style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;"></div>
 
@@ -867,6 +933,28 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 
     </div>
   </div>
+</div>
+
+<!-- FLOATING DONATE BUTTON -->
+<div class="float-donate" id="floatDonate">
+  <div class="float-raised-badge" id="floatRaisedNum" style="display:none;">💰 $0 raised</div>
+  <div class="float-btn-wrap">
+    <div class="float-pulse-ring"></div>
+    <div class="float-pulse-ring float-pulse-ring2"></div>
+    <button class="float-circle" onclick="goDonate()" title="Donate Now">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" fill="#0a0e1a" stroke="none"/></svg>
+    </button>
+    <div class="float-label" onclick="goDonate()">Donate Now</div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1);event.stopPropagation();">&#8249;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="Photo" />
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1);event.stopPropagation();">&#8250;</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
 
 <input type="file" id="fileIn" accept="image/*" style="display:none;" onchange="handlePhoto(event)"/>
@@ -1496,6 +1584,7 @@ function renderPublicSponsors() {
     var total = sponsors.reduce(function(sum, s) { return sum + Number(s.amount||0); }, 0);
     totals.innerHTML = '<div style="display:inline-flex;gap:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 28px;"><div style="text-align:center;"><div style="serif;font-size:32px;font-weight:700;color:var(--gold);">' + sponsors.length + '</div><div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Sponsors</div></div><div style="width:1px;background:var(--border);"></div><div style="text-align:center;"><div style="serif;font-size:32px;font-weight:700;color:var(--gold);">$' + total.toLocaleString() + '</div><div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Total Raised</div></div></div>';
   }
+  updateFundsDisplay();
 }
 
 // ===== SCROLL ANIMATIONS =====
@@ -1655,13 +1744,194 @@ function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;'
 // ===== INIT =====
 applyData();
 loadAllPhotos();  // async - loads from Supabase
+loadLogo();  // async - load foundation logo
 renderPublicSponsors();
+updateFundsDisplay();
 initAnimations();
+initFloatDonate();
+setTimeout(makeGalleryClickable, 2000);  // after photos load
 
 // Set today date in sponsor form
 var today = new Date().toISOString().split('T')[0];
 var spDate = document.getElementById('sp-date');
 if (spDate) spDate.value = today;
+
+// ===== LIGHTBOX =====
+var lightboxPhotos = [];
+var lightboxIndex = 0;
+
+function buildLightboxPhotos() {
+  lightboxPhotos = [];
+  var meta = photoCache || {};
+  for (var i = 0; i < 8; i++) {
+    var filename = meta['gallery_' + i];
+    if (filename) lightboxPhotos.push(getSupaPhotoURL(filename));
+  }
+  // Add gi-0 and gi-2 (the split section photos)
+  var gi0 = document.getElementById('gi-0');
+  var gi2 = document.getElementById('gi-2');
+  if (gi0 && gi0.querySelector('img')) {
+    var src = gi0.querySelector('img').src;
+    if (!lightboxPhotos.includes(src)) lightboxPhotos.push(src);
+  }
+  if (gi2 && gi2.querySelector('img')) {
+    var src2 = gi2.querySelector('img').src;
+    if (!lightboxPhotos.includes(src2)) lightboxPhotos.push(src2);
+  }
+}
+
+function openLightbox(src) {
+  buildLightboxPhotos();
+  var idx = lightboxPhotos.indexOf(src);
+  if (idx === -1) { lightboxPhotos.unshift(src); idx = 0; }
+  lightboxIndex = idx;
+  showLightbox();
+}
+
+function showLightbox() {
+  var lb = document.getElementById('lightbox');
+  var img = document.getElementById('lightboxImg');
+  var counter = document.getElementById('lightboxCounter');
+  img.src = lightboxPhotos[lightboxIndex];
+  counter.textContent = (lightboxIndex + 1) + ' / ' + lightboxPhotos.length;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxBg(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+function lightboxNav(dir) {
+  lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
+  showLightbox();
+}
+
+// Make gallery items clickable for lightbox
+function makeGalleryClickable() {
+  for (var i = 0; i < 8; i++) {
+    (function(idx) {
+      var el = document.getElementById('gi-' + idx);
+      if (!el) return;
+      el.style.cursor = 'pointer';
+      el.onclick = function() {
+        var img = el.querySelector('img');
+        if (img) openLightbox(img.src);
+      };
+    })(i);
+  }
+}
+
+// ===== FLOATING DONATE BUTTON =====
+function initFloatDonate() {
+  var bar = document.getElementById('floatDonate');
+  var shown = false;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400 && !shown) {
+      bar.classList.add('visible');
+      shown = true;
+    } else if (window.scrollY < 100 && shown) {
+      bar.classList.remove('visible');
+      shown = false;
+    }
+  }, { passive: true });
+}
+
+function updateFundsDisplay() {
+  var sponsors = getSponsors();
+  var total = sponsors.reduce(function(sum, s) { return sum + Number(s.amount || 0); }, 0);
+  var count = sponsors.length;
+  var goal = 10000;
+  var pct = Math.min((total / goal) * 100, 100);
+
+  // Float badge
+  var fn = document.getElementById('floatRaisedNum');
+  if (fn) {
+    if (total > 0) {
+      fn.textContent = '💰 $' + total.toLocaleString() + ' raised';
+      fn.style.display = 'block';
+    } else {
+      fn.style.display = 'none';
+    }
+  }
+
+  // Goal section bar
+  var bar = document.getElementById('fundsRaisedBar');
+  var fill = document.getElementById('fundsBarFill');
+  var amt = document.getElementById('goalRaisedAmt');
+  var cnt = document.getElementById('goalSponsorCount');
+  if (total > 0 || count > 0) {
+    if (bar) bar.style.display = 'block';
+    if (amt) amt.textContent = '$' + total.toLocaleString();
+    if (cnt) cnt.textContent = count;
+    setTimeout(function() { if (fill) fill.style.width = pct + '%'; }, 300);
+  }
+}
+
+// ===== LOGO UPLOAD =====
+async function handleLogoUpload(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  showToast('Uploading logo... ⏳');
+  try {
+    var filename = await uploadToSupabase(file, 'logo');
+    await setPhotoMeta('logo', filename);
+    var url = getSupaPhotoURL(filename);
+    applyLogo(url);
+    showToast('Logo updated! ✅');
+  } catch(err) {
+    showToast('Upload failed: ' + err.message, true);
+  }
+  e.target.value = '';
+}
+
+function applyLogo(url) {
+  var svg = document.getElementById('navLogoSvg');
+  var img = document.getElementById('navLogoImg');
+  var preview = document.getElementById('logoPreview');
+  if (img && url) {
+    img.src = url;
+    img.style.display = 'block';
+    if (svg) svg.style.display = 'none';
+  }
+  if (preview && url) {
+    preview.innerHTML = '<img src="' + url + '" style="width:100%;height:100%;object-fit:cover;" />';
+  }
+}
+
+async function loadLogo() {
+  var meta = await getPhotoMeta();
+  var filename = meta['logo'];
+  if (filename) applyLogo(getSupaPhotoURL(filename));
+}
+
+// ===== SWIPE FOR LIGHTBOX =====
+(function() {
+  var touchStartX = 0;
+  document.addEventListener('touchstart', function(e) {
+    if (document.getElementById('lightbox').classList.contains('open')) {
+      touchStartX = e.touches[0].clientX;
+    }
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    var diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) lightboxNav(diff > 0 ? 1 : -1);
+  }, { passive: true });
+})();
+
+// Keyboard nav for lightbox
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowRight') lightboxNav(1);
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'Escape') closeLightbox();
+});
 </script>
 </body>
 </html>
