@@ -407,8 +407,8 @@ section p { line-height: 1.85; }
 </nav>
 
 <!-- MOTTO BAR -->
-<div id="mottoBar" style="position:fixed;top:64px;left:0;right:0;z-index:99;padding:14px 0;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2);">
-  <span id="mottoText" style="font-weight:800;letter-spacing:4px;text-transform:uppercase;">✝&nbsp;&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;&nbsp;✝</span>
+<div id="mottoBar" style="position:fixed;top:64px;left:0;right:0;z-index:99;padding:14px 0;text-align:center;background:#0a0e1a;border-bottom:1px solid rgba(201,168,76,.3);box-shadow:0 4px 20px rgba(0,0,0,.2);">
+  <span id="mottoText" style="font-weight:800;letter-spacing:4px;text-transform:uppercase;color:#c9a84c;font-size:clamp(13px,2.5vw,18px);text-shadow:0 0 30px rgba(201,168,76,.5);">✝&nbsp;&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;&nbsp;✝</span>
 </div>
 
 <!-- HERO -->
@@ -1323,7 +1323,36 @@ var DEF={
 };
 
 function getData(){try{return Object.assign({},DEF,JSON.parse(localStorage.getItem(DKEY)||'{}'));}catch(e){return Object.assign({},DEF);}}
-function setData(d){localStorage.setItem(DKEY,JSON.stringify(d));}
+function setData(d) {
+  var json = JSON.stringify(d);
+  localStorage.setItem(DKEY, json);
+  // Also sync to Supabase for cross-device
+  fetch(SUPA_URL + '/rest/v1/mch_photos', {
+    method: 'POST',
+    headers: {
+      'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY,
+      'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates'
+    },
+    body: JSON.stringify({id: 'site_settings', filename: json})
+  }).catch(function(e){ console.warn('Settings sync failed', e); });
+}
+
+async function loadSettingsFromSupabase() {
+  try {
+    var res = await fetch(SUPA_URL + '/rest/v1/mch_photos?id=eq.site_settings&select=filename', {
+      headers: {'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY}
+    });
+    var rows = await res.json();
+    if (Array.isArray(rows) && rows.length > 0) {
+      var remote = JSON.parse(rows[0].filename);
+      // Merge remote into local (remote wins)
+      var local = getData();
+      var merged = Object.assign({}, local, remote);
+      localStorage.setItem(DKEY, JSON.stringify(merged));
+      applyData();
+    }
+  } catch(e) { console.warn('Failed to load remote settings', e); }
+}
 function getPwd(){return localStorage.getItem(AKEY)||'mercy2020';}
 
 async function syncPwdFromSupabase() {
@@ -2085,6 +2114,7 @@ function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;'
 
 // ===== INIT =====
 syncPwdFromSupabase();  // sync password across devices
+loadSettingsFromSupabase();  // sync ALL settings including motto
 applyData();
 loadAllPhotos();  // async - loads from Supabase
 loadLogo();  // async - load foundation logo
