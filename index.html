@@ -134,9 +134,48 @@ section{padding:88px 5%;}
 .c-item h4{font-size:13px;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
 .c-item p{font-size:14px;color:var(--text2);line-height:1.6;}
 .socials{display:flex;gap:10px;margin-top:8px;}
-.soc{width:38px;height:38px;border-radius:10px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--text2);transition:all .2s;}
-.soc:hover{border-color:var(--gold);color:var(--gold);}
-.soc svg{width:16px;height:16px;fill:currentColor;}
+.soc-fb{background:#1877f2 !important;border-color:#1877f2 !important;color:white !important;}
+.soc-fb:hover{background:#0d6efd !important;border-color:#0d6efd !important;}
+.soc-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888) !important;border-color:#dc2743 !important;color:white !important;}
+.soc-ig:hover{opacity:.85;}
+.soc-yt{background:#ff0000 !important;border-color:#ff0000 !important;color:white !important;}
+.soc-yt:hover{background:#cc0000 !important;}
+.soc-wa{background:#25d366 !important;border-color:#25d366 !important;color:white !important;}
+.soc-wa:hover{background:#128c7e !important;}
+.soc-tt{background:#000000 !important;border-color:#333 !important;color:white !important;}
+.soc-tt:hover{background:#333 !important;}
+.soc{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .2s,transform .2s;border:1px solid var(--border);background:var(--card);color:var(--text2);}
+.soc:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.3);}
+.soc svg{width:18px;height:18px;}
+
+/* BIBLE VERSE CARD */
+.verse-card{background:linear-gradient(135deg,#0a1628,#0d1f3c);border:1px solid rgba(201,168,76,.25);border-radius:24px;padding:44px;position:relative;overflow:hidden;}
+.verse-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.verse-card::after{content:'';position:absolute;bottom:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.08),transparent 70%);}
+.verse-text{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3vw,26px);color:var(--white);line-height:1.7;font-style:italic;position:relative;z-index:1;}
+.verse-ref{font-size:12px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-top:16px;position:relative;z-index:1;}
+.verse-icon{width:48px;height:48px;margin-bottom:20px;position:relative;z-index:1;}
+
+/* SCROLL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.left{transform:translateX(-30px);}
+.reveal.right{transform:translateX(30px);}
+.reveal.scale{transform:scale(.95);opacity:0;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+.reveal-delay-4{transition-delay:.4s;}
+.reveal-delay-5{transition-delay:.5s;}
+
+/* SPONSOR TABLE */
+.sponsor-table{width:100%;border-collapse:collapse;font-size:14px;}
+.sponsor-table th{padding:10px 14px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);border-bottom:1px solid var(--border);}
+.sponsor-table td{padding:10px 14px;color:var(--text);border-bottom:1px solid rgba(255,255,255,.04);}
+.sponsor-table tr:last-child td{border-bottom:none;}
+.sponsor-table .amount{color:var(--gold);font-weight:700;}
+.sponsor-table .flag{font-size:16px;}
+
 .contact-form{display:flex;flex-direction:column;gap:14px;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .fg{display:flex;flex-direction:column;gap:6px;}
@@ -268,7 +307,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   <div class="hero-content">
     <div class="hero-badge">
       <svg style="width:12px;height:12px;fill:currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      <span id="heroTag">Serving Uganda's Children Since 2026</span>
+      <span id="heroTag">Serving Uganda's Children Since 2020</span>
     </div>
     <h1 id="heroTitle">Every Child Deserves <em>Love &amp; Hope</em></h1>
     <p id="heroDesc">Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda. Together we can change their story.</p>
@@ -427,11 +466,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <div class="sec-tag">Our Founder</div>
         <h2 class="sec-title">Ssengonzi Alex</h2>
         <p style="font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:16px;">Born from a heart transformed by God's grace, Ssengonzi Alex founded Mercy Children's Home in Kasanda Bukuya, Uganda with a simple but powerful calling — to be the hands and feet of Jesus to the most vulnerable children in his community.</p>
-        <p style="font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:16px;">Having witnessed first-hand the suffering of orphaned and abandoned children in Uganda, Alex stepped out in faith in 2026 — with little more than a willing heart and the promise of God's provision. Today, by the grace of God and the generous support of friends around the world, Mercy Children's Home is a beacon of hope in Kasanda Bukuya.</p>
+        <p style="font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:16px;">Having witnessed first-hand the suffering of orphaned and abandoned children in Uganda, Alex stepped out in faith in 2020 — with little more than a willing heart and the promise of God's provision. Today, by the grace of God and the generous support of friends around the world, Mercy Children's Home is a beacon of hope in Kasanda Bukuya.</p>
         <p style="font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:28px;">"God called me to love these children as my own. Every child here is a miracle, and every sponsor is an answer to our prayers." — <strong style="color:var(--gold);">Ssengonzi Alex</strong></p>
         <div style="display:flex;gap:16px;flex-wrap:wrap;">
           <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 20px;text-align:center;">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);">2026</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);">2020</div>
             <div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">Founded</div>
           </div>
           <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 20px;text-align:center;">
@@ -497,6 +536,18 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <div class="g-placeholder" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
         <svg style="width:32px;height:32px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         <span style="font-size:12px;color:var(--text2);">Photo 6</span>
+      </div>
+    </div>
+    <div id="gi-6" style="border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:var(--card);border:1px solid var(--border);cursor:pointer;">
+      <div class="g-placeholder" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+        <svg style="width:32px;height:32px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span style="font-size:12px;color:var(--text2);">Photo 7</span>
+      </div>
+    </div>
+    <div id="gi-7" style="border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:var(--card);border:1px solid var(--border);cursor:pointer;">
+      <div class="g-placeholder" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+        <svg style="width:32px;height:32px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span style="font-size:12px;color:var(--text2);">Photo 8</span>
       </div>
     </div>
   </div>
@@ -602,10 +653,21 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <div>
           <h4>Follow Us</h4>
           <div class="socials">
-            <a href="#" class="soc" id="socFb" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-            <a href="#" class="soc" id="socIg" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-            <a href="#" class="soc" id="socYt" target="_blank"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
-            <a href="https://wa.me/256751442505" class="soc" id="socWa" target="_blank"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+            <a href="#" class="soc soc-fb" id="socFb" target="_blank" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="soc soc-ig" id="socIg" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="#" class="soc soc-yt" id="socYt" target="_blank" title="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+            </a>
+            <a href="https://wa.me/256751442505" class="soc soc-wa" id="socWa" target="_blank" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+            <a href="#" class="soc soc-tt" id="socTt" target="_blank" title="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -634,6 +696,29 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   </div>
 </section>
 
+<!-- SPONSORS WALL -->
+<section style="background:var(--bg2);padding:88px 5%;" id="sponsors">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="sec-hdr" style="text-align:center;">
+      <div class="sec-tag reveal">Hall of Faith</div>
+      <h2 class="sec-title reveal reveal-delay-1">Our Generous Sponsors</h2>
+      <p class="sec-sub reveal reveal-delay-2" style="margin:0 auto;">To every soul who has given — God sees your heart. These names are written not only here, but in Heaven. Thank you.</p>
+    </div>
+    <div id="publicSponsors" style="display:none;">
+      <div style="overflow-x:auto;border-radius:16px;border:1px solid var(--border);background:var(--card);">
+        <table class="sponsor-table">
+          <thead><tr><th>Name</th><th>Country</th><th>Amount</th><th>Date</th><th>Message</th></tr></thead>
+          <tbody id="sponsorTableBody"></tbody>
+        </table>
+      </div>
+      <div style="text-align:center;margin-top:32px;" id="sponsorTotals"></div>
+    </div>
+    <div id="noSponsors" style="text-align:center;padding:40px 20px;background:var(--card);border:1px solid var(--border);border-radius:16px;">
+      <p style="font-size:14px;color:var(--text2);">Be the first to sponsor — your name will appear here. <a href="#donate" style="color:var(--gold);text-decoration:none;">Donate now →</a></p>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
@@ -642,7 +727,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <div class="nav-icon"><svg style="width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
         <span style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--white);">Mercy Children's Home</span>
       </div>
-      <p>Providing shelter, love, and opportunity to Uganda's most vulnerable children since <span id="footerYear">2026</span>. Every child deserves a future.</p>
+      <p>Providing shelter, love, and opportunity to Uganda's most vulnerable children since <span id="footerYear">2020</span>. Every child deserves a future.</p>
     </div>
     <div class="footer-col">
       <h4>Quick Links</h4>
@@ -662,7 +747,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© <span id="footerYear2">2026</span> Mercy Children's Home, Uganda. All rights reserved.</p>
+    <p>© <span id="footerYear2">2020</span> Mercy Children's Home, Uganda. All rights reserved.</p>
     <p>Made with <span class="footer-heart">♥</span> for the children of Uganda</p>
   </div>
 </footer>
@@ -688,7 +773,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <button class="adm-close" onclick="closeAdmin()">✕</button>
     </div>
     <div class="adm-tabs">
-      <button class="adm-tab active" onclick="admTab('photos',this)">Photos</button>
+      <button class="adm-tab" onclick="admTab('photos',this)">Photos</button>
+      <button class="adm-tab" onclick="admTab('sponsors',this)">Sponsors</button>
       <button class="adm-tab" onclick="admTab('content',this)">Content</button>
       <button class="adm-tab" onclick="admTab('contact',this)">Contact</button>
       <button class="adm-tab" onclick="admTab('stats',this)">Stats</button>
@@ -697,16 +783,38 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <div class="adm-body">
 
       <div class="adm-sec active" id="adm-photos">
-        <p style="font-size:12px;color:var(--text2);margin-bottom:14px;">Click a slot to upload a photo from your device.</p>
+        <p style="font-size:12px;color:var(--text2);margin-bottom:14px;">Click any slot to upload a photo. Supports up to 8 photos.</p>
         <div class="photo-grid" id="photoGrid"></div>
-        <button class="adm-btn" onclick="showToast('Photos saved!')">Save Photos</button>
+        <button class="adm-btn" onclick="showToast('Photos saved! ✅')">Save Photos</button>
+      </div>
+
+      <div class="adm-sec" id="adm-sponsors">
+        <p style="font-size:12px;color:var(--text2);margin-bottom:16px;">Add sponsor names, countries and donation amounts. These will show on the website.</p>
+        <div id="sponsorList" style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;"></div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px;">
+          <p style="font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">Add New Sponsor</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+            <div class="af" style="margin:0;"><label>Name</label><input type="text" id="sp-name" placeholder="e.g. John Smith"/></div>
+            <div class="af" style="margin:0;"><label>Country</label><input type="text" id="sp-country" placeholder="e.g. USA"/></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+            <div class="af" style="margin:0;"><label>Amount ($)</label><input type="number" id="sp-amount" placeholder="e.g. 100"/></div>
+            <div class="af" style="margin:0;"><label>Date</label><input type="date" id="sp-date"/></div>
+          </div>
+          <div class="af" style="margin-bottom:10px;"><label>Message (optional)</label><input type="text" id="sp-msg" placeholder="e.g. God bless these children"/></div>
+          <button class="adm-btn" onclick="addSponsor()">+ Add Sponsor</button>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <button class="adm-btn" onclick="saveSponsors()">Save All Sponsors</button>
+          <button class="adm-btn danger" onclick="clearSponsors()">Clear All</button>
+        </div>
       </div>
 
       <div class="adm-sec" id="adm-content">
         <div class="af"><label>Hero Headline</label><input type="text" id="ei-heroTitle" value="Every Child Deserves Love & Hope"/></div>
         <div class="af"><label>Hero Description</label><textarea id="ei-heroDesc">Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda.</textarea></div>
         <div class="af"><label>About Text</label><textarea id="ei-aboutText">Mercy Children's Home is a faith-based non-profit located in Kasanda Bukuya, Uganda, dedicated to comprehensive care for orphaned and vulnerable children.</textarea></div>
-        <div class="af"><label>Founded Year</label><input type="text" id="ei-year" value="2026"/></div>
+        <div class="af"><label>Founded Year</label><input type="text" id="ei-year" value="2020"/></div>
         <button class="adm-btn" onclick="saveContent()">Save Content</button>
       </div>
 
@@ -717,6 +825,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <div class="af"><label>Facebook URL</label><input type="text" id="ei-fb" value="#"/></div>
         <div class="af"><label>Instagram URL</label><input type="text" id="ei-ig" value="#"/></div>
         <div class="af"><label>YouTube URL</label><input type="text" id="ei-yt" value="#"/></div>
+        <div class="af"><label>TikTok URL</label><input type="text" id="ei-tt" value="#"/></div>
         <div class="af"><label>GoFundMe URL</label><input type="text" id="ei-gfm" value="https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968"/></div>
         <button class="adm-btn" onclick="saveContact()">Save Contact</button>
       </div>
@@ -749,61 +858,124 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 <div class="toast" id="toast"><span class="toast-icon" id="toastIcon"></span><span id="toastMsg"></span></div>
 
 <script>
-var DKEY='mch_d',PKEY='mch_p',AKEY='mch_pwd';
+var DKEY='mch_d',PKEY='mch_p',AKEY='mch_pwd',SPKEY='mch_sponsors';
 var unlocked=false,curSlot=null,tapCount=0,tapTimer=null;
+var TOTAL_PHOTOS=8;
 
-var DEF={heroTitle:"Every Child Deserves Love & Hope",heroDesc:"Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda. Together we can change their story.",aboutText:"Mercy Children's Home is a faith-based non-profit organization located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.",year:"2026",location:"Kasanda Bukuya, Uganda",phone:"+256 751 442 505",email:"info@mercychildrenshome.org",fb:"#",ig:"#",yt:"#",gfm:"https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968",s1n:"50+",s1l:"Children Helped",s2n:"8+",s2l:"Years of Service",s3n:"100%",s3l:"Love & Care"};
+var DEF={heroTitle:"Every Child Deserves Love & Hope",heroDesc:"Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda. Together we can change their story.",aboutText:"Mercy Children's Home is a faith-based non-profit organization located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.",year:"2020",location:"Kasanda Bukuya, Uganda",phone:"+256 751 442 505",email:"info@mercychildrenshome.org",fb:"#",ig:"#",yt:"#",tt:"#",gfm:"https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968",s1n:"50+",s1l:"Children Helped",s2n:"4+",s2l:"Years of Service",s3n:"100%",s3l:"Love & Care"};
 
 function getData(){try{return Object.assign({},DEF,JSON.parse(localStorage.getItem(DKEY)||'{}'));}catch(e){return Object.assign({},DEF);}}
 function setData(d){localStorage.setItem(DKEY,JSON.stringify(d));}
-function getPhotos(){try{var p=JSON.parse(localStorage.getItem(PKEY)||'[]');while(p.length<6)p.push(null);return p;}catch(e){return[null,null,null,null,null,null];}}
+function getPhotos(){try{var p=JSON.parse(localStorage.getItem(PKEY)||'[]');while(p.length<TOTAL_PHOTOS)p.push(null);return p;}catch(e){var a=[];for(var i=0;i<TOTAL_PHOTOS;i++)a.push(null);return a;}}
 function setPhotos(p){localStorage.setItem(PKEY,JSON.stringify(p));}
-function getPwd(){return localStorage.getItem(AKEY)||'mercy2026';}
+function getPwd(){return localStorage.getItem(AKEY)||'mercy2020';}
+function getSponsors(){try{return JSON.parse(localStorage.getItem(SPKEY)||'[]');}catch(e){return[];}}
+function setSponsors(s){localStorage.setItem(SPKEY,JSON.stringify(s));}
 
 function applyAll(){
   var d=getData();
-  // Hero
   document.getElementById('heroTitle').innerHTML=d.heroTitle.replace('Love & Hope','<em>Love &amp; Hope</em>');
   document.getElementById('heroDesc').textContent=d.heroDesc;
   document.getElementById('heroTag').textContent="Serving Uganda's Children Since "+d.year;
-  // Stats
   document.getElementById('stat1n').textContent=d.s1n;
   document.getElementById('stat1l').textContent=d.s1l;
   document.getElementById('stat2n').textContent=d.s2n;
   document.getElementById('stat2l').textContent=d.s2l;
   document.getElementById('stat3n').textContent=d.s3n;
   document.getElementById('stat3l').textContent=d.s3l;
-  // About
   document.getElementById('aboutText').textContent=d.aboutText;
-  // Contact
   document.getElementById('contactLocation').textContent=d.location;
   document.getElementById('contactPhone').textContent=d.phone;
   document.getElementById('contactEmail').textContent=d.email;
   document.getElementById('socFb').href=d.fb;
   document.getElementById('socIg').href=d.ig;
   document.getElementById('socYt').href=d.yt;
+  document.getElementById('socTt').href=d.tt;
   document.getElementById('socWa').href='https://wa.me/'+d.phone.replace(/\D/g,'');
-  // Footer
   document.getElementById('footerYear').textContent=d.year;
   document.getElementById('footerYear2').textContent=d.year;
   // Photos
   var photos=getPhotos();
-  for(var i=0;i<6;i++){
+  for(var i=0;i<TOTAL_PHOTOS;i++){
     var el=document.getElementById('gi-'+i);
     if(!el)continue;
     if(photos[i]){
-      el.innerHTML='<img src="'+photos[i]+'" alt="Photo '+(i+1)+'"/>';
-    }else{
-      el.innerHTML='<div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo '+(i+1)+'</span></div>';
+      el.innerHTML='<img src="'+photos[i]+'" alt="Photo '+(i+1)+'" style="width:100%;height:100%;object-fit:cover;display:block;"/>';
     }
   }
+  renderPublicSponsors();
 }
+
+// SPONSORS PUBLIC
+function renderPublicSponsors(){
+  var sponsors=getSponsors();
+  var tbody=document.getElementById('sponsorTableBody');
+  var pub=document.getElementById('publicSponsors');
+  var none=document.getElementById('noSponsors');
+  var totals=document.getElementById('sponsorTotals');
+  if(!sponsors.length){if(pub)pub.style.display='none';if(none)none.style.display='block';return;}
+  if(pub)pub.style.display='block';
+  if(none)none.style.display='none';
+  if(tbody){
+    tbody.innerHTML=sponsors.map(function(s){
+      var flag=s.country&&s.country.toLowerCase().indexOf('usa')!==-1?'🇺🇸':s.country&&s.country.toLowerCase().indexOf('uk')!==-1?'🇬🇧':s.country&&s.country.toLowerCase().indexOf('uganda')!==-1?'🇺🇬':'🌍';
+      return '<tr><td><strong>'+esc(s.name)+'</strong></td><td><span class="flag">'+flag+'</span> '+esc(s.country||'')+'</td><td class="amount">$'+Number(s.amount||0).toLocaleString()+'</td><td>'+esc(s.date||'')+'</td><td style="color:var(--text2);font-style:italic;">'+esc(s.message||'')+'</td></tr>';
+    }).join('');
+  }
+  if(totals){
+    var total=sponsors.reduce(function(sum,s){return sum+Number(s.amount||0);},0);
+    totals.innerHTML='<div style="display:inline-flex;gap:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 28px;"><div style="text-align:center;"><div style="font-family:\'Cormorant Garamond\',serif;font-size:32px;font-weight:700;color:var(--gold);">'+sponsors.length+'</div><div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;">Sponsors</div></div><div style="width:1px;background:var(--border);"></div><div style="text-align:center;"><div style="font-family:\'Cormorant Garamond\',serif;font-size:32px;font-weight:700;color:var(--gold);">$'+total.toLocaleString()+'</div><div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;">Total Raised</div></div></div>';
+  }
+}
+
+// SPONSORS ADMIN
+function renderAdminSponsors(){
+  var sponsors=getSponsors();
+  var list=document.getElementById('sponsorList');
+  if(!sponsors.length){list.innerHTML='<p style="font-size:13px;color:var(--text2);text-align:center;padding:16px;">No sponsors yet.</p>';return;}
+  list.innerHTML=sponsors.map(function(s,i){
+    return '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;">'
+      +'<div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;color:var(--white);">'+esc(s.name)+' — <span style="color:var(--gold);">$'+Number(s.amount||0).toLocaleString()+'</span></div>'
+      +'<div style="font-size:11px;color:var(--text2);">'+esc(s.country||'')+' · '+esc(s.date||'')+(s.message?' · '+esc(s.message):'')+'</div></div>'
+      +'<button onclick="deleteSponsor('+i+')" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:5px 10px;border-radius:7px;cursor:pointer;font-family:\'Outfit\',sans-serif;font-size:12px;">Delete</button>'
+      +'</div>';
+  }).join('');
+}
+function addSponsor(){
+  var name=document.getElementById('sp-name').value.trim();
+  var country=document.getElementById('sp-country').value.trim();
+  var amount=document.getElementById('sp-amount').value;
+  var date=document.getElementById('sp-date').value;
+  var msg=document.getElementById('sp-msg').value.trim();
+  if(!name||!amount){showToast('Enter name and amount',true);return;}
+  var sponsors=getSponsors();
+  sponsors.unshift({name:name,country:country,amount:amount,date:date,message:msg});
+  setSponsors(sponsors);
+  document.getElementById('sp-name').value='';
+  document.getElementById('sp-country').value='';
+  document.getElementById('sp-amount').value='';
+  document.getElementById('sp-msg').value='';
+  renderAdminSponsors();
+  renderPublicSponsors();
+  showToast('Sponsor added! ✅');
+}
+function deleteSponsor(i){
+  if(!confirm('Delete this sponsor?'))return;
+  var sponsors=getSponsors();
+  sponsors.splice(i,1);
+  setSponsors(sponsors);
+  renderAdminSponsors();
+  renderPublicSponsors();
+  showToast('Deleted');
+}
+function saveSponsors(){setSponsors(getSponsors());renderPublicSponsors();showToast('Sponsors saved! ✅');}
+function clearSponsors(){if(!confirm('Clear all sponsors?'))return;setSponsors([]);renderAdminSponsors();renderPublicSponsors();showToast('Cleared');}
 
 // NAV
 window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
 function toggleMenu(){document.getElementById('mobMenu').classList.toggle('open');}
 
-// SECRET TAP (5 taps on logo)
+// SECRET TAP
 function secretTap(){
   tapCount++;
   if(tapTimer)clearTimeout(tapTimer);
@@ -830,12 +1002,12 @@ function showToast(msg,isErr){
 // ADMIN
 function openAdmin(){
   if(!unlocked){document.getElementById('pwdOverlay').style.display='flex';setTimeout(function(){document.getElementById('pwdInput').focus();},100);}
-  else{document.getElementById('adminOverlay').classList.add('open');loadAdmFields();renderPhotoGrid();}
+  else{document.getElementById('adminOverlay').classList.add('open');loadAdmFields();renderPhotoGrid();renderAdminSponsors();}
 }
 function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');}
 function checkPwd(){
   var v=document.getElementById('pwdInput').value;
-  if(v===getPwd()){unlocked=true;document.getElementById('pwdOverlay').style.display='none';document.getElementById('pwdInput').value='';document.getElementById('adminOverlay').classList.add('open');loadAdmFields();renderPhotoGrid();}
+  if(v===getPwd()){unlocked=true;document.getElementById('pwdOverlay').style.display='none';document.getElementById('pwdInput').value='';document.getElementById('adminOverlay').classList.add('open');loadAdmFields();renderPhotoGrid();renderAdminSponsors();}
   else{showToast('Wrong password!',true);document.getElementById('pwdInput').value='';}
 }
 function admTab(tab,el){
@@ -843,14 +1015,11 @@ function admTab(tab,el){
   document.querySelectorAll('.adm-sec').forEach(function(s){s.classList.remove('active');});
   el.classList.add('active');
   document.getElementById('adm-'+tab).classList.add('active');
+  if(tab==='sponsors')renderAdminSponsors();
 }
 
 function loadAdmFields(){
   var d=getData();
-  ['heroTitle','heroDesc','aboutText','year','location','phone','email','fb','ig','yt','gfm','s1n','s1l','s2n','s2l','s3n','s3l'].forEach(function(k){
-    var el=document.getElementById('ei-'+k)||document.getElementById(k.replace(/(\d)/,'$1').replace('s','s'));
-    // use mapping
-  });
   document.getElementById('ei-heroTitle').value=d.heroTitle;
   document.getElementById('ei-heroDesc').value=d.heroDesc;
   document.getElementById('ei-aboutText').value=d.aboutText;
@@ -861,6 +1030,7 @@ function loadAdmFields(){
   document.getElementById('ei-fb').value=d.fb;
   document.getElementById('ei-ig').value=d.ig;
   document.getElementById('ei-yt').value=d.yt;
+  var tt=document.getElementById('ei-tt');if(tt)tt.value=d.tt||'#';
   document.getElementById('ei-gfm').value=d.gfm;
   document.getElementById('s1n').value=d.s1n;
   document.getElementById('s1l').value=d.s1l;
@@ -869,26 +1039,26 @@ function loadAdmFields(){
   document.getElementById('s3n').value=d.s3n;
   document.getElementById('s3l').value=d.s3l;
 }
-
 function saveContent(){var d=getData();d.heroTitle=document.getElementById('ei-heroTitle').value;d.heroDesc=document.getElementById('ei-heroDesc').value;d.aboutText=document.getElementById('ei-aboutText').value;d.year=document.getElementById('ei-year').value;setData(d);applyAll();showToast('Content saved! ✅');}
-function saveContact(){var d=getData();d.location=document.getElementById('ei-location').value;d.phone=document.getElementById('ei-phone').value;d.email=document.getElementById('ei-email').value;d.fb=document.getElementById('ei-fb').value;d.ig=document.getElementById('ei-ig').value;d.yt=document.getElementById('ei-yt').value;d.gfm=document.getElementById('ei-gfm').value;setData(d);applyAll();showToast('Contact saved! ✅');}
+function saveContact(){var d=getData();d.location=document.getElementById('ei-location').value;d.phone=document.getElementById('ei-phone').value;d.email=document.getElementById('ei-email').value;d.fb=document.getElementById('ei-fb').value;d.ig=document.getElementById('ei-ig').value;d.yt=document.getElementById('ei-yt').value;var tt=document.getElementById('ei-tt');if(tt)d.tt=tt.value;d.gfm=document.getElementById('ei-gfm').value;setData(d);applyAll();showToast('Contact saved! ✅');}
 function saveStats(){var d=getData();d.s1n=document.getElementById('s1n').value;d.s1l=document.getElementById('s1l').value;d.s2n=document.getElementById('s2n').value;d.s2l=document.getElementById('s2l').value;d.s3n=document.getElementById('s3n').value;d.s3l=document.getElementById('s3l').value;setData(d);applyAll();showToast('Stats saved! ✅');}
 function changePwd(){var np=document.getElementById('newPwd').value,cp=document.getElementById('confPwd').value;if(np.length<6){showToast('Min 6 characters',true);return;}if(np!==cp){showToast('Passwords do not match!',true);return;}localStorage.setItem(AKEY,np);document.getElementById('newPwd').value='';document.getElementById('confPwd').value='';showToast('Password changed! ✅');}
 function resetAll(){if(!confirm('Reset everything to defaults?'))return;localStorage.removeItem(DKEY);localStorage.removeItem(PKEY);applyAll();loadAdmFields();renderPhotoGrid();showToast('Reset done ✅');}
 
-// PHOTO GRID
+// PHOTO GRID (8 slots)
 function renderPhotoGrid(){
   var photos=getPhotos(),grid=document.getElementById('photoGrid');
+  if(!grid)return;
   grid.innerHTML='';
-  for(var i=0;i<6;i++){
+  for(var i=0;i<TOTAL_PHOTOS;i++){
     var slot=document.createElement('div');
     slot.className='p-slot';
-    slot.setAttribute('data-idx',i);
     (function(idx){slot.onclick=function(){curSlot=idx;document.getElementById('fileIn').click();};})(i);
     if(photos[i]){
-      slot.innerHTML='<img src="'+photos[i]+'" alt="Photo '+(i+1)+'"/><div class="p-hover"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg><span>Change</span></div>';
+      slot.innerHTML='<img src="'+photos[i]+'" alt="Photo '+(i+1)+'" style="width:100%;height:100%;object-fit:cover;"/>'
+        +'<div class="p-hover"><svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg><span>Change</span></div>';
     }else{
-      slot.innerHTML='<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Photo '+(i+1)+'</span>';
+      slot.innerHTML='<svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Photo '+(i+1)+'</span>';
     }
     grid.appendChild(slot);
   }
@@ -896,17 +1066,65 @@ function renderPhotoGrid(){
 function handlePhoto(e){
   var file=e.target.files[0];if(!file)return;
   var reader=new FileReader();
-  reader.onload=function(ev){var photos=getPhotos();photos[curSlot]=ev.target.result;setPhotos(photos);applyAll();renderPhotoGrid();showToast('Photo '+(curSlot+1)+' updated! ✅');};
+  reader.onload=function(ev){
+    var photos=getPhotos();
+    photos[curSlot]=ev.target.result;
+    setPhotos(photos);
+    applyAll();
+    renderPhotoGrid();
+    showToast('Photo '+(curSlot+1)+' updated! ✅');
+  };
   reader.readAsDataURL(file);
   e.target.value='';
 }
 
-// SCROLL ANIMATIONS
-var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:.1});
-document.querySelectorAll('.m-card,.c-item').forEach(function(el){el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity .5s ease,transform .5s ease';obs.observe(el);});
+// SCROLL REVEAL
+function initReveal(){
+  var els=document.querySelectorAll('.reveal');
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el){obs.observe(el);});
+}
+
+// ADD REVEAL CLASSES TO ELEMENTS
+function addRevealClasses(){
+  // Mission cards
+  document.querySelectorAll('.m-card').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.classList.add('reveal-delay-'+(i%3+1));
+  });
+  // Contact items
+  document.querySelectorAll('.c-item').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.classList.add('reveal-delay-'+(i+1));
+  });
+  // About card
+  var ac=document.querySelector('.about-card');
+  if(ac)ac.classList.add('reveal','left');
+  var at=document.querySelector('.about-text');
+  if(at)at.classList.add('reveal','right');
+  // Sections titles
+  document.querySelectorAll('.sec-title:not(.hero h1 *)').forEach(function(el){
+    if(!el.classList.contains('reveal'))el.classList.add('reveal');
+  });
+}
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 
 // INIT
+addRevealClasses();
 applyAll();
+initReveal();
+
+// Set today's date in sponsor form
+var today=new Date().toISOString().split('T')[0];
+var spDate=document.getElementById('sp-date');
+if(spDate)spDate.value=today;
 </script>
 </body>
 </html>
