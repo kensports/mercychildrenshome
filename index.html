@@ -611,7 +611,7 @@ section p { line-height: 1.85; }
             <div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">Founded</div>
           </div>
           <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 20px;text-align:center;">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);">33+</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);" id="founderChildCount">32</div>
             <div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">Children</div>
           </div>
           <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 20px;text-align:center;">
@@ -989,7 +989,37 @@ section p { line-height: 1.85; }
         <div id="photoGrid" style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;"></div>
 
         <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;">👤 Founder Photo</div>
-        <div id="founderPhotoGrid" style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;"></div>
+        <div id="founderPhotoGrid" style="display:flex;flex-direction:column;gap:10px;margin-bottom:10px;"></div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:18px;">
+          <div style="font-size:11px;color:var(--text2);margin-bottom:8px;font-weight:600;">📐 Adjust photo position/size:</div>
+          <select id="founderPhotoPos" onchange="updateFounderPhotoPos()" style="width:100%;padding:8px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text);outline:none;margin-bottom:8px;">
+            <option value="center">Center (default)</option>
+            <option value="top">Top — show face</option>
+            <option value="bottom">Bottom</option>
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+          </select>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div>
+              <div style="font-size:10px;color:var(--text2);margin-bottom:4px;">Aspect Ratio</div>
+              <select id="founderPhotoRatio" onchange="updateFounderPhotoPos()" style="width:100%;padding:7px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text);outline:none;">
+                <option value="3/4">Portrait 3:4 (default)</option>
+                <option value="1/1">Square 1:1</option>
+                <option value="4/3">Landscape 4:3</option>
+                <option value="2/3">Tall 2:3</option>
+              </select>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--text2);margin-bottom:4px;">Border Radius</div>
+              <select id="founderPhotoBorder" onchange="updateFounderPhotoPos()" style="width:100%;padding:7px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text);outline:none;">
+                <option value="20px">Rounded (default)</option>
+                <option value="50%">Circle</option>
+                <option value="8px">Slightly rounded</option>
+                <option value="0px">Square edges</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
         <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin:18px 0 6px;">🌍 Sponsor Photos</div>
         <div id="sponsorPhotoGrid" style="display:flex;flex-direction:column;gap:10px;margin-bottom:10px;"></div>
@@ -1065,7 +1095,10 @@ section p { line-height: 1.85; }
         
         <div style="height:1px;background:var(--border);margin:16px 0;"></div>
         <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">👤 Founder Section</div>
-        <div class="af"><label>Founder Name</label><input type="text" id="ei-founderName" value="Ssengonzi Alex"/></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="af" style="margin:0;"><label>Founder Name</label><input type="text" id="ei-founderName" value="Ssengonzi Alex"/></div>
+          <div class="af" style="margin:0;"><label>Children Count</label><input type="text" id="ei-childCount" value="32" placeholder="e.g. 32"/></div>
+        </div>
         <div class="af"><label>Founder Bio (Paragraph 1)</label><textarea id="ei-founderBio1" style="width:100%;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;height:80px;resize:none;">Born from a heart transformed by God's grace, Ssengonzi Alex founded Mercy Children's Home in Kasanda Bukuya, Uganda with a simple but powerful calling — to be the hands and feet of Jesus to the most vulnerable children in his community.</textarea></div>
         <div class="af"><label>Founder Bio (Paragraph 2)</label><textarea id="ei-founderBio2" style="width:100%;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;height:80px;resize:none;">Having witnessed first-hand the suffering of orphaned and abandoned children in Uganda, Alex stepped out in faith in 2020 — with little more than a willing heart and the promise of God's provision. Today, by the grace of God and the generous support of friends around the world, Mercy Children's Home is a beacon of hope in Kasanda Bukuya.</textarea></div>
         <div class="af"><label>Founder Quote</label><textarea id="ei-founderQuote" style="width:100%;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;height:70px;resize:none;">"God called me to love these children as my own. Every child here is a miracle, and every sponsor is an answer to our prayers." — Ssengonzi Alex</textarea></div>
@@ -1471,6 +1504,7 @@ function applyData() {
   var wa=document.getElementById('socWa'); if(wa)wa.href='https://wa.me/'+d.phone.replace(/\D/g,'');
   // Apply founder fields
   var fn2 = document.getElementById('founderName'); if(fn2 && d.founderName) fn2.textContent = d.founderName;
+  var cc2 = document.getElementById('founderChildCount'); if(cc2 && d.childCount) cc2.textContent = d.childCount;
   var fb1e = document.getElementById('founderBio1'); if(fb1e && d.founderBio1) fb1e.textContent = d.founderBio1;
   var fb2e = document.getElementById('founderBio2'); if(fb2e && d.founderBio2) fb2e.textContent = d.founderBio2;
   var fqe = document.getElementById('founderQuote'); if(fqe && d.founderQuote) fqe.innerHTML = d.founderQuote.replace('— Ssengonzi Alex','— <strong style="color:var(--gold);">Ssengonzi Alex</strong>');
@@ -1850,7 +1884,7 @@ function admTab(tab, el) {
   document.getElementById('adm-' + tab).classList.add('active');
   if (tab === 'sponsors') renderAdminSponsors();
   if (tab === 'team') { renderTeamAdmin(); }
-  if (tab === 'photos') { renderPhotoGrid(); renderFounderPhotoGrid(); renderSponsorPhotoGrid(); } // all async
+  if (tab === 'photos') { renderPhotoGrid(); renderFounderPhotoGrid(); renderSponsorPhotoGrid(); loadFounderPhotoStyle(); } // all async
 }
 
 function loadAdmFields() {
@@ -1868,6 +1902,7 @@ function loadAdmFields() {
   // Load founder fields
   var d3 = getData();
   var fn3 = document.getElementById('ei-founderName'); if(fn3) fn3.value = d3.founderName || 'Ssengonzi Alex';
+  var ccl = document.getElementById('ei-childCount'); if(ccl) ccl.value = d3.childCount || '32';
   var fb1l = document.getElementById('ei-founderBio1'); if(fb1l) fb1l.value = d3.founderBio1 || fb1l.value;
   var fb2l = document.getElementById('ei-founderBio2'); if(fb2l) fb2l.value = d3.founderBio2 || fb2l.value;
   var fql = document.getElementById('ei-founderQuote'); if(fql) fql.value = d3.founderQuote || fql.value;
@@ -1893,6 +1928,7 @@ async function saveContent() {
   d.year = document.getElementById('ei-year').value;
   // Save founder fields
   var fn = document.getElementById('ei-founderName'); if(fn) d.founderName = fn.value;
+  var cc = document.getElementById('ei-childCount'); if(cc) d.childCount = cc.value;
   var fb1 = document.getElementById('ei-founderBio1'); if(fb1) d.founderBio1 = fb1.value;
   var fb2 = document.getElementById('ei-founderBio2'); if(fb2) d.founderBio2 = fb2.value;
   var fq = document.getElementById('ei-founderQuote'); if(fq) d.founderQuote = fq.value;
@@ -2168,6 +2204,7 @@ function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;'
 
 // ===== INIT =====
 applyData();  // instant from localStorage cache
+loadFounderPhotoStyle();
 syncPwdFromSupabase();
 loadSettingsFromSupabase();  // overwrites with Supabase data (remote wins)
 loadAllPhotos();  // async - loads from Supabase
@@ -2722,6 +2759,46 @@ document.addEventListener('DOMContentLoaded', function() {
   var fontSel = document.getElementById('ei-mottoFont');
   if (fontSel) fontSel.onchange = previewMotto;
 });
+
+// ===== FOUNDER PHOTO RESIZE =====
+function updateFounderPhotoPos() {
+  var pos = (document.getElementById('founderPhotoPos') || {}).value || 'center';
+  var ratio = (document.getElementById('founderPhotoRatio') || {}).value || '3/4';
+  var border = (document.getElementById('founderPhotoBorder') || {}).value || '20px';
+
+  // Save to localStorage
+  localStorage.setItem('founder_pos', pos);
+  localStorage.setItem('founder_ratio', ratio);
+  localStorage.setItem('founder_border', border);
+
+  // Apply to page immediately
+  applyFounderPhotoStyle(pos, ratio, border);
+  showToast('Photo style updated! ✅');
+}
+
+function applyFounderPhotoStyle(pos, ratio, border) {
+  var el = document.getElementById('gi-1');
+  if (!el) return;
+  el.style.aspectRatio = pos || 'center' ? (ratio || '3/4') : '3/4';
+  el.style.borderRadius = border || '20px';
+  var img = el.querySelector('img');
+  if (img) img.style.objectPosition = pos || 'center';
+}
+
+function loadFounderPhotoStyle() {
+  var pos = localStorage.getItem('founder_pos') || 'center';
+  var ratio = localStorage.getItem('founder_ratio') || '3/4';
+  var border = localStorage.getItem('founder_border') || '20px';
+  applyFounderPhotoStyle(pos, ratio, border);
+
+  // Set selects when admin opens
+  var posEl = document.getElementById('founderPhotoPos');
+  if (posEl) posEl.value = pos;
+  var ratioEl = document.getElementById('founderPhotoRatio');
+  if (ratioEl) ratioEl.value = ratio;
+  var borderEl = document.getElementById('founderPhotoBorder');
+  if (borderEl) borderEl.value = border;
+}
 </script>
 </body>
 </html>
