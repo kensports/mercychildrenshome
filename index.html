@@ -699,7 +699,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       </div>
       <div class="c-item">
         <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-        <div><h4>Email</h4><p id="contactEmail">info@mercychildrenshome.org</p></div>
+        <div><h4>Email</h4><a id="contactEmail" href="mailto:mercychildrenshomeug2024@gmail.com" style="color:var(--text2);text-decoration:none;">mercychildrenshomeug2024@gmail.com</a></div>
       </div>
       <div class="c-item">
         <div class="c-icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
@@ -1087,7 +1087,7 @@ var DEF={
   heroDesc:"Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda. Together we can change their story.",
   aboutText:"Mercy Children's Home is a faith-based non-profit organization located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.",
   year:"2020", location:"Kasanda Bukuya, Uganda", phone:"+256 751 442 505",
-  email:"info@mercychildrenshome.org", fb:"#", ig:"#", yt:"#", tt:"#",
+  email:"info@mercychildrenshome.org", fb:"#", ig:"https://www.instagram.com/mercychildrensfamilyuganda", yt:"https://youtube.com/@mercychidrenshomeug4969?si=AUnM9l7ssI3Let6D", tt:"https://www.tiktok.com/@mercy.home.ug?_r=1&_t=ZS-95YTJ705bY0",
   gfm:"https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968",
   s1n:"50+", s1l:"Children Helped", s2n:"4+", s2l:"Years of Service", s3n:"100%", s3l:"Love & Care"
 };
@@ -1116,7 +1116,7 @@ function applyData() {
   var at=document.getElementById('aboutText'); if(at)at.textContent=d.aboutText;
   var cl=document.getElementById('contactLocation'); if(cl)cl.textContent=d.location;
   var cp=document.getElementById('contactPhone'); if(cp)cp.textContent=d.phone;
-  var ce=document.getElementById('contactEmail'); if(ce)ce.textContent=d.email;
+  var ce=document.getElementById('contactEmail'); if(ce){ce.textContent=d.email;ce.href='mailto:'+d.email;}
   var fb=document.getElementById('socFb'); if(fb)fb.href=d.fb;
   var ig=document.getElementById('socIg'); if(ig)ig.href=d.ig;
   var yt=document.getElementById('socYt'); if(yt)yt.href=d.yt;
@@ -1137,11 +1137,12 @@ async function loadAllPhotos() {
       if (!el) return;
       if (filename) {
         var url = getSupaPhotoURL(filename);
+        var savedPos = localStorage.getItem('pos_gallery_' + idx) || 'center';
         el.style.position = 'relative';
         el.style.background = 'none';
         var img = document.createElement('img');
         img.src = url;
-        img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;';
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:' + savedPos + ';display:block;position:absolute;top:0;left:0;';
         el.innerHTML = '';
         el.appendChild(img);
       }
@@ -1212,24 +1213,53 @@ async function renderPhotoGrid() {
       }
       // Info
       var info = document.createElement('div');
-      var label = document.createElement('label');
-      label.style.cssText = 'display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#000;padding:7px 12px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;';
-      label.innerHTML = '<svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload';
-      var input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-      input.style.display = 'none';
-      input.onchange = (function(k){ return function(e){ handlePhotoUpload(e, k); }; })(key);
-      label.appendChild(input);
       var title = document.createElement('div');
       title.style.cssText = 'font-size:11px;color:var(--text2);margin-bottom:6px;font-weight:600;';
       title.textContent = 'Photo ' + (idx+1) + (filename ? ' ✅' : '');
       info.appendChild(title);
+      // Upload button
+      var label = document.createElement('label');
+      label.style.cssText = 'display:inline-flex;align-items:center;gap:5px;background:var(--gold);color:#000;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;';
+      label.innerHTML = '<svg style="width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload';
+      var input = document.createElement('input');
+      input.type = 'file'; input.accept = 'image/*'; input.style.display = 'none';
+      input.onchange = (function(k){ return function(e){ handlePhotoUpload(e, k); }; })(key);
+      label.appendChild(input);
       info.appendChild(label);
       if (filename) {
+        // Resize/position control
+        var posKey = 'pos_' + key;
+        var curPos = localStorage.getItem(posKey) || 'center';
+        var posWrap = document.createElement('div');
+        posWrap.style.cssText = 'margin-top:6px;';
+        posWrap.innerHTML = '<div style="font-size:10px;color:var(--text2);margin-bottom:4px;">📐 Adjust position:</div>';
+        var posSelect = document.createElement('select');
+        posSelect.style.cssText = 'background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:4px 8px;border-radius:6px;font-size:11px;width:100%;';
+        var positions = [
+          ['center','Center (default)'],['top','Top'],['bottom','Bottom'],
+          ['left','Left'],['right','Right'],
+          ['top left','Top Left'],['top right','Top Right'],
+          ['bottom left','Bottom Left'],['bottom right','Bottom Right']
+        ];
+        positions.forEach(function(p) {
+          var opt = document.createElement('option');
+          opt.value = p[0]; opt.textContent = p[1];
+          if (p[0] === curPos) opt.selected = true;
+          posSelect.appendChild(opt);
+        });
+        posSelect.onchange = (function(k, gIdx){ return function() {
+          var pos = posSelect.value;
+          localStorage.setItem('pos_' + k, pos);
+          var el = document.getElementById('gi-' + gIdx);
+          if (el) { var img = el.querySelector('img'); if(img) img.style.objectPosition = pos; }
+          showToast('Position updated!');
+        }; })(key, idx);
+        posWrap.appendChild(posSelect);
+        info.appendChild(posWrap);
+        // Delete button
         var del = document.createElement('button');
         del.textContent = 'Delete';
-        del.style.cssText = 'margin-left:6px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:7px 10px;border-radius:8px;font-size:11px;cursor:pointer;';
+        del.style.cssText = 'margin-top:6px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:5px 10px;border-radius:8px;font-size:11px;cursor:pointer;width:100%;';
         del.onclick = (function(k, f){ return function(){ deletePhoto(k, f); }; })(key, filename);
         info.appendChild(del);
       }
@@ -1830,14 +1860,13 @@ function makeGalleryClickable() {
 // ===== FLOATING DONATE BUTTON =====
 function initFloatDonate() {
   var bar = document.getElementById('floatDonate');
-  var shown = false;
+  // Show after 2 seconds regardless, hide when back at very top
+  setTimeout(function() { bar.classList.add('visible'); }, 2000);
   window.addEventListener('scroll', function() {
-    if (window.scrollY > 400 && !shown) {
+    if (window.scrollY > 200) {
       bar.classList.add('visible');
-      shown = true;
-    } else if (window.scrollY < 100 && shown) {
+    } else if (window.scrollY < 50) {
       bar.classList.remove('visible');
-      shown = false;
     }
   }, { passive: true });
 }
@@ -1882,6 +1911,7 @@ async function handleLogoUpload(e) {
     var filename = await uploadToSupabase(file, 'logo');
     await setPhotoMeta('logo', filename);
     var url = getSupaPhotoURL(filename);
+    localStorage.setItem('mch_logo_cache', url); // instant cache
     applyLogo(url);
     showToast('Logo updated! ✅');
   } catch(err) {
@@ -1900,14 +1930,25 @@ function applyLogo(url) {
     if (svg) svg.style.display = 'none';
   }
   if (preview && url) {
-    preview.innerHTML = '<img src="' + url + '" style="width:100%;height:100%;object-fit:cover;" />';
+    preview.innerHTML = '<img src="' + url + '" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" />';
   }
 }
 
+function loadLogoCached() {
+  // Load from cache first (instant), then verify from Supabase
+  var cached = localStorage.getItem('mch_logo_cache');
+  if (cached) applyLogo(cached);
+}
+
 async function loadLogo() {
+  loadLogoCached(); // instant from cache
   var meta = await getPhotoMeta();
   var filename = meta['logo'];
-  if (filename) applyLogo(getSupaPhotoURL(filename));
+  if (filename) {
+    var url = getSupaPhotoURL(filename);
+    localStorage.setItem('mch_logo_cache', url);
+    applyLogo(url);
+  }
 }
 
 // ===== SWIPE FOR LIGHTBOX =====
