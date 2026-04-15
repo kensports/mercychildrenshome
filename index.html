@@ -479,17 +479,20 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 
 <!-- PHOTO 1 - Children at Home -->
 <section style="background:var(--bg);padding:0;" id="gallery">
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:400px;">
-    <div id="gi-0" style="position:relative;overflow:hidden;cursor:pointer;min-height:400px;background:var(--card);">
-      <div class="g-placeholder" style="height:100%;min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+  <div style="position:relative;min-height:420px;overflow:hidden;">
+    <div id="gi-0" style="position:absolute;inset:0;cursor:pointer;background:var(--card);">
+      <div class="g-placeholder" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
         <svg style="width:40px;height:40px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        <span style="font-size:13px;color:var(--text2);">Children at Home</span>
+        <span style="font-size:13px;color:var(--text2);">Photo 1</span>
       </div>
     </div>
-    <div style="padding:60px 5%;display:flex;flex-direction:column;justify-content:center;background:var(--bg2);">
+    <!-- Dark overlay -->
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.7) 0%,rgba(0,0,0,.3) 60%,transparent 100%);z-index:1;"></div>
+    <!-- Text over image -->
+    <div style="position:relative;z-index:2;padding:60px 5%;max-width:480px;min-height:420px;display:flex;flex-direction:column;justify-content:center;">
       <div class="sec-tag" style="align-self:flex-start;">Daily Life</div>
-      <h2 class="sec-title">A Place to Call Home</h2>
-      <p style="font-size:15px;color:var(--text2);line-height:1.8;">By the grace of God, every child who arrives at Mercy Children's Home finds more than a roof over their head — they find family, routine, love, and the presence of the Holy Spirit. We thank God for every generous heart that makes this possible.</p>
+      <h2 class="sec-title" style="color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.5);">A Place to Call Home</h2>
+      <p style="font-size:15px;color:rgba(255,255,255,.85);line-height:1.8;text-shadow:0 1px 8px rgba(0,0,0,.6);">By the grace of God, every child who arrives at Mercy Children's Home finds more than a roof over their head — they find family, routine, love, and the presence of the Holy Spirit.</p>
     </div>
   </div>
 </section>
@@ -533,16 +536,21 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 
 <!-- PHOTO 2 - Education -->
 <section style="background:var(--bg);padding:0;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:400px;">
-    <div style="padding:60px 5%;display:flex;flex-direction:column;justify-content:center;background:var(--bg);">
-      <div class="sec-tag" style="align-self:flex-start;">Education</div>
-      <h2 class="sec-title">Learning in God's Light</h2>
-      <p style="font-size:15px;color:var(--text2);line-height:1.8;">"The fear of the Lord is the beginning of wisdom." — Proverbs 9:10. Every child at Mercy Home attends school. We believe education is God's gift and our children deserve the very best. Their bright futures begin in the classroom.</p>
-    </div>
-    <div id="gi-2" style="position:relative;overflow:hidden;cursor:pointer;min-height:400px;background:var(--card);">
-      <div class="g-placeholder" style="height:100%;min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+  <div style="position:relative;min-height:420px;overflow:hidden;">
+    <div id="gi-2" style="position:absolute;inset:0;cursor:pointer;background:var(--card);">
+      <div class="g-placeholder" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
         <svg style="width:40px;height:40px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         <span style="font-size:13px;color:var(--text2);">Children in School</span>
+      </div>
+    </div>
+    <!-- Dark overlay from right -->
+    <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(0,0,0,.75) 0%,rgba(0,0,0,.3) 60%,transparent 100%);z-index:1;"></div>
+    <!-- Text over image - right aligned -->
+    <div style="position:relative;z-index:2;padding:60px 5%;min-height:420px;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;text-align:right;">
+      <div style="max-width:440px;">
+        <div class="sec-tag" style="align-self:flex-end;">Education</div>
+        <h2 class="sec-title" style="color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.5);">Learning in God's Light</h2>
+        <p style="font-size:15px;color:rgba(255,255,255,.85);line-height:1.8;text-shadow:0 1px 8px rgba(0,0,0,.6);">"The fear of the Lord is the beginning of wisdom." — Proverbs 9:10. Every child at Mercy Home attends school. We believe education is God's gift and our children deserve the very best.</p>
       </div>
     </div>
   </div>
@@ -1095,6 +1103,29 @@ var DEF={
 function getData(){try{return Object.assign({},DEF,JSON.parse(localStorage.getItem(DKEY)||'{}'));}catch(e){return Object.assign({},DEF);}}
 function setData(d){localStorage.setItem(DKEY,JSON.stringify(d));}
 function getPwd(){return localStorage.getItem(AKEY)||'mercy2020';}
+
+async function syncPwdFromSupabase() {
+  try {
+    var res = await fetch(SUPA_URL + '/rest/v1/mch_photos?id=eq.admin_pwd&select=filename', {
+      headers: {'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY}
+    });
+    var rows = await res.json();
+    if (Array.isArray(rows) && rows.length > 0) {
+      localStorage.setItem(AKEY, rows[0].filename);
+    }
+  } catch(e) {}
+}
+
+async function savePwdToSupabase(pwd) {
+  await fetch(SUPA_URL + '/rest/v1/mch_photos', {
+    method: 'POST',
+    headers: {
+      'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY,
+      'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates'
+    },
+    body: JSON.stringify({id: 'admin_pwd', filename: pwd})
+  });
+}
 function getSponsors(){try{return JSON.parse(localStorage.getItem(SPKEY)||'[]');}catch(e){return[];}}
 function setSponsors(s){localStorage.setItem(SPKEY,JSON.stringify(s));}
 function getSponsorPhotoCount(){return parseInt(localStorage.getItem(SPPHKEY)||'0');}
@@ -1532,15 +1563,16 @@ function saveStats() {
   });
   setData(d); applyData(); showToast('Stats saved! ✅');
 }
-function changePwd() {
+async function changePwd() {
   var np = document.getElementById('newPwd').value;
   var cp = document.getElementById('confPwd').value;
   if (np.length < 6) { showToast('Min 6 characters', true); return; }
   if (np !== cp) { showToast('Passwords do not match!', true); return; }
   localStorage.setItem(AKEY, np);
+  await savePwdToSupabase(np);
   document.getElementById('newPwd').value = '';
   document.getElementById('confPwd').value = '';
-  showToast('Password changed! ✅');
+  showToast('Password changed on ALL devices! ✅');
 }
 function resetAll() {
   if (!confirm('Reset all content to defaults?')) return;
@@ -1772,6 +1804,7 @@ function initAnimations() {
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\'\'/g,'&#39;'); }
 
 // ===== INIT =====
+syncPwdFromSupabase();  // sync password across devices
 applyData();
 loadAllPhotos();  // async - loads from Supabase
 loadLogo();  // async - load foundation logo
