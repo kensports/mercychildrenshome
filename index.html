@@ -41,7 +41,7 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .mob-close{position:absolute;top:20px;right:24px;font-size:24px;cursor:pointer;color:var(--text2);}
 
 /* HERO */
-.hero{min-height:100vh;padding:140px 5% 70px;display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero{min-height:100vh;padding:160px 5% 70px;display:flex;align-items:center;position:relative;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(37,99,235,.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.07) 0%,transparent 50%),var(--bg);}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:60px 60px;}
 .hero-content{position:relative;z-index:1;max-width:640px;}
@@ -407,8 +407,8 @@ section p { line-height: 1.85; }
 </nav>
 
 <!-- MOTTO BAR -->
-<div style="position:fixed;top:64px;left:0;right:0;z-index:99;background:linear-gradient(90deg,rgba(10,14,26,.98),rgba(13,31,60,.98));border-bottom:1px solid rgba(201,168,76,.25);padding:7px 0;text-align:center;">
-  <span style="font-size:11px;font-weight:800;color:var(--gold);letter-spacing:3px;text-transform:uppercase;text-shadow:0 0 20px rgba(201,168,76,.4);">✝&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;✝</span>
+<div id="mottoBar" style="position:fixed;top:64px;left:0;right:0;z-index:99;padding:14px 0;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2);">
+  <span id="mottoText" style="font-weight:800;letter-spacing:4px;text-transform:uppercase;">✝&nbsp;&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;&nbsp;✝</span>
 </div>
 
 <!-- HERO -->
@@ -1018,6 +1018,51 @@ section p { line-height: 1.85; }
         <div class="af"><label>Hero Description</label><textarea id="ei-heroDesc">Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda.</textarea></div>
         <div class="af"><label>About Text</label><textarea id="ei-aboutText">Mercy Children's Home is a faith-based non-profit located in Kasanda Bukuya, Uganda, dedicated to comprehensive care for orphaned and vulnerable children.</textarea></div>
         <div class="af"><label>Founded Year</label><input type="text" id="ei-year" value="2020"/></div>
+        
+        <div style="height:1px;background:var(--border);margin:16px 0;"></div>
+        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">✝ Motto Bar Customization</div>
+        
+        <div class="af"><label>Motto Text</label><input type="text" id="ei-motto" value="✝   Together We Are The Church   ✝"/></div>
+        
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="af" style="margin:0;">
+            <label>Text Color</label>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input type="color" id="ei-mottoColor" value="#c9a84c" style="width:44px;height:36px;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:none;padding:2px;"/>
+              <input type="text" id="ei-mottoColorHex" value="#c9a84c" style="flex:1;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text);outline:none;"/>
+            </div>
+          </div>
+          <div class="af" style="margin:0;">
+            <label>Background Color</label>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input type="color" id="ei-mottoBg" value="#0a0e1a" style="width:44px;height:36px;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:none;padding:2px;"/>
+              <input type="text" id="ei-mottoBgHex" value="#0a0e1a" style="flex:1;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text);outline:none;"/>
+            </div>
+          </div>
+        </div>
+        
+        <div class="af" style="margin-top:10px;">
+          <label>Font Size</label>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <input type="range" id="ei-mottoSize" min="12" max="32" value="16" style="flex:1;" oninput="document.getElementById('mottoSizeVal').textContent=this.value+'px';previewMotto();"/>
+            <span id="mottoSizeVal" style="font-size:12px;color:var(--gold);width:40px;">16px</span>
+          </div>
+        </div>
+        
+        <div class="af">
+          <label>Font Style</label>
+          <select id="ei-mottoFont" style="width:100%;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;">
+            <option value="uppercase-bold">ALL CAPS Bold (default)</option>
+            <option value="italic-serif">Italic Serif</option>
+            <option value="normal">Normal</option>
+            <option value="script">Script Style</option>
+          </select>
+        </div>
+        
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:14px;text-align:center;" id="mottoPreview">
+          <span id="mottoPreviewText" style="font-size:16px;font-weight:800;color:#c9a84c;letter-spacing:4px;text-transform:uppercase;">✝   Together We Are The Church   ✝</span>
+        </div>
+        
         <button class="adm-btn" onclick="saveContent()">Save Content</button>
       </div>
 
@@ -1233,6 +1278,11 @@ var DEF={
   aboutText:"Mercy Children's Home is a faith-based non-profit organization located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.",
   year:"2020", location:"Kasanda Bukuya, Uganda", phone:"+256 751 442 505",
   email:"mercychildrenshomeug2024@gmail.com", fb:"https://www.facebook.com/TheloveofJesusfoundation?mibextid=rS40aB7S9Ucbxw6v", ig:"https://www.instagram.com/mercychildrensfamilyuganda", yt:"https://youtube.com/@mercychidrenshomeug4969?si=AUnM9l7ssI3Let6D", tt:"https://www.tiktok.com/@mercy.home.ug?_r=1&_t=ZS-95YTJ705bY0",
+  mottoText:"✝   Together We Are The Church   ✝",
+  mottoColor:"#c9a84c",
+  mottoBg:"#0a0e1a",
+  mottoSize:"16",
+  mottoFont:"uppercase-bold",
   gfm:"https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968",
   s1n:"50+", s1l:"Children Helped", s2n:"4+", s2l:"Years of Service", s3n:"100%", s3l:"Love & Care"
 };
@@ -1326,6 +1376,7 @@ function applyData() {
   var wa=document.getElementById('socWa'); if(wa)wa.href='https://wa.me/'+d.phone.replace(/\D/g,'');
   var fy=document.getElementById('footerYear'); if(fy)fy.textContent=d.year;
   var fy2=document.getElementById('footerYear2'); if(fy2)fy2.textContent=d.year;
+  applyMotto(d);
 }
 
 // ===== LOAD ALL PHOTOS FROM SUPABASE =====
@@ -1703,6 +1754,16 @@ function admTab(tab, el) {
 
 function loadAdmFields() {
   var d = getData();
+  // Load motto fields
+  var d2 = getData();
+  var mc = document.getElementById('ei-mottoColor'); if(mc){mc.value=d2.mottoColor||'#c9a84c';}
+  var mch = document.getElementById('ei-mottoColorHex'); if(mch){mch.value=d2.mottoColor||'#c9a84c';}
+  var mb = document.getElementById('ei-mottoBg'); if(mb){mb.value=d2.mottoBg||'#0a0e1a';}
+  var mbh = document.getElementById('ei-mottoBgHex'); if(mbh){mbh.value=d2.mottoBg||'#0a0e1a';}
+  var ms = document.getElementById('ei-mottoSize'); if(ms){ms.value=d2.mottoSize||'16'; var sv=document.getElementById('mottoSizeVal'); if(sv)sv.textContent=(d2.mottoSize||'16')+'px';}
+  var mf = document.getElementById('ei-mottoFont'); if(mf){mf.value=d2.mottoFont||'uppercase-bold';}
+  var mt = document.getElementById('ei-motto'); if(mt){mt.value=d2.mottoText||'✝   Together We Are The Church   ✝';}
+  previewMotto();
   var fields = {
     'ei-heroTitle': d.heroTitle, 'ei-heroDesc': d.heroDesc,
     'ei-aboutText': d.aboutText, 'ei-year': d.year,
@@ -1723,6 +1784,12 @@ function saveContent() {
   d.heroDesc = document.getElementById('ei-heroDesc').value;
   d.aboutText = document.getElementById('ei-aboutText').value;
   d.year = document.getElementById('ei-year').value;
+  // Save motto settings
+  var mt = document.getElementById('ei-motto'); if(mt) d.mottoText = mt.value;
+  var mc = document.getElementById('ei-mottoColor'); if(mc) d.mottoColor = mc.value;
+  var mb = document.getElementById('ei-mottoBg'); if(mb) d.mottoBg = mb.value;
+  var ms = document.getElementById('ei-mottoSize'); if(ms) d.mottoSize = ms.value;
+  var mf = document.getElementById('ei-mottoFont'); if(mf) d.mottoFont = mf.value;
   setData(d); applyData(); showToast('Content saved! ✅');
 }
 function saveContact() {
@@ -2393,6 +2460,114 @@ async function saveEditMember() {
   renderTeamPublic();
   showToast('Member updated! ✅');
 }
+
+// ===== MOTTO BAR =====
+function applyMotto(d) {
+  var bar = document.getElementById('mottoBar');
+  var text = document.getElementById('mottoText');
+  if (!bar || !text) return;
+  var color = d.mottoColor || '#c9a84c';
+  var bg = d.mottoBg || '#0a0e1a';
+  var size = (d.mottoSize || '16') + 'px';
+  var font = d.mottoFont || 'uppercase-bold';
+  var mottoStr = d.mottoText || '✝   Together We Are The Church   ✝';
+
+  bar.style.background = bg;
+  bar.style.borderBottom = '1px solid ' + color + '44';
+  text.textContent = mottoStr;
+  text.style.color = color;
+  text.style.fontSize = 'clamp(12px, 2.5vw, ' + size + ')';
+  text.style.textShadow = '0 0 30px ' + color + '66';
+
+  if (font === 'uppercase-bold') {
+    text.style.textTransform = 'uppercase';
+    text.style.fontWeight = '800';
+    text.style.fontStyle = 'normal';
+    text.style.letterSpacing = '4px';
+    text.style.fontFamily = "'Outfit', sans-serif";
+  } else if (font === 'italic-serif') {
+    text.style.textTransform = 'none';
+    text.style.fontWeight = '600';
+    text.style.fontStyle = 'italic';
+    text.style.letterSpacing = '1px';
+    text.style.fontFamily = "'Cormorant Garamond', serif";
+  } else if (font === 'script') {
+    text.style.textTransform = 'none';
+    text.style.fontWeight = '700';
+    text.style.fontStyle = 'italic';
+    text.style.letterSpacing = '2px';
+    text.style.fontFamily = "Georgia, serif";
+  } else {
+    text.style.textTransform = 'none';
+    text.style.fontWeight = '600';
+    text.style.fontStyle = 'normal';
+    text.style.letterSpacing = '2px';
+    text.style.fontFamily = "'Outfit', sans-serif";
+  }
+}
+
+function previewMotto() {
+  var preview = document.getElementById('mottoPreviewText');
+  if (!preview) return;
+  var color = (document.getElementById('ei-mottoColor') || {}).value || '#c9a84c';
+  var size = ((document.getElementById('ei-mottoSize') || {}).value || '16') + 'px';
+  var font = (document.getElementById('ei-mottoFont') || {}).value || 'uppercase-bold';
+  var mottoStr = (document.getElementById('ei-motto') || {}).value || '✝   Together We Are The Church   ✝';
+  var bg = (document.getElementById('ei-mottoBg') || {}).value || '#0a0e1a';
+
+  preview.textContent = mottoStr;
+  preview.style.color = color;
+  preview.style.fontSize = size;
+  document.getElementById('mottoPreview').style.background = bg;
+
+  if (font === 'uppercase-bold') {
+    preview.style.textTransform = 'uppercase'; preview.style.fontWeight = '800';
+    preview.style.fontStyle = 'normal'; preview.style.letterSpacing = '4px';
+    preview.style.fontFamily = "sans-serif";
+  } else if (font === 'italic-serif') {
+    preview.style.textTransform = 'none'; preview.style.fontWeight = '600';
+    preview.style.fontStyle = 'italic'; preview.style.letterSpacing = '1px';
+    preview.style.fontFamily = "Georgia, serif";
+  } else if (font === 'script') {
+    preview.style.textTransform = 'none'; preview.style.fontWeight = '700';
+    preview.style.fontStyle = 'italic'; preview.style.letterSpacing = '2px';
+    preview.style.fontFamily = "Georgia, serif";
+  } else {
+    preview.style.textTransform = 'none'; preview.style.fontWeight = '600';
+    preview.style.fontStyle = 'normal'; preview.style.letterSpacing = '2px';
+  }
+
+  // Also preview live on page
+  applyMotto({
+    mottoColor: color, mottoBg: bg, mottoSize: size.replace('px',''),
+    mottoFont: font, mottoText: mottoStr
+  });
+}
+
+// Sync color picker with hex input
+document.addEventListener('DOMContentLoaded', function() {
+  var colorPairs = [
+    ['ei-mottoColor', 'ei-mottoColorHex'],
+    ['ei-mottoBg', 'ei-mottoBgHex']
+  ];
+  colorPairs.forEach(function(pair) {
+    var picker = document.getElementById(pair[0]);
+    var hex = document.getElementById(pair[1]);
+    if (picker && hex) {
+      picker.oninput = function() { hex.value = picker.value; previewMotto(); };
+      hex.oninput = function() {
+        if (/^#[0-9A-Fa-f]{6}$/.test(hex.value)) {
+          picker.value = hex.value;
+          previewMotto();
+        }
+      };
+    }
+  });
+  var mottoInput = document.getElementById('ei-motto');
+  if (mottoInput) mottoInput.oninput = previewMotto;
+  var fontSel = document.getElementById('ei-mottoFont');
+  if (fontSel) fontSel.onchange = previewMotto;
+});
 </script>
 </body>
 </html>
