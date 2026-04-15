@@ -3,506 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mercy Children's Home | Changing Lives, One Child at a Time</title>
-<meta name="description" content="Mercy Children's Home provides shelter, education, and love to orphaned and vulnerable children in Uganda. Donate today and change a child's life.">
+<title>Mercy Children's Home | Kasanda Bukuya, Uganda</title>
+<meta name="description" content="Mercy Children's Home provides shelter, education, nutrition and love to orphaned and vulnerable children in Kasanda Bukuya, Uganda.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root {
-  --navy: #0a2540;
-  --blue: #1a56db;
-  --sky: #3b82f6;
-  --light: #e8f0fe;
-  --warm: #f59e0b;
-  --white: #ffffff;
-  --gray: #f8faff;
-  --text: #1e293b;
-  --text2: #64748b;
-  --border: #e2e8f0;
+:root{
+  --bg:#0a0e1a;--bg2:#0f1525;--bg3:#161d30;--card:#131929;
+  --gold:#c9a84c;--gold2:#e8c97a;--blue:#2563eb;--sky:#60a5fa;
+  --text:#e8eaf0;--text2:#8892a4;--border:#1e2a40;--white:#ffffff;
+  --green:#10b981;--red:#ef4444;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
 
-/* ===== NAV ===== */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 5%;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 68px;
-  transition: box-shadow .3s;
-}
-nav.scrolled { box-shadow: 0 4px 24px rgba(10,37,64,.1); }
-.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nav-logo-icon {
-  width: 40px; height: 40px; border-radius: 10px;
-  background: linear-gradient(135deg, var(--blue), var(--sky));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; color: white;
-}
-.nav-brand-text { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--navy); line-height: 1.2; }
-.nav-brand-text span { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; }
-.nav-links { display: flex; align-items: center; gap: 32px; }
-.nav-links a { text-decoration: none; color: var(--text2); font-size: 14px; font-weight: 500; transition: color .2s; }
-.nav-links a:hover { color: var(--blue); }
-.nav-donate {
-  background: var(--blue); color: white !important;
-  padding: 10px 22px; border-radius: 8px;
-  font-weight: 600 !important; font-size: 14px !important;
-  transition: background .2s, transform .2s !important;
-}
-.nav-donate:hover { background: var(--navy) !important; transform: translateY(-1px); }
-.nav-hamburger { display: none; cursor: pointer; font-size: 22px; color: var(--navy); }
-.mobile-menu {
-  display: none; position: fixed; inset: 0; background: white; z-index: 200;
-  flex-direction: column; align-items: center; justify-content: center; gap: 32px;
-}
-.mobile-menu.open { display: flex; }
-.mobile-menu a { text-decoration: none; color: var(--navy); font-size: 22px; font-weight: 600; }
-.mobile-close { position: absolute; top: 20px; right: 24px; font-size: 28px; cursor: pointer; color: var(--text2); }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow .3s;}
+nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5);}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;}
+.nav-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.nav-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.1;}
+.nav-name small{display:block;font-family:'Outfit',sans-serif;font-size:10px;font-weight:400;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:14px;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{background:linear-gradient(135deg,#1a3060,#2563eb);color:#fff !important;padding:9px 20px;border-radius:8px;font-weight:600 !important;font-size:13px !important;display:flex;align-items:center;gap:6px;transition:opacity .2s !important;}
+.nav-cta:hover{opacity:.85;}
+.hamburger{display:none;cursor:pointer;color:var(--text);font-size:20px;}
 
-/* ===== HERO ===== */
-.hero {
-  min-height: 100vh;
-  background: linear-gradient(160deg, #0a2540 0%, #1a3a6b 50%, #1a56db 100%);
-  display: flex; align-items: center;
-  padding: 100px 5% 60px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-.hero-content { position: relative; z-index: 1; max-width: 600px; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
-  color: #93c5fd; padding: 6px 14px; border-radius: 30px;
-  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
-  margin-bottom: 24px;
-  animation: fadeUp .6s ease forwards;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(36px, 6vw, 64px);
-  font-weight: 800; color: white; line-height: 1.15;
-  margin-bottom: 20px;
-  animation: fadeUp .6s .1s ease forwards; opacity: 0;
-}
-.hero h1 span { color: var(--warm); }
-.hero p {
-  font-size: 17px; color: rgba(255,255,255,.75); line-height: 1.7;
-  margin-bottom: 36px;
-  animation: fadeUp .6s .2s ease forwards; opacity: 0;
-}
-.hero-btns {
-  display: flex; gap: 14px; flex-wrap: wrap;
-  animation: fadeUp .6s .3s ease forwards; opacity: 0;
-}
-.btn-primary {
-  background: var(--warm); color: var(--navy);
-  padding: 14px 30px; border-radius: 10px;
-  font-size: 15px; font-weight: 700; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: transform .2s, box-shadow .2s;
-  box-shadow: 0 4px 20px rgba(245,158,11,.4);
-}
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,158,11,.5); }
-.btn-secondary {
-  background: rgba(255,255,255,.1); color: white;
-  padding: 14px 30px; border-radius: 10px;
-  font-size: 15px; font-weight: 600; text-decoration: none;
-  border: 1px solid rgba(255,255,255,.3);
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: background .2s;
-}
-.btn-secondary:hover { background: rgba(255,255,255,.2); }
-.hero-stats {
-  display: flex; gap: 40px; margin-top: 52px; flex-wrap: wrap;
-  animation: fadeUp .6s .4s ease forwards; opacity: 0;
-}
-.hero-stat { }
-.hero-stat-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: white; line-height: 1; }
-.hero-stat-label { font-size: 12px; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-.hero-visual {
-  position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
-  width: min(42%, 480px);
-  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-  animation: fadeUp .8s .2s ease forwards; opacity: 0;
-}
-.hero-img-card {
-  border-radius: 16px; overflow: hidden;
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(255,255,255,.15);
-  aspect-ratio: 3/4;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 60px;
-}
-.hero-img-card:nth-child(2) { margin-top: 30px; }
-.hero-img-card:nth-child(3) { margin-top: -30px; }
+/* MOBILE MENU */
+.mob-menu{display:none;position:fixed;inset:0;background:var(--bg2);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+.mob-menu.open{display:flex;}
+.mob-menu a{text-decoration:none;color:var(--text);font-size:20px;font-weight:600;}
+.mob-close{position:absolute;top:20px;right:24px;font-size:24px;cursor:pointer;color:var(--text2);}
 
-@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+/* HERO */
+.hero{min-height:100vh;padding:100px 5% 70px;display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(37,99,235,.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.07) 0%,transparent 50%),var(--bg);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:60px 60px;}
+.hero-content{position:relative;z-index:1;max-width:640px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gold);padding:6px 14px;border-radius:30px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:28px;animation:fadeUp .6s ease forwards;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,70px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:22px;animation:fadeUp .6s .1s ease forwards;opacity:0;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero p{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:36px;animation:fadeUp .6s .2s ease forwards;opacity:0;max-width:520px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .6s .3s ease forwards;opacity:0;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(201,168,76,.3);}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,.4);}
+.btn-outline{background:transparent;color:var(--text);padding:14px 28px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;border:1px solid var(--border);display:inline-flex;align-items:center;gap:8px;transition:border-color .2s,color .2s;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.hero-stats{display:flex;gap:44px;margin-top:56px;flex-wrap:wrap;animation:fadeUp .6s .4s ease forwards;opacity:0;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--gold);line-height:1;}
+.stat-label{font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
 
-/* ===== SECTION BASE ===== */
-section { padding: 80px 5%; }
-.section-tag {
-  display: inline-block; background: var(--light); color: var(--blue);
-  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
-  padding: 6px 14px; border-radius: 30px; margin-bottom: 16px;
-}
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(28px, 4vw, 42px); font-weight: 800;
-  color: var(--navy); line-height: 1.2; margin-bottom: 14px;
-}
-.section-sub { font-size: 16px; color: var(--text2); line-height: 1.7; max-width: 600px; }
-.section-header { margin-bottom: 52px; }
+/* SECTIONS */
+section{padding:88px 5%;}
+.sec-tag{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:5px 14px;border-radius:30px;margin-bottom:16px;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.sec-sub{font-size:15px;color:var(--text2);line-height:1.8;max-width:560px;}
+.sec-hdr{margin-bottom:52px;}
 
-/* ===== ABOUT ===== */
-.about { background: var(--gray); }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-.about-visual {
-  background: linear-gradient(135deg, var(--navy), var(--blue));
-  border-radius: 24px; padding: 48px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-height: 380px; text-align: center; position: relative; overflow: hidden;
-}
-.about-visual::before {
-  content: ''; position: absolute; inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='20' cy='20' r='3'/%3E%3C/g%3E%3C/svg%3E");
-}
-.about-icon { font-size: 72px; margin-bottom: 20px; position: relative; z-index: 1; }
-.about-visual h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: white; position: relative; z-index: 1; }
-.about-visual p { font-size: 14px; color: rgba(255,255,255,.7); margin-top: 10px; position: relative; z-index: 1; line-height: 1.6; }
-.about-text p { font-size: 16px; color: var(--text2); line-height: 1.8; margin-bottom: 16px; }
-.about-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
-.about-list li {
-  display: flex; align-items: center; gap: 12px;
-  font-size: 15px; color: var(--text); font-weight: 500;
-}
-.about-list li i { color: var(--blue); font-size: 16px; width: 20px; }
+/* ABOUT */
+.about{background:var(--bg2);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.about-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:44px;position:relative;overflow:hidden;}
+.about-card::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.15),transparent 70%);}
+.about-card-icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;margin-bottom:22px;}
+.about-card-icon svg{width:30px;height:30px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.about-card h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--white);margin-bottom:12px;}
+.about-card p{font-size:14px;color:var(--text2);line-height:1.8;}
+.about-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:26px;}
+.about-list li{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text);}
+.about-list li svg{width:18px;height:18px;flex-shrink:0;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 
-/* ===== MISSION CARDS ===== */
-.mission { background: white; }
-.mission-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-.mission-card {
-  background: var(--gray);
-  border: 1px solid var(--border);
-  border-radius: 20px; padding: 32px;
-  transition: transform .2s, box-shadow .2s, border-color .2s;
-}
-.mission-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,86,219,.1); border-color: var(--sky); }
-.mission-icon {
-  width: 56px; height: 56px; border-radius: 14px;
-  background: var(--light); display: flex; align-items: center; justify-content: center;
-  font-size: 24px; margin-bottom: 20px;
-}
-.mission-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 10px; }
-.mission-card p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+/* MISSION */
+.mission{background:var(--bg);}
+.mission-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+.m-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;transition:border-color .2s,transform .2s;}
+.m-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-3px);}
+.m-icon{width:50px;height:50px;border-radius:13px;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.m-icon svg{width:24px;height:24px;fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.m-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:10px;}
+.m-card p{font-size:13px;color:var(--text2);line-height:1.7;}
 
-/* ===== GALLERY ===== */
-.gallery { background: var(--navy); }
-.gallery .section-title { color: white; }
-.gallery .section-sub { color: rgba(255,255,255,.6); }
-.gallery .section-tag { background: rgba(255,255,255,.1); color: #93c5fd; }
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto;
-  gap: 16px;
-}
-.gallery-item {
-  border-radius: 16px; overflow: hidden;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 64px;
-  transition: transform .2s, border-color .2s;
-  cursor: pointer;
-  min-height: 200px;
-}
-.gallery-item:hover { transform: scale(1.02); border-color: rgba(255,255,255,.3); }
-.gallery-item:nth-child(1) { grid-column: span 2; min-height: 280px; }
-.gallery-item:nth-child(4) { grid-column: span 2; min-height: 250px; }
-.gallery-caption {
-  padding: 16px; text-align: center;
-  font-size: 13px; color: rgba(255,255,255,.5);
-  background: rgba(0,0,0,.3);
-}
+/* GALLERY */
+.gallery{background:var(--bg2);}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.g-item{border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:var(--card);border:1px solid var(--border);transition:transform .2s;cursor:pointer;position:relative;}
+.g-item:hover{transform:scale(1.02);}
+.g-item:nth-child(1){grid-column:span 2;aspect-ratio:16/9;}
+.g-item:nth-child(4){grid-column:span 2;aspect-ratio:16/9;}
+.g-item img{width:100%;height:100%;object-fit:cover;display:block;}
+.g-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.g-placeholder svg{width:36px;height:36px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.g-placeholder span{font-size:12px;color:var(--border);}
 
-/* ===== DONATE ===== */
-.donate { background: var(--gray); }
-.donate-inner {
-  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
-  border-radius: 28px; padding: 60px 48px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
-  position: relative; overflow: hidden;
-}
-.donate-inner::before {
-  content: ''; position: absolute; right: -60px; top: -60px;
-  width: 300px; height: 300px; border-radius: 50%;
-  background: rgba(255,255,255,.05);
-}
-.donate-inner::after {
-  content: ''; position: absolute; left: -40px; bottom: -40px;
-  width: 200px; height: 200px; border-radius: 50%;
-  background: rgba(255,255,255,.03);
-}
-.donate-text { position: relative; z-index: 1; }
-.donate-text .section-tag { background: rgba(255,255,255,.15); color: #93c5fd; }
-.donate-text .section-title { color: white; }
-.donate-text .section-sub { color: rgba(255,255,255,.7); }
-.donate-perks { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
-.donate-perks li { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,.85); font-size: 15px; }
-.donate-perks li i { color: var(--warm); font-size: 16px; }
-.donate-box {
-  background: white; border-radius: 20px; padding: 36px;
-  position: relative; z-index: 1;
-}
-.donate-box h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--navy); margin-bottom: 6px; }
-.donate-box p { font-size: 13px; color: var(--text2); margin-bottom: 24px; }
-.donate-amounts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-.amount-btn {
-  background: var(--gray); border: 2px solid var(--border);
-  color: var(--navy); padding: 12px 8px; border-radius: 10px;
-  font-size: 15px; font-weight: 700; cursor: pointer;
-  transition: all .2s; text-align: center;
-}
-.amount-btn:hover, .amount-btn.active { background: var(--blue); border-color: var(--blue); color: white; }
-.donate-input-wrap { position: relative; margin-bottom: 20px; }
-.donate-input-wrap span {
-  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-  color: var(--text2); font-weight: 600;
-}
-.donate-input {
-  width: 100%; padding: 13px 14px 13px 34px;
-  border: 2px solid var(--border); border-radius: 10px;
-  font-size: 16px; font-family: 'DM Sans', sans-serif;
-  color: var(--navy); outline: none;
-  transition: border-color .2s;
-}
-.donate-input:focus { border-color: var(--blue); }
-.donate-btn {
-  width: 100%; background: var(--blue); color: white;
-  border: none; padding: 15px; border-radius: 10px;
-  font-size: 16px; font-weight: 700; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  transition: background .2s, transform .2s;
-}
-.donate-btn:hover { background: var(--navy); transform: translateY(-1px); }
-.donate-note { font-size: 11px; color: var(--text2); text-align: center; margin-top: 12px; }
+/* DONATE */
+.donate{background:var(--bg);}
+.donate-wrap{background:var(--card);border:1px solid var(--border);border-radius:28px;padding:56px 48px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden;}
+.donate-wrap::before{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.08),transparent 70%);}
+.donate-wrap::after{content:'';position:absolute;left:-50px;bottom:-50px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.06),transparent 70%);}
+.donate-text{position:relative;z-index:1;}
+.donate-perks{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:28px;}
+.donate-perks li{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text);}
+.donate-perks li svg{width:18px;height:18px;flex-shrink:0;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;}
+.donate-box{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:32px;position:relative;z-index:1;}
+.donate-box h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.donate-box p{font-size:13px;color:var(--text2);margin-bottom:22px;}
+.amt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+.amt-btn{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:11px 6px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;font-family:'Outfit',sans-serif;}
+.amt-btn:hover,.amt-btn.active{background:rgba(201,168,76,.15);border-color:var(--gold);color:var(--gold);}
+.amt-input-wrap{position:relative;margin-bottom:16px;}
+.amt-symbol{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text2);font-weight:600;}
+.amt-input{width:100%;padding:12px 14px 12px 30px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;font-size:15px;color:var(--text);font-family:'Outfit',sans-serif;outline:none;transition:border-color .2s;}
+.amt-input:focus{border-color:var(--gold);}
+.donate-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;border:none;padding:14px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s;}
+.donate-btn:hover{opacity:.88;}
+.donate-note{font-size:11px;color:var(--text2);text-align:center;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;}
 
-/* ===== CONTACT ===== */
-.contact { background: white; }
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-.contact-info { display: flex; flex-direction: column; gap: 28px; }
-.contact-item { display: flex; gap: 16px; align-items: flex-start; }
-.contact-icon {
-  width: 48px; height: 48px; border-radius: 12px;
-  background: var(--light); color: var(--blue);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0;
-}
-.contact-item h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
-.contact-item p { font-size: 14px; color: var(--text2); line-height: 1.6; }
-.contact-socials { display: flex; gap: 12px; margin-top: 8px; }
-.social-btn {
-  width: 40px; height: 40px; border-radius: 10px;
-  background: var(--light); color: var(--blue);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; text-decoration: none;
-  transition: background .2s, color .2s, transform .2s;
-}
-.social-btn:hover { background: var(--blue); color: white; transform: translateY(-2px); }
-.contact-form { display: flex; flex-direction: column; gap: 16px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-group label { font-size: 13px; font-weight: 600; color: var(--navy); }
-.form-group input, .form-group textarea, .form-group select {
-  padding: 12px 14px; border: 2px solid var(--border); border-radius: 10px;
-  font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text);
-  outline: none; transition: border-color .2s; resize: none; background: white;
-}
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--blue); }
-.form-group textarea { height: 120px; }
-.form-submit {
-  background: var(--blue); color: white; border: none;
-  padding: 14px 28px; border-radius: 10px;
-  font-size: 15px; font-weight: 700; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  display: flex; align-items: center; gap: 8px;
-  transition: background .2s, transform .2s;
-  align-self: flex-start;
-}
-.form-submit:hover { background: var(--navy); transform: translateY(-1px); }
+/* CONTACT */
+.contact{background:var(--bg2);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+.c-items{display:flex;flex-direction:column;gap:24px;}
+.c-item{display:flex;gap:16px;align-items:flex-start;}
+.c-icon{width:46px;height:46px;border-radius:12px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.c-icon svg{width:20px;height:20px;fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.c-item h4{font-size:13px;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
+.c-item p{font-size:14px;color:var(--text2);line-height:1.6;}
+.socials{display:flex;gap:10px;margin-top:8px;}
+.soc{width:38px;height:38px;border-radius:10px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--text2);transition:all .2s;}
+.soc:hover{border-color:var(--gold);color:var(--gold);}
+.soc svg{width:16px;height:16px;fill:currentColor;}
+.contact-form{display:flex;flex-direction:column;gap:14px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fg{display:flex;flex-direction:column;gap:6px;}
+.fg label{font-size:12px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px;}
+.fg input,.fg textarea,.fg select{padding:11px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:'Outfit',sans-serif;color:var(--text);outline:none;transition:border-color .2s;resize:none;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--gold);}
+.fg select option{background:var(--bg2);}
+.fg textarea{height:110px;}
+.form-btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;border:none;padding:13px 26px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:8px;align-self:flex-start;transition:opacity .2s;}
+.form-btn:hover{opacity:.88;}
 
-/* ===== FOOTER ===== */
-footer {
-  background: var(--navy); color: rgba(255,255,255,.7);
-  padding: 48px 5% 28px;
-}
-.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-.footer-brand p { font-size: 14px; line-height: 1.7; margin-top: 12px; max-width: 280px; }
-.footer-col h4 { font-size: 13px; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
-.footer-col a { display: block; font-size: 14px; color: rgba(255,255,255,.6); text-decoration: none; margin-bottom: 10px; transition: color .2s; }
-.footer-col a:hover { color: white; }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 16px; }
-.footer-bottom p { font-size: 13px; }
-.footer-heart { color: #f87171; }
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 28px;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:36px;}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.footer-brand p{font-size:13px;color:var(--text2);line-height:1.7;max-width:280px;}
+.footer-col h4{font-size:12px;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:var(--text2);text-decoration:none;margin-bottom:9px;transition:color .2s;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:12px;color:var(--text2);}
+.footer-heart{color:#f87171;}
 
-/* ===== ADMIN PANEL ===== */
-.admin-fab {
-  position: fixed; bottom: 24px; left: 24px; z-index: 500;
-  width: 50px; height: 50px; border-radius: 50%;
-  background: var(--navy); color: white;
-  border: none; font-size: 18px; cursor: pointer;
-  box-shadow: 0 4px 20px rgba(10,37,64,.4);
-  display: flex; align-items: center; justify-content: center;
-  transition: transform .2s;
-}
-.admin-fab:hover { transform: scale(1.1); }
-.admin-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 600;
-  display: none; align-items: flex-end; justify-content: center;
-}
-.admin-overlay.open { display: flex; }
-.admin-panel {
-  background: white; border-radius: 24px 24px 0 0;
-  width: 100%; max-width: 680px; max-height: 85vh; overflow-y: auto;
-  padding: 0 0 40px;
-}
-.admin-handle { width: 40px; height: 4px; background: #e2e8f0; border-radius: 2px; margin: 14px auto; }
-.admin-hdr {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 24px 16px; border-bottom: 1px solid var(--border);
-}
-.admin-hdr h2 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); }
-.admin-close { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text2); }
-.admin-tabs {
-  display: flex; border-bottom: 1px solid var(--border);
-  overflow-x: auto; scrollbar-width: none; padding: 0 24px;
-}
-.admin-tabs::-webkit-scrollbar { display: none; }
-.admin-tab {
-  padding: 12px 16px; font-size: 13px; font-weight: 600;
-  color: var(--text2); border: none; background: none; cursor: pointer;
-  border-bottom: 2px solid transparent; white-space: nowrap;
-  transition: color .2s;
-}
-.admin-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
-.admin-body { padding: 20px 24px; }
-.admin-section { display: none; }
-.admin-section.active { display: block; }
-.admin-field { margin-bottom: 16px; }
-.admin-field label { display: block; font-size: 12px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
-.admin-field input, .admin-field textarea {
-  width: 100%; padding: 10px 14px; border: 2px solid var(--border);
-  border-radius: 10px; font-size: 14px; font-family: 'DM Sans', sans-serif;
-  color: var(--text); outline: none; transition: border-color .2s;
-}
-.admin-field input:focus, .admin-field textarea:focus { border-color: var(--blue); }
-.admin-field textarea { height: 80px; resize: none; }
-.admin-save {
-  background: var(--blue); color: white; border: none;
-  padding: 11px 24px; border-radius: 10px; font-size: 14px;
-  font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif;
-  transition: background .2s;
-}
-.admin-save:hover { background: var(--navy); }
-.admin-pwd-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 700;
-  display: flex; align-items: center; justify-content: center; padding: 20px;
-}
-.admin-pwd-box {
-  background: white; border-radius: 20px; padding: 32px 28px;
-  width: 100%; max-width: 340px; text-align: center;
-}
-.admin-pwd-box h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--navy); margin-bottom: 6px; }
-.admin-pwd-box p { font-size: 13px; color: var(--text2); margin-bottom: 20px; }
-.admin-pwd-input {
-  width: 100%; padding: 12px 14px; border: 2px solid var(--border);
-  border-radius: 10px; font-size: 16px; font-family: 'DM Sans', sans-serif;
-  text-align: center; letter-spacing: 4px; outline: none; margin-bottom: 14px;
-  transition: border-color .2s;
-}
-.admin-pwd-input:focus { border-color: var(--blue); }
-.admin-pwd-btn {
-  width: 100%; background: var(--blue); color: white; border: none;
-  padding: 12px; border-radius: 10px; font-size: 15px; font-weight: 700;
-  cursor: pointer; font-family: 'DM Sans', sans-serif;
-}
-.admin-pwd-cancel { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 13px; margin-top: 10px; display: block; width: 100%; }
-.photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
-.photo-slot {
-  aspect-ratio: 1; border-radius: 12px; border: 2px dashed var(--border);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  cursor: pointer; transition: border-color .2s; overflow: hidden; position: relative;
-  background: var(--gray);
-}
-.photo-slot:hover { border-color: var(--blue); }
-.photo-slot img { width: 100%; height: 100%; object-fit: cover; }
-.photo-slot .photo-edit {
-  position: absolute; inset: 0; background: rgba(0,0,0,.5);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 6px; opacity: 0; transition: opacity .2s; color: white;
-}
-.photo-slot:hover .photo-edit { opacity: 1; }
-.photo-slot .photo-edit i { font-size: 22px; }
-.photo-slot .photo-edit span { font-size: 12px; font-weight: 600; }
-.photo-slot .photo-placeholder { font-size: 32px; }
-.photo-slot .photo-num { font-size: 11px; color: var(--text2); margin-top: 4px; }
-.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:13px 18px;border-radius:12px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,.4);transform:translateY(100px);opacity:0;transition:transform .3s,opacity .3s;max-width:300px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast-icon{color:var(--gold);}
+.toast-icon.err{color:var(--red);}
 
-.toast {
-  position: fixed; bottom: 24px; right: 24px; z-index: 999;
-  background: var(--navy); color: white;
-  padding: 14px 20px; border-radius: 12px;
-  font-size: 14px; font-weight: 500;
-  display: flex; align-items: center; gap: 10px;
-  box-shadow: 0 8px 30px rgba(0,0,0,.3);
-  transform: translateY(100px); opacity: 0;
-  transition: transform .3s, opacity .3s;
-  max-width: 320px;
-}
-.toast.show { transform: translateY(0); opacity: 1; }
-.toast i { color: var(--warm); }
+/* ADMIN */
+.admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:600;display:none;align-items:flex-end;justify-content:center;}
+.admin-overlay.open{display:flex;}
+.admin-panel{background:var(--bg2);border-radius:24px 24px 0 0;width:100%;max-width:680px;max-height:88vh;overflow-y:auto;border-top:1px solid var(--border);}
+.adm-handle{width:36px;height:3px;background:var(--border);border-radius:2px;margin:12px auto;}
+.adm-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 24px 14px;border-bottom:1px solid var(--border);}
+.adm-hdr h2{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);}
+.adm-close{background:none;border:none;color:var(--text2);cursor:pointer;font-size:18px;}
+.adm-tabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;padding:0 24px;}
+.adm-tabs::-webkit-scrollbar{display:none;}
+.adm-tab{padding:11px 14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;font-family:'Outfit',sans-serif;}
+.adm-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.adm-body{padding:20px 24px 40px;}
+.adm-sec{display:none;}
+.adm-sec.active{display:block;}
+.af{margin-bottom:14px;}
+.af label{display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.af input,.af textarea{width:100%;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--text);outline:none;transition:border-color .2s;}
+.af input:focus,.af textarea:focus{border-color:var(--gold);}
+.af textarea{height:75px;resize:none;}
+.adm-btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;border:none;padding:10px 22px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;}
+.adm-btn.danger{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3);}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+.p-slot{aspect-ratio:4/3;border-radius:12px;border:1.5px dashed var(--border);background:var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s;overflow:hidden;position:relative;}
+.p-slot:hover{border-color:var(--gold);}
+.p-slot img{width:100%;height:100%;object-fit:cover;}
+.p-slot svg{width:28px;height:28px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round;}
+.p-slot span{font-size:11px;color:var(--text2);margin-top:6px;}
+.p-slot .p-hover{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;transition:opacity .2s;color:white;font-size:12px;font-weight:600;}
+.p-slot:hover .p-hover{opacity:1;}
+.p-hover svg{width:22px;height:22px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.adm-divider{height:1px;background:var(--border);margin:18px 0;}
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .nav-hamburger { display: block; }
-  .hero { padding-top: 120px; }
-  .hero-visual { display: none; }
-  .about-grid, .donate-inner, .contact-grid { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: 1fr 1fr; }
-  .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 1; }
-  .footer-top { grid-template-columns: 1fr 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .donate-inner { padding: 36px 28px; }
+/* PWD */
+.pwd-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:700;display:flex;align-items:center;justify-content:center;padding:20px;}
+.pwd-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:32px 28px;width:100%;max-width:320px;text-align:center;}
+.pwd-box h3{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--white);margin-bottom:6px;}
+.pwd-box p{font-size:13px;color:var(--text2);margin-bottom:20px;}
+.pwd-in{width:100%;padding:12px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;font-size:16px;font-family:'Outfit',sans-serif;color:var(--text);text-align:center;letter-spacing:4px;outline:none;margin-bottom:12px;transition:border-color .2s;}
+.pwd-in:focus{border-color:var(--gold);}
+.pwd-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;border:none;padding:12px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;}
+.pwd-cancel{background:none;border:none;color:var(--text2);cursor:pointer;font-size:12px;margin-top:10px;display:block;width:100%;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .hamburger{display:block;}
+  .about-grid,.donate-wrap,.contact-grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr 1fr;}
+  .g-item:nth-child(1),.g-item:nth-child(4){grid-column:span 1;aspect-ratio:4/3;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .donate-wrap{padding:36px 24px;}
 }
-@media (max-width: 500px) {
-  section { padding: 60px 5%; }
-  .gallery-grid { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr; }
-  .hero-stats { gap: 24px; }
-  .donate-amounts { grid-template-columns: repeat(3, 1fr); }
+@media(max-width:500px){
+  section{padding:60px 5%;}
+  .footer-top{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr;}
+  .g-item:nth-child(1),.g-item:nth-child(4){grid-column:span 1;}
 }
 </style>
 </head>
 <body>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <span class="mobile-close" onclick="toggleMenu()"><i class="fas fa-times"></i></span>
-  <a href="#about" onclick="toggleMenu()">About Us</a>
-  <a href="#mission" onclick="toggleMenu()">Our Mission</a>
+<div class="mob-menu" id="mobMenu">
+  <span class="mob-close" onclick="toggleMenu()"><i class="fas fa-times"></i></span>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#mission" onclick="toggleMenu()">Mission</a>
   <a href="#gallery" onclick="toggleMenu()">Gallery</a>
   <a href="#donate" onclick="toggleMenu()">Donate</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
@@ -510,76 +243,72 @@ footer {
 
 <!-- NAV -->
 <nav id="navbar">
-  <a class="nav-brand" href="#">
-    <div class="nav-logo-icon">🏠</div>
-    <div class="nav-brand-text">
-      Mercy Children's Home
-      <span>Uganda Children's Care</span>
+  <a class="nav-brand" href="#" onclick="secretTap()">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     </div>
+    <div class="nav-name">Mercy Children's Home<small>Kasanda Bukuya · Uganda</small></div>
   </a>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#mission">Mission</a>
     <a href="#gallery">Gallery</a>
     <a href="#contact">Contact</a>
-    <a href="#donate" class="nav-donate"><i class="fas fa-heart"></i> Donate Now</a>
+    <a href="#donate" class="nav-cta"><svg style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> Donate Now</a>
   </div>
-  <div class="nav-hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+  <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-badge"><i class="fas fa-star"></i> Serving Uganda's Children Since 2026</div>
-    <h1>Every Child Deserves <span>Love &amp; Hope</span></h1>
-    <p>Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Uganda. Together we can change their story.</p>
+    <div class="hero-badge">
+      <svg style="width:12px;height:12px;fill:currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span id="heroTag">Serving Uganda's Children Since 2026</span>
+    </div>
+    <h1 id="heroTitle">Every Child Deserves <em>Love &amp; Hope</em></h1>
+    <p id="heroDesc">Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda. Together we can change their story.</p>
     <div class="hero-btns">
-      <a href="#donate" class="btn-primary"><i class="fas fa-heart"></i> Donate on GoFundMe</a>
-      <a href="#about" class="btn-secondary"><i class="fas fa-play-circle"></i> Learn More</a>
+      <a href="#donate" class="btn-gold">
+        <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        Donate on GoFundMe
+      </a>
+      <a href="#about" class="btn-outline">
+        <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+        Learn More
+      </a>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num">50+</div>
-        <div class="hero-stat-label">Children Helped</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">8+</div>
-        <div class="hero-stat-label">Years of Service</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">100%</div>
-        <div class="hero-stat-label">Love &amp; Care</div>
-      </div>
+      <div><div class="stat-num" id="stat1n">50+</div><div class="stat-label" id="stat1l">Children Helped</div></div>
+      <div><div class="stat-num" id="stat2n">8+</div><div class="stat-label" id="stat2l">Years of Service</div></div>
+      <div><div class="stat-num" id="stat3n">100%</div><div class="stat-label" id="stat3l">Love &amp; Care</div></div>
     </div>
-  </div>
-  <div class="hero-visual">
-    <div class="hero-img-card">👧</div>
-    <div class="hero-img-card">👦</div>
-    <div class="hero-img-card">🤝</div>
-    <div class="hero-img-card">📚</div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-grid">
-    <div class="about-visual">
-      <div class="about-icon">🏠</div>
+    <div class="about-card">
+      <div class="about-card-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
       <h3>A Home Full of Hope</h3>
-      <p>We are more than a shelter — we are a family, a community, and a launching pad for Uganda's future leaders.</p>
+      <p id="aboutCard">We are more than a shelter — we are a family, a community, and a launching pad for Uganda's future leaders. Every child who walks through our doors finds safety, love, and purpose.</p>
     </div>
     <div class="about-text">
-      <div class="section-tag">About Us</div>
-      <h2 class="section-title">Who We Are</h2>
-      <p>Mercy Children's Home is a faith-based non-profit organization located in Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.</p>
-      <p>Founded with a heart for the forgotten, we believe every child — regardless of background — deserves a safe home, quality education, proper nutrition, and a future full of possibilities.</p>
+      <div class="sec-tag">About Us</div>
+      <h2 class="sec-title">Who We Are</h2>
+      <p id="aboutText" style="font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:8px;">Mercy Children's Home is a faith-based non-profit organization located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.</p>
       <ul class="about-list">
-        <li><i class="fas fa-check-circle"></i> Safe, loving residential care</li>
-        <li><i class="fas fa-check-circle"></i> Primary and secondary school education</li>
-        <li><i class="fas fa-check-circle"></i> Three nutritious meals daily</li>
-        <li><i class="fas fa-check-circle"></i> Medical and healthcare support</li>
-        <li><i class="fas fa-check-circle"></i> Spiritual guidance and mentorship</li>
-        <li><i class="fas fa-check-circle"></i> Vocational training for older children</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Safe, loving residential care</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Primary and secondary school education</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Three nutritious meals daily</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Medical and healthcare support</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Spiritual guidance and mentorship</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Vocational training for older children</li>
       </ul>
     </div>
   </div>
@@ -587,162 +316,146 @@ footer {
 
 <!-- MISSION -->
 <section class="mission" id="mission">
-  <div class="section-header">
-    <div class="section-tag">Our Mission</div>
-    <h2 class="section-title">What We Do</h2>
-    <p class="section-sub">We provide holistic care that nurtures every aspect of a child's development — body, mind, and spirit.</p>
+  <div class="sec-hdr">
+    <div class="sec-tag">Our Mission</div>
+    <h2 class="sec-title">What We Do</h2>
+    <p class="sec-sub">We provide holistic care that nurtures every aspect of a child's development — body, mind, and spirit.</p>
   </div>
   <div class="mission-grid">
-    <div class="mission-card">
-      <div class="mission-icon">🏠</div>
+    <div class="m-card">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
       <h3>Safe Shelter</h3>
-      <p>We provide a clean, safe, and loving home environment where children feel secure and valued every single day.</p>
+      <p>A clean, secure, and loving home where children feel safe, valued, and protected every day.</p>
     </div>
-    <div class="mission-card">
-      <div class="mission-icon">📚</div>
+    <div class="m-card">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
       <h3>Education</h3>
-      <p>Every child attends school. We pay school fees, provide uniforms, books, and after-school tutoring support.</p>
+      <p>School fees, uniforms, books, and tutoring — every child gets the education they deserve.</p>
     </div>
-    <div class="mission-card">
-      <div class="mission-icon">🍽️</div>
+    <div class="m-card">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
       <h3>Nutrition</h3>
-      <p>Three balanced meals a day ensure our children grow healthy, strong, and ready to learn and play.</p>
+      <p>Three balanced meals a day to keep our children healthy, strong, and ready to grow.</p>
     </div>
-    <div class="mission-card">
-      <div class="mission-icon">🏥</div>
+    <div class="m-card">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
       <h3>Healthcare</h3>
-      <p>Regular medical checkups, vaccinations, and prompt treatment ensure every child stays healthy.</p>
+      <p>Regular checkups, vaccinations, and prompt medical treatment for every child in our care.</p>
     </div>
-    <div class="mission-card">
-      <div class="mission-icon">✝️</div>
+    <div class="m-card">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
       <h3>Spiritual Care</h3>
-      <p>We nurture children's faith, character, and values through devotions, mentorship and community worship.</p>
+      <p>Faith, character, and values — we nurture the whole child through devotions and mentorship.</p>
     </div>
-    <div class="mission-card">
-      <div class="mission-icon">🎓</div>
+    <div class="m-card">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
       <h3>Future Skills</h3>
-      <p>Older children receive vocational training and life skills preparation for independent, successful adulthood.</p>
+      <p>Vocational training and life skills to prepare older children for confident, independent lives.</p>
     </div>
   </div>
 </section>
 
 <!-- GALLERY -->
 <section class="gallery" id="gallery">
-  <div class="section-header">
-    <div class="section-tag">Gallery</div>
-    <h2 class="section-title">Life at Mercy Home</h2>
-    <p class="section-sub">Moments of joy, learning, laughter and love from our children's daily lives.</p>
+  <div class="sec-hdr">
+    <div class="sec-tag">Gallery</div>
+    <h2 class="sec-title">Life at Mercy Home</h2>
+    <p class="sec-sub">Moments of joy, learning, laughter and love from our children's daily lives.</p>
   </div>
-  <div class="gallery-grid">
-    <div class="gallery-item" id="gitem-0" style="background:var(--navy);font-size:64px;">🧒</div>
-    <div class="gallery-item" id="gitem-1" style="font-size:64px;">📖</div>
-    <div class="gallery-item" id="gitem-2" style="font-size:64px;">🎨</div>
-    <div class="gallery-item" id="gitem-3" style="font-size:64px;">⚽</div>
-    <div class="gallery-item" id="gitem-4" style="font-size:64px;">🌱</div>
-    <div class="gallery-item" id="gitem-5" style="font-size:64px;">🙏</div>
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="g-item" id="gi-0"><div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo 1</span></div></div>
+    <div class="g-item" id="gi-1"><div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo 2</span></div></div>
+    <div class="g-item" id="gi-2"><div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo 3</span></div></div>
+    <div class="g-item" id="gi-3"><div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo 4</span></div></div>
+    <div class="g-item" id="gi-4"><div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo 5</span></div></div>
+    <div class="g-item" id="gi-5"><div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo 6</span></div></div>
   </div>
-  <p style="text-align:center;color:rgba(255,255,255,.4);font-size:13px;margin-top:20px;">Tap the ⚙️ button (bottom-left) to upload real photos via Admin Panel</p>
 </section>
 
 <!-- DONATE -->
 <section class="donate" id="donate">
-  <div class="donate-inner">
+  <div class="donate-wrap">
     <div class="donate-text">
-      <div class="section-tag">Make a Difference</div>
-      <h2 class="section-title">Your Gift Changes Lives</h2>
-      <p class="section-sub">Every dollar you give goes directly to feeding, clothing, educating, and caring for our children.</p>
+      <div class="sec-tag">Make a Difference</div>
+      <h2 class="sec-title">Your Gift Changes Lives</h2>
+      <p class="sec-sub">Every dollar you give goes directly to feeding, clothing, educating, and caring for our children.</p>
       <ul class="donate-perks">
-        <li><i class="fas fa-utensils"></i> $10 feeds a child for a week</li>
-        <li><i class="fas fa-book"></i> $25 covers school supplies for a term</li>
-        <li><i class="fas fa-tshirt"></i> $50 provides clothing for one child</li>
-        <li><i class="fas fa-graduation-cap"></i> $100 pays school fees for a month</li>
-        <li><i class="fas fa-heart"></i> $500 sponsors a child for a full year</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>$10 feeds a child for a week</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>$25 covers school supplies for a term</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>$50 provides clothing for one child</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>$100 pays school fees for a month</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>$500 sponsors a child for a full year</li>
       </ul>
     </div>
     <div class="donate-box">
       <h3>Donate via GoFundMe</h3>
-      <p>Choose an amount or enter your own — every contribution matters.</p>
-      <div class="donate-amounts">
-        <div class="amount-btn" onclick="setAmount(10,this)">$10</div>
-        <div class="amount-btn active" onclick="setAmount(25,this)">$25</div>
-        <div class="amount-btn" onclick="setAmount(50,this)">$50</div>
-        <div class="amount-btn" onclick="setAmount(100,this)">$100</div>
-        <div class="amount-btn" onclick="setAmount(250,this)">$250</div>
-        <div class="amount-btn" onclick="setAmount(500,this)">$500</div>
+      <p>Choose an amount — every contribution matters.</p>
+      <div class="amt-grid">
+        <div class="amt-btn" onclick="setAmt(10,this)">$10</div>
+        <div class="amt-btn active" onclick="setAmt(25,this)">$25</div>
+        <div class="amt-btn" onclick="setAmt(50,this)">$50</div>
+        <div class="amt-btn" onclick="setAmt(100,this)">$100</div>
+        <div class="amt-btn" onclick="setAmt(250,this)">$250</div>
+        <div class="amt-btn" onclick="setAmt(500,this)">$500</div>
       </div>
-      <div class="donate-input-wrap">
-        <span>$</span>
-        <input type="number" class="donate-input" id="donateAmount" value="25" placeholder="Enter amount"/>
+      <div class="amt-input-wrap">
+        <span class="amt-symbol">$</span>
+        <input type="number" class="amt-input" id="donateAmt" value="25"/>
       </div>
-      <button class="donate-btn" onclick="goToGofundme()">
-        <i class="fas fa-heart"></i> Donate Now on GoFundMe
+      <button class="donate-btn" onclick="goDonate()">
+        <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        Donate Now on GoFundMe
       </button>
-      <p class="donate-note">🔒 Secure donation via GoFundMe · 100% goes to the children</p>
+      <p class="donate-note">
+        <svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Secure donation · 100% goes to the children
+      </p>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div class="section-header">
-    <div class="section-tag">Get In Touch</div>
-    <h2 class="section-title">Contact Us</h2>
-    <p class="section-sub">Want to volunteer, partner, or learn more? We'd love to hear from you.</p>
+  <div class="sec-hdr">
+    <div class="sec-tag">Get In Touch</div>
+    <h2 class="sec-title">Contact Us</h2>
+    <p class="sec-sub">Want to volunteer, partner, or learn more? We'd love to hear from you.</p>
   </div>
   <div class="contact-grid">
-    <div class="contact-info">
-      <div class="contact-item">
-        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-        <div>
-          <h4>Location</h4>
-          <p>Mercy Children's Home<br>Kasanda Bukuya, Uganda</p>
-        </div>
+    <div class="c-items">
+      <div class="c-item">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><h4>Location</h4><p id="contactLocation">Kasanda Bukuya, Uganda</p></div>
       </div>
-      <div class="contact-item">
-        <div class="contact-icon"><i class="fas fa-phone"></i></div>
-        <div>
-          <h4>Phone / WhatsApp</h4>
-          <p>+256 751 442 505<br>Available Mon–Sat, 8am–6pm</p>
-        </div>
+      <div class="c-item">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18C.07.13.96-.01 2.02 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg></div>
+        <div><h4>Phone / WhatsApp</h4><p id="contactPhone">+256 751 442 505</p></div>
       </div>
-      <div class="contact-item">
-        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-        <div>
-          <h4>Email</h4>
-          <p>info@mercychildrenshome.org<br>We respond within 24 hours</p>
-        </div>
+      <div class="c-item">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><h4>Email</h4><p id="contactEmail">info@mercychildrenshome.org</p></div>
       </div>
-      <div class="contact-item">
-        <div class="contact-icon"><i class="fas fa-share-alt"></i></div>
+      <div class="c-item">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
         <div>
           <h4>Follow Us</h4>
-          <div class="contact-socials">
-            <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
-            <a href="https://wa.me/256751442505" class="social-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <div class="socials">
+            <a href="#" class="soc" id="socFb" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" class="soc" id="socIg" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" class="soc" id="socYt" target="_blank"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+            <a href="https://wa.me/256751442505" class="soc" id="socWa" target="_blank"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
           </div>
         </div>
       </div>
     </div>
     <div class="contact-form">
       <div class="form-row">
-        <div class="form-group">
-          <label>First Name</label>
-          <input type="text" placeholder="John"/>
-        </div>
-        <div class="form-group">
-          <label>Last Name</label>
-          <input type="text" placeholder="Doe"/>
-        </div>
+        <div class="fg"><label>First Name</label><input type="text" placeholder="John"/></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Doe"/></div>
       </div>
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" placeholder="john@example.com"/>
-      </div>
-      <div class="form-group">
-        <label>Subject</label>
-        <select>
+      <div class="fg"><label>Email</label><input type="email" placeholder="john@example.com"/></div>
+      <div class="fg"><label>Subject</label>
+        <select style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:14px;font-family:'Outfit',sans-serif;color:var(--text);outline:none;">
           <option>General Inquiry</option>
           <option>Volunteer Interest</option>
           <option>Donation / Sponsorship</option>
@@ -750,12 +463,10 @@ footer {
           <option>Media / Press</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>Message</label>
-        <textarea placeholder="Tell us how you'd like to help or any questions you have..."></textarea>
-      </div>
-      <button class="form-submit" onclick="submitForm()">
-        <i class="fas fa-paper-plane"></i> Send Message
+      <div class="fg"><label>Message</label><textarea placeholder="Tell us how you'd like to help..."></textarea></div>
+      <button class="form-btn" onclick="submitForm()">
+        <svg style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Send Message
       </button>
     </div>
   </div>
@@ -764,15 +475,12 @@ footer {
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
-    <div class="footer-brand">
-      <div class="nav-brand" style="text-decoration:none;">
-        <div class="nav-logo-icon">🏠</div>
-        <div class="nav-brand-text" style="color:white;">
-          Mercy Children's Home
-          <span style="color:rgba(255,255,255,.4)">Uganda Children's Care</span>
-        </div>
+    <div>
+      <div class="footer-brand">
+        <div class="nav-icon"><svg style="width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--white);">Mercy Children's Home</span>
       </div>
-      <p>Providing shelter, love, and opportunity to Uganda's most vulnerable children since 2026. Every child deserves a future.</p>
+      <p>Providing shelter, love, and opportunity to Uganda's most vulnerable children since <span id="footerYear">2026</span>. Every child deserves a future.</p>
     </div>
     <div class="footer-col">
       <h4>Quick Links</h4>
@@ -791,457 +499,251 @@ footer {
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Mercy Children's Home, Uganda. All rights reserved.</p>
+    <p>© <span id="footerYear2">2026</span> Mercy Children's Home, Uganda. All rights reserved.</p>
     <p>Made with <span class="footer-heart">♥</span> for the children of Uganda</p>
   </div>
 </footer>
 
-<!-- ADMIN PASSWORD -->
-<div class="admin-pwd-overlay" id="adminPwdOverlay">
-  <div class="admin-pwd-box">
-    <div style="font-size:40px;margin-bottom:12px;">🔐</div>
+<!-- ADMIN PWD -->
+<div class="pwd-overlay" id="pwdOverlay" style="display:none;">
+  <div class="pwd-box">
+    <div style="font-size:36px;margin-bottom:12px;">🔐</div>
     <h3>Admin Access</h3>
-    <p>Enter the admin password to edit the website</p>
-    <input type="password" class="admin-pwd-input" id="adminPwdInput" placeholder="••••••" onkeydown="if(event.key==='Enter')checkAdminPwd()"/>
-    <button class="admin-pwd-btn" onclick="checkAdminPwd()">Enter</button>
-    <button class="admin-pwd-cancel" onclick="document.getElementById('adminPwdOverlay').style.display='none'">Cancel</button>
+    <p>Enter password to edit website</p>
+    <input type="password" class="pwd-in" id="pwdInput" placeholder="••••••" onkeydown="if(event.key==='Enter')checkPwd()"/>
+    <button class="pwd-btn" onclick="checkPwd()">Enter</button>
+    <button class="pwd-cancel" onclick="document.getElementById('pwdOverlay').style.display='none'">Cancel</button>
   </div>
 </div>
-
-<!-- ADMIN FAB -->
-<button class="admin-fab" onclick="openAdmin()" title="Admin Panel">⚙️</button>
 
 <!-- ADMIN PANEL -->
 <div class="admin-overlay" id="adminOverlay">
   <div class="admin-panel">
-    <div class="admin-handle"></div>
-    <div class="admin-hdr">
-      <h2>⚙️ Admin Panel</h2>
-      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    <div class="adm-handle"></div>
+    <div class="adm-hdr">
+      <h2>Admin Panel</h2>
+      <button class="adm-close" onclick="closeAdmin()">✕</button>
     </div>
-    <div class="admin-tabs">
-      <button class="admin-tab active" onclick="switchAdminTab('photos',this)">📷 Photos</button>
-      <button class="admin-tab" onclick="switchAdminTab('content',this)">✏️ Content</button>
-      <button class="admin-tab" onclick="switchAdminTab('contact',this)">📞 Contact</button>
-      <button class="admin-tab" onclick="switchAdminTab('stats',this)">📊 Stats</button>
-      <button class="admin-tab" onclick="switchAdminTab('settings',this)">🔑 Settings</button>
+    <div class="adm-tabs">
+      <button class="adm-tab active" onclick="admTab('photos',this)">Photos</button>
+      <button class="adm-tab" onclick="admTab('content',this)">Content</button>
+      <button class="adm-tab" onclick="admTab('contact',this)">Contact</button>
+      <button class="adm-tab" onclick="admTab('stats',this)">Stats</button>
+      <button class="adm-tab" onclick="admTab('settings',this)">Settings</button>
     </div>
-    <div class="admin-body">
+    <div class="adm-body">
 
-      <!-- PHOTOS TAB -->
-      <div class="admin-section active" id="admin-photos">
-        <p style="font-size:13px;color:var(--text2);margin-bottom:16px;">Click any photo slot to upload a new image. Changes are saved in your browser.</p>
+      <div class="adm-sec active" id="adm-photos">
+        <p style="font-size:12px;color:var(--text2);margin-bottom:14px;">Click a slot to upload a photo from your device.</p>
         <div class="photo-grid" id="photoGrid"></div>
-        <button class="admin-save" onclick="savePhotos()"><i class="fas fa-save"></i> Save All Photos</button>
+        <button class="adm-btn" onclick="showToast('Photos saved!')">Save Photos</button>
       </div>
 
-      <!-- CONTENT TAB -->
-      <div class="admin-section" id="admin-content">
-        <div class="admin-field">
-          <label>Organization Name</label>
-          <input type="text" id="edit-orgName" value="Mercy Children's Home"/>
-        </div>
-        <div class="admin-field">
-          <label>Hero Headline</label>
-          <input type="text" id="edit-heroTitle" value="Every Child Deserves Love & Hope"/>
-        </div>
-        <div class="admin-field">
-          <label>Hero Description</label>
-          <textarea id="edit-heroDesc">Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Uganda. Together we can change their story.</textarea>
-        </div>
-        <div class="admin-field">
-          <label>About Us Text</label>
-          <textarea id="edit-aboutText">Mercy Children's Home is a faith-based non-profit organization located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.</textarea>
-        </div>
-        <div class="admin-field">
-          <label>Founded Year</label>
-          <input type="text" id="edit-foundedYear" value="2026"/>
-        </div>
-        <button class="admin-save" onclick="saveContent()"><i class="fas fa-save"></i> Save Content</button>
+      <div class="adm-sec" id="adm-content">
+        <div class="af"><label>Hero Headline</label><input type="text" id="ei-heroTitle" value="Every Child Deserves Love & Hope"/></div>
+        <div class="af"><label>Hero Description</label><textarea id="ei-heroDesc">Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda.</textarea></div>
+        <div class="af"><label>About Text</label><textarea id="ei-aboutText">Mercy Children's Home is a faith-based non-profit located in Kasanda Bukuya, Uganda, dedicated to comprehensive care for orphaned and vulnerable children.</textarea></div>
+        <div class="af"><label>Founded Year</label><input type="text" id="ei-year" value="2026"/></div>
+        <button class="adm-btn" onclick="saveContent()">Save Content</button>
       </div>
 
-      <!-- CONTACT TAB -->
-      <div class="admin-section" id="admin-contact">
-        <div class="admin-field">
-          <label>Location</label>
-          <input type="text" id="edit-location" value="Kasanda Bukuya, Uganda"/>
-        </div>
-        <div class="admin-field">
-          <label>Phone / WhatsApp Number</label>
-          <input type="text" id="edit-phone" value="+256 751 442 505"/>
-        </div>
-        <div class="admin-field">
-          <label>Email Address</label>
-          <input type="text" id="edit-email" value="info@mercychildrenshome.org"/>
-        </div>
-        <div class="admin-field">
-          <label>Facebook URL</label>
-          <input type="text" id="edit-facebook" value="#"/>
-        </div>
-        <div class="admin-field">
-          <label>Instagram URL</label>
-          <input type="text" id="edit-instagram" value="#"/>
-        </div>
-        <div class="admin-field">
-          <label>YouTube URL</label>
-          <input type="text" id="edit-youtube" value="#"/>
-        </div>
-        <div class="admin-field">
-          <label>GoFundMe URL</label>
-          <input type="text" id="edit-gofundme" value="https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968"/>
-        </div>
-        <button class="admin-save" onclick="saveContact()"><i class="fas fa-save"></i> Save Contact Info</button>
+      <div class="adm-sec" id="adm-contact">
+        <div class="af"><label>Location</label><input type="text" id="ei-location" value="Kasanda Bukuya, Uganda"/></div>
+        <div class="af"><label>Phone / WhatsApp</label><input type="text" id="ei-phone" value="+256 751 442 505"/></div>
+        <div class="af"><label>Email</label><input type="text" id="ei-email" value="info@mercychildrenshome.org"/></div>
+        <div class="af"><label>Facebook URL</label><input type="text" id="ei-fb" value="#"/></div>
+        <div class="af"><label>Instagram URL</label><input type="text" id="ei-ig" value="#"/></div>
+        <div class="af"><label>YouTube URL</label><input type="text" id="ei-yt" value="#"/></div>
+        <div class="af"><label>GoFundMe URL</label><input type="text" id="ei-gfm" value="https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968"/></div>
+        <button class="adm-btn" onclick="saveContact()">Save Contact</button>
       </div>
 
-      <!-- STATS TAB -->
-      <div class="admin-section" id="admin-stats">
-        <p style="font-size:13px;color:var(--text2);margin-bottom:16px;">Update the hero statistics displayed on the homepage.</p>
+      <div class="adm-sec" id="adm-stats">
         <div class="stat-grid">
-          <div class="admin-field">
-            <label>Stat 1 Number</label>
-            <input type="text" id="stat1-num" value="50+"/>
-          </div>
-          <div class="admin-field">
-            <label>Stat 1 Label</label>
-            <input type="text" id="stat1-label" value="Children Helped"/>
-          </div>
-          <div class="admin-field">
-            <label>Stat 2 Number</label>
-            <input type="text" id="stat2-num" value="8+"/>
-          </div>
-          <div class="admin-field">
-            <label>Stat 2 Label</label>
-            <input type="text" id="stat2-label" value="Years of Service"/>
-          </div>
-          <div class="admin-field">
-            <label>Stat 3 Number</label>
-            <input type="text" id="stat3-num" value="100%"/>
-          </div>
-          <div class="admin-field">
-            <label>Stat 3 Label</label>
-            <input type="text" id="stat3-label" value="Love & Care"/>
-          </div>
+          <div class="af"><label>Stat 1 Number</label><input type="text" id="s1n" value="50+"/></div>
+          <div class="af"><label>Stat 1 Label</label><input type="text" id="s1l" value="Children Helped"/></div>
+          <div class="af"><label>Stat 2 Number</label><input type="text" id="s2n" value="8+"/></div>
+          <div class="af"><label>Stat 2 Label</label><input type="text" id="s2l" value="Years of Service"/></div>
+          <div class="af"><label>Stat 3 Number</label><input type="text" id="s3n" value="100%"/></div>
+          <div class="af"><label>Stat 3 Label</label><input type="text" id="s3l" value="Love & Care"/></div>
         </div>
-        <button class="admin-save" onclick="saveStats()"><i class="fas fa-save"></i> Save Stats</button>
+        <button class="adm-btn" onclick="saveStats()">Save Stats</button>
       </div>
 
-      <!-- SETTINGS TAB -->
-      <div class="admin-section" id="admin-settings">
-        <div class="admin-field">
-          <label>Change Admin Password</label>
-          <input type="password" id="new-pwd" placeholder="New password (min 6 chars)"/>
-        </div>
-        <div class="admin-field">
-          <label>Confirm New Password</label>
-          <input type="password" id="confirm-pwd" placeholder="Confirm new password"/>
-        </div>
-        <button class="admin-save" onclick="changeAdminPwd()"><i class="fas fa-key"></i> Change Password</button>
-        <div class="divider" style="margin:20px 0;"></div>
-        <button class="admin-save" style="background:#ef4444;" onclick="clearAllData()"><i class="fas fa-trash"></i> Reset All to Defaults</button>
+      <div class="adm-sec" id="adm-settings">
+        <div class="af"><label>New Password</label><input type="password" id="newPwd" placeholder="Min 6 characters"/></div>
+        <div class="af"><label>Confirm Password</label><input type="password" id="confPwd" placeholder="Confirm"/></div>
+        <button class="adm-btn" onclick="changePwd()">Change Password</button>
+        <div class="adm-divider"></div>
+        <button class="adm-btn danger" onclick="resetAll()">Reset All to Defaults</button>
       </div>
 
     </div>
   </div>
 </div>
 
-<input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)"/>
-
-<div class="toast" id="toast"></div>
+<input type="file" id="fileIn" accept="image/*" style="display:none;" onchange="handlePhoto(event)"/>
+<div class="toast" id="toast"><span class="toast-icon" id="toastIcon"></span><span id="toastMsg"></span></div>
 
 <script>
-var ADMIN_PWD_KEY = 'mch_admin_pwd';
-var DATA_KEY = 'mch_data';
-var PHOTOS_KEY = 'mch_photos';
-var adminUnlocked = false;
-var currentPhotoSlot = null;
+var DKEY='mch_d',PKEY='mch_p',AKEY='mch_pwd';
+var unlocked=false,curSlot=null,tapCount=0,tapTimer=null;
 
-// ===== DATA =====
-var defaultData = {
-  orgName: "Mercy Children's Home",
-  heroTitle: "Every Child Deserves Love & Hope",
-  heroDesc: "Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Uganda. Together we can change their story.",
-  aboutText: "Mercy Children's Home is a faith-based non-profit organization located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.",
-  foundedYear: "2026",
-  location: "Kasanda Bukuya, Uganda",
-  phone: "+256 751 442 505",
-  email: "info@mercychildrenshome.org",
-  facebook: "#",
-  instagram: "#",
-  youtube: "#",
-  gofundme: "https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968",
-  stat1num: "50+", stat1label: "Children Helped",
-  stat2num: "8+", stat2label: "Years of Service",
-  stat3num: "100%", stat3label: "Love & Care",
-};
-var defaultPhotos = [null,null,null,null,null,null];
-var photoEmojis = ['🧒','📖','🎨','⚽','🌱','🙏'];
+var DEF={heroTitle:"Every Child Deserves Love & Hope",heroDesc:"Mercy Children's Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda. Together we can change their story.",aboutText:"Mercy Children's Home is a faith-based non-profit organization located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.",year:"2026",location:"Kasanda Bukuya, Uganda",phone:"+256 751 442 505",email:"info@mercychildrenshome.org",fb:"#",ig:"#",yt:"#",gfm:"https://www.gofundme.com/f/mercy-childrens-home-growing-our-home-and-community/cl/s?utm_campaign=fp_sharesheet&utm_content=amp17_te&utm_medium=customer&utm_source=copy_link&lang=en_US&attribution_id=sl%3A06c43a5a-630b-4750-887e-43f93eadd690&ts=1776212968",s1n:"50+",s1l:"Children Helped",s2n:"8+",s2l:"Years of Service",s3n:"100%",s3l:"Love & Care"};
 
-function getData(){try{return JSON.parse(localStorage.getItem(DATA_KEY))||defaultData;}catch(e){return defaultData;}}
-function saveData(d){localStorage.setItem(DATA_KEY,JSON.stringify(d));}
-function getPhotos(){try{return JSON.parse(localStorage.getItem(PHOTOS_KEY))||defaultPhotos;}catch(e){return defaultPhotos;}}
-function savePhotosData(p){localStorage.setItem(PHOTOS_KEY,JSON.stringify(p));}
-function getAdminPwd(){return localStorage.getItem(ADMIN_PWD_KEY)||'mercy2026';}
+function getData(){try{return Object.assign({},DEF,JSON.parse(localStorage.getItem(DKEY)||'{}'));}catch(e){return Object.assign({},DEF);}}
+function setData(d){localStorage.setItem(DKEY,JSON.stringify(d));}
+function getPhotos(){try{var p=JSON.parse(localStorage.getItem(PKEY)||'[]');while(p.length<6)p.push(null);return p;}catch(e){return[null,null,null,null,null,null];}}
+function setPhotos(p){localStorage.setItem(PKEY,JSON.stringify(p));}
+function getPwd(){return localStorage.getItem(AKEY)||'mercy2026';}
 
-// ===== APPLY DATA TO PAGE =====
-function applyData(){
-  var d = getData();
+function applyAll(){
+  var d=getData();
   // Hero
-  var ht = document.querySelector('.hero h1');
-  if(ht) ht.innerHTML = d.heroTitle.replace('Love & Hope','<span>Love &amp; Hope</span>');
-  var hp = document.querySelector('.hero p');
-  if(hp) hp.textContent = d.heroDesc;
-  // Badge
-  var hb = document.querySelector('.hero-badge');
-  if(hb) hb.innerHTML = '<i class="fas fa-star"></i> Serving Uganda\'s Children Since '+d.foundedYear;
+  document.getElementById('heroTitle').innerHTML=d.heroTitle.replace('Love & Hope','<em>Love &amp; Hope</em>');
+  document.getElementById('heroDesc').textContent=d.heroDesc;
+  document.getElementById('heroTag').textContent="Serving Uganda's Children Since "+d.year;
   // Stats
-  var sn = document.querySelectorAll('.hero-stat-num');
-  var sl = document.querySelectorAll('.hero-stat-label');
-  if(sn[0]){sn[0].textContent=d.stat1num;sl[0].textContent=d.stat1label;}
-  if(sn[1]){sn[1].textContent=d.stat2num;sl[1].textContent=d.stat2label;}
-  if(sn[2]){sn[2].textContent=d.stat3num;sl[2].textContent=d.stat3label;}
+  document.getElementById('stat1n').textContent=d.s1n;
+  document.getElementById('stat1l').textContent=d.s1l;
+  document.getElementById('stat2n').textContent=d.s2n;
+  document.getElementById('stat2l').textContent=d.s2l;
+  document.getElementById('stat3n').textContent=d.s3n;
+  document.getElementById('stat3l').textContent=d.s3l;
+  // About
+  document.getElementById('aboutText').textContent=d.aboutText;
   // Contact
-  var cps = document.querySelectorAll('.contact-item p');
-  if(cps[0]) cps[0].innerHTML = "Mercy Children's Home<br>"+d.location;
-  if(cps[1]) cps[1].innerHTML = d.phone+'<br>Available Mon–Sat, 8am–6pm';
-  if(cps[2]) cps[2].innerHTML = d.email+'<br>We respond within 24 hours';
-  // Social links
-  var socials = document.querySelectorAll('.social-btn');
-  if(socials[0]) socials[0].href = d.facebook;
-  if(socials[1]) socials[1].href = d.instagram;
-  if(socials[2]) socials[2].href = d.youtube;
-  if(socials[3]) socials[3].href = 'https://wa.me/'+d.phone.replace(/\D/g,'');
+  document.getElementById('contactLocation').textContent=d.location;
+  document.getElementById('contactPhone').textContent=d.phone;
+  document.getElementById('contactEmail').textContent=d.email;
+  document.getElementById('socFb').href=d.fb;
+  document.getElementById('socIg').href=d.ig;
+  document.getElementById('socYt').href=d.yt;
+  document.getElementById('socWa').href='https://wa.me/'+d.phone.replace(/\D/g,'');
   // Footer
-  var fp = document.querySelectorAll('.footer-brand p');
-  if(fp[0]) fp[0].textContent = 'Providing shelter, love, and opportunity to Uganda\'s most vulnerable children since '+d.foundedYear+'. Every child deserves a future.';
-  var fc = document.querySelector('.footer-bottom p');
-  if(fc) fc.textContent = '© '+d.foundedYear+' Mercy Children\'s Home, Uganda. All rights reserved.';
-}
-
-function applyPhotos(){
-  var photos = getPhotos();
-  photos.forEach(function(p, i){
-    var el = document.getElementById('gitem-'+i);
-    if(!el) return;
-    if(p){
-      el.innerHTML = '<img src="'+p+'" style="width:100%;height:100%;object-fit:cover;" />';
-      el.style.fontSize = '0';
-    } else {
-      el.innerHTML = photoEmojis[i];
-      el.style.fontSize = '64px';
-    }
-  });
-}
-
-// ===== NAV =====
-window.addEventListener('scroll', function(){
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-});
-function toggleMenu(){
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-
-// ===== DONATE =====
-function setAmount(val, btn){
-  document.querySelectorAll('.amount-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
-  document.getElementById('donateAmount').value = val;
-}
-function goToGofundme(){
-  var amount = document.getElementById('donateAmount').value;
-  if(!amount||amount<1){showToast('Please enter a valid amount',true);return;}
-  var d = getData();
-  window.open(d.gofundme, '_blank');
-  showToast('Redirecting to GoFundMe... 💙');
-}
-
-// ===== CONTACT FORM =====
-function submitForm(){
-  showToast("Message sent! We'll get back to you soon. 🙏");
-}
-
-// ===== TOAST =====
-function showToast(msg, isErr){
-  var t = document.getElementById('toast');
-  t.innerHTML = '<i class="fas fa-'+(isErr?'exclamation-circle':'check-circle')+'"></i> '+msg;
-  t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show');}, 3500);
-}
-
-// ===== ADMIN =====
-function openAdmin(){
-  if(!adminUnlocked){
-    document.getElementById('adminPwdOverlay').style.display='flex';
-    setTimeout(function(){document.getElementById('adminPwdInput').focus();},100);
-  } else {
-    document.getElementById('adminOverlay').classList.add('open');
-    renderPhotoGrid();
-    loadAdminFields();
-  }
-}
-function closeAdmin(){
-  document.getElementById('adminOverlay').classList.remove('open');
-}
-function checkAdminPwd(){
-  var entered = document.getElementById('adminPwdInput').value;
-  if(entered === getAdminPwd()){
-    adminUnlocked = true;
-    document.getElementById('adminPwdOverlay').style.display='none';
-    document.getElementById('adminPwdInput').value='';
-    document.getElementById('adminOverlay').classList.add('open');
-    renderPhotoGrid();
-    loadAdminFields();
-  } else {
-    showToast('Wrong password!', true);
-    document.getElementById('adminPwdInput').value='';
-  }
-}
-function switchAdminTab(tab, el){
-  document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active');});
-  document.querySelectorAll('.admin-section').forEach(function(s){s.classList.remove('active');});
-  el.classList.add('active');
-  document.getElementById('admin-'+tab).classList.add('active');
-}
-
-// ===== PHOTO GRID =====
-function renderPhotoGrid(){
-  var photos = getPhotos();
-  var grid = document.getElementById('photoGrid');
-  grid.innerHTML = '';
+  document.getElementById('footerYear').textContent=d.year;
+  document.getElementById('footerYear2').textContent=d.year;
+  // Photos
+  var photos=getPhotos();
   for(var i=0;i<6;i++){
-    var slot = document.createElement('div');
-    slot.className = 'photo-slot';
-    slot.setAttribute('data-idx', i);
-    slot.onclick = (function(idx){return function(){openPhotoUpload(idx);};})(i);
+    var el=document.getElementById('gi-'+i);
+    if(!el)continue;
     if(photos[i]){
-      slot.innerHTML = '<img src="'+photos[i]+'" alt="Photo '+(i+1)+'" />'
-        +'<div class="photo-edit"><i class="fas fa-camera"></i><span>Change Photo</span></div>';
-    } else {
-      slot.innerHTML = '<div class="photo-placeholder">'+photoEmojis[i]+'</div>'
-        +'<div class="photo-num">Photo '+(i+1)+'</div>'
-        +'<div class="photo-edit"><i class="fas fa-plus"></i><span>Upload Photo</span></div>';
+      el.innerHTML='<img src="'+photos[i]+'" alt="Photo '+(i+1)+'"/>';
+    }else{
+      el.innerHTML='<div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo '+(i+1)+'</span></div>';
+    }
+  }
+}
+
+// NAV
+window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
+function toggleMenu(){document.getElementById('mobMenu').classList.toggle('open');}
+
+// SECRET TAP (5 taps on logo)
+function secretTap(){
+  tapCount++;
+  if(tapTimer)clearTimeout(tapTimer);
+  tapTimer=setTimeout(function(){tapCount=0;},2000);
+  if(tapCount>=5){tapCount=0;openAdmin();}
+}
+
+// DONATE
+function setAmt(v,btn){document.querySelectorAll('.amt-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');document.getElementById('donateAmt').value=v;}
+function goDonate(){var a=document.getElementById('donateAmt').value;if(!a||a<1){showToast('Enter a valid amount',true);return;}var d=getData();window.open(d.gfm,'_blank');showToast('Opening GoFundMe... 💙');}
+function submitForm(){showToast("Message sent! We'll get back to you soon. 🙏");}
+
+// TOAST
+function showToast(msg,isErr){
+  document.getElementById('toastMsg').textContent=msg;
+  var ic=document.getElementById('toastIcon');
+  ic.innerHTML=isErr?'<i class="fas fa-exclamation-circle"></i>':'<i class="fas fa-check-circle"></i>';
+  ic.className='toast-icon'+(isErr?' err':'');
+  var t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},3500);
+}
+
+// ADMIN
+function openAdmin(){
+  if(!unlocked){document.getElementById('pwdOverlay').style.display='flex';setTimeout(function(){document.getElementById('pwdInput').focus();},100);}
+  else{document.getElementById('adminOverlay').classList.add('open');loadAdmFields();renderPhotoGrid();}
+}
+function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');}
+function checkPwd(){
+  var v=document.getElementById('pwdInput').value;
+  if(v===getPwd()){unlocked=true;document.getElementById('pwdOverlay').style.display='none';document.getElementById('pwdInput').value='';document.getElementById('adminOverlay').classList.add('open');loadAdmFields();renderPhotoGrid();}
+  else{showToast('Wrong password!',true);document.getElementById('pwdInput').value='';}
+}
+function admTab(tab,el){
+  document.querySelectorAll('.adm-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.adm-sec').forEach(function(s){s.classList.remove('active');});
+  el.classList.add('active');
+  document.getElementById('adm-'+tab).classList.add('active');
+}
+
+function loadAdmFields(){
+  var d=getData();
+  ['heroTitle','heroDesc','aboutText','year','location','phone','email','fb','ig','yt','gfm','s1n','s1l','s2n','s2l','s3n','s3l'].forEach(function(k){
+    var el=document.getElementById('ei-'+k)||document.getElementById(k.replace(/(\d)/,'$1').replace('s','s'));
+    // use mapping
+  });
+  document.getElementById('ei-heroTitle').value=d.heroTitle;
+  document.getElementById('ei-heroDesc').value=d.heroDesc;
+  document.getElementById('ei-aboutText').value=d.aboutText;
+  document.getElementById('ei-year').value=d.year;
+  document.getElementById('ei-location').value=d.location;
+  document.getElementById('ei-phone').value=d.phone;
+  document.getElementById('ei-email').value=d.email;
+  document.getElementById('ei-fb').value=d.fb;
+  document.getElementById('ei-ig').value=d.ig;
+  document.getElementById('ei-yt').value=d.yt;
+  document.getElementById('ei-gfm').value=d.gfm;
+  document.getElementById('s1n').value=d.s1n;
+  document.getElementById('s1l').value=d.s1l;
+  document.getElementById('s2n').value=d.s2n;
+  document.getElementById('s2l').value=d.s2l;
+  document.getElementById('s3n').value=d.s3n;
+  document.getElementById('s3l').value=d.s3l;
+}
+
+function saveContent(){var d=getData();d.heroTitle=document.getElementById('ei-heroTitle').value;d.heroDesc=document.getElementById('ei-heroDesc').value;d.aboutText=document.getElementById('ei-aboutText').value;d.year=document.getElementById('ei-year').value;setData(d);applyAll();showToast('Content saved! ✅');}
+function saveContact(){var d=getData();d.location=document.getElementById('ei-location').value;d.phone=document.getElementById('ei-phone').value;d.email=document.getElementById('ei-email').value;d.fb=document.getElementById('ei-fb').value;d.ig=document.getElementById('ei-ig').value;d.yt=document.getElementById('ei-yt').value;d.gfm=document.getElementById('ei-gfm').value;setData(d);applyAll();showToast('Contact saved! ✅');}
+function saveStats(){var d=getData();d.s1n=document.getElementById('s1n').value;d.s1l=document.getElementById('s1l').value;d.s2n=document.getElementById('s2n').value;d.s2l=document.getElementById('s2l').value;d.s3n=document.getElementById('s3n').value;d.s3l=document.getElementById('s3l').value;setData(d);applyAll();showToast('Stats saved! ✅');}
+function changePwd(){var np=document.getElementById('newPwd').value,cp=document.getElementById('confPwd').value;if(np.length<6){showToast('Min 6 characters',true);return;}if(np!==cp){showToast('Passwords do not match!',true);return;}localStorage.setItem(AKEY,np);document.getElementById('newPwd').value='';document.getElementById('confPwd').value='';showToast('Password changed! ✅');}
+function resetAll(){if(!confirm('Reset everything to defaults?'))return;localStorage.removeItem(DKEY);localStorage.removeItem(PKEY);applyAll();loadAdmFields();renderPhotoGrid();showToast('Reset done ✅');}
+
+// PHOTO GRID
+function renderPhotoGrid(){
+  var photos=getPhotos(),grid=document.getElementById('photoGrid');
+  grid.innerHTML='';
+  for(var i=0;i<6;i++){
+    var slot=document.createElement('div');
+    slot.className='p-slot';
+    slot.setAttribute('data-idx',i);
+    (function(idx){slot.onclick=function(){curSlot=idx;document.getElementById('fileIn').click();};})(i);
+    if(photos[i]){
+      slot.innerHTML='<img src="'+photos[i]+'" alt="Photo '+(i+1)+'"/><div class="p-hover"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg><span>Change</span></div>';
+    }else{
+      slot.innerHTML='<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Photo '+(i+1)+'</span>';
     }
     grid.appendChild(slot);
   }
 }
-
-function openPhotoUpload(idx){
-  currentPhotoSlot = idx;
-  document.getElementById('photoInput').click();
-}
-function handlePhotoUpload(e){
-  var file = e.target.files[0];
-  if(!file) return;
-  var reader = new FileReader();
-  reader.onload = function(ev){
-    var photos = getPhotos();
-    photos[currentPhotoSlot] = ev.target.result;
-    savePhotosData(photos);
-    applyPhotos();
-    renderPhotoGrid();
-    showToast('Photo '+(currentPhotoSlot+1)+' updated! ✅');
-  };
+function handlePhoto(e){
+  var file=e.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){var photos=getPhotos();photos[curSlot]=ev.target.result;setPhotos(photos);applyAll();renderPhotoGrid();showToast('Photo '+(curSlot+1)+' updated! ✅');};
   reader.readAsDataURL(file);
-  e.target.value = '';
-}
-function savePhotos(){
-  showToast('All photos saved! ✅');
+  e.target.value='';
 }
 
-// ===== LOAD ADMIN FIELDS =====
-function loadAdminFields(){
-  var d = getData();
-  document.getElementById('edit-orgName').value = d.orgName||'';
-  document.getElementById('edit-heroTitle').value = d.heroTitle||'';
-  document.getElementById('edit-heroDesc').value = d.heroDesc||'';
-  document.getElementById('edit-aboutText').value = d.aboutText||'';
-  document.getElementById('edit-foundedYear').value = d.foundedYear||'';
-  document.getElementById('edit-location').value = d.location||'';
-  document.getElementById('edit-phone').value = d.phone||'';
-  document.getElementById('edit-email').value = d.email||'';
-  document.getElementById('edit-facebook').value = d.facebook||'';
-  document.getElementById('edit-instagram').value = d.instagram||'';
-  document.getElementById('edit-youtube').value = d.youtube||'';
-  document.getElementById('edit-gofundme').value = d.gofundme||'';
-  document.getElementById('stat1-num').value = d.stat1num||'';
-  document.getElementById('stat1-label').value = d.stat1label||'';
-  document.getElementById('stat2-num').value = d.stat2num||'';
-  document.getElementById('stat2-label').value = d.stat2label||'';
-  document.getElementById('stat3-num').value = d.stat3num||'';
-  document.getElementById('stat3-label').value = d.stat3label||'';
-}
+// SCROLL ANIMATIONS
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:.1});
+document.querySelectorAll('.m-card,.c-item').forEach(function(el){el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity .5s ease,transform .5s ease';obs.observe(el);});
 
-// ===== SAVE FUNCTIONS =====
-function saveContent(){
-  var d = getData();
-  d.orgName = document.getElementById('edit-orgName').value;
-  d.heroTitle = document.getElementById('edit-heroTitle').value;
-  d.heroDesc = document.getElementById('edit-heroDesc').value;
-  d.aboutText = document.getElementById('edit-aboutText').value;
-  d.foundedYear = document.getElementById('edit-foundedYear').value;
-  saveData(d); applyData();
-  showToast('Content saved! ✅');
-}
-function saveContact(){
-  var d = getData();
-  d.location = document.getElementById('edit-location').value;
-  d.phone = document.getElementById('edit-phone').value;
-  d.email = document.getElementById('edit-email').value;
-  d.facebook = document.getElementById('edit-facebook').value;
-  d.instagram = document.getElementById('edit-instagram').value;
-  d.youtube = document.getElementById('edit-youtube').value;
-  d.gofundme = document.getElementById('edit-gofundme').value;
-  saveData(d); applyData();
-  showToast('Contact info saved! ✅');
-}
-function saveStats(){
-  var d = getData();
-  d.stat1num = document.getElementById('stat1-num').value;
-  d.stat1label = document.getElementById('stat1-label').value;
-  d.stat2num = document.getElementById('stat2-num').value;
-  d.stat2label = document.getElementById('stat2-label').value;
-  d.stat3num = document.getElementById('stat3-num').value;
-  d.stat3label = document.getElementById('stat3-label').value;
-  saveData(d); applyData();
-  showToast('Stats saved! ✅');
-}
-function changeAdminPwd(){
-  var np = document.getElementById('new-pwd').value;
-  var cp = document.getElementById('confirm-pwd').value;
-  if(np.length < 6){showToast('Password must be at least 6 characters',true);return;}
-  if(np !== cp){showToast('Passwords do not match!',true);return;}
-  localStorage.setItem(ADMIN_PWD_KEY, np);
-  document.getElementById('new-pwd').value='';
-  document.getElementById('confirm-pwd').value='';
-  showToast('Password changed! ✅');
-}
-function clearAllData(){
-  if(!confirm('Reset all content to defaults? This cannot be undone.')) return;
-  localStorage.removeItem(DATA_KEY);
-  localStorage.removeItem(PHOTOS_KEY);
-  applyData(); applyPhotos();
-  loadAdminFields(); renderPhotoGrid();
-  showToast('Reset to defaults ✅');
-}
-
-// ===== SCROLL ANIMATIONS =====
-var observer = new IntersectionObserver(function(entries){
-  entries.forEach(function(entry){
-    if(entry.isIntersecting){
-      entry.target.style.opacity='1';
-      entry.target.style.transform='translateY(0)';
-    }
-  });
-},{threshold:0.1});
-document.querySelectorAll('.mission-card,.contact-item').forEach(function(el){
-  el.style.opacity='0';
-  el.style.transform='translateY(20px)';
-  el.style.transition='opacity .5s ease, transform .5s ease';
-  observer.observe(el);
-});
-
-// ===== INIT =====
-applyData();
-applyPhotos();
+// INIT
+applyAll();
 </script>
 </body>
 </html>
