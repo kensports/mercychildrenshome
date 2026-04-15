@@ -601,10 +601,10 @@ section p { line-height: 1.85; }
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" class="founder-grid">
       <div>
         <div class="sec-tag">Our Founder</div>
-        <h2 class="sec-title">Ssengonzi Alex</h2>
-        <p style="font-size:15px;color:#94a3b8;line-height:1.9;margin-bottom:16px;">Born from a heart transformed by God's grace, Ssengonzi Alex founded Mercy Children's Home in Kasanda Bukuya, Uganda with a simple but powerful calling — to be the hands and feet of Jesus to the most vulnerable children in his community.</p>
-        <p style="font-size:15px;color:#94a3b8;line-height:1.9;margin-bottom:16px;">Having witnessed first-hand the suffering of orphaned and abandoned children in Uganda, Alex stepped out in faith in 2020 — with little more than a willing heart and the promise of God's provision. Today, by the grace of God and the generous support of friends around the world, Mercy Children's Home is a beacon of hope in Kasanda Bukuya.</p>
-        <p style="font-size:15px;color:#cbd5e1;line-height:1.9;margin-bottom:28px;font-style:italic;">"God called me to love these children as my own. Every child here is a miracle, and every sponsor is an answer to our prayers." — <strong style="color:var(--gold);">Ssengonzi Alex</strong></p>
+        <h2 class="sec-title" id="founderName">Ssengonzi Alex</h2>
+        <p style="font-size:15px;color:#94a3b8;line-height:1.9;margin-bottom:16px;" id="founderBio1">Born from a heart transformed by God's grace, Ssengonzi Alex founded Mercy Children's Home in Kasanda Bukuya, Uganda with a simple but powerful calling — to be the hands and feet of Jesus to the most vulnerable children in his community.</p>
+        <p style="font-size:15px;color:#94a3b8;line-height:1.9;margin-bottom:16px;" id="founderBio2">Having witnessed first-hand the suffering of orphaned and abandoned children in Uganda, Alex stepped out in faith in 2020 — with little more than a willing heart and the promise of God's provision. Today, by the grace of God and the generous support of friends around the world, Mercy Children's Home is a beacon of hope in Kasanda Bukuya.</p>
+        <p style="font-size:15px;color:#cbd5e1;line-height:1.9;margin-bottom:28px;font-style:italic;" id="founderQuote">"God called me to love these children as my own. Every child here is a miracle, and every sponsor is an answer to our prayers." — <strong style="color:var(--gold);">Ssengonzi Alex</strong></p>
         <div style="display:flex;gap:16px;flex-wrap:wrap;">
           <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 20px;text-align:center;">
             <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);">2020</div>
@@ -1064,6 +1064,13 @@ section p { line-height: 1.85; }
         <div class="af"><label>Founded Year</label><input type="text" id="ei-year" value="2020"/></div>
         
         <div style="height:1px;background:var(--border);margin:16px 0;"></div>
+        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">👤 Founder Section</div>
+        <div class="af"><label>Founder Name</label><input type="text" id="ei-founderName" value="Ssengonzi Alex"/></div>
+        <div class="af"><label>Founder Bio (Paragraph 1)</label><textarea id="ei-founderBio1" style="width:100%;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;height:80px;resize:none;">Born from a heart transformed by God's grace, Ssengonzi Alex founded Mercy Children's Home in Kasanda Bukuya, Uganda with a simple but powerful calling — to be the hands and feet of Jesus to the most vulnerable children in his community.</textarea></div>
+        <div class="af"><label>Founder Bio (Paragraph 2)</label><textarea id="ei-founderBio2" style="width:100%;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;height:80px;resize:none;">Having witnessed first-hand the suffering of orphaned and abandoned children in Uganda, Alex stepped out in faith in 2020 — with little more than a willing heart and the promise of God's provision. Today, by the grace of God and the generous support of friends around the world, Mercy Children's Home is a beacon of hope in Kasanda Bukuya.</textarea></div>
+        <div class="af"><label>Founder Quote</label><textarea id="ei-founderQuote" style="width:100%;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;height:70px;resize:none;">"God called me to love these children as my own. Every child here is a miracle, and every sponsor is an answer to our prayers." — Ssengonzi Alex</textarea></div>
+
+        <div style="height:1px;background:var(--border);margin:16px 0;"></div>
         <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">✝ Motto Bar Customization</div>
         
         <div class="af"><label>Motto Text</label><input type="text" id="ei-motto" value="✝   Together We Are The Church   ✝"/></div>
@@ -1462,6 +1469,11 @@ function applyData() {
   var yt=document.getElementById('socYt'); if(yt)yt.href=d.yt;
   var tt=document.getElementById('socTt'); if(tt)tt.href=d.tt;
   var wa=document.getElementById('socWa'); if(wa)wa.href='https://wa.me/'+d.phone.replace(/\D/g,'');
+  // Apply founder fields
+  var fn2 = document.getElementById('founderName'); if(fn2 && d.founderName) fn2.textContent = d.founderName;
+  var fb1e = document.getElementById('founderBio1'); if(fb1e && d.founderBio1) fb1e.textContent = d.founderBio1;
+  var fb2e = document.getElementById('founderBio2'); if(fb2e && d.founderBio2) fb2e.textContent = d.founderBio2;
+  var fqe = document.getElementById('founderQuote'); if(fqe && d.founderQuote) fqe.innerHTML = d.founderQuote.replace('— Ssengonzi Alex','— <strong style="color:var(--gold);">Ssengonzi Alex</strong>');
   var fy=document.getElementById('footerYear'); if(fy)fy.textContent=d.year;
   var fy2=document.getElementById('footerYear2'); if(fy2)fy2.textContent=d.year;
   var fy3=document.getElementById('footerCopyYear'); if(fy3)fy3.textContent=d.year;
@@ -1853,6 +1865,12 @@ function loadAdmFields() {
   var mf = document.getElementById('ei-mottoFont'); if(mf){mf.value=d2.mottoFont||'uppercase-bold';}
   var mt = document.getElementById('ei-motto'); if(mt){mt.value=d2.mottoText||'✝   Together We Are The Church   ✝';}
   previewMotto();
+  // Load founder fields
+  var d3 = getData();
+  var fn3 = document.getElementById('ei-founderName'); if(fn3) fn3.value = d3.founderName || 'Ssengonzi Alex';
+  var fb1l = document.getElementById('ei-founderBio1'); if(fb1l) fb1l.value = d3.founderBio1 || fb1l.value;
+  var fb2l = document.getElementById('ei-founderBio2'); if(fb2l) fb2l.value = d3.founderBio2 || fb2l.value;
+  var fql = document.getElementById('ei-founderQuote'); if(fql) fql.value = d3.founderQuote || fql.value;
   var fields = {
     'ei-heroTitle': d.heroTitle, 'ei-heroDesc': d.heroDesc,
     'ei-aboutText': d.aboutText, 'ei-year': d.year,
@@ -1873,6 +1891,11 @@ async function saveContent() {
   d.heroDesc = document.getElementById('ei-heroDesc').value;
   d.aboutText = document.getElementById('ei-aboutText').value;
   d.year = document.getElementById('ei-year').value;
+  // Save founder fields
+  var fn = document.getElementById('ei-founderName'); if(fn) d.founderName = fn.value;
+  var fb1 = document.getElementById('ei-founderBio1'); if(fb1) d.founderBio1 = fb1.value;
+  var fb2 = document.getElementById('ei-founderBio2'); if(fb2) d.founderBio2 = fb2.value;
+  var fq = document.getElementById('ei-founderQuote'); if(fq) d.founderQuote = fq.value;
   var mt = document.getElementById('ei-motto'); if(mt) d.mottoText = mt.value;
   var mc = document.getElementById('ei-mottoColor'); if(mc) d.mottoColor = mc.value;
   var mb = document.getElementById('ei-mottoBg'); if(mb) d.mottoBg = mb.value;
