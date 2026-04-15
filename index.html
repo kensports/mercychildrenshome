@@ -1326,8 +1326,8 @@ function getData(){try{return Object.assign({},DEF,JSON.parse(localStorage.getIt
 function setData(d) {
   var json = JSON.stringify(d);
   localStorage.setItem(DKEY, json);
-  // Also sync to Supabase for cross-device
-  fetch(SUPA_URL + '/rest/v1/mch_photos', {
+  // Sync to Supabase synchronously so phone gets it immediately
+  return fetch(SUPA_URL + '/rest/v1/mch_photos', {
     method: 'POST',
     headers: {
       'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY,
@@ -1345,11 +1345,9 @@ async function loadSettingsFromSupabase() {
     var rows = await res.json();
     if (Array.isArray(rows) && rows.length > 0) {
       var remote = JSON.parse(rows[0].filename);
-      // Merge remote into local (remote wins)
-      var local = getData();
-      var merged = Object.assign({}, local, remote);
-      localStorage.setItem(DKEY, JSON.stringify(merged));
-      applyData();
+      // Remote ALWAYS wins - overwrite local completely
+      localStorage.setItem(DKEY, JSON.stringify(remote));
+      applyData(); // re-apply with fresh remote data
     }
   } catch(e) { console.warn('Failed to load remote settings', e); }
 }
@@ -1842,34 +1840,40 @@ function loadAdmFields() {
     if (el) el.value = fields[id];
   });
 }
-function saveContent() {
+async function saveContent() {
   var d = getData();
   d.heroTitle = document.getElementById('ei-heroTitle').value;
   d.heroDesc = document.getElementById('ei-heroDesc').value;
   d.aboutText = document.getElementById('ei-aboutText').value;
   d.year = document.getElementById('ei-year').value;
-  // Save motto settings
   var mt = document.getElementById('ei-motto'); if(mt) d.mottoText = mt.value;
   var mc = document.getElementById('ei-mottoColor'); if(mc) d.mottoColor = mc.value;
   var mb = document.getElementById('ei-mottoBg'); if(mb) d.mottoBg = mb.value;
   var ms = document.getElementById('ei-mottoSize'); if(ms) d.mottoSize = ms.value;
   var mf = document.getElementById('ei-mottoFont'); if(mf) d.mottoFont = mf.value;
-  setData(d); applyData(); showToast('Content saved! ✅');
+  showToast('Saving... ⏳');
+  await setData(d);
+  applyData();
+  showToast('Saved! Updates on ALL devices ✅');
 }
-function saveContact() {
+async function saveContact() {
   var d = getData();
   ['location','phone','email','fb','ig','yt','gfm'].forEach(function(k) {
     var el = document.getElementById('ei-' + k); if (el) d[k] = el.value;
   });
   var tt = document.getElementById('ei-tt'); if(tt) d.tt = tt.value;
-  setData(d); applyData(); showToast('Contact saved! ✅');
+  showToast('Saving... ⏳');
+  await setData(d);
+  applyData(); showToast('Contact saved on ALL devices! ✅');
 }
-function saveStats() {
+async function saveStats() {
   var d = getData();
   ['s1n','s1l','s2n','s2l','s3n','s3l'].forEach(function(k) {
     var el = document.getElementById(k); if(el) d[k] = el.value;
   });
-  setData(d); applyData(); showToast('Stats saved! ✅');
+  showToast('Saving... ⏳');
+  await setData(d);
+  applyData(); showToast('Stats saved on ALL devices! ✅');
 }
 async function changePwd() {
   var np = document.getElementById('newPwd').value;
@@ -2113,9 +2117,9 @@ function initAnimations() {
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\'\'/g,'&#39;'); }
 
 // ===== INIT =====
-syncPwdFromSupabase();  // sync password across devices
-loadSettingsFromSupabase();  // sync ALL settings including motto
-applyData();
+applyData();  // instant from localStorage cache
+syncPwdFromSupabase();
+loadSettingsFromSupabase();  // overwrites with Supabase data (remote wins)
 loadAllPhotos();  // async - loads from Supabase
 loadLogo();  // async - load foundation logo
 renderPublicSponsors();
