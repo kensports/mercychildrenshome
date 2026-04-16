@@ -41,14 +41,27 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .mob-close{position:absolute;top:20px;right:24px;font-size:24px;cursor:pointer;color:var(--text2);}
 
 /* MOTTO */
-#mottoBar{position:fixed;top:64px;left:0;right:0;z-index:99;padding:8px 16px;text-align:center;background:#0a0e1a !important;background-color:#0a0e1a !important;border-bottom:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center;}
-#mottoBar.pos-left{justify-content:flex-start;padding-left:24px;}
-#mottoBar.pos-right{justify-content:flex-end;padding-right:24px;}
+#mottoBar{
+  position:relative;
+  z-index:10;
+  padding:0;
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border:none;
+  overflow:visible;
+  display:block;
+}
+#mottoBar.pos-left .motto-pill{margin-left:0;margin-right:auto;}
+#mottoBar.pos-right .motto-pill{margin-left:auto;margin-right:0;}
+#mottoBar .motto-pill{display:inline-flex;}
 .motto-pill{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(201,168,76,.35);border-radius:999px;padding:5px 16px;transition:background .2s;}
+/* Force motto to never have purple/blue background */
+#mottoBar *{background-image:none !important;}
 
 
 /* HERO */
-.hero{min-height:100vh;padding:160px 5% 70px;display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero{min-height:100vh;padding:110px 5% 70px;display:flex;align-items:center;position:relative;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(37,99,235,.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.07) 0%,transparent 50%),var(--bg);}
 .hero-grid{display:none;}
 .hero-content{position:relative;z-index:1;max-width:680px;}
@@ -405,18 +418,17 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
 </nav>
 
-<!-- MOTTO BAR -->
-<div id="mottoBar">
-  <div class="motto-pill">
-    <span id="mottoText" style="font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c9a84c;font-size:11px;white-space:nowrap;">✝&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;✝</span>
-  </div>
-</div>
-
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
+    <!-- MOTTO BAR - scrolls with page inside hero -->
+    <div id="mottoBar" style="margin-bottom:18px;padding:0;">
+      <div class="motto-pill">
+        <span id="mottoText" style="font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c9a84c;font-size:11px;white-space:nowrap;">✝&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;✝</span>
+      </div>
+    </div>
     <div class="hero-badge">
       <svg style="width:12px;height:12px;fill:currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       <span id="heroTag">Serving Uganda's Children Since 2020</span>
@@ -1528,8 +1540,11 @@ async function syncRemoteData(){
     if(Array.isArray(rows)&&rows.length>0){
       localStorage.setItem(DKEY,rows[0].filename);
       applyData();
-      // Also apply motto with fresh remote data
-      applyMotto(getData());
+      // Apply motto with position from remote data
+      var _remoteMotto = getData();
+      applyMotto(_remoteMotto);
+      // Update local position cache
+      try{if(_remoteMotto.mottoPos)localStorage.setItem('mch_motto_pos',_remoteMotto.mottoPos);}catch(e){}
       loadMottoFields();
     }
   }catch(e){}
@@ -2004,18 +2019,22 @@ function applyMotto(d){
   }
   var pill = document.querySelector('.motto-pill');
   if(pill){
-    var bg = d.mottoBg||'#0a0e1a';
-    pill.style.borderColor = (d.mottoColor||'#c9a84c')+'60';
-    pill.style.background = bg==='#0a0e1a'?'transparent':bg;
+    pill.style.borderColor = (d.mottoColor||'#c9a84c')+'55';
+    pill.style.background = 'transparent';
   }
   var bar = document.getElementById('mottoBar');
   if(bar){
+    // Force dark bg - no purple ever
     bar.style.setProperty('background','#0a0e1a','important');
     bar.style.setProperty('background-color','#0a0e1a','important');
-    // Apply position
+    bar.style.setProperty('background-image','none','important');
+    // Apply position on ALL devices
     bar.classList.remove('pos-left','pos-right');
-    if(d.mottoPos==='left') bar.classList.add('pos-left');
-    else if(d.mottoPos==='right') bar.classList.add('pos-right');
+    var pos = d.mottoPos||'center';
+    if(pos==='left') bar.classList.add('pos-left');
+    else if(pos==='right') bar.classList.add('pos-right');
+    // Save to localStorage so phone gets it too
+    try{localStorage.setItem('mch_motto_pos', pos);}catch(e){}
   }
 }
 
@@ -2723,7 +2742,11 @@ async function saveEditVolunteer(){
 
 applyData();
 applyCaptions();
-applyMotto(getData());
+// Apply motto including saved position
+var _initMotto = getData();
+// Restore position from localStorage if available
+try{var _savedPos=localStorage.getItem('mch_motto_pos');if(_savedPos)_initMotto.mottoPos=_savedPos;}catch(e){}
+applyMotto(_initMotto);
 loadLogo();
 // Sync from Supabase - re-apply everything after remote data loads
 syncRemoteData().then(function(){
