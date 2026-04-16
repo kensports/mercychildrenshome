@@ -1007,8 +1007,39 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <div class="af"><label>About Text</label><textarea id="ei-aboutText">Mercy Children's Home is a faith-based organisation located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.</textarea></div>
         <div class="af"><label>Founded Year</label><input type="text" id="ei-year" value="2020"/></div>
         <div style="height:1px;background:var(--border);margin:16px 0;"></div>
-        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">✝ Motto Bar</div>
-        <div class="af"><label>Motto Text</label><input type="text" id="ei-motto" value="✝   Together We Are The Church   ✝"/></div>
+        <div style="height:1px;background:var(--border);margin:4px 0 16px;"></div>
+        <div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-radius:14px;padding:16px;margin-bottom:16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">✝ Motto Bar</div>
+          <div class="af" style="margin-bottom:12px;">
+            <label>Motto Text</label>
+            <input type="text" id="ei-motto" oninput="previewMotto()" style="font-size:14px;" placeholder="✝ Your motto here ✝"/>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+            <div>
+              <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Text Color</label>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <input type="color" id="ei-mottoColor" value="#c9a84c" oninput="document.getElementById('ei-mottoColorHex').value=this.value;previewMotto();" style="width:40px;height:34px;border:1px solid var(--border);border-radius:7px;cursor:pointer;padding:2px;background:none;flex-shrink:0;"/>
+                <input type="text" id="ei-mottoColorHex" value="#c9a84c" maxlength="7" oninput="if(/^#[0-9A-Fa-f]{6}$/.test(this.value)){document.getElementById('ei-mottoColor').value=this.value;previewMotto();}" style="flex:1;padding:7px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:7px;font-size:12px;color:var(--text);outline:none;font-family:monospace;"/>
+              </div>
+            </div>
+            <div>
+              <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Background</label>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <input type="color" id="ei-mottoBg" value="#0a0e1a" oninput="document.getElementById('ei-mottoBgHex').value=this.value;previewMotto();" style="width:40px;height:34px;border:1px solid var(--border);border-radius:7px;cursor:pointer;padding:2px;background:none;flex-shrink:0;"/>
+                <input type="text" id="ei-mottoBgHex" value="#0a0e1a" maxlength="7" oninput="if(/^#[0-9A-Fa-f]{6}$/.test(this.value)){document.getElementById('ei-mottoBg').value=this.value;previewMotto();}" style="flex:1;padding:7px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:7px;font-size:12px;color:var(--text);outline:none;font-family:monospace;"/>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Font Size — <span id="mottoSizeVal">14px</span></label>
+            <input type="range" id="ei-mottoSize" min="10" max="26" value="14" oninput="document.getElementById('mottoSizeVal').textContent=this.value+'px';previewMotto();" style="width:100%;"/>
+          </div>
+          <div id="mottoPrevBox" style="border-radius:8px;padding:10px;text-align:center;margin-bottom:12px;background:#0a0e1a;transition:background .2s;">
+            <span style="font-size:10px;color:var(--text2);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Live Preview</span>
+            <span id="mottoPreviewText" style="font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a84c;font-size:14px;">✝   Together We Are The Church   ✝</span>
+          </div>
+          <button class="adm-btn" onclick="saveMotto()" style="width:100%;font-size:14px;padding:12px;">💾 Save Motto</button>
+        </div>
         <div style="height:1px;background:var(--border);margin:16px 0;"></div>
         <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">👤 Founder Section</div>
         <div class="af"><label>Founder Name</label><input type="text" id="ei-founderName" value="Ssengonzi Alex"/></div>
@@ -1572,7 +1603,7 @@ async function checkPwd(){
     document.getElementById('pwdOverlay').style.display='none';
     document.getElementById('pwdInput').value='';
     document.getElementById('adminOverlay').classList.add('open');
-    loadAdmFields();await renderPhotoGrid();await renderFounderPhotoGrid();renderAdminSponsors();
+    loadAdmFields();loadMottoFields();await renderPhotoGrid();await renderFounderPhotoGrid();renderAdminSponsors();
   }else{showToast('Wrong password!',true);document.getElementById('pwdInput').value='';}
 }
 function admTab(tab,el){
@@ -1583,12 +1614,66 @@ function admTab(tab,el){
   if(tab==='sponsors')renderAdminSponsors();
   if(tab==='photos'){renderPhotoGrid();renderFounderPhotoGrid();}
   if(tab==='captions')renderCaptionsAdmin();
+  if(tab==='content')loadMottoFields();
 }
 
 function loadAdmFields(){
   var d=getData();
   var fields={'ei-heroTitle':d.heroTitle,'ei-heroSub':d.heroSub||DEF.heroSub,'ei-heroDesc':d.heroDesc,'ei-aboutText':d.aboutText,'ei-year':d.year,'ei-location':d.location,'ei-phone':d.phone,'ei-email':d.email,'ei-fb':d.fb,'ei-ig':d.ig,'ei-yt':d.yt,'ei-tt':d.tt||'#','ei-gfm':d.gfm,'ei-motto':d.mottoText||DEF.mottoText,'ei-founderName':d.founderName||DEF.founderName,'ei-childCount':d.childCount||DEF.childCount,'ei-founderBio1':d.founderBio1||DEF.founderBio1,'ei-founderBio2':d.founderBio2||DEF.founderBio2,'ei-founderQuote':d.founderQuote||DEF.founderQuote,'s1n':d.s1n,'s1l':d.s1l,'s2n':d.s2n,'s2l':d.s2l,'s3n':d.s3n,'s3l':d.s3l};
   Object.keys(fields).forEach(function(id){var el=document.getElementById(id);if(el)el.value=fields[id];});
+}
+
+function previewMotto(){
+  var val = (document.getElementById('ei-motto')||{}).value || '';
+  var color = (document.getElementById('ei-mottoColor')||{}).value || '#c9a84c';
+  var bg = (document.getElementById('ei-mottoBg')||{}).value || '#0a0e1a';
+  var size = (document.getElementById('ei-mottoSize')||{}).value || '14';
+  // Update preview box
+  var prev = document.getElementById('mottoPreviewText');
+  if(prev){prev.textContent=val;prev.style.color=color;prev.style.fontSize=size+'px';}
+  var box = document.getElementById('mottoPrevBox');
+  if(box) box.style.background = bg;
+  // Live update on page immediately
+  var mt = document.getElementById('mottoText');
+  if(mt){mt.textContent=val;mt.style.color=color;mt.style.fontSize='clamp(11px,1.8vw,'+size+'px)';}
+  var bar = document.getElementById('mottoBar');
+  if(bar) bar.style.setProperty('background',bg,'important');
+}
+
+async function saveMotto(){
+  var d = getData();
+  d.mottoText = (document.getElementById('ei-motto')||{}).value || d.mottoText;
+  d.mottoColor = (document.getElementById('ei-mottoColor')||{}).value || '#c9a84c';
+  d.mottoBg = (document.getElementById('ei-mottoBg')||{}).value || '#0a0e1a';
+  d.mottoSize = (document.getElementById('ei-mottoSize')||{}).value || '14';
+  showToast('Saving motto... ⏳');
+  await setData(d);
+  applyMotto(d);
+  showToast('Motto saved on ALL devices! ✅');
+}
+
+function applyMotto(d){
+  var mt = document.getElementById('mottoText');
+  if(mt){
+    mt.textContent = d.mottoText || DEF.mottoText;
+    mt.style.color = d.mottoColor || '#c9a84c';
+    mt.style.fontSize = 'clamp(11px,1.8vw,'+(d.mottoSize||'14')+'px)';
+  }
+  var bar = document.getElementById('mottoBar');
+  if(bar) bar.style.setProperty('background', d.mottoBg||'#0a0e1a','important');
+}
+
+function loadMottoFields(){
+  var d = getData();
+  var mt = document.getElementById('ei-motto'); if(mt) mt.value = d.mottoText||DEF.mottoText;
+  var mc = document.getElementById('ei-mottoColor'); if(mc) mc.value = d.mottoColor||'#c9a84c';
+  var mch = document.getElementById('ei-mottoColorHex'); if(mch) mch.value = d.mottoColor||'#c9a84c';
+  var mb = document.getElementById('ei-mottoBg'); if(mb) mb.value = d.mottoBg||'#0a0e1a';
+  var mbh = document.getElementById('ei-mottoBgHex'); if(mbh) mbh.value = d.mottoBg||'#0a0e1a';
+  var ms = document.getElementById('ei-mottoSize'); if(ms){ ms.value = d.mottoSize||'14'; var sv=document.getElementById('mottoSizeVal'); if(sv) sv.textContent=(d.mottoSize||'14')+'px';}
+  var prev = document.getElementById('mottoPreviewText');
+  if(prev){prev.textContent=d.mottoText||DEF.mottoText;prev.style.color=d.mottoColor||'#c9a84c';prev.style.fontSize=(d.mottoSize||'14')+'px';}
+  var box = document.getElementById('mottoPrevBox'); if(box) box.style.background=d.mottoBg||'#0a0e1a';
 }
 
 async function saveContent(){
@@ -1857,6 +1942,7 @@ function initScrollAnimations(){
 // ===== INIT =====
 applyData();
 applyCaptions();
+applyMotto(getData());
 loadLogo();
 syncRemoteData();
 loadCaptionsFromSupabase();
