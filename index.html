@@ -49,7 +49,7 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5);}
 /* HERO */
 .hero{min-height:100vh;padding:160px 5% 70px;display:flex;align-items:center;position:relative;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(37,99,235,.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.07) 0%,transparent 50%),var(--bg);}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:60px 60px;}
+.hero-grid{display:none;}
 .hero-content{position:relative;z-index:1;max-width:680px;}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gold);padding:6px 14px;border-radius:30px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:28px;}
 .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6vw,68px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:14px;}
@@ -353,6 +353,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   section{padding:60px 5%;}
   .footer-top{grid-template-columns:1fr;}
   .gallery-main-grid{grid-template-columns:1fr;}
+  #supporterGrid{grid-template-columns:repeat(2,1fr) !important;}
   .donate-cta-band{flex-direction:column;text-align:center;}
   .hero-stats{gap:24px;}
 }
@@ -736,6 +737,37 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   </div>
 </section>
 
+<!-- SUPPORTERS SECTION -->
+<section id="supporters" style="background:var(--bg2);padding:88px 5%;">
+  <div style="max-width:960px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="sec-tag">Our Volunteers</div>
+      <h2 class="sec-title">Meet Our Volunteers</h2>
+      <p style="font-size:16px;color:#94a3b8;line-height:1.9;max-width:680px;margin:16px auto 0;">Mercy Children's Home is made possible through the kindness and support of people who believe every child deserves love, care, and a future. We are deeply grateful to those who continue to stand with us and support these <strong style="color:var(--gold);">32 children</strong>.</p>
+    </div>
+
+    <!-- Supporter Photos Grid -->
+    <div id="supporterGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px;margin-bottom:56px;"></div>
+
+    <!-- Empty state - shown when no supporters added yet -->
+    <div id="supporterEmpty" style="text-align:center;padding:48px 20px;background:var(--card);border:1px dashed var(--border);border-radius:20px;margin-bottom:56px;">
+      <div style="font-size:40px;margin-bottom:16px;">🤝</div>
+      <p style="font-size:15px;color:var(--text2);margin-bottom:8px;">Volunteer photos will appear here.</p>
+      <p style="font-size:13px;color:#475569;">Add volunteers in <strong style="color:var(--gold);">Admin → Volunteers</strong></p>
+    </div>
+
+    <!-- CTA -->
+    <div style="background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(37,99,235,.06));border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:40px;text-align:center;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,28px);color:var(--white);line-height:1.6;margin-bottom:8px;">Join these generous volunteers and help us continue caring for <em style="color:var(--gold);font-style:normal;">32 children</em>.</p>
+      <p style="font-size:14px;color:#94a3b8;margin-bottom:24px;">Every contribution — big or small — changes a life.</p>
+      <a href="#donate" class="btn-gold" style="display:inline-flex;">
+        <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        Donate Now
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- SPONSORS THANK YOU -->
 <section style="background:var(--bg);padding:88px 5%;">
   <div style="max-width:800px;margin:0 auto;text-align:center;">
@@ -939,6 +971,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <div class="adm-tabs">
       <button class="adm-tab active" onclick="admTab('photos',this)">Photos</button>
       <button class="adm-tab" onclick="admTab('captions',this)">Captions</button>
+      <button class="adm-tab" onclick="admTab('supporters',this)">Volunteers</button>
       <button class="adm-tab" onclick="admTab('sponsors',this)">Sponsors</button>
       <button class="adm-tab" onclick="admTab('content',this)">Content</button>
       <button class="adm-tab" onclick="admTab('contact',this)">Contact</button>
@@ -974,6 +1007,43 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <p style="font-size:12px;color:var(--text2);margin-bottom:16px;">Add captions for each photo. They appear on hover and in photo banners. Synced to ALL devices.</p>
         <div id="captionsList" style="display:flex;flex-direction:column;gap:12px;"></div>
         <button class="adm-btn" style="margin-top:16px;" onclick="saveCaptions()">Save All Captions</button>
+      </div>
+
+      <!-- VOLUNTEERS TAB -->
+      <div class="adm-sec" id="adm-supporters">
+        <p style="font-size:12px;color:var(--text2);margin-bottom:16px;">Add supporter photos with name and country. They appear in the Supporters section. Synced to ALL devices.</p>
+        <div id="supporterAdminList" style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px;"></div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px;">
+          <p style="font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Add New Volunteer</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+            <div class="af" style="margin:0;"><label>Name</label><input type="text" id="sup-name" placeholder="e.g. John"/></div>
+            <div class="af" style="margin:0;"><label>Country</label><input type="text" id="sup-country" placeholder="e.g. USA"/></div>
+          </div>
+          <div class="af" style="margin-bottom:10px;">
+            <label>Category</label>
+            <select id="sup-category" style="width:100%;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;font-family:'Outfit',sans-serif;">
+              <option value="Volunteer">Volunteer</option>
+              <option value="Donor">Donor</option>
+              <option value="Sponsor">Child Sponsor</option>
+              <option value="Partner">Partner Organization</option>
+              <option value="Church Partner">Church Partner</option>
+              <option value="Community Support">Community Supporter</option>
+              <option value="International Support">International Supporter</option>
+              <option value="Medical Volunteer">Medical Volunteer</option>
+              <option value="Education Volunteer">Education Volunteer</option>
+            </select>
+          </div>
+          <div class="af" style="margin-bottom:10px;"><label>Short Quote (optional)</label><input type="text" id="sup-quote" placeholder="e.g. These children deserve the world"/></div>
+          <div class="af" style="margin-bottom:12px;">
+            <label>Photo</label>
+            <label style="display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#000;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
+              📷 Upload Photo<input type="file" accept="image/*" id="sup-photo" style="display:none;"/>
+            </label>
+            <span id="sup-photo-status" style="font-size:11px;color:var(--text2);margin-left:8px;"></span>
+          </div>
+          <button class="adm-btn" onclick="addSupporter()">+ Add Supporter</button>
+        </div>
+        <button class="adm-btn danger" onclick="clearSupporters()">Clear All Supporters</button>
       </div>
 
       <!-- SPONSORS TAB -->
@@ -1252,6 +1322,11 @@ function applyCaptions(){
     var el=document.getElementById(k);
     if(el)el.textContent=caps[k];
   });
+  // Also apply to any dynamically created caption elements
+  for(var i=0;i<=17;i++){
+    var capEl=document.getElementById('cap-'+i);
+    if(capEl&&caps['cap-'+i]!==undefined)capEl.textContent=caps['cap-'+i];
+  }
 }
 
 function getPwd(){return localStorage.getItem(AKEY)||'mercy2020';}
@@ -1357,9 +1432,19 @@ async function loadAllPhotos(){
         var img=document.createElement('img');
         img.src=url;
         img.style.cssText='width:100%;height:100%;object-fit:cover;object-position:'+savedPos+';display:block;position:absolute;top:0;left:0;';
-        // Remove old img if exists
         var oldImg=el.querySelector('img');
         if(oldImg)oldImg.remove();
+        // Ensure caption element exists for this slot
+        if(!el.querySelector('.g-caption')){
+          var capDiv=document.createElement('div');
+          capDiv.className='g-caption';
+          var capP=document.createElement('p');
+          capP.id='cap-'+idx;
+          var caps=getCaptions();
+          capP.textContent=caps['cap-'+idx]||'';
+          capDiv.appendChild(capP);
+          el.appendChild(capDiv);
+        }
         el.insertBefore(img,el.firstChild);
       } else {
         // Hide if no photo (except slots 3-7 which were originally visible)
@@ -1615,6 +1700,7 @@ function admTab(tab,el){
   if(tab==='photos'){renderPhotoGrid();renderFounderPhotoGrid();}
   if(tab==='captions')renderCaptionsAdmin();
   if(tab==='content')loadMottoFields();
+  if(tab==='supporters')renderSupporterAdmin();
 }
 
 function loadAdmFields(){
@@ -1657,10 +1743,15 @@ function applyMotto(d){
   if(mt){
     mt.textContent = d.mottoText || DEF.mottoText;
     mt.style.color = d.mottoColor || '#c9a84c';
-    mt.style.fontSize = 'clamp(11px,1.8vw,'+(d.mottoSize||'14')+'px)';
+    var sz = parseInt(d.mottoSize||14);
+    mt.style.fontSize = sz+'px';
+    mt.style.removeProperty('font-size');
+    mt.setAttribute('style', mt.getAttribute('style')+(';font-size:'+sz+'px !important'));
   }
   var bar = document.getElementById('mottoBar');
-  if(bar) bar.style.setProperty('background', d.mottoBg||'#0a0e1a','important');
+  if(bar){
+    bar.style.setProperty('background', d.mottoBg||'#0a0e1a','important');
+  }
 }
 
 function loadMottoFields(){
@@ -1830,30 +1921,44 @@ function lightboxNav(dir){lightboxIndex=(lightboxIndex+dir+lightboxPhotos.length
 
 function makeGalleryClickable(){
   var caps=getCaptions();
-  var lastTapped=null;
+
+  // MOBILE SCROLL CAPTION: show captions when scroll stops over gallery, hide when scrolling
+  if(window.matchMedia('(hover:none)').matches){
+    var scrollTimer=null;
+    var isScrolling=false;
+    window.addEventListener('scroll',function(){
+      isScrolling=true;
+      // Hide all captions while scrolling
+      document.querySelectorAll('.g-item.active').forEach(function(el){el.classList.remove('active');});
+      clearTimeout(scrollTimer);
+      scrollTimer=setTimeout(function(){
+        isScrolling=false;
+        // When scroll stops, show captions for visible gallery items
+        for(var i=0;i<=17;i++){
+          var el=document.getElementById('gi-'+i);
+          if(!el||el.style.display==='none')continue;
+          var img=el.querySelector('img');
+          if(!img)continue;
+          var rect=el.getBoundingClientRect();
+          var inView=(rect.top>=0&&rect.bottom<=window.innerHeight)||(rect.top<window.innerHeight&&rect.bottom>0);
+          if(inView){el.classList.add('active');}
+        }
+        // Auto hide after 2.5 seconds
+        setTimeout(function(){
+          document.querySelectorAll('.g-item.active').forEach(function(el){el.classList.remove('active');});
+        },2500);
+      },300);
+    },{passive:true});
+  }
+
   for(var i=0;i<=17;i++){
     (function(idx){
       var el=document.getElementById('gi-'+idx);
       if(!el)return;
       el.style.cursor='pointer';
       el.onclick=function(e){
-        // On mobile: first tap shows caption, second tap opens lightbox
-        if(window.matchMedia('(hover:none)').matches){
-          if(lastTapped===el&&el.classList.contains('active')){
-            // Second tap - open lightbox
-            var img=el.querySelector('img');
-            if(img)openLightbox(img.src,caps['cap-'+idx]||'');
-          } else {
-            // First tap - show caption
-            if(lastTapped&&lastTapped!==el)lastTapped.classList.remove('active');
-            el.classList.toggle('active');
-            lastTapped=el;
-          }
-        } else {
-          // Desktop - just open lightbox
-          var img=el.querySelector('img');
-          if(img)openLightbox(img.src,caps['cap-'+idx]||'');
-        }
+        var img=el.querySelector('img');
+        if(img)openLightbox(img.src,caps['cap-'+idx]||'');
       };
     })(i);
   }
@@ -1939,6 +2044,144 @@ function initScrollAnimations(){
   document.querySelectorAll('.scroll-anim').forEach(function(el){obs.observe(el);});
 }
 
+// ===== SUPPORTERS =====
+var SUP_KEY = 'mch_supporters';
+var supportersDataCache = null;
+
+async function getSupporters(){
+  if(supportersDataCache) return supportersDataCache;
+  try{
+    var r = await fetch(SUPA_URL+'/rest/v1/mch_photos?id=eq.supporters_list&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    var rows = await r.json();
+    if(Array.isArray(rows)&&rows.length>0){supportersDataCache=JSON.parse(rows[0].filename);return supportersDataCache;}
+  }catch(e){}
+  try{return JSON.parse(localStorage.getItem(SUP_KEY)||'[]');}catch(e){return[];}
+}
+
+async function setSupporters(s){
+  supportersDataCache = s;
+  var json = JSON.stringify(s);
+  localStorage.setItem(SUP_KEY, json);
+  try{
+    await fetch(SUPA_URL+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'supporters_list',filename:json})});
+  }catch(e){}
+}
+
+async function renderSupportersPublic(){
+  var supporters = await getSupporters();
+  var grid = document.getElementById('supporterGrid');
+  var empty = document.getElementById('supporterEmpty');
+  if(!grid) return;
+  grid.innerHTML = '';
+  if(!supporters.length){
+    grid.style.display = 'none';
+    if(empty) empty.style.display = 'block';
+    return;
+  }
+  grid.style.display = 'grid';
+  if(empty) empty.style.display = 'none';
+  supporters.forEach(function(s){
+    var card = document.createElement('div');
+    card.style.cssText = 'background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;text-align:center;transition:transform .3s,box-shadow .3s;';
+    card.onmouseenter = function(){this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 40px rgba(0,0,0,.4)';};
+    card.onmouseleave = function(){this.style.transform='';this.style.boxShadow='';};
+    var photoHtml = s.photoUrl
+      ? '<div style="width:100%;aspect-ratio:1;overflow:hidden;"><img src="'+s.photoUrl+'" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>'
+      : '<div style="width:100%;aspect-ratio:1;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;"><svg style="width:48px;height:48px;fill:none;stroke:rgba(255,255,255,.4);stroke-width:1.5;stroke-linecap:round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+    var nameStr = esc(s.name||'Volunteer');
+    var countryStr = s.country ? esc(s.country) : '';
+    var catStr = s.category || 'Volunteer';
+    var quoteHtml = s.quote ? '<p style="font-size:11px;color:#94a3b8;font-style:italic;line-height:1.5;padding:0 12px 12px;margin:0;">"'+esc(s.quote)+'"</p>' : '';
+    card.innerHTML = photoHtml
+      + '<div style="padding:12px 12px 4px;">'
+      + '<div style="font-size:13px;font-weight:700;color:#f1f5f9;">'+nameStr+(countryStr?' — '+countryStr:'')+'</div>'
+      + '<div style="display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:5px;letter-spacing:.5px;">'+esc(catStr)+'</div>'
+      + '</div>'
+      + quoteHtml
+      + '<div style="height:'+(s.quote?'0':'10px')+'"></div>';
+    grid.appendChild(card);
+  });
+}
+
+async function renderSupporterAdmin(){
+  var supporters = await getSupporters();
+  var list = document.getElementById('supporterAdminList');
+  if(!list) return;
+  if(!supporters.length){
+    list.innerHTML='<p style="font-size:13px;color:var(--text2);text-align:center;padding:16px;">No supporters yet. Add one below.</p>';
+    return;
+  }
+  list.innerHTML = supporters.map(function(s,i){
+    var photoThumb = s.photoUrl
+      ? '<img src="'+s.photoUrl+'" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;" />'
+      : '<div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg style="width:20px;height:20px;fill:none;stroke:white;stroke-width:1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+    return '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;align-items:center;gap:12px;">'
+      + photoThumb
+      + '<div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;color:var(--white);">'+esc(s.name||'Supporter')+'</div>'
+      + '<div style="font-size:11px;color:var(--gold);">'+esc(s.country||'')+'</div>'
+      + (s.quote?'<div style="font-size:11px;color:var(--text2);font-style:italic;margin-top:2px;">"'+esc(s.quote)+'"</div>':'')
+      + '</div>'
+      + '<button onclick="deleteSupporter('+i+')" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:6px 10px;border-radius:7px;font-size:11px;cursor:pointer;flex-shrink:0;">Remove</button>'
+      + '</div>';
+  }).join('');
+}
+
+var supPhotoPending = null;
+document.addEventListener('DOMContentLoaded', function(){
+  var sp = document.getElementById('sup-photo');
+  if(sp) sp.onchange = function(e){
+    var file = e.target.files[0];
+    if(!file) return;
+    supPhotoPending = file;
+    var status = document.getElementById('sup-photo-status');
+    if(status) status.textContent = '📎 '+file.name;
+  };
+});
+
+async function addSupporter(){
+  var name = (document.getElementById('sup-name')||{}).value||'';
+  var country = (document.getElementById('sup-country')||{}).value||'';
+  var quote = (document.getElementById('sup-quote')||{}).value||'';
+  var category = (document.getElementById('sup-category')||{}).value||'Volunteer';
+  if(!name.trim()){showToast('Enter a name',true);return;}
+  showToast('Adding supporter... ⏳');
+  var photoUrl = null;
+  if(supPhotoPending){
+    try{
+      var filename = await uploadToSupabase(supPhotoPending,'supporter_'+Date.now());
+      photoUrl = getSupaPhotoURL(filename);
+    }catch(e){showToast('Photo upload failed, added without photo',true);}
+  }
+  var supporters = await getSupporters();
+  supporters.push({name:name.trim(), country:country.trim(), quote:quote.trim(), category:category, photoUrl:photoUrl});
+  await setSupporters(supporters);
+  // Clear fields
+  ['sup-name','sup-country','sup-quote','sup-photo'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  var st = document.getElementById('sup-photo-status'); if(st) st.textContent='';
+  supPhotoPending = null;
+  renderSupporterAdmin();
+  renderSupportersPublic();
+  showToast('Supporter added! ✅');
+}
+
+async function deleteSupporter(i){
+  if(!confirm('Remove this supporter?')) return;
+  var supporters = await getSupporters();
+  supporters.splice(i,1);
+  await setSupporters(supporters);
+  renderSupporterAdmin();
+  renderSupportersPublic();
+  showToast('Supporter removed');
+}
+
+async function clearSupporters(){
+  if(!confirm('Remove all supporters?')) return;
+  await setSupporters([]);
+  renderSupporterAdmin();
+  renderSupportersPublic();
+  showToast('Cleared');
+}
+
 // ===== INIT =====
 applyData();
 applyCaptions();
@@ -1949,6 +2192,7 @@ loadCaptionsFromSupabase();
 loadAllPhotos();
 renderPublicSponsors();
 updateFundsDisplay();
+renderSupportersPublic();
 initFloatDonate();
 var spDate=document.getElementById('sp-date');
 if(spDate)spDate.value=new Date().toISOString().split('T')[0];
