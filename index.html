@@ -1312,6 +1312,9 @@ async function loadCaptionsFromSupabase(){
       var remote=JSON.parse(rows[0].filename);
       localStorage.setItem(CAPKEY,JSON.stringify(remote));
       applyCaptions();
+      // Re-apply after photos load (photos may have loaded first)
+      setTimeout(applyCaptions, 1500);
+      setTimeout(applyCaptions, 3000);
     }
   }catch(e){}
 }
@@ -1338,6 +1341,9 @@ async function syncRemoteData(){
     if(Array.isArray(rows)&&rows.length>0){
       localStorage.setItem(DKEY,rows[0].filename);
       applyData();
+      // Also apply motto with fresh remote data
+      applyMotto(getData());
+      loadMottoFields();
     }
   }catch(e){}
   try{
@@ -1622,15 +1628,19 @@ async function renderCaptionsAdmin(){
 }
 
 async function saveCaptions(){
-  var capDefs=['cap-0','cap-2','cap-3','cap-4','cap-5','cap-6','cap-7','cap-founder'];
   var caps=getCaptions();
-  capDefs.forEach(function(id){
+  // Save all caption inputs including dynamic ones
+  var allIds=['cap-0','cap-2','cap-3','cap-4','cap-5','cap-6','cap-7',
+    'cap-8','cap-9','cap-10','cap-11','cap-12','cap-13','cap-14',
+    'cap-15','cap-16','cap-17','cap-founder'];
+  allIds.forEach(function(id){
     var inp=document.getElementById('cap-input-'+id);
-    if(inp)caps[id]=inp.value;
+    if(inp) caps[id]=inp.value;
   });
   showToast('Saving captions... ⏳');
   await setCaptions(caps);
   applyCaptions();
+  setTimeout(applyCaptions,500);
   showToast('Captions saved on ALL devices! ✅');
 }
 
@@ -1739,18 +1749,22 @@ async function saveMotto(){
 }
 
 function applyMotto(d){
+  if(!d) return;
   var mt = document.getElementById('mottoText');
   if(mt){
     mt.textContent = d.mottoText || DEF.mottoText;
-    mt.style.color = d.mottoColor || '#c9a84c';
+    var color = d.mottoColor || '#c9a84c';
     var sz = parseInt(d.mottoSize||14);
-    mt.style.fontSize = sz+'px';
-    mt.style.removeProperty('font-size');
-    mt.setAttribute('style', mt.getAttribute('style')+(';font-size:'+sz+'px !important'));
+    var bg = d.mottoBg || '#0a0e1a';
+    mt.style.cssText = 'font-weight:800;letter-spacing:3px;text-transform:uppercase;white-space:nowrap;'
+      + 'color:'+color+';'
+      + 'font-size:'+sz+'px;'
+      + 'text-shadow:0 0 20px '+color+'66;';
   }
   var bar = document.getElementById('mottoBar');
   if(bar){
     bar.style.setProperty('background', d.mottoBg||'#0a0e1a','important');
+    bar.style.setProperty('background-color', d.mottoBg||'#0a0e1a','important');
   }
 }
 
@@ -2187,7 +2201,11 @@ applyData();
 applyCaptions();
 applyMotto(getData());
 loadLogo();
-syncRemoteData();
+// Sync from Supabase - re-apply everything after remote data loads
+syncRemoteData().then(function(){
+  applyMotto(getData());
+  setTimeout(applyCaptions, 200);
+});
 loadCaptionsFromSupabase();
 loadAllPhotos();
 renderPublicSponsors();
