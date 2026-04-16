@@ -1533,11 +1533,17 @@ function applyCaptions(){
 
 function getPwd(){return localStorage.getItem(AKEY)||'mercy2020';}
 
+var _lastSaveTime = 0;
 async function syncRemoteData(){
   try{
     var r=await fetch(SUPA_URL+'/rest/v1/mch_photos?id=eq.site_settings&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
     var rows=await r.json();
     if(Array.isArray(rows)&&rows.length>0){
+      // If user saved within last 15 seconds, don't overwrite with old Supabase data
+      if(Date.now()-_lastSaveTime < 15000){
+        applyData();applyMotto(getData());
+        return;
+      }
       // Force s2n=3 before saving to localStorage
       try{
         var _rawSettings = JSON.parse(rows[0].filename);
@@ -1548,10 +1554,8 @@ async function syncRemoteData(){
         localStorage.setItem(DKEY, rows[0].filename);
       }
       applyData();
-      // Apply motto with position from remote data
       var _remoteMotto = getData();
       applyMotto(_remoteMotto);
-      // Update local position cache
       try{if(_remoteMotto.mottoPos)localStorage.setItem('mch_motto_pos',_remoteMotto.mottoPos);}catch(e){}
       loadMottoFields();
     }
@@ -2021,10 +2025,29 @@ async function saveMotto(){
   d.mottoBg = (document.getElementById('ei-mottoBg')||{}).value || '#0a0e1a';
   d.mottoSize = (document.getElementById('ei-mottoSize')||{}).value || '11';
   d.mottoPos = _mottoPos;
-  showToast('Saving motto... ⏳');
-  await setData(d);
+  // Also force s2n=3 so sync doesn't break meals count
+  d.s2n = '3';
+  showToast('Saving... ⏳');
+  // Save to localStorage immediately so sync can't overwrite
+  _lastSaveTime = Date.now();
+  localStorage.setItem(DKEY, JSON.stringify(d));
+  // Apply right away before network
   applyMotto(d);
-  showToast('Motto saved on ALL devices! ✅');
+  // Then save to Supabase
+  try{
+    var res = await fetch(SUPA_URL+'/rest/v1/mch_photos',{
+      method:'POST',
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},
+      body:JSON.stringify({id:'site_settings',filename:JSON.stringify(d)})
+    });
+    if(res.ok){
+      showToast('Motto saved on ALL devices! ✅');
+    } else {
+      showToast('Saved locally (sync failed)', true);
+    }
+  }catch(e){
+    showToast('Saved locally only', true);
+  }
 }
 
 function applyMotto(d){
