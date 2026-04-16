@@ -2216,32 +2216,125 @@ function initScrollAnimations(){
 var SUP_KEY = 'mch_supporters';
 var supportersDataCache = null;
 
+function getCountryCode(country){
+  if(!country) return null;
+  var codes={
+    'usa':'us','united states':'us','us':'us',
+    'uk':'gb','united kingdom':'gb','england':'gb','britain':'gb','scotland':'gb','wales':'gb',
+    'uganda':'ug','ug':'ug',
+    'canada':'ca','ca':'ca',
+    'australia':'au','au':'au',
+    'germany':'de','de':'de',
+    'france':'fr','fr':'fr',
+    'netherlands':'nl','holland':'nl','nl':'nl',
+    'norway':'no','no':'no',
+    'sweden':'se','se':'se',
+    'denmark':'dk','dk':'dk',
+    'finland':'fi','fi':'fi',
+    'switzerland':'ch','ch':'ch',
+    'austria':'at','at':'at',
+    'italy':'it','it':'it',
+    'spain':'es','es':'es',
+    'portugal':'pt','pt':'pt',
+    'ireland':'ie','ie':'ie',
+    'new zealand':'nz','nz':'nz',
+    'south africa':'za','za':'za',
+    'kenya':'ke','ke':'ke',
+    'tanzania':'tz','tz':'tz',
+    'rwanda':'rw','rw':'rw',
+    'nigeria':'ng','ng':'ng',
+    'ghana':'gh','gh':'gh',
+    'ethiopia':'et','et':'et',
+    'india':'in','in':'in',
+    'china':'cn','cn':'cn',
+    'japan':'jp','jp':'jp',
+    'singapore':'sg','sg':'sg',
+    'philippines':'ph','ph':'ph',
+    'indonesia':'id','id':'id',
+    'malaysia':'my','my':'my',
+    'thailand':'th','th':'th',
+    'south korea':'kr','korea':'kr','kr':'kr',
+    'brazil':'br','br':'br',
+    'mexico':'mx','mx':'mx',
+    'argentina':'ar','ar':'ar',
+    'colombia':'co','co':'co',
+    'chile':'cl','cl':'cl',
+    'peru':'pe','pe':'pe',
+    'belgium':'be','be':'be',
+    'poland':'pl','pl':'pl',
+    'greece':'gr','gr':'gr',
+    'turkey':'tr','tr':'tr',
+    'israel':'il','il':'il',
+    'uae':'ae','dubai':'ae','ae':'ae',
+    'russia':'ru','ru':'ru',
+    'ukraine':'ua','ua':'ua',
+    'zimbabwe':'zw','zw':'zw',
+    'zambia':'zm','zm':'zm',
+    'malawi':'mw','mw':'mw',
+    'cameroon':'cm','cm':'cm',
+    'egypt':'eg','eg':'eg',
+    'morocco':'ma','ma':'ma',
+    'congo':'cd','cd':'cd',
+    'belgium':'be','be':'be',
+    'czech republic':'cz','czechia':'cz','cz':'cz',
+    'hungary':'hu','hu':'hu',
+    'romania':'ro','ro':'ro',
+    'serbia':'rs','rs':'rs',
+    'croatia':'hr','hr':'hr',
+    'slovakia':'sk','sk':'sk',
+    'bulgaria':'bg','bg':'bg',
+    'denmark':'dk','dk':'dk',
+    'new zealand':'nz','nz':'nz',
+    'pakistan':'pk','pk':'pk',
+    'bangladesh':'bd','bd':'bd',
+    'sri lanka':'lk','lk':'lk',
+    'nepal':'np','np':'np',
+    'myanmar':'mm','mm':'mm',
+    'vietnam':'vn','vn':'vn',
+    'cambodia':'kh','kh':'kh',
+    'taiwan':'tw','tw':'tw',
+    'hong kong':'hk','hk':'hk',
+    'saudi arabia':'sa','sa':'sa',
+    'jordan':'jo','jo':'jo',
+    'lebanon':'lb','lb':'lb',
+    'iran':'ir','ir':'ir',
+    'iraq':'iq','iq':'iq',
+    'kuwait':'kw','kw':'kw',
+    'qatar':'qa','qa':'qa',
+    'bahrain':'bh','bh':'bh',
+    'oman':'om','om':'om',
+    'senegal':'sn','sn':'sn',
+    'ivory coast':'ci','ci':'ci',
+    'mali':'ml','ml':'ml',
+    'burkina faso':'bf','bf':'bf',
+    'benin':'bj','bj':'bj',
+    'togo':'tg','tg':'tg',
+    'guinea':'gn','gn':'gn',
+    'angola':'ao','ao':'ao',
+    'botswana':'bw','bw':'bw',
+    'namibia':'na','na':'na',
+    'lesotho':'ls','ls':'ls',
+    'swaziland':'sz','sz':'sz',
+    'madagascar':'mg','mg':'mg',
+    'mozambique':'mz','mz':'mz',
+    'sudan':'sd','sd':'sd',
+    'somalia':'so','so':'so',
+    'eritrea':'er','er':'er',
+    'djibouti':'dj','dj':'dj',
+    'burundi':'bi','bi':'bi',
+    'liberia':'lr','lr':'lr',
+    'sierra leone':'sl','sl':'sl'
+  };
+  return codes[country.trim().toLowerCase()]||null;
+}
+
 function getCountryFlag(country){
   if(!country) return '';
-  var flags={
-    'usa':'🇺🇸','united states':'🇺🇸','us':'🇺🇸',
-    'uk':'🇬🇧','united kingdom':'🇬🇧','england':'🇬🇧','britain':'🇬🇧',
-    'uganda':'🇺🇬','ug':'🇺🇬',
-    'canada':'🇨🇦','ca':'🇨🇦',
-    'australia':'🇦🇺','au':'🇦🇺',
-    'germany':'🇩🇪','de':'🇩🇪',
-    'france':'🇫🇷','fr':'🇫🇷',
-    'netherlands':'🇳🇱','holland':'🇳🇱','nl':'🇳🇱',
-    'norway':'🇳🇴','sweden':'🇸🇪','denmark':'🇩🇰','finland':'🇫🇮',
-    'switzerland':'🇨🇭','austria':'🇦🇹','italy':'🇮🇹','spain':'🇪🇸',
-    'portugal':'🇵🇹','ireland':'🇮🇪','new zealand':'🇳🇿','nz':'🇳🇿',
-    'south africa':'🇿🇦','za':'🇿🇦','kenya':'🇰🇪','tanzania':'🇹🇿',
-    'rwanda':'🇷🇼','nigeria':'🇳🇬','ghana':'🇬🇭','ethiopia':'🇪🇹',
-    'india':'🇮🇳','china':'🇨🇳','japan':'🇯🇵','singapore':'🇸🇬',
-    'philippines':'🇵🇭','indonesia':'🇮🇩','malaysia':'🇲🇾','thailand':'🇹🇭',
-    'south korea':'🇰🇷','korea':'🇰🇷','brazil':'🇧🇷','mexico':'🇲🇽',
-    'argentina':'🇦🇷','colombia':'🇨🇴','chile':'🇨🇱','peru':'🇵🇪',
-    'belgium':'🇧🇪','poland':'🇵🇱','greece':'🇬🇷','turkey':'🇹🇷',
-    'israel':'🇮🇱','uae':'🇦🇪','dubai':'🇦🇪','russia':'🇷🇺','ukraine':'🇺🇦',
-    'zimbabwe':'🇿🇼','zambia':'🇿🇲','malawi':'🇲🇼','cameroon':'🇨🇲',
-    'egypt':'🇪🇬','morocco':'🇲🇦','congo':'🇨🇩'
-  };
-  return flags[country.trim().toLowerCase()]||'🌍';
+  var code = getCountryCode(country);
+  if(code){
+    return '<img src="https://flagcdn.com/20x15/'+code+'.png" width="20" height="15" style="border-radius:2px;vertical-align:middle;display:inline-block;margin-right:4px;" alt="'+country+'" />';
+  }
+  return '<span style="font-size:14px;vertical-align:middle;margin-right:4px;">🌍</span>';
 }
 
 async function getSupporters(){
@@ -2293,9 +2386,9 @@ async function renderSupportersPublic(){
     card.innerHTML = photoHtml
       + '<div style="padding:14px 14px 8px;">'
       + '<div style="font-size:14px;font-weight:700;color:#f1f5f9;margin-bottom:4px;">'+nameStr+'</div>'
-      + '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px;">'
-      + '<span style="font-size:16px;line-height:1;">'+flag+'</span>'
-      + (countryStr?'<span style="font-size:12px;color:#94a3b8;">'+countryStr+'</span>':'')
+      + '<div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:6px;">'
+      + flag
+      + (countryStr?'<span style="font-size:12px;color:#94a3b8;vertical-align:middle;">'+countryStr+'</span>':'')
       + '</div>'
       + '<div style="display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.5px;">'+esc(catStr)+'</div>'
       + '</div>'
@@ -2313,7 +2406,7 @@ async function renderSupporterAdmin(){
     return;
   }
   list.innerHTML = supporters.map(function(s,i){
-    var adminFlag = s.country ? getCountryFlag(s.country) : '';
+    var adminFlag = s.country ? getCountryFlag(s.country) : '<span style="font-size:12px;">🌍</span>';
     var adminInitials = (s.name||'V').split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
     var photoThumb = s.photoUrl
       ? '<img src="'+s.photoUrl+'" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;" />'
@@ -2322,7 +2415,7 @@ async function renderSupporterAdmin(){
       + photoThumb
       + '<div style="flex:1;min-width:0;">'
       + '<div style="font-size:13px;font-weight:700;color:var(--white);">'+esc(s.name||'Volunteer')+'</div>'
-      + '<div style="font-size:11px;color:var(--gold);">'+adminFlag+' '+esc(s.country||'')+(s.category?' · '+esc(s.category):'')+'</div>'
+      + '<div style="font-size:11px;color:var(--gold);display:flex;align-items:center;gap:4px;">'+adminFlag+'<span>'+esc(s.country||'')+(s.category?' · '+esc(s.category):'')+'</span></div>'
       + (s.quote?'<div style="font-size:11px;color:var(--text2);font-style:italic;margin-top:2px;">"'+esc(s.quote)+'"</div>':'')
       + '</div>'
       + '<div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">'
