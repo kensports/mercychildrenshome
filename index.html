@@ -996,7 +996,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
             <label style="display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#000;padding:7px 12px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">Upload Logo<input type="file" accept="image/*" style="display:none;" onchange="handleLogoUpload(event)"/></label>
           </div>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">📷 Gallery Photos</div>
+        <div style="background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:12px;margin-bottom:14px;">
+          <p style="font-size:12px;font-weight:700;color:#60a5fa;margin-bottom:4px;">🖼️ Banner Photos (Full-width sections)</p>
+          <p style="font-size:11px;color:var(--text2);line-height:1.6;"><strong style="color:#fff;">Banner 1</strong> = "A Place to Call Home" section<br><strong style="color:#fff;">Banner 2</strong> = "Learning in God's Light" section<br>These are the big full-width photos behind the overlay text.</p>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">📷 All Photos</div>
         <div id="photoGrid" style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;"></div>
         <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;">👤 Founder Photo</div>
         <div id="founderPhotoGrid" style="display:flex;flex-direction:column;gap:10px;"></div>
@@ -1022,6 +1026,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
           <div class="af" style="margin-bottom:10px;">
             <label>Category</label>
             <select id="sup-category" style="width:100%;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;font-family:'Outfit',sans-serif;">
+              <option value="Director & Founder">Director &amp; Founder</option>
               <option value="Volunteer">Volunteer</option>
               <option value="Donor">Donor</option>
               <option value="Sponsor">Child Sponsor</option>
@@ -1259,6 +1264,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <div class="af" style="margin-bottom:12px;">
       <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Category</label>
       <select id="ev-category" style="width:100%;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;font-family:'Outfit',sans-serif;">
+        <option value="Director & Founder">Director &amp; Founder</option>
         <option value="Volunteer">Volunteer</option>
         <option value="Donor">Donor</option>
         <option value="Sponsor">Child Sponsor</option>
@@ -1628,7 +1634,7 @@ async function renderPhotoGrid(){
   if(!grid)return;
   grid.innerHTML='';
   var meta=await getPhotoMeta();
-  var labels=['Banner Photo 1','(skip)','Banner Photo 2','Gallery 1','Gallery 2','Gallery 3','Gallery 4','Gallery 5','Gallery 6','Gallery 7','Gallery 8','Gallery 9','Gallery 10','Gallery 11','Gallery 12','Gallery 13','Gallery 14','Gallery 15'];
+  var labels=['Banner 1 - A Place to Call Home','(skip)','Banner 2 - Learning in Gods Light','Gallery 1','Gallery 2','Gallery 3','Gallery 4','Gallery 5','Gallery 6','Gallery 7','Gallery 8','Gallery 9','Gallery 10','Gallery 11','Gallery 12','Gallery 13','Gallery 14','Gallery 15'];
   for(var i=0;i<=17;i++){
     if(i===1)continue;
     (function(idx){
@@ -2210,6 +2216,34 @@ function initScrollAnimations(){
 var SUP_KEY = 'mch_supporters';
 var supportersDataCache = null;
 
+function getCountryFlag(country){
+  if(!country) return '';
+  var flags={
+    'usa':'🇺🇸','united states':'🇺🇸','us':'🇺🇸',
+    'uk':'🇬🇧','united kingdom':'🇬🇧','england':'🇬🇧','britain':'🇬🇧',
+    'uganda':'🇺🇬','ug':'🇺🇬',
+    'canada':'🇨🇦','ca':'🇨🇦',
+    'australia':'🇦🇺','au':'🇦🇺',
+    'germany':'🇩🇪','de':'🇩🇪',
+    'france':'🇫🇷','fr':'🇫🇷',
+    'netherlands':'🇳🇱','holland':'🇳🇱','nl':'🇳🇱',
+    'norway':'🇳🇴','sweden':'🇸🇪','denmark':'🇩🇰','finland':'🇫🇮',
+    'switzerland':'🇨🇭','austria':'🇦🇹','italy':'🇮🇹','spain':'🇪🇸',
+    'portugal':'🇵🇹','ireland':'🇮🇪','new zealand':'🇳🇿','nz':'🇳🇿',
+    'south africa':'🇿🇦','za':'🇿🇦','kenya':'🇰🇪','tanzania':'🇹🇿',
+    'rwanda':'🇷🇼','nigeria':'🇳🇬','ghana':'🇬🇭','ethiopia':'🇪🇹',
+    'india':'🇮🇳','china':'🇨🇳','japan':'🇯🇵','singapore':'🇸🇬',
+    'philippines':'🇵🇭','indonesia':'🇮🇩','malaysia':'🇲🇾','thailand':'🇹🇭',
+    'south korea':'🇰🇷','korea':'🇰🇷','brazil':'🇧🇷','mexico':'🇲🇽',
+    'argentina':'🇦🇷','colombia':'🇨🇴','chile':'🇨🇱','peru':'🇵🇪',
+    'belgium':'🇧🇪','poland':'🇵🇱','greece':'🇬🇷','turkey':'🇹🇷',
+    'israel':'🇮🇱','uae':'🇦🇪','dubai':'🇦🇪','russia':'🇷🇺','ukraine':'🇺🇦',
+    'zimbabwe':'🇿🇼','zambia':'🇿🇲','malawi':'🇲🇼','cameroon':'🇨🇲',
+    'egypt':'🇪🇬','morocco':'🇲🇦','congo':'🇨🇩'
+  };
+  return flags[country.trim().toLowerCase()]||'🌍';
+}
+
 async function getSupporters(){
   if(supportersDataCache) return supportersDataCache;
   try{
@@ -2247,20 +2281,25 @@ async function renderSupportersPublic(){
     card.style.cssText = 'background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;text-align:center;transition:transform .3s,box-shadow .3s;';
     card.onmouseenter = function(){this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 40px rgba(0,0,0,.4)';};
     card.onmouseleave = function(){this.style.transform='';this.style.boxShadow='';};
+    var initials = (s.name||'V').split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
     var photoHtml = s.photoUrl
-      ? '<div style="width:100%;aspect-ratio:1;overflow:hidden;"><img src="'+s.photoUrl+'" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>'
-      : '<div style="width:100%;aspect-ratio:1;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;"><svg style="width:48px;height:48px;fill:none;stroke:rgba(255,255,255,.4);stroke-width:1.5;stroke-linecap:round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+      ? '<div style="width:100%;aspect-ratio:1;overflow:hidden;background:linear-gradient(135deg,#1a3060,#2563eb);"><img src="'+s.photoUrl+'" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>'
+      : '<div style="width:100%;aspect-ratio:1;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;"><span style="font-family:Cormorant Garamond,serif;font-size:36px;font-weight:700;color:rgba(255,255,255,.7);">'+initials+'</span></div>';
     var nameStr = esc(s.name||'Volunteer');
     var countryStr = s.country ? esc(s.country) : '';
+    var flag = s.country ? getCountryFlag(s.country) : '🌍';
     var catStr = s.category || 'Volunteer';
-    var quoteHtml = s.quote ? '<p style="font-size:11px;color:#94a3b8;font-style:italic;line-height:1.5;padding:0 12px 12px;margin:0;">"'+esc(s.quote)+'"</p>' : '';
+    var quoteHtml = s.quote ? '<p style="font-size:12px;color:#94a3b8;font-style:italic;line-height:1.6;padding:8px 14px 14px;margin:0;border-top:1px solid rgba(255,255,255,.05);">"'+esc(s.quote)+'"</p>' : '';
     card.innerHTML = photoHtml
-      + '<div style="padding:12px 12px 4px;">'
-      + '<div style="font-size:13px;font-weight:700;color:#f1f5f9;">'+nameStr+(countryStr?' — '+countryStr:'')+'</div>'
-      + '<div style="display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:5px;letter-spacing:.5px;">'+esc(catStr)+'</div>'
+      + '<div style="padding:14px 14px 8px;">'
+      + '<div style="font-size:14px;font-weight:700;color:#f1f5f9;margin-bottom:4px;">'+nameStr+'</div>'
+      + '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px;">'
+      + '<span style="font-size:16px;line-height:1;">'+flag+'</span>'
+      + (countryStr?'<span style="font-size:12px;color:#94a3b8;">'+countryStr+'</span>':'')
       + '</div>'
-      + quoteHtml
-      + '<div style="height:'+(s.quote?'0':'10px')+'"></div>';
+      + '<div style="display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.5px;">'+esc(catStr)+'</div>'
+      + '</div>'
+      + quoteHtml;
     grid.appendChild(card);
   });
 }
@@ -2274,14 +2313,16 @@ async function renderSupporterAdmin(){
     return;
   }
   list.innerHTML = supporters.map(function(s,i){
+    var adminFlag = s.country ? getCountryFlag(s.country) : '';
+    var adminInitials = (s.name||'V').split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
     var photoThumb = s.photoUrl
       ? '<img src="'+s.photoUrl+'" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;" />'
-      : '<div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg style="width:22px;height:22px;fill:none;stroke:white;stroke-width:1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+      : '<div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:Cormorant Garamond,serif;font-size:20px;font-weight:700;color:rgba(255,255,255,.7);">'+adminInitials+'</span></div>';
     return '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;align-items:center;gap:12px;">'
       + photoThumb
       + '<div style="flex:1;min-width:0;">'
       + '<div style="font-size:13px;font-weight:700;color:var(--white);">'+esc(s.name||'Volunteer')+'</div>'
-      + '<div style="font-size:11px;color:var(--gold);">'+esc(s.country||'')+(s.category?' · '+esc(s.category):'')+'</div>'
+      + '<div style="font-size:11px;color:var(--gold);">'+adminFlag+' '+esc(s.country||'')+(s.category?' · '+esc(s.category):'')+'</div>'
       + (s.quote?'<div style="font-size:11px;color:var(--text2);font-style:italic;margin-top:2px;">"'+esc(s.quote)+'"</div>':'')
       + '</div>'
       + '<div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">'
