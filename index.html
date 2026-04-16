@@ -1033,7 +1033,61 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
               <option value="Education Volunteer">Education Volunteer</option>
             </select>
           </div>
-          <div class="af" style="margin-bottom:10px;"><label>Short Quote (optional)</label><input type="text" id="sup-quote" placeholder="e.g. These children deserve the world"/></div>
+          <div class="af" style="margin-bottom:10px;">
+            <label>Emotional Quote (optional)</label>
+            <select id="sup-quote-select" onchange="applyQuoteSelect()" style="width:100%;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:12px;color:var(--text);outline:none;font-family:'Outfit',sans-serif;margin-bottom:8px;">
+              <option value="">— Choose a quote or type your own below —</option>
+              <optgroup label="❤️ Love &amp; Care">
+                <option>These children deserve all the love in the world.</option>
+                <option>Every child is a gift — I'm honored to help.</option>
+                <option>Love is the greatest gift we can give a child.</option>
+                <option>Caring for children is the highest calling.</option>
+                <option>No child should ever feel alone or forgotten.</option>
+                <option>Children are our greatest treasure.</option>
+              </optgroup>
+              <optgroup label="🙏 Faith &amp; Purpose">
+                <option>God called me to serve, and I answered.</option>
+                <option>Faith without works is dead — so I act.</option>
+                <option>I serve because I was also once served.</option>
+                <option>We are God's hands extended to these children.</option>
+                <option>Blessed to be a blessing to these little ones.</option>
+                <option>Jesus said, let the children come — so here I am.</option>
+              </optgroup>
+              <optgroup label="🌍 Hope &amp; Future">
+                <option>Investing in a child is investing in the future.</option>
+                <option>One life changed changes the world.</option>
+                <option>These children will change Uganda one day.</option>
+                <option>Hope is the most powerful thing we can give.</option>
+                <option>A brighter Uganda starts with these children.</option>
+                <option>The future belongs to those we raise today.</option>
+              </optgroup>
+              <optgroup label="💪 Action &amp; Commitment">
+                <option>I don't just donate — I believe in this mission.</option>
+                <option>Small acts of kindness create big change.</option>
+                <option>Together we are stronger than any problem.</option>
+                <option>I may be far away, but my heart is here.</option>
+                <option>Distance cannot stop genuine compassion.</option>
+                <option>I give because I can — and because they need it.</option>
+              </optgroup>
+              <optgroup label="🤝 Community &amp; Unity">
+                <option>We are one family across the ocean.</option>
+                <option>Borders cannot separate a heart of love.</option>
+                <option>Together we are the church in action.</option>
+                <option>Community means no one is left behind.</option>
+                <option>Standing together makes us unbreakable.</option>
+                <option>United by love, driven by purpose.</option>
+              </optgroup>
+              <optgroup label="✨ Gratitude &amp; Joy">
+                <option>Their smiles are worth every sacrifice.</option>
+                <option>Giving brings more joy than receiving.</option>
+                <option>I receive more than I give every time I visit.</option>
+                <option>Their laughter is the best reward.</option>
+                <option>I am forever changed by these children.</option>
+                <option>Grateful to be part of something so beautiful.</option>
+              </optgroup>
+            </select>
+            <input type="text" id="sup-quote" placeholder="Or type a custom quote here..." style="width:100%;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;font-family:'Outfit',sans-serif;"/>
+          </div>
           <div class="af" style="margin-bottom:12px;">
             <label>Photo</label>
             <label style="display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#000;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
@@ -1182,6 +1236,100 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1);event.stopPropagation();">&#8250;</button>
   <div class="lightbox-caption" id="lightboxCaption"></div>
   <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<!-- EDIT VOLUNTEER MODAL -->
+<div id="editVolOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:900;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px;width:100%;max-width:400px;max-height:90vh;overflow-y:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);">Edit Volunteer</h3>
+      <button onclick="closeEditVol()" style="background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;">✕</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+      <div id="ev-photo-preview" style="flex-shrink:0;"></div>
+      <div>
+        <label style="display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#000;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
+          📷 Change Photo<input type="file" accept="image/*" id="ev-photo" style="display:none;"/>
+        </label>
+        <div id="ev-photo-status" style="font-size:11px;color:var(--text2);margin-top:4px;"></div>
+      </div>
+    </div>
+    <div class="af" style="margin-bottom:12px;"><label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Name</label><input type="text" id="ev-name" style="width:100%;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:14px;color:var(--text);outline:none;font-family:'Outfit',sans-serif;"/></div>
+    <div class="af" style="margin-bottom:12px;"><label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Country</label><input type="text" id="ev-country" style="width:100%;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:14px;color:var(--text);outline:none;font-family:'Outfit',sans-serif;"/></div>
+    <div class="af" style="margin-bottom:12px;">
+      <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Category</label>
+      <select id="ev-category" style="width:100%;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;font-family:'Outfit',sans-serif;">
+        <option value="Volunteer">Volunteer</option>
+        <option value="Donor">Donor</option>
+        <option value="Sponsor">Child Sponsor</option>
+        <option value="Partner">Partner Organization</option>
+        <option value="Church Partner">Church Partner</option>
+        <option value="Community Support">Community Supporter</option>
+        <option value="International Support">International Supporter</option>
+        <option value="Medical Volunteer">Medical Volunteer</option>
+        <option value="Education Volunteer">Education Volunteer</option>
+      </select>
+    </div>
+    <div class="af" style="margin-bottom:16px;">
+      <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Quote</label>
+      <select id="ev-quote-select" onchange="applyQuoteSelect('ev-quote-select','ev-quote')" style="width:100%;padding:9px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:12px;color:var(--text);outline:none;font-family:'Outfit',sans-serif;margin-bottom:8px;">
+        <option value="">— Choose a quote —</option>
+        <optgroup label="❤️ Love &amp; Care">
+          <option>These children deserve all the love in the world.</option>
+          <option>Every child is a gift — I'm honored to help.</option>
+          <option>Love is the greatest gift we can give a child.</option>
+          <option>Caring for children is the highest calling.</option>
+          <option>No child should ever feel alone or forgotten.</option>
+          <option>Children are our greatest treasure.</option>
+        </optgroup>
+        <optgroup label="🙏 Faith &amp; Purpose">
+          <option>God called me to serve, and I answered.</option>
+          <option>Faith without works is dead — so I act.</option>
+          <option>I serve because I was also once served.</option>
+          <option>We are God's hands extended to these children.</option>
+          <option>Blessed to be a blessing to these little ones.</option>
+          <option>Jesus said, let the children come — so here I am.</option>
+        </optgroup>
+        <optgroup label="🌍 Hope &amp; Future">
+          <option>Investing in a child is investing in the future.</option>
+          <option>One life changed changes the world.</option>
+          <option>These children will change Uganda one day.</option>
+          <option>Hope is the most powerful thing we can give.</option>
+          <option>A brighter Uganda starts with these children.</option>
+          <option>The future belongs to those we raise today.</option>
+        </optgroup>
+        <optgroup label="💪 Action &amp; Commitment">
+          <option>I don't just donate — I believe in this mission.</option>
+          <option>Small acts of kindness create big change.</option>
+          <option>Together we are stronger than any problem.</option>
+          <option>I may be far away, but my heart is here.</option>
+          <option>Distance cannot stop genuine compassion.</option>
+          <option>I give because I can — and because they need it.</option>
+        </optgroup>
+        <optgroup label="🤝 Community &amp; Unity">
+          <option>We are one family across the ocean.</option>
+          <option>Borders cannot separate a heart of love.</option>
+          <option>Together we are the church in action.</option>
+          <option>Community means no one is left behind.</option>
+          <option>Standing together makes us unbreakable.</option>
+          <option>United by love, driven by purpose.</option>
+        </optgroup>
+        <optgroup label="✨ Gratitude &amp; Joy">
+          <option>Their smiles are worth every sacrifice.</option>
+          <option>Giving brings more joy than receiving.</option>
+          <option>I receive more than I give every time I visit.</option>
+          <option>Their laughter is the best reward.</option>
+          <option>I am forever changed by these children.</option>
+          <option>Grateful to be part of something so beautiful.</option>
+        </optgroup>
+      </select>
+      <input type="text" id="ev-quote" placeholder="Or type a custom quote..." style="width:100%;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);outline:none;font-family:'Outfit',sans-serif;"/>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="saveEditVolunteer()" style="flex:1;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;border:none;padding:12px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;">Save Changes</button>
+      <button onclick="closeEditVol()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:12px 16px;border-radius:10px;font-size:14px;cursor:pointer;">Cancel</button>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"><span class="toast-icon" id="toastIcon"></span><span id="toastMsg"></span></div>
@@ -2122,20 +2270,24 @@ async function renderSupporterAdmin(){
   var list = document.getElementById('supporterAdminList');
   if(!list) return;
   if(!supporters.length){
-    list.innerHTML='<p style="font-size:13px;color:var(--text2);text-align:center;padding:16px;">No supporters yet. Add one below.</p>';
+    list.innerHTML='<p style="font-size:13px;color:var(--text2);text-align:center;padding:16px;">No volunteers yet. Add one below.</p>';
     return;
   }
   list.innerHTML = supporters.map(function(s,i){
     var photoThumb = s.photoUrl
-      ? '<img src="'+s.photoUrl+'" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;" />'
-      : '<div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg style="width:20px;height:20px;fill:none;stroke:white;stroke-width:1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
-    return '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;align-items:center;gap:12px;">'
+      ? '<img src="'+s.photoUrl+'" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;" />'
+      : '<div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg style="width:22px;height:22px;fill:none;stroke:white;stroke-width:1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+    return '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;align-items:center;gap:12px;">'
       + photoThumb
-      + '<div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;color:var(--white);">'+esc(s.name||'Supporter')+'</div>'
-      + '<div style="font-size:11px;color:var(--gold);">'+esc(s.country||'')+'</div>'
+      + '<div style="flex:1;min-width:0;">'
+      + '<div style="font-size:13px;font-weight:700;color:var(--white);">'+esc(s.name||'Volunteer')+'</div>'
+      + '<div style="font-size:11px;color:var(--gold);">'+esc(s.country||'')+(s.category?' · '+esc(s.category):'')+'</div>'
       + (s.quote?'<div style="font-size:11px;color:var(--text2);font-style:italic;margin-top:2px;">"'+esc(s.quote)+'"</div>':'')
       + '</div>'
-      + '<button onclick="deleteSupporter('+i+')" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:6px 10px;border-radius:7px;font-size:11px;cursor:pointer;flex-shrink:0;">Remove</button>'
+      + '<div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">'
+      + '<button onclick="editVolunteer('+i+')" style="background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:6px 10px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;">Edit</button>'
+      + '<button onclick="deleteSupporter('+i+')" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:6px 10px;border-radius:7px;font-size:11px;cursor:pointer;">Remove</button>'
+      + '</div>'
       + '</div>';
   }).join('');
 }
@@ -2194,6 +2346,82 @@ async function clearSupporters(){
   renderSupporterAdmin();
   renderSupportersPublic();
   showToast('Cleared');
+}
+
+// ===== EDIT VOLUNTEER =====
+var editVolIdx = -1;
+var editVolPhotoPending = null;
+
+function applyQuoteSelect(selectId, inputId){
+  var sel = document.getElementById(selectId||'sup-quote-select');
+  var inp = document.getElementById(inputId||'sup-quote');
+  if(sel&&inp&&sel.value) inp.value = sel.value;
+}
+
+async function editVolunteer(idx){
+  editVolIdx = idx;
+  editVolPhotoPending = null;
+  var supporters = await getSupporters();
+  var s = supporters[idx];
+  if(!s) return;
+  // Fill edit modal
+  var en = document.getElementById('ev-name'); if(en) en.value = s.name||'';
+  var ec = document.getElementById('ev-country'); if(ec) ec.value = s.country||'';
+  var eq = document.getElementById('ev-quote'); if(eq) eq.value = s.quote||'';
+  var ecat = document.getElementById('ev-category'); if(ecat) ecat.value = s.category||'Volunteer';
+  var eqs = document.getElementById('ev-quote-select'); if(eqs) eqs.value = '';
+  var ephoto = document.getElementById('ev-photo-status'); if(ephoto) ephoto.textContent = s.photoUrl?'📎 Current photo saved':'No photo';
+  var preview = document.getElementById('ev-photo-preview');
+  if(preview) preview.innerHTML = s.photoUrl
+    ? '<img src="'+s.photoUrl+'" style="width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);" />'
+    : '<div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;"><svg style="width:24px;height:24px;fill:none;stroke:white;stroke-width:1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+  document.getElementById('editVolOverlay').style.display='flex';
+}
+
+function closeEditVol(){
+  document.getElementById('editVolOverlay').style.display='none';
+  editVolIdx=-1; editVolPhotoPending=null;
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var ep=document.getElementById('ev-photo');
+  if(ep) ep.onchange=function(e){
+    var file=e.target.files[0]; if(!file)return;
+    editVolPhotoPending=file;
+    var st=document.getElementById('ev-photo-status'); if(st) st.textContent='📎 '+file.name;
+    // Preview
+    var reader=new FileReader();
+    reader.onload=function(ev){
+      var prev=document.getElementById('ev-photo-preview');
+      if(prev) prev.innerHTML='<img src="'+ev.target.result+'" style="width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);" />';
+    };
+    reader.readAsDataURL(file);
+  };
+});
+
+async function saveEditVolunteer(){
+  if(editVolIdx<0) return;
+  var name=(document.getElementById('ev-name')||{}).value||'';
+  if(!name.trim()){showToast('Name required',true);return;}
+  showToast('Saving... ⏳');
+  var supporters=await getSupporters();
+  var s=supporters[editVolIdx];
+  s.name=name.trim();
+  s.country=(document.getElementById('ev-country')||{}).value||'';
+  s.quote=(document.getElementById('ev-quote')||{}).value||'';
+  s.category=(document.getElementById('ev-category')||{}).value||'Volunteer';
+  if(editVolPhotoPending){
+    try{
+      var filename=await uploadToSupabase(editVolPhotoPending,'supporter_'+Date.now());
+      s.photoUrl=getSupaPhotoURL(filename);
+    }catch(e){showToast('Photo upload failed',true);}
+  }
+  supporters[editVolIdx]=s;
+  await setSupporters(supporters);
+  closeEditVol();
+  renderSupporterAdmin();
+  renderSupportersPublic();
+  showToast('Volunteer updated! ✅');
 }
 
 // ===== INIT =====
