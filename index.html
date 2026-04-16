@@ -41,10 +41,11 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .mob-close{position:absolute;top:20px;right:24px;font-size:24px;cursor:pointer;color:var(--text2);}
 
 /* MOTTO */
-#mottoBar{position:fixed;top:64px;left:0;right:0;z-index:99;padding:8px 16px;text-align:center;background:#0a0e1a !important;border-bottom:1px solid rgba(201,168,76,.3);overflow:hidden;}
-.motto-shimmer{position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(201,168,76,.08) 50%,transparent 100%);animation:mottoShimmer 3s linear infinite;pointer-events:none;}
-@keyframes mottoShimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
-@keyframes mottoFloat{0%,100%{transform:translateY(0px);}50%{transform:translateY(-3px);}}
+#mottoBar{position:fixed;top:64px;left:0;right:0;z-index:99;padding:8px 16px;text-align:center;background:#0a0e1a !important;background-color:#0a0e1a !important;border-bottom:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+#mottoBar.pos-left{justify-content:flex-start;padding-left:24px;}
+#mottoBar.pos-right{justify-content:flex-end;padding-right:24px;}
+.motto-pill{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(201,168,76,.35);border-radius:999px;padding:5px 16px;transition:background .2s;}
+
 
 /* HERO */
 .hero{min-height:100vh;padding:160px 5% 70px;display:flex;align-items:center;position:relative;overflow:hidden;}
@@ -406,9 +407,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 
 <!-- MOTTO BAR -->
 <div id="mottoBar">
-  <div class="motto-shimmer"></div>
-  <div style="display:inline-flex;align-items:center;gap:0;animation:mottoFloat 3s ease-in-out infinite;position:relative;z-index:1;">
-    <span id="mottoText" style="font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a84c;font-size:clamp(11px,1.8vw,15px);text-shadow:0 0 20px rgba(201,168,76,.6);white-space:nowrap;">✝&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;✝</span>
+  <div class="motto-pill">
+    <span id="mottoText" style="font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c9a84c;font-size:11px;white-space:nowrap;">✝&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;✝</span>
   </div>
 </div>
 
@@ -447,7 +447,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   <div class="trust-item"><div class="trust-num" id="tb1n">32</div><div class="trust-lbl" id="tb1l">Children Supported</div></div>
   <div class="trust-item"><div class="trust-num" id="tb2n">3</div><div class="trust-lbl" id="tb2l">Meals Daily</div></div>
   <div class="trust-item"><div class="trust-num" id="tb3n">2020</div><div class="trust-lbl" id="tb3l">Founded</div></div>
-  <div class="trust-item"><div class="trust-num">🇺🇸</div><div class="trust-lbl">USA Sponsor Support</div></div>
+  <div class="trust-item"><div class="trust-num">🌍</div><div class="trust-lbl">Worldwide Support</div></div>
 </div>
 
 <!-- ABOUT -->
@@ -1182,6 +1182,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
           <div id="mottoPrevBox" style="border-radius:8px;padding:10px;text-align:center;margin-bottom:12px;background:#0a0e1a;transition:background .2s;">
             <span style="font-size:10px;color:var(--text2);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Live Preview</span>
             <span id="mottoPreviewText" style="font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a84c;font-size:14px;">✝   Together We Are The Church   ✝</span>
+          </div>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Position</label>
+            <div style="display:flex;gap:8px;">
+              <button onclick="setMottoPos('left',this)" id="mpos-left" style="flex:1;padding:8px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-size:12px;cursor:pointer;">⬅ Left</button>
+              <button onclick="setMottoPos('center',this)" id="mpos-center" style="flex:1;padding:8px;border-radius:8px;background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gold);font-size:12px;cursor:pointer;font-weight:700;">⬛ Center</button>
+              <button onclick="setMottoPos('right',this)" id="mpos-right" style="flex:1;padding:8px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-size:12px;cursor:pointer;">Right ➡</button>
+            </div>
           </div>
           <button class="adm-btn" onclick="saveMotto()" style="width:100%;font-size:14px;padding:12px;">💾 Save Motto</button>
         </div>
@@ -1951,12 +1959,34 @@ function previewMotto(){
   if(bar) bar.style.setProperty('background',bg,'important');
 }
 
+var _mottoPos = 'center';
+function setMottoPos(pos, btn){
+  _mottoPos = pos;
+  ['left','center','right'].forEach(function(p){
+    var b = document.getElementById('mpos-'+p);
+    if(b){
+      b.style.background = p===pos?'rgba(201,168,76,.15)':'var(--bg3)';
+      b.style.borderColor = p===pos?'var(--gold)':'var(--border)';
+      b.style.color = p===pos?'var(--gold)':'var(--text2)';
+      b.style.fontWeight = p===pos?'700':'400';
+    }
+  });
+  // Live preview
+  var bar = document.getElementById('mottoBar');
+  if(bar){
+    bar.classList.remove('pos-left','pos-right');
+    if(pos==='left') bar.classList.add('pos-left');
+    else if(pos==='right') bar.classList.add('pos-right');
+  }
+}
+
 async function saveMotto(){
   var d = getData();
   d.mottoText = (document.getElementById('ei-motto')||{}).value || d.mottoText;
   d.mottoColor = (document.getElementById('ei-mottoColor')||{}).value || '#c9a84c';
   d.mottoBg = (document.getElementById('ei-mottoBg')||{}).value || '#0a0e1a';
-  d.mottoSize = (document.getElementById('ei-mottoSize')||{}).value || '14';
+  d.mottoSize = (document.getElementById('ei-mottoSize')||{}).value || '11';
+  d.mottoPos = _mottoPos;
   showToast('Saving motto... ⏳');
   await setData(d);
   applyMotto(d);
@@ -1969,17 +1999,23 @@ function applyMotto(d){
   if(mt){
     mt.textContent = d.mottoText || DEF.mottoText;
     var color = d.mottoColor || '#c9a84c';
-    var sz = parseInt(d.mottoSize||14);
-    var bg = d.mottoBg || '#0a0e1a';
-    mt.style.cssText = 'font-weight:800;letter-spacing:3px;text-transform:uppercase;white-space:nowrap;'
-      + 'color:'+color+';'
-      + 'font-size:'+sz+'px;'
-      + 'text-shadow:0 0 20px '+color+'66;';
+    var sz = parseInt(d.mottoSize||11);
+    mt.style.cssText = 'font-weight:700;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;color:'+color+';font-size:'+sz+'px;';
+  }
+  var pill = document.querySelector('.motto-pill');
+  if(pill){
+    var bg = d.mottoBg||'#0a0e1a';
+    pill.style.borderColor = (d.mottoColor||'#c9a84c')+'60';
+    pill.style.background = bg==='#0a0e1a'?'transparent':bg;
   }
   var bar = document.getElementById('mottoBar');
   if(bar){
-    bar.style.setProperty('background', d.mottoBg||'#0a0e1a','important');
-    bar.style.setProperty('background-color', d.mottoBg||'#0a0e1a','important');
+    bar.style.setProperty('background','#0a0e1a','important');
+    bar.style.setProperty('background-color','#0a0e1a','important');
+    // Apply position
+    bar.classList.remove('pos-left','pos-right');
+    if(d.mottoPos==='left') bar.classList.add('pos-left');
+    else if(d.mottoPos==='right') bar.classList.add('pos-right');
   }
 }
 
@@ -1990,10 +2026,13 @@ function loadMottoFields(){
   var mch = document.getElementById('ei-mottoColorHex'); if(mch) mch.value = d.mottoColor||'#c9a84c';
   var mb = document.getElementById('ei-mottoBg'); if(mb) mb.value = d.mottoBg||'#0a0e1a';
   var mbh = document.getElementById('ei-mottoBgHex'); if(mbh) mbh.value = d.mottoBg||'#0a0e1a';
-  var ms = document.getElementById('ei-mottoSize'); if(ms){ ms.value = d.mottoSize||'14'; var sv=document.getElementById('mottoSizeVal'); if(sv) sv.textContent=(d.mottoSize||'14')+'px';}
+  var ms = document.getElementById('ei-mottoSize'); if(ms){ ms.value = d.mottoSize||'11'; var sv=document.getElementById('mottoSizeVal'); if(sv) sv.textContent=(d.mottoSize||'11')+'px';}
   var prev = document.getElementById('mottoPreviewText');
-  if(prev){prev.textContent=d.mottoText||DEF.mottoText;prev.style.color=d.mottoColor||'#c9a84c';prev.style.fontSize=(d.mottoSize||'14')+'px';}
-  var box = document.getElementById('mottoPrevBox'); if(box) box.style.background=d.mottoBg||'#0a0e1a';
+  if(prev){prev.textContent=d.mottoText||DEF.mottoText;prev.style.color=d.mottoColor||'#c9a84c';prev.style.fontSize=(d.mottoSize||'11')+'px';}
+  var box = document.getElementById('mottoPrevBox'); if(box) box.style.background='#0a0e1a';
+  // Restore position
+  _mottoPos = d.mottoPos||'center';
+  setMottoPos(_mottoPos, null);
 }
 
 async function saveContent(){
@@ -2280,111 +2319,160 @@ var supportersDataCache = null;
 function getCountryCode(country){
   if(!country) return null;
   var codes={
-    'usa':'us','united states':'us','us':'us',
-    'uk':'gb','united kingdom':'gb','england':'gb','britain':'gb','scotland':'gb','wales':'gb',
-    'uganda':'ug','ug':'ug',
+    /* Americas */
+    'usa':'us','united states':'us','united states of america':'us','us':'us','america':'us',
     'canada':'ca','ca':'ca',
-    'australia':'au','au':'au',
-    'germany':'de','de':'de',
-    'france':'fr','fr':'fr',
-    'netherlands':'nl','holland':'nl','nl':'nl',
-    'norway':'no','no':'no',
-    'sweden':'se','se':'se',
-    'denmark':'dk','dk':'dk',
-    'finland':'fi','fi':'fi',
-    'switzerland':'ch','ch':'ch',
-    'austria':'at','at':'at',
-    'italy':'it','it':'it',
-    'spain':'es','es':'es',
-    'portugal':'pt','pt':'pt',
-    'ireland':'ie','ie':'ie',
-    'new zealand':'nz','nz':'nz',
-    'south africa':'za','za':'za',
-    'kenya':'ke','ke':'ke',
-    'tanzania':'tz','tz':'tz',
-    'rwanda':'rw','rw':'rw',
-    'nigeria':'ng','ng':'ng',
-    'ghana':'gh','gh':'gh',
-    'ethiopia':'et','et':'et',
-    'india':'in','in':'in',
-    'china':'cn','cn':'cn',
-    'japan':'jp','jp':'jp',
-    'singapore':'sg','sg':'sg',
-    'philippines':'ph','ph':'ph',
-    'indonesia':'id','id':'id',
-    'malaysia':'my','my':'my',
-    'thailand':'th','th':'th',
-    'south korea':'kr','korea':'kr','kr':'kr',
     'brazil':'br','br':'br',
     'mexico':'mx','mx':'mx',
     'argentina':'ar','ar':'ar',
-    'colombia':'co','co':'co',
+    'colombia':'co','colombia':'co',
     'chile':'cl','cl':'cl',
     'peru':'pe','pe':'pe',
+    'venezuela':'ve','ve':'ve',
+    'ecuador':'ec','ec':'ec',
+    'bolivia':'bo','bo':'bo',
+    'paraguay':'py','py':'py',
+    'uruguay':'uy','uy':'uy',
+    'cuba':'cu','cu':'cu',
+    'jamaica':'jm','jm':'jm',
+    'haiti':'ht','ht':'ht',
+    'dominican republic':'do','do':'do',
+    'trinidad':'tt','tt':'tt',
+    'guyana':'gy','gy':'gy',
+    'panama':'pa','pa':'pa',
+    'costa rica':'cr','cr':'cr',
+    'guatemala':'gt','gt':'gt',
+    'honduras':'hn','hn':'hn',
+    'el salvador':'sv','sv':'sv',
+    'nicaragua':'ni','ni':'ni',
+    /* Europe */
+    'uk':'gb','united kingdom':'gb','england':'gb','britain':'gb','scotland':'gb','wales':'gb','great britain':'gb',
+    'germany':'de','deutschland':'de','de':'de',
+    'france':'fr','fr':'fr',
+    'italy':'it','it':'it',
+    'spain':'es','es':'es',
+    'portugal':'pt','pt':'pt',
+    'netherlands':'nl','holland':'nl','nl':'nl',
     'belgium':'be','be':'be',
+    'switzerland':'ch','ch':'ch',
+    'austria':'at','at':'at',
+    'sweden':'se','se':'se',
+    'norway':'no','no':'no',
+    'denmark':'dk','dk':'dk',
+    'finland':'fi','fi':'fi',
+    'ireland':'ie','ie':'ie',
     'poland':'pl','pl':'pl',
-    'greece':'gr','gr':'gr',
-    'turkey':'tr','tr':'tr',
-    'israel':'il','il':'il',
-    'uae':'ae','dubai':'ae','ae':'ae',
     'russia':'ru','ru':'ru',
     'ukraine':'ua','ua':'ua',
-    'zimbabwe':'zw','zw':'zw',
-    'zambia':'zm','zm':'zm',
-    'malawi':'mw','mw':'mw',
-    'cameroon':'cm','cm':'cm',
-    'egypt':'eg','eg':'eg',
-    'morocco':'ma','ma':'ma',
-    'congo':'cd','cd':'cd',
-    'belgium':'be','be':'be',
+    'greece':'gr','gr':'gr',
+    'turkey':'tr','tr':'tr',
     'czech republic':'cz','czechia':'cz','cz':'cz',
     'hungary':'hu','hu':'hu',
     'romania':'ro','ro':'ro',
+    'bulgaria':'bg','bg':'bg',
     'serbia':'rs','rs':'rs',
     'croatia':'hr','hr':'hr',
     'slovakia':'sk','sk':'sk',
-    'bulgaria':'bg','bg':'bg',
-    'denmark':'dk','dk':'dk',
+    'slovenia':'si','si':'si',
+    'luxembourg':'lu','lu':'lu',
+    'iceland':'is','is':'is',
+    'estonia':'ee','ee':'ee',
+    'latvia':'lv','lv':'lv',
+    'lithuania':'lt','lt':'lt',
+    'albania':'al','al':'al',
+    'north macedonia':'mk','mk':'mk',
+    'moldova':'md','md':'md',
+    'belarus':'by','by':'by',
+    'malta':'mt','mt':'mt',
+    'cyprus':'cy','cy':'cy',
+    /* Oceania */
+    'australia':'au','au':'au','aussie':'au',
     'new zealand':'nz','nz':'nz',
+    'papua new guinea':'pg','pg':'pg',
+    'fiji':'fj','fj':'fj',
+    /* Asia */
+    'china':'cn','cn':'cn',
+    'japan':'jp','jp':'jp',
+    'india':'in','in':'in',
+    'south korea':'kr','korea':'kr','kr':'kr',
+    'indonesia':'id','id':'id',
+    'philippines':'ph','ph':'ph',
+    'vietnam':'vn','vn':'vn',
+    'thailand':'th','th':'th',
+    'malaysia':'my','my':'my',
+    'singapore':'sg','sg':'sg',
+    'myanmar':'mm','mm':'mm',
+    'cambodia':'kh','kh':'kh',
+    'laos':'la','la':'la',
+    'taiwan':'tw','tw':'tw',
+    'hong kong':'hk','hk':'hk',
     'pakistan':'pk','pk':'pk',
     'bangladesh':'bd','bd':'bd',
     'sri lanka':'lk','lk':'lk',
     'nepal':'np','np':'np',
-    'myanmar':'mm','mm':'mm',
-    'vietnam':'vn','vn':'vn',
-    'cambodia':'kh','kh':'kh',
-    'taiwan':'tw','tw':'tw',
-    'hong kong':'hk','hk':'hk',
-    'saudi arabia':'sa','sa':'sa',
-    'jordan':'jo','jo':'jo',
-    'lebanon':'lb','lb':'lb',
+    'afghanistan':'af','af':'af',
     'iran':'ir','ir':'ir',
     'iraq':'iq','iq':'iq',
+    'saudi arabia':'sa','sa':'sa',
+    'uae':'ae','united arab emirates':'ae','dubai':'ae','abu dhabi':'ae','ae':'ae',
+    'israel':'il','il':'il',
+    'jordan':'jo','jo':'jo',
+    'lebanon':'lb','lb':'lb',
     'kuwait':'kw','kw':'kw',
     'qatar':'qa','qa':'qa',
     'bahrain':'bh','bh':'bh',
     'oman':'om','om':'om',
-    'senegal':'sn','sn':'sn',
-    'ivory coast':'ci','ci':'ci',
-    'mali':'ml','ml':'ml',
-    'burkina faso':'bf','bf':'bf',
-    'benin':'bj','bj':'bj',
-    'togo':'tg','tg':'tg',
-    'guinea':'gn','gn':'gn',
+    'yemen':'ye','ye':'ye',
+    'syria':'sy','sy':'sy',
+    'mongolia':'mn','mn':'mn',
+    'kazakhstan':'kz','kz':'kz',
+    'uzbekistan':'uz','uz':'uz',
+    /* Africa */
+    'uganda':'ug','ug':'ug',
+    'kenya':'ke','ke':'ke',
+    'tanzania':'tz','tz':'tz',
+    'rwanda':'rw','rw':'rw',
+    'ethiopia':'et','et':'et',
+    'nigeria':'ng','ng':'ng',
+    'ghana':'gh','gh':'gh',
+    'south africa':'za','za':'za',
+    'egypt':'eg','eg':'eg',
+    'morocco':'ma','ma':'ma',
     'angola':'ao','ao':'ao',
+    'cameroon':'cm','cm':'cm',
+    'zimbabwe':'zw','zw':'zw',
+    'zambia':'zm','zm':'zm',
+    'malawi':'mw','mw':'mw',
+    'mozambique':'mz','mz':'mz',
     'botswana':'bw','bw':'bw',
     'namibia':'na','na':'na',
-    'lesotho':'ls','ls':'ls',
-    'swaziland':'sz','sz':'sz',
-    'madagascar':'mg','mg':'mg',
-    'mozambique':'mz','mz':'mz',
+    'senegal':'sn','sn':'sn',
+    'ivory coast':'ci','cote d ivoire':'ci','ci':'ci',
+    'mali':'ml','ml':'ml',
+    'burkina faso':'bf','bf':'bf',
+    'niger':'ne','ne':'ne',
+    'chad':'td','td':'td',
     'sudan':'sd','sd':'sd',
+    'south sudan':'ss','ss':'ss',
     'somalia':'so','so':'so',
+    'congo':'cd','democratic republic of congo':'cd','drc':'cd','cd':'cd',
+    'republic of congo':'cg','cg':'cg',
+    'madagascar':'mg','mg':'mg',
+    'guinea':'gn','gn':'gn',
+    'liberia':'lr','lr':'lr',
+    'sierra leone':'sl','sl':'sl',
+    'togo':'tg','tg':'tg',
+    'benin':'bj','bj':'bj',
+    'gabon':'ga','ga':'ga',
+    'equatorial guinea':'gq','gq':'gq',
     'eritrea':'er','er':'er',
     'djibouti':'dj','dj':'dj',
     'burundi':'bi','bi':'bi',
-    'liberia':'lr','lr':'lr',
-    'sierra leone':'sl','sl':'sl'
+    'lesotho':'ls','ls':'ls',
+    'eswatini':'sz','swaziland':'sz','sz':'sz',
+    'libya':'ly','ly':'ly',
+    'tunisia':'tn','tn':'tn',
+    'algeria':'dz','dz':'dz'
   };
   return codes[country.trim().toLowerCase()]||null;
 }
