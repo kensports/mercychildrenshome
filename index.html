@@ -127,6 +127,11 @@ section{padding:88px 5%;}
 .fstat-lbl{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
 
 /* GALLERY */
+/* SKELETON SHIMMER */
+@keyframes shimmerLoad{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+.skeleton{background:linear-gradient(90deg,var(--card) 25%,var(--bg3) 50%,var(--card) 75%);background-size:200% 100%;animation:shimmerLoad 1.5s infinite;}
+.photo-banner-img.skeleton,.g-item.skeleton{animation:shimmerLoad 1.5s infinite;}
+
 .gallery-section{background:var(--bg);padding:88px 5%;}
 .gallery-main-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:0;}
 .g-item{border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--border);cursor:pointer;position:relative;}
@@ -1373,6 +1378,7 @@ async function getPhotoMeta(){
 
 async function setPhotoMeta(key,filename){
   photoCache=null;
+  localStorage.removeItem('mch_photo_cache'); // invalidate cache on upload
   if(filename){
     await fetch(SUPA_URL+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:key,filename:filename})});
   }else{
@@ -1572,74 +1578,100 @@ function applyData(){
 }
 
 // ===== LOAD PHOTOS =====
-async function loadAllPhotos(){
-  var meta=await getPhotoMeta();
-  // Banner photos (0 and 2)
+function getCachedPhotoMeta(){
+  try{return JSON.parse(localStorage.getItem('mch_photo_cache')||'{}');}catch(e){return{};}
+}
+function saveCachedPhotoMeta(meta){
+  try{localStorage.setItem('mch_photo_cache',JSON.stringify(meta));}catch(e){}
+}
+
+function applyPhotoToElement(el,url,idx,isBanner){
+  if(!el||!url)return;
+  var savedPos=localStorage.getItem('pos_gallery_'+idx)||'center';
+  var existing=el.querySelector('img');
+  if(existing&&existing.getAttribute('data-url')===url)return;
+  if(isBanner){
+    el.innerHTML='';el.style.background='none';
+    var img=document.createElement('img');
+    img.src=url;img.setAttribute('data-url',url);
+    img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:'+savedPos+';display:block;';
+    img.onload=function(){el.classList.remove('skeleton');};
+    el.appendChild(img);
+  } else {
+    el.style.display='block';el.style.position='relative';
+    el.style.aspectRatio='4/3';el.style.minHeight='180px';
+    if(existing)existing.remove();
+    var img2=document.createElement('img');
+    img2.src=url;img2.setAttribute('data-url',url);
+    img2.style.cssText='width:100%;height:100%;object-fit:cover;object-position:'+savedPos+';display:block;position:absolute;top:0;left:0;';
+    img2.onload=function(){el.classList.remove('skeleton');};
+    if(!el.querySelector('.g-caption')){
+      var caps=getCaptions();
+      var capDiv=document.createElement('div');
+      capDiv.className='g-caption';
+      var capP=document.createElement('p');
+      capP.id='cap-'+idx;
+      capP.textContent=caps['cap-'+idx]||'';
+      capDiv.appendChild(capP);
+      el.appendChild(capDiv);
+    }
+    el.insertBefore(img2,el.firstChild);
+    el.classList.add('skeleton');
+  }
+}
+
+function applyPhotosFromMeta(meta){
   [0,2].forEach(function(idx){
     var filename=meta['gallery_'+idx];
     var el=document.getElementById('gi-'+idx);
     if(!el||!filename)return;
-    var url=getSupaPhotoURL(filename);
-    var savedPos=localStorage.getItem('pos_gallery_'+idx)||'center';
-    el.innerHTML='';el.style.background='none';
-    var img=document.createElement('img');
-    img.src=url;
-    img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:'+savedPos+';display:block;';
-    el.appendChild(img);
+    applyPhotoToElement(el,getSupaPhotoURL(filename),idx,true);
   });
-  // Gallery photos (3-17) - only show slot if photo exists
   for(var i=3;i<=17;i++){
     (function(idx){
       var filename=meta['gallery_'+idx];
       var el=document.getElementById('gi-'+idx);
       if(!el)return;
       if(filename){
-        var url=getSupaPhotoURL(filename);
-        var savedPos=localStorage.getItem('pos_gallery_'+idx)||'center';
-        el.style.display='block';
-        el.style.position='relative';
-        el.style.aspectRatio='4/3';
-        el.style.minHeight='180px';
-        var img=document.createElement('img');
-        img.src=url;
-        img.style.cssText='width:100%;height:100%;object-fit:cover;object-position:'+savedPos+';display:block;position:absolute;top:0;left:0;';
-        var oldImg=el.querySelector('img');
-        if(oldImg)oldImg.remove();
-        // Ensure caption element exists for this slot
-        if(!el.querySelector('.g-caption')){
-          var capDiv=document.createElement('div');
-          capDiv.className='g-caption';
-          var capP=document.createElement('p');
-          capP.id='cap-'+idx;
-          var caps=getCaptions();
-          capP.textContent=caps['cap-'+idx]||'';
-          capDiv.appendChild(capP);
-          el.appendChild(capDiv);
-        }
-        el.insertBefore(img,el.firstChild);
+        applyPhotoToElement(el,getSupaPhotoURL(filename),idx,false);
       } else {
-        // Hide if no photo (except slots 3-7 which were originally visible)
-        if(idx>=8) el.style.display='none';
+        if(idx>=8)el.style.display='none';
       }
     })(i);
   }
-  // Founder
   var ff=meta['founder'];
   var fel=document.getElementById('gi-1');
   if(fel&&ff){
     var furl=getSupaPhotoURL(ff);
+    var fex=fel.querySelector('img');
+    if(fex&&fex.getAttribute('data-url')===furl)return;
     var fimg=document.createElement('img');
-    fimg.src=furl;
+    fimg.src=furl;fimg.setAttribute('data-url',furl);
     fimg.style.cssText='width:100%;height:100%;object-fit:cover;object-position:center;display:block;position:absolute;top:0;left:0;';
+    fimg.onload=function(){fel.classList.remove('skeleton');};
     fel.style.position='relative';
     var badge=fel.querySelector('.founder-overlay-badge');
-    fel.innerHTML='';
-    fel.appendChild(fimg);
+    fel.innerHTML='';fel.appendChild(fimg);
     if(badge)fel.appendChild(badge);
   }
 }
 
-// ===== ADMIN PHOTO GRID =====
+async function loadAllPhotos(){
+  // INSTANT: load from localStorage cache first
+  var cached=getCachedPhotoMeta();
+  if(Object.keys(cached).length>0){
+    applyPhotosFromMeta(cached);
+  } else {
+    // Show skeleton shimmer while fetching
+    [0,2].forEach(function(idx){var el=document.getElementById('gi-'+idx);if(el)el.classList.add('skeleton');});
+  }
+  // BACKGROUND: fetch fresh from Supabase
+  var meta=await getPhotoMeta();
+  saveCachedPhotoMeta(meta);
+  applyPhotosFromMeta(meta);
+}
+
+
 async function renderPhotoGrid(){
   var grid=document.getElementById('photoGrid');
   if(!grid)return;
