@@ -1367,13 +1367,21 @@ function getSupaPhotoURL(f){return SUPA_URL+'/storage/v1/object/public/'+BUCKET+
 
 async function getPhotoMeta(){
   if(photoCache)return photoCache;
+  // Try localStorage cache first (instant, no network)
+  var cached=getCachedPhotoMeta();
+  if(Object.keys(cached).length>0){
+    photoCache=cached; // use cache immediately
+  }
+  // Always fetch fresh in background
   try{
     var r=await fetch(SUPA_URL+'/rest/v1/mch_photos?select=id,filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
     var rows=await r.json();
     var m={};
     if(Array.isArray(rows))rows.forEach(function(row){m[row.id]=row.filename;});
-    photoCache=m;return m;
-  }catch(e){return{};}
+    photoCache=m;
+    saveCachedPhotoMeta(m); // update cache
+    return m;
+  }catch(e){return photoCache||{};}
 }
 
 async function setPhotoMeta(key,filename){
@@ -1657,18 +1665,28 @@ function applyPhotosFromMeta(meta){
 }
 
 async function loadAllPhotos(){
-  // INSTANT: load from localStorage cache first
+  // STEP 1: SYNCHRONOUS - show from localStorage instantly (zero delay)
   var cached=getCachedPhotoMeta();
   if(Object.keys(cached).length>0){
-    applyPhotosFromMeta(cached);
+    applyPhotosFromMeta(cached); // instant - no network needed
   } else {
-    // Show skeleton shimmer while fetching
-    [0,2].forEach(function(idx){var el=document.getElementById('gi-'+idx);if(el)el.classList.add('skeleton');});
+    // First ever visit - show skeleton shimmer
+    [0,2].forEach(function(idx){
+      var el=document.getElementById('gi-'+idx);
+      if(el) el.classList.add('skeleton');
+    });
   }
-  // BACKGROUND: fetch fresh from Supabase
-  var meta=await getPhotoMeta();
-  saveCachedPhotoMeta(meta);
-  applyPhotosFromMeta(meta);
+  // STEP 2: ASYNC - silently refresh from Supabase in background
+  // This does NOT block the UI
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/mch_photos?select=id,filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    var rows=await r.json();
+    var fresh={};
+    if(Array.isArray(rows))rows.forEach(function(row){fresh[row.id]=row.filename;});
+    photoCache=fresh;
+    saveCachedPhotoMeta(fresh);
+    applyPhotosFromMeta(fresh); // update with fresh data (usually same URLs)
+  }catch(e){}
 }
 
 
@@ -2602,6 +2620,19 @@ async function saveEditVolunteer(){
 }
 
 // ===== INIT =====
+// Preload cached images immediately (before DOM ready)
+(function(){
+  var cached=getCachedPhotoMeta();
+  Object.keys(cached).forEach(function(k){
+    if(cached[k] && k.indexOf('gallery_')===0){
+      var link=document.createElement('link');
+      link.rel='preload';link.as='image';
+      link.href='https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/'+cached[k];
+      document.head.appendChild(link);
+    }
+  });
+})();
+
 applyData();
 applyCaptions();
 applyMotto(getData());
