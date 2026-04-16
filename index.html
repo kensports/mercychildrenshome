@@ -1969,17 +1969,28 @@ function previewMotto(){
   var val = (document.getElementById('ei-motto')||{}).value || '';
   var color = (document.getElementById('ei-mottoColor')||{}).value || '#c9a84c';
   var bg = (document.getElementById('ei-mottoBg')||{}).value || '#0a0e1a';
-  var size = (document.getElementById('ei-mottoSize')||{}).value || '14';
+  var size = parseInt((document.getElementById('ei-mottoSize')||{}).value || '11');
   // Update preview box
   var prev = document.getElementById('mottoPreviewText');
   if(prev){prev.textContent=val;prev.style.color=color;prev.style.fontSize=size+'px';}
   var box = document.getElementById('mottoPrevBox');
-  if(box) box.style.background = bg;
-  // Live update on page immediately
+  if(box) box.style.background = bg==='#0a0e1a'?'rgba(255,255,255,0.04)':bg;
+  // Live update the ACTUAL motto on the page
   var mt = document.getElementById('mottoText');
-  if(mt){mt.textContent=val;mt.style.color=color;mt.style.fontSize='clamp(11px,1.8vw,'+size+'px)';}
+  if(mt){
+    mt.textContent = val || mt.textContent;
+    mt.style.setProperty('color', color, 'important');
+    mt.style.setProperty('font-size', size+'px', 'important');
+  }
+  // Update pill border color live
+  var pill = document.querySelector('.motto-pill');
+  if(pill) pill.style.borderColor = color+'55';
+  // Bar background (only if changed from default)
   var bar = document.getElementById('mottoBar');
-  if(bar) bar.style.setProperty('background',bg,'important');
+  if(bar){
+    bar.style.setProperty('background', '#0a0e1a', 'important');
+    bar.style.setProperty('background-color', '#0a0e1a', 'important');
+  }
 }
 
 var _mottoPos = 'center';
@@ -2018,30 +2029,33 @@ async function saveMotto(){
 
 function applyMotto(d){
   if(!d) return;
+  var color = d.mottoColor || '#c9a84c';
+  var sz = parseInt(d.mottoSize||11);
   var mt = document.getElementById('mottoText');
   if(mt){
     mt.textContent = d.mottoText || DEF.mottoText;
-    var color = d.mottoColor || '#c9a84c';
-    var sz = parseInt(d.mottoSize||11);
-    mt.style.cssText = 'font-weight:700;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;color:'+color+';font-size:'+sz+'px;';
+    // Use setProperty with important so color always wins
+    mt.style.setProperty('color', color, 'important');
+    mt.style.setProperty('font-size', sz+'px', 'important');
+    mt.style.setProperty('font-weight', '700', 'important');
+    mt.style.setProperty('letter-spacing', '2px', 'important');
+    mt.style.setProperty('text-transform', 'uppercase', 'important');
+    mt.style.setProperty('white-space', 'nowrap', 'important');
   }
   var pill = document.querySelector('.motto-pill');
   if(pill){
-    pill.style.borderColor = (d.mottoColor||'#c9a84c')+'55';
+    pill.style.borderColor = color+'55';
     pill.style.background = 'transparent';
   }
   var bar = document.getElementById('mottoBar');
   if(bar){
-    // Force dark bg - no purple ever
     bar.style.setProperty('background','#0a0e1a','important');
     bar.style.setProperty('background-color','#0a0e1a','important');
     bar.style.setProperty('background-image','none','important');
-    // Apply position on ALL devices
     bar.classList.remove('pos-left','pos-right');
     var pos = d.mottoPos||'center';
     if(pos==='left') bar.classList.add('pos-left');
     else if(pos==='right') bar.classList.add('pos-right');
-    // Save to localStorage so phone gets it too
     try{localStorage.setItem('mch_motto_pos', pos);}catch(e){}
   }
 }
