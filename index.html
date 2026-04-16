@@ -1538,7 +1538,15 @@ async function syncRemoteData(){
     var r=await fetch(SUPA_URL+'/rest/v1/mch_photos?id=eq.site_settings&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
     var rows=await r.json();
     if(Array.isArray(rows)&&rows.length>0){
-      localStorage.setItem(DKEY,rows[0].filename);
+      // Force s2n=3 before saving to localStorage
+      try{
+        var _rawSettings = JSON.parse(rows[0].filename);
+        _rawSettings.s2n = '3';
+        _rawSettings.s2l = 'Meals Daily';
+        localStorage.setItem(DKEY, JSON.stringify(_rawSettings));
+      }catch(e){
+        localStorage.setItem(DKEY, rows[0].filename);
+      }
       applyData();
       // Apply motto with position from remote data
       var _remoteMotto = getData();
@@ -1584,11 +1592,11 @@ function applyData(){
   var s2n=document.getElementById('stat2n'),s2l=document.getElementById('stat2l');
   var s3n=document.getElementById('stat3n'),s3l=document.getElementById('stat3l');
   if(s1n)s1n.textContent=d.s1n;if(s1l)s1l.textContent=d.s1l;
-  if(s2n)s2n.textContent=d.s2n;if(s2l)s2l.textContent=d.s2l;
+  if(s2n)s2n.textContent='3';if(s2l)s2l.textContent=d.s2l||'Meals Daily';
   if(s3n)s3n.textContent=d.s3n;if(s3l)s3l.textContent=d.s3l;
   // Trust band
   var tb1n=document.getElementById('tb1n');if(tb1n)tb1n.textContent=d.s1n||'32';
-  var tb2n=document.getElementById('tb2n');if(tb2n)tb2n.textContent=d.s2n||'3';
+  var tb2n=document.getElementById('tb2n');if(tb2n)tb2n.textContent='3';
   var at=document.getElementById('aboutText');if(at)at.textContent=d.aboutText;
   var cl=document.getElementById('contactLocation');if(cl)cl.textContent=d.location;
   var cp=document.getElementById('contactPhone');if(cp)cp.textContent=d.phone;
@@ -2763,6 +2771,11 @@ var spDate=document.getElementById('sp-date');
 if(spDate)spDate.value=new Date().toISOString().split('T')[0];
 setTimeout(makeGalleryClickable,2000);
 setTimeout(initScrollAnimations,300);
+// Force correct stats display
+setTimeout(function(){
+  var tb2=document.getElementById('tb2n');if(tb2)tb2.textContent='3';
+  var s2=document.getElementById('stat2n');if(s2)s2.textContent='3';
+},100);
 </script>
 </body>
 </html>
