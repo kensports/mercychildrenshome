@@ -131,18 +131,19 @@ section{padding:88px 5%;}
 .gallery-main-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:0;}
 .g-item{border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--border);cursor:pointer;position:relative;}
 .g-item img{width:100%;height:100%;object-fit:cover;display:block;}
-.g-caption{position:absolute;bottom:14px;left:14px;right:14px;background:rgba(5,8,18,.88);border:1px solid rgba(201,168,76,.3);backdrop-filter:blur(10px);border-radius:12px;padding:12px 16px;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s;}
-.g-item:hover .g-caption,.g-item:focus .g-caption{opacity:1;transform:translateY(0);}
-.g-caption p{font-size:13px;color:#f1f5f9;font-weight:600;line-height:1.5;display:flex;align-items:center;gap:8px;}
-.g-caption p::before{content:'📷';font-size:12px;flex-shrink:0;}
+.g-caption{position:absolute;bottom:0;left:0;right:0;background:transparent;border-radius:0 0 16px 16px;padding:10px 14px;opacity:0;transition:opacity .4s ease;}
+.g-item:hover .g-caption,.g-item:focus .g-caption,.g-item.active .g-caption{opacity:1;}
+.g-caption p{font-size:13px;color:#ffffff;font-weight:700;line-height:1.4;text-shadow:0 1px 8px rgba(0,0,0,.9),0 0 20px rgba(0,0,0,.8);display:flex;align-items:center;gap:0;}
+.g-caption p::before{content:'';display:none;}
 .g-placeholder{width:100%;aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
 .g-placeholder svg{width:32px;height:32px;fill:none;stroke:var(--border);stroke-width:1.5;stroke-linecap:round;}
 .g-placeholder span{font-size:12px;color:var(--text2);}
 
 /* PHOTO BANNER CAPTION - big black box */
-.photo-caption-bar{position:absolute;bottom:16px;left:16px;z-index:3;background:rgba(5,8,18,.88);border:1px solid rgba(201,168,76,.3);backdrop-filter:blur(10px);border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:10px;max-width:90%;}
-.photo-caption-bar svg{width:16px;height:16px;fill:none;stroke:var(--gold);stroke-width:2;flex-shrink:0;}
-.photo-caption-bar span{font-size:13px;color:#f1f5f9;font-weight:600;}
+.photo-caption-bar{position:absolute;bottom:0;left:0;right:0;z-index:3;background:transparent;padding:10px 5%;display:flex;align-items:center;gap:0;opacity:0;transition:opacity .4s ease;}
+.photo-banner:hover .photo-caption-bar{opacity:1;}
+.photo-caption-bar svg{display:none;}
+.photo-caption-bar span{font-size:14px;color:#ffffff;font-weight:700;text-shadow:0 1px 8px rgba(0,0,0,.9),0 0 20px rgba(0,0,0,.8);}
 
 /* SCROLL ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
@@ -182,9 +183,7 @@ section{padding:88px 5%;}
 .photo-banner-content-right>div{max-width:520px;}
 .photo-banner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:700;color:#ffffff;line-height:1.15;margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,.6);}
 .photo-banner p{font-size:16px;color:rgba(255,255,255,.9);line-height:1.8;text-shadow:0 1px 10px rgba(0,0,0,.7);}
-.photo-caption-bar{background:rgba(0,0,0,.7);backdrop-filter:blur(8px);padding:10px 5%;display:flex;align-items:center;gap:8px;border-top:1px solid rgba(255,255,255,.1);}
-.photo-caption-bar svg{width:14px;height:14px;fill:none;stroke:var(--gold);stroke-width:2;flex-shrink:0;}
-.photo-caption-bar span{font-size:12px;color:rgba(255,255,255,.8);}
+
 
 /* DONATE SECTION */
 .donate{background:var(--bg);}
@@ -348,8 +347,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   .trust-item:nth-child(3){border-top:1px solid var(--border);}
   .trust-item:nth-child(4){border-top:1px solid var(--border);border-right:none;}
   .gallery-main-grid{grid-template-columns:1fr 1fr;}
-  /* Always show captions on mobile */
-  .g-caption{opacity:1 !important;transform:translateY(0) !important;}
+  /* Mobile captions show on tap via .active class */
 }
 @media(max-width:500px){
   section{padding:60px 5%;}
@@ -493,7 +491,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <h2>A Place to Call Home</h2>
     <p>By the grace of God, every child who arrives at Mercy Children's Home finds more than a roof — they find family, love, and a community that cares.</p>
   </div>
-  <div class="photo-caption-bar" style="position:absolute;bottom:0;left:0;right:0;z-index:3;">
+  <div class="photo-caption-bar">
     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
     <span id="cap-0">Children during their daily activities at Mercy Children's Home</span>
   </div>
@@ -620,7 +618,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <p>"The fear of the Lord is the beginning of wisdom." — Proverbs 9:10. Every child at Mercy Home attends school — because education is God's gift to their future.</p>
     </div>
   </div>
-  <div class="photo-caption-bar" style="position:absolute;bottom:0;left:0;right:0;z-index:3;">
+  <div class="photo-caption-bar">
     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
     <span id="cap-2">Children during learning time at Mercy Children's Home</span>
   </div>
@@ -678,26 +676,51 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <h2 class="sec-title">Real Moments of Grace</h2>
     <p class="sec-sub" style="margin:0 auto;">Every photo reflects the care, support, and hope we provide to vulnerable children in our community.</p>
   </div>
-  <div class="gallery-main-grid">
-    <div id="gi-3" style="aspect-ratio:4/3;min-height:180px;" class="g-item">
-      <div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo 4</span></div>
+  <div class="gallery-main-grid" id="galleryGrid">
+    <div id="gi-3" class="g-item">
       <div class="g-caption"><p id="cap-3">Children during Sunday gathering</p></div>
     </div>
-    <div id="gi-4" style="aspect-ratio:4/3;min-height:180px;" class="g-item">
-      <div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo 5</span></div>
+    <div id="gi-4" class="g-item">
       <div class="g-caption"><p id="cap-4">Daily meal time at Mercy Children's Home</p></div>
     </div>
-    <div id="gi-5" style="aspect-ratio:4/3;min-height:180px;" class="g-item">
-      <div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo 6</span></div>
+    <div id="gi-5" class="g-item">
       <div class="g-caption"><p id="cap-5">Community support visit</p></div>
     </div>
-    <div id="gi-6" style="aspect-ratio:4/3;min-height:180px;" class="g-item">
-      <div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo 7</span></div>
+    <div id="gi-6" class="g-item">
       <div class="g-caption"><p id="cap-6">Children at play — joy is alive at Mercy Home</p></div>
     </div>
-    <div id="gi-7" style="aspect-ratio:4/3;min-height:180px;" class="g-item">
-      <div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo 8</span></div>
+    <div id="gi-7" class="g-item">
       <div class="g-caption"><p id="cap-7">A safe home for every child in our care</p></div>
+    </div>
+    <div id="gi-8" class="g-item" style="display:none;">
+      <div class="g-caption"><p id="cap-8"></p></div>
+    </div>
+    <div id="gi-9" class="g-item" style="display:none;">
+      <div class="g-caption"><p id="cap-9"></p></div>
+    </div>
+    <div id="gi-10" class="g-item" style="display:none;">
+      <div class="g-caption"><p id="cap-10"></p></div>
+    </div>
+    <div id="gi-11" class="g-item" style="display:none;">
+      <div class="g-caption"><p id="cap-11"></p></div>
+    </div>
+    <div id="gi-12" class="g-item" style="display:none;">
+      <div class="g-caption"><p id="cap-12"></p></div>
+    </div>
+    <div id="gi-13" class="g-item" style="display:none;">
+      <div class="g-caption"><p id="cap-13"></p></div>
+    </div>
+    <div id="gi-14" class="g-item" style="display:none;">
+      <div class="g-caption"><p id="cap-14"></p></div>
+    </div>
+    <div id="gi-15" class="g-item" style="display:none;">
+      <div class="g-caption"><p id="cap-15"></p></div>
+    </div>
+    <div id="gi-16" class="g-item" style="display:none;">
+      <div class="g-caption"><p id="cap-16"></p></div>
+    </div>
+    <div id="gi-17" class="g-item" style="display:none;">
+      <div class="g-caption"><p id="cap-17"></p></div>
     </div>
   </div>
   <!-- DONATE CTA AFTER GALLERY -->
@@ -1156,6 +1179,8 @@ var DEF_CAPTIONS={
   'cap-5':'Community support visit',
   'cap-6':'Children at play — joy is alive at Mercy Home',
   'cap-7':'A safe home for every child in our care',
+  'cap-8':'','cap-9':'','cap-10':'','cap-11':'','cap-12':'',
+  'cap-13':'','cap-14':'','cap-15':'','cap-16':'','cap-17':'',
   'cap-founder':'Ssengonzi Alex — Founder of Mercy Children\'s Home'
 };
 
@@ -1272,30 +1297,42 @@ function applyData(){
 // ===== LOAD PHOTOS =====
 async function loadAllPhotos(){
   var meta=await getPhotoMeta();
-  for(var i=0;i<8;i++){
+  // Banner photos (0 and 2)
+  [0,2].forEach(function(idx){
+    var filename=meta['gallery_'+idx];
+    var el=document.getElementById('gi-'+idx);
+    if(!el||!filename)return;
+    var url=getSupaPhotoURL(filename);
+    var savedPos=localStorage.getItem('pos_gallery_'+idx)||'center';
+    el.innerHTML='';el.style.background='none';
+    var img=document.createElement('img');
+    img.src=url;
+    img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:'+savedPos+';display:block;';
+    el.appendChild(img);
+  });
+  // Gallery photos (3-17) - only show slot if photo exists
+  for(var i=3;i<=17;i++){
     (function(idx){
       var filename=meta['gallery_'+idx];
       var el=document.getElementById('gi-'+idx);
-      if(!el||!filename)return;
-      var url=getSupaPhotoURL(filename);
-      var savedPos=localStorage.getItem('pos_gallery_'+idx)||'center';
-      if(idx===0||idx===2){
-        el.innerHTML='';
-        el.style.background='none';
+      if(!el)return;
+      if(filename){
+        var url=getSupaPhotoURL(filename);
+        var savedPos=localStorage.getItem('pos_gallery_'+idx)||'center';
+        el.style.display='block';
+        el.style.position='relative';
+        el.style.aspectRatio='4/3';
+        el.style.minHeight='180px';
         var img=document.createElement('img');
         img.src=url;
-        img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:'+savedPos+';display:block;';
-        el.appendChild(img);
-      }else{
-        var existing=el.querySelector('.g-placeholder');
-        if(existing){
-          el.style.position='relative';
-          var img2=document.createElement('img');
-          img2.src=url;
-          img2.style.cssText='width:100%;height:100%;object-fit:cover;object-position:'+savedPos+';display:block;';
-          el.insertBefore(img2,el.firstChild);
-          existing.style.display='none';
-        }
+        img.style.cssText='width:100%;height:100%;object-fit:cover;object-position:'+savedPos+';display:block;position:absolute;top:0;left:0;';
+        // Remove old img if exists
+        var oldImg=el.querySelector('img');
+        if(oldImg)oldImg.remove();
+        el.insertBefore(img,el.firstChild);
+      } else {
+        // Hide if no photo (except slots 3-7 which were originally visible)
+        if(idx>=8) el.style.display='none';
       }
     })(i);
   }
@@ -1321,8 +1358,8 @@ async function renderPhotoGrid(){
   if(!grid)return;
   grid.innerHTML='';
   var meta=await getPhotoMeta();
-  var labels=['Banner Photo 1','(not used)','Banner Photo 2','Gallery 1','Gallery 2','Gallery 3','Gallery 4','Gallery 5'];
-  for(var i=0;i<8;i++){
+  var labels=['Banner Photo 1','(skip)','Banner Photo 2','Gallery 1','Gallery 2','Gallery 3','Gallery 4','Gallery 5','Gallery 6','Gallery 7','Gallery 8','Gallery 9','Gallery 10','Gallery 11','Gallery 12','Gallery 13','Gallery 14','Gallery 15'];
+  for(var i=0;i<=17;i++){
     if(i===1)continue;
     (function(idx){
       var key='gallery_'+idx;
@@ -1428,11 +1465,21 @@ async function renderCaptionsAdmin(){
   var capDefs=[
     {id:'cap-0',label:'Banner Photo 1',photoKey:'gallery_0'},
     {id:'cap-2',label:'Banner Photo 2',photoKey:'gallery_2'},
-    {id:'cap-3',label:'Gallery Photo 1',photoKey:'gallery_3'},
-    {id:'cap-4',label:'Gallery Photo 2',photoKey:'gallery_4'},
-    {id:'cap-5',label:'Gallery Photo 3',photoKey:'gallery_5'},
-    {id:'cap-6',label:'Gallery Photo 4',photoKey:'gallery_6'},
-    {id:'cap-7',label:'Gallery Photo 5',photoKey:'gallery_7'},
+    {id:'cap-3',label:'Gallery 1',photoKey:'gallery_3'},
+    {id:'cap-4',label:'Gallery 2',photoKey:'gallery_4'},
+    {id:'cap-5',label:'Gallery 3',photoKey:'gallery_5'},
+    {id:'cap-6',label:'Gallery 4',photoKey:'gallery_6'},
+    {id:'cap-7',label:'Gallery 5',photoKey:'gallery_7'},
+    {id:'cap-8',label:'Gallery 6',photoKey:'gallery_8'},
+    {id:'cap-9',label:'Gallery 7',photoKey:'gallery_9'},
+    {id:'cap-10',label:'Gallery 8',photoKey:'gallery_10'},
+    {id:'cap-11',label:'Gallery 9',photoKey:'gallery_11'},
+    {id:'cap-12',label:'Gallery 10',photoKey:'gallery_12'},
+    {id:'cap-13',label:'Gallery 11',photoKey:'gallery_13'},
+    {id:'cap-14',label:'Gallery 12',photoKey:'gallery_14'},
+    {id:'cap-15',label:'Gallery 13',photoKey:'gallery_15'},
+    {id:'cap-16',label:'Gallery 14',photoKey:'gallery_16'},
+    {id:'cap-17',label:'Gallery 15',photoKey:'gallery_17'},
     {id:'cap-founder',label:'Founder Photo',photoKey:'founder'}
   ];
   list.innerHTML='';
@@ -1658,7 +1705,7 @@ async function buildLightboxPhotos(){
   var meta=await getPhotoMeta();
   var caps=getCaptions();
   lightboxPhotos=[];lightboxCaptions=[];
-  for(var i=0;i<8;i++){
+  for(var i=0;i<=17;i++){
     var filename=meta['gallery_'+i];
     if(filename){
       lightboxPhotos.push(getSupaPhotoURL(filename));
@@ -1698,14 +1745,30 @@ function lightboxNav(dir){lightboxIndex=(lightboxIndex+dir+lightboxPhotos.length
 
 function makeGalleryClickable(){
   var caps=getCaptions();
-  for(var i=0;i<8;i++){
+  var lastTapped=null;
+  for(var i=0;i<=17;i++){
     (function(idx){
       var el=document.getElementById('gi-'+idx);
       if(!el)return;
       el.style.cursor='pointer';
-      el.onclick=function(){
-        var img=el.querySelector('img');
-        if(img)openLightbox(img.src,caps['cap-'+idx]||'');
+      el.onclick=function(e){
+        // On mobile: first tap shows caption, second tap opens lightbox
+        if(window.matchMedia('(hover:none)').matches){
+          if(lastTapped===el&&el.classList.contains('active')){
+            // Second tap - open lightbox
+            var img=el.querySelector('img');
+            if(img)openLightbox(img.src,caps['cap-'+idx]||'');
+          } else {
+            // First tap - show caption
+            if(lastTapped&&lastTapped!==el)lastTapped.classList.remove('active');
+            el.classList.toggle('active');
+            lastTapped=el;
+          }
+        } else {
+          // Desktop - just open lightbox
+          var img=el.querySelector('img');
+          if(img)openLightbox(img.src,caps['cap-'+idx]||'');
+        }
       };
     })(i);
   }
