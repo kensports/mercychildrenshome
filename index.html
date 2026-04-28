@@ -94,7 +94,7 @@ section{padding:88px 5%;}
 .sec-hdr{margin-bottom:52px;}
 
 /* DONATE CTA BAND */
-.donate-cta-band{background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(37,99,235,.08));border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:48px 0 0;}
+.donate-cta-band{background:linear-gradient(135deg,rgba(220,38,38,.12),rgba(37,99,235,.08));border:1px solid rgba(220,38,38,.25);border-radius:20px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:48px 0 0;}
 .donate-cta-band h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);}
 .donate-cta-band p{font-size:14px;color:#94a3b8;margin-top:4px;}
 
@@ -147,6 +147,33 @@ section{padding:88px 5%;}
 .photo-banner-img.skeleton,.g-item.skeleton{animation:shimmerLoad 1.5s infinite;}
 
 .gallery-section{background:var(--bg);padding:88px 5%;}
+.video-section{background:var(--bg2);padding:88px 5%;}
+.video-section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,42px);font-weight:700;color:var(--gold);text-align:center;margin-bottom:8px;}
+.video-section-sub{text-align:center;color:var(--text2);font-size:15px;margin-bottom:40px;}
+.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.video-card{background:var(--bg);border-radius:14px;overflow:hidden;border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;cursor:pointer;}
+.video-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.4);}
+.video-thumb{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;}
+.video-thumb img{width:100%;height:100%;object-fit:cover;}
+.video-thumb .play-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);}
+.video-thumb .play-btn svg{width:48px;height:48px;fill:rgba(255,255,255,0.9);}
+.video-info{padding:12px 14px;}
+.video-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.4;}
+.video-meta{font-size:11px;color:var(--text2);}
+.video-tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:600;margin-bottom:6px;}
+.video-tag.yt{background:rgba(255,0,0,0.15);color:#ff4444;border:1px solid rgba(255,0,0,0.3);}
+.video-tag.upload{background:rgba(30,111,255,0.15);color:#4488ff;border:1px solid rgba(30,111,255,0.3);}
+.video-tag.activity{background:rgba(240,165,0,0.15);color:var(--gold);border:1px solid rgba(240,165,0,0.3);}
+.video-modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:900;display:none;align-items:center;justify-content:center;padding:20px;}
+.video-modal.open{display:flex !important;}
+.video-modal-inner{width:100%;max-width:860px;position:relative;}
+.video-modal-close{position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;padding:8px;}
+.video-modal iframe,.video-modal video{width:100%;aspect-ratio:16/9;border-radius:10px;border:none;background:#000;}
+.yt-channel-btn{display:flex;align-items:center;gap:10px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.3);color:#ff4444;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;margin:0 auto 32px;width:fit-content;}
+.yt-channel-btn svg{width:24px;height:24px;fill:#ff4444;}
+.videos-empty{text-align:center;padding:60px 20px;color:var(--text2);font-size:15px;}
+@media(max-width:768px){.video-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.video-grid{grid-template-columns:1fr;}}
 .gallery-main-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:0;}
 .g-item{border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--border);cursor:pointer;position:relative;}
 .g-item img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -222,7 +249,7 @@ section{padding:88px 5%;}
 .amt-symbol{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text2);font-weight:600;}
 .amt-input{width:100%;padding:12px 14px 12px 30px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;font-size:15px;color:var(--text);font-family:'Outfit',sans-serif;outline:none;transition:border-color .2s;}
 .amt-input:focus{border-color:var(--gold);}
-.donate-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;border:none;padding:14px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s;}
+.donate-btn{width:100%;background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;border:none;padding:14px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s;box-shadow:0 4px 14px rgba(220,38,38,0.35);}
 .donate-btn:hover{opacity:.88;}
 .donate-note{font-size:11px;color:var(--text2);text-align:center;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;}
 
@@ -282,11 +309,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 .float-donate.visible{opacity:1;pointer-events:auto;}
 .float-btn-wrap{position:relative;}
 .float-pulse-ring,.float-pulse-ring2,.float-circle,.float-label{display:none;}
-@keyframes pillGlow{0%,100%{box-shadow:0 4px 20px rgba(0,0,0,.8),0 0 0px rgba(201,168,76,0);}50%{box-shadow:0 4px 20px rgba(0,0,0,.8),0 0 14px rgba(201,168,76,.2);}}
+@keyframes pillGlow{0%,100%{box-shadow:0 4px 20px rgba(0,0,0,.8),0 0 0px rgba(220,38,38,0);}50%{box-shadow:0 4px 20px rgba(0,0,0,.8),0 0 18px rgba(220,38,38,.4);}}
 @keyframes pillFloat{0%,100%{transform:translateY(0px);}50%{transform:translateY(-5px);}}
 @keyframes heartBeat{0%,100%{transform:scale(1);}14%{transform:scale(1.18);}28%{transform:scale(1);}42%{transform:scale(1.1);}70%{transform:scale(1);}}
-.float-pill{display:flex;align-items:center;gap:12px;background:#0a0e1a;border:1.5px solid rgba(201,168,76,.55);border-radius:14px;padding:10px 18px 10px 10px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.8);animation:pillFloat 3s ease-in-out infinite,pillGlow 3s ease-in-out infinite;transition:transform .25s,box-shadow .25s;}
-.float-pill:hover{animation:none;transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.9),0 0 18px rgba(201,168,76,.2);}
+.float-pill{display:flex;align-items:center;gap:12px;background:#0a0e1a;border:1.5px solid rgba(220,38,38,.7);border-radius:14px;padding:10px 18px 10px 10px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.8);animation:pillFloat 3s ease-in-out infinite,pillGlow 3s ease-in-out infinite;transition:transform .25s,box-shadow .25s;}
+.float-pill:hover{animation:none;transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.9),0 0 22px rgba(220,38,38,.4);}
 .float-pill:active{transform:scale(.97);}
 .float-pill-icon{width:46px;height:46px;background:transparent;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .float-pill-icon .heart-anim{animation:heartBeat 1.8s ease-in-out infinite;transform-origin:center;}
@@ -391,6 +418,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   <a href="#mission" onclick="toggleMenu()">Mission</a>
   <a href="#founder" onclick="toggleMenu()">Founder</a>
   <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#videos" onclick="toggleMenu()">Videos</a>
   <a href="#donate" onclick="toggleMenu()">Donate</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
 </div>
@@ -409,6 +437,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <a href="#mission">Mission</a>
     <a href="#founder">Founder</a>
     <a href="#gallery">Gallery</a>
+            <a href="#videos">Videos</a>
     <a href="#contact">Contact</a>
     <a href="#donate" class="nav-cta">
       <svg style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
@@ -941,6 +970,34 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 </section>
 
 <!-- FOOTER -->
+
+<!-- ═══ VIDEO SECTION ═══ -->
+<section class="video-section" id="videos">
+  <h2 class="video-section-title">Our Videos</h2>
+  <p class="video-section-sub">Watch our activities, stories and YouTube channel</p>
+  
+  <!-- YouTube Channel Link -->
+  <a class="yt-channel-btn" href="https://youtube.com/@mercychidrenshomeug4969" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.5 20.5 12 20.5 12 20.5s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+    Subscribe to our YouTube Channel
+  </a>
+  
+  <div class="video-grid" id="videoGrid">
+    <div class="videos-empty" style="grid-column:1/-1;">
+      <div style="font-size:40px;margin-bottom:12px;">🎬</div>
+      <div>No videos yet. Admin can add videos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal" style="display:none;">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" onclick="closeVideoModal()">✕</button>
+    <div id="videoModalContent"></div>
+  </div>
+</div>
+
 <footer>
   <div class="footer-top">
     <div>
@@ -1005,6 +1062,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <button class="adm-tab" onclick="admTab('contact',this)">Contact</button>
       <button class="adm-tab" onclick="admTab('stats',this)">Stats</button>
       <button class="adm-tab" onclick="admTab('settings',this)">Settings</button>
+      <button class="adm-tab" onclick="admTab('videos',this)">🎬 Videos</button>
     </div>
     <div class="adm-body">
 
@@ -1242,7 +1300,42 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       </div>
 
       <!-- SETTINGS TAB -->
-      <div class="adm-sec" id="adm-settings">
+      <div class="adm-sec" id="adm-videos">
+  <h3 style="color:var(--gold);margin-bottom:16px;font-family:'Cormorant Garamond',serif;font-size:22px;">🎬 Video Manager</h3>
+  <div style="background:var(--bg);border-radius:12px;padding:16px;border:1px solid var(--border);margin-bottom:20px;">
+    <h4 style="color:var(--text);margin-bottom:14px;font-size:14px;font-weight:700;">Add New Video</h4>
+    <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+      <button onclick="setVTab(this,'youtube')" class="vtab vtab-active" style="flex:1;min-width:90px;padding:8px;border-radius:8px;border:1px solid rgba(255,0,0,0.3);background:rgba(255,0,0,0.1);color:#ff4444;font-size:12px;font-weight:600;cursor:pointer;">▶ YouTube</button>
+      <button onclick="setVTab(this,'direct')" class="vtab" style="flex:1;min-width:90px;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;">🔗 Direct URL</button>
+      <button onclick="setVTab(this,'activity')" class="vtab" style="flex:1;min-width:90px;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;">🏃 Activity</button>
+    </div>
+    <input type="hidden" id="v-type" value="youtube"/>
+    <div class="af"><label>Video Title *</label><input type="text" id="v-title" placeholder="e.g. Children Christmas 2024"/></div>
+    <div id="v-yt-fields">
+      <div class="af"><label>YouTube URL or Video ID *</label>
+        <input type="text" id="v-yt-url" placeholder="https://youtu.be/xxxxx" oninput="previewYT(this.value)"/>
+      </div>
+      <div id="v-yt-preview" style="margin-top:8px;border-radius:8px;overflow:hidden;aspect-ratio:16/9;display:none;"></div>
+    </div>
+    <div id="v-direct-fields" style="display:none;">
+      <div class="af"><label>Video URL * (.mp4 or archive.org)</label><input type="text" id="v-direct-url" placeholder="https://archive.org/download/..."/></div>
+      <div class="af"><label>Thumbnail URL (optional)</label><input type="text" id="v-thumb-url" placeholder="https://... image URL"/></div>
+    </div>
+    <div class="af"><label>Category</label>
+      <select id="v-cat" style="width:100%;padding:10px;border-radius:8px;background:var(--bg2);border:1px solid var(--border);color:var(--text);font-size:13px;">
+        <option value="general">General</option>
+        <option value="activities">Activities</option>
+        <option value="events">Events &amp; Celebrations</option>
+        <option value="testimonials">Testimonials</option>
+        <option value="updates">Updates</option>
+      </select>
+    </div>
+    <button onclick="addVideo()" style="width:100%;padding:13px;border-radius:10px;background:var(--gold);color:#000;font-weight:700;font-size:14px;border:none;cursor:pointer;margin-top:6px;">+ Add Video</button>
+  </div>
+  <h4 style="color:var(--text);margin-bottom:12px;font-size:14px;font-weight:700;">All Videos (<span id="v-count">0</span>)</h4>
+  <div id="v-admin-list" style="display:grid;gap:10px;"></div>
+</div>
+<div class="adm-sec" id="adm-settings">
         <div class="af"><label>New Password</label><input type="password" id="newPwd" placeholder="Min 6 characters"/></div>
         <div class="af"><label>Confirm Password</label><input type="password" id="confPwd" placeholder="Confirm"/></div>
         <button class="adm-btn" onclick="changePwd()">Change Password</button>
@@ -2740,79 +2833,148 @@ document.addEventListener('DOMContentLoaded',function(){
     var reader=new FileReader();
     reader.onload=function(ev){
       var prev=document.getElementById('ev-photo-preview');
-      if(prev) prev.innerHTML='<img src="'+ev.target.result+'" style="width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);" />';
+      if(prev){
+        prev.innerHTML='';
+        var pImg=document.createElement('img');
+        pImg.src=ev.target.result;
+        pImg.style.cssText='width:100%;height:100%;object-fit:cover;border-radius:50%;';
+        prev.appendChild(pImg);
+      }
     };
     reader.readAsDataURL(file);
   };
 });
 
-async function saveEditVolunteer(){
-  if(editVolIdx<0) return;
-  var name=(document.getElementById('ev-name')||{}).value||'';
-  if(!name.trim()){showToast('Name required',true);return;}
-  showToast('Saving... ⏳');
-  var supporters=await getSupporters();
-  var s=supporters[editVolIdx];
-  s.name=name.trim();
-  s.country=(document.getElementById('ev-country')||{}).value||'';
-  s.quote=(document.getElementById('ev-quote')||{}).value||'';
-  s.category=(document.getElementById('ev-category')||{}).value||'Volunteer';
-  if(editVolPhotoPending){
-    try{
-      var filename=await uploadToSupabase(editVolPhotoPending,'supporter_'+Date.now());
-      s.photoUrl=getSupaPhotoURL(filename);
-    }catch(e){showToast('Photo upload failed',true);}
+/* ── YouTube preview ── */
+function previewYT(val){
+  var id=getYTId(val);
+  var prev=document.getElementById('v-yt-preview');
+  if(!prev)return;
+  if(id){
+    var pImg=document.createElement('img');pImg.src=ytThumb(id);pImg.style.cssText='width:100%;border-radius:8px;';pImg.onerror=function(){this.style.display='none';};prev.innerHTML='';prev.appendChild(pImg);
+    prev.style.display='block';
+  }else{
+    prev.style.display='none';
   }
-  supporters[editVolIdx]=s;
-  await setSupporters(supporters);
-  closeEditVol();
-  renderSupporterAdmin();
-  renderSupportersPublic();
-  showToast('Volunteer updated! ✅');
 }
 
-// ===== INIT =====
-// Preload cached images immediately (before DOM ready)
-(function(){
-  var cached=getCachedPhotoMeta();
-  Object.keys(cached).forEach(function(k){
-    if(cached[k] && k.indexOf('gallery_')===0){
-      var link=document.createElement('link');
-      link.rel='preload';link.as='image';
-      link.href='https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/'+cached[k];
-      document.head.appendChild(link);
-    }
+var VIDEO_TABLE='mch_videos';
+function getYTId(url){if(!url)return'';url=url.trim();if(/^[a-zA-Z0-9_-]{11}$/.test(url))return url;var m=url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);return m?m[1]:'';}
+function ytThumb(id){return'https://img.youtube.com/vi/'+id+'/hqdefault.jpg';}
+function ytEmbed(id){return'https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0';}
+function setVTab(btn,type){
+  document.querySelectorAll('.vtab').forEach(function(b){b.style.background='var(--bg2)';b.style.color='var(--text2)';b.style.borderColor='var(--border)';});
+  if(type==='youtube'){btn.style.background='rgba(255,0,0,0.1)';btn.style.color='#ff4444';btn.style.borderColor='rgba(255,0,0,0.3)';}
+  else{btn.style.background='rgba(240,165,0,0.1)';btn.style.color='var(--gold)';btn.style.borderColor='rgba(240,165,0,0.3)';}
+  document.getElementById('v-type').value=type;
+  var ytF=document.getElementById('v-yt-fields');var dirF=document.getElementById('v-direct-fields');
+  if(ytF)ytF.style.display=type==='youtube'?'block':'none';
+  if(dirF)dirF.style.display=type!=='youtube'?'block':'none';
+  var pv=document.getElementById('v-yt-preview');if(pv)pv.style.display='none';
+}
+function previewYT(val){
+  var id=getYTId(val);var pv=document.getElementById('v-yt-preview');if(!pv)return;
+  if(id){pv.innerHTML='';var img=document.createElement('img');img.src=ytThumb(id);img.style.cssText='width:100%;border-radius:8px;';pv.appendChild(img);pv.style.display='block';}
+  else pv.style.display='none';
+}
+async function loadVideos(){
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/'+VIDEO_TABLE+'?select=*&order=created_at.desc',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    if(!r.ok)throw new Error('Failed');
+    var vids=await r.json();renderVideoGrid(vids);renderVideoAdminList(vids);
+  }catch(e){console.warn('Videos:',e);renderVideoGrid([]);renderVideoAdminList([]);}
+}
+function renderVideoGrid(vids){
+  var grid=document.getElementById('videoGrid');if(!grid)return;
+  if(!vids||!vids.length){grid.innerHTML='<div class="videos-empty" style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text2);"><div style="font-size:40px;margin-bottom:12px;">🎬</div><div>No videos yet.</div></div>';return;}
+  grid.innerHTML='';
+  var catMap={'general':'General','activities':'Activities','events':'Events','testimonials':'Testimonials','updates':'Updates'};
+  vids.forEach(function(v){
+    var thumb='',tagHtml='';
+    if(v.type==='youtube'){var yi=getYTId(v.url||'');thumb=yi?ytThumb(yi):'';tagHtml='<span class="video-tag yt">▶ YouTube</span>';}
+    else if(v.type==='activity'){thumb=v.thumb||'';tagHtml='<span class="video-tag activity">🏃 Activity</span>';}
+    else{thumb=v.thumb||'';tagHtml='<span class="video-tag upload">🔗 Video</span>';}
+    var card=document.createElement('div');card.className='video-card';
+    var td=document.createElement('div');td.className='video-thumb';
+    if(thumb){var ti=document.createElement('img');ti.src=thumb;ti.alt='';td.appendChild(ti);}
+    else td.innerHTML='<div style="width:100%;height:100%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:32px;">🎬</div>';
+    td.innerHTML+='<div class="play-btn"><svg viewBox="0 0 24 24" style="width:48px;height:48px;fill:rgba(255,255,255,0.9);"><path d="M8 5v14l11-7z"/></svg></div>';
+    var id2=document.createElement('div');id2.className='video-info';
+    id2.innerHTML=tagHtml+'<div class="video-title">'+(v.title||'Untitled')+'</div>'+((catMap[v.category]||v.category)?'<div class="video-meta">'+(catMap[v.category]||v.category)+'</div>':'');
+    card.appendChild(td);card.appendChild(id2);
+    (function(vid){td.addEventListener('click',function(){playVideoItem(vid);});})(v);
+    grid.appendChild(card);
   });
-})();
+}
+function renderVideoAdminList(vids){
+  var list=document.getElementById('v-admin-list');var cnt=document.getElementById('v-count');
+  if(!list)return;if(cnt)cnt.textContent=vids?vids.length:0;
+  if(!vids||!vids.length){list.innerHTML='<div style="text-align:center;color:var(--text2);padding:20px;">No videos yet.</div>';return;}
+  list.innerHTML='';
+  vids.forEach(function(v){
+    var thumb='';
+    if(v.type==='youtube'){var yi2=getYTId(v.url||'');thumb=yi2?ytThumb(yi2):'';}else thumb=v.thumb||'';
+    var item=document.createElement('div');
+    item.style.cssText='display:flex;align-items:center;gap:12px;background:var(--bg);border-radius:10px;padding:10px;border:1px solid var(--border);margin-bottom:8px;';
+    var te=document.createElement('div');te.style.cssText='width:60px;height:45px;background:var(--bg2);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;font-size:20px;';
+    if(thumb){var ti2=document.createElement('img');ti2.src=thumb;ti2.style.cssText='width:100%;height:100%;object-fit:cover;';te.appendChild(ti2);}else te.textContent='🎬';
+    var inf=document.createElement('div');inf.style.cssText='flex:1;min-width:0;';
+    inf.innerHTML='<div style="font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+(v.title||'Untitled')+'</div><div style="font-size:11px;color:var(--text2);">'+(v.type||'')+(v.category?' · '+v.category:'')+'</div>';
+    var db=document.createElement('button');db.textContent='Delete';
+    db.style.cssText='background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;flex-shrink:0;';
+    (function(vid){db.addEventListener('click',function(){deleteVideo(vid.id);});})(v);
+    item.appendChild(te);item.appendChild(inf);item.appendChild(db);list.appendChild(item);
+  });
+}
+function playVideoItem(v){
+  var modal=document.getElementById('videoModal');var content=document.getElementById('videoModalContent');
+  if(!modal||!content)return;
+  if(v.type==='youtube'){
+    var yi3=getYTId(v.url||'');if(!yi3){showToast('Invalid YouTube link',true);return;}
+    content.innerHTML='<iframe src="'+ytEmbed(yi3)+'" allowfullscreen allow="autoplay; fullscreen" style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;"></iframe>';
+  }else{
+    content.innerHTML='<video src="'+v.url+'" controls autoplay playsinline style="width:100%;aspect-ratio:16/9;border-radius:10px;background:#000;display:block;"></video>';
+  }
+  modal.classList.add('open');document.body.style.overflow='hidden';
+}
+function closeVideoModal(){
+  var modal=document.getElementById('videoModal');
+  if(modal){modal.classList.remove('open');var c=document.getElementById('videoModalContent');if(c)c.innerHTML='';}
+  document.body.style.overflow='';
+}
+async function addVideo(){
+  var type=document.getElementById('v-type').value;
+  var title=(document.getElementById('v-title').value||'').trim();
+  var cat=document.getElementById('v-cat').value;
+  if(!title){showToast('Enter a video title',true);return;}
+  var url='',thumb='';
+  if(type==='youtube'){
+    var ytVal=(document.getElementById('v-yt-url').value||'').trim();
+    var yi4=getYTId(ytVal);if(!yi4){showToast('Invalid YouTube URL',true);return;}
+    url=ytVal;thumb=ytThumb(yi4);
+  }else{
+    var de=document.getElementById('v-direct-url');var te2=document.getElementById('v-thumb-url');
+    url=de?(de.value||'').trim():'';thumb=te2?(te2.value||'').trim():'';
+    if(!url){showToast('Enter a video URL',true);return;}
+  }
+  try{
+    var r2=await fetch(SUPA_URL+'/rest/v1/'+VIDEO_TABLE,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({title:title,type:type,url:url,thumb:thumb,category:cat,created_at:new Date().toISOString()})});
+    if(!r2.ok)throw new Error(await r2.text());
+    showToast('Video added ✓');
+    document.getElementById('v-title').value='';document.getElementById('v-yt-url').value='';
+    var pv2=document.getElementById('v-yt-preview');if(pv2)pv2.style.display='none';
+    loadVideos();
+  }catch(e){showToast('Create mch_videos table in Supabase first!',true);console.error(e);}
+}
+async function deleteVideo(id){
+  if(!confirm('Delete this video?'))return;
+  try{
+    await fetch(SUPA_URL+'/rest/v1/'+VIDEO_TABLE+'?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    showToast('Deleted ✓');loadVideos();
+  }catch(e){showToast('Delete failed',true);}
+}
+setTimeout(loadVideos,2000);
 
-applyData();
-applyCaptions();
-// Apply motto including saved position
-var _initMotto = getData();
-// Restore position from localStorage if available
-try{var _savedPos=localStorage.getItem('mch_motto_pos');if(_savedPos)_initMotto.mottoPos=_savedPos;}catch(e){}
-applyMotto(_initMotto);
-loadLogo();
-// Sync from Supabase - re-apply everything after remote data loads
-syncRemoteData().then(function(){
-  applyMotto(getData());
-  setTimeout(applyCaptions, 200);
-});
-loadCaptionsFromSupabase();
-loadAllPhotos();
-renderPublicSponsors();
-updateFundsDisplay();
-renderSupportersPublic();
-initFloatDonate();
-var spDate=document.getElementById('sp-date');
-if(spDate)spDate.value=new Date().toISOString().split('T')[0];
-setTimeout(makeGalleryClickable,2000);
-setTimeout(initScrollAnimations,300);
-// Force correct stats display
-setTimeout(function(){
-  var tb2=document.getElementById('tb2n');if(tb2)tb2.textContent='3';
-  var s2=document.getElementById('stat2n');if(s2)s2.textContent='3';
-},100);
 </script>
 </body>
 </html>
