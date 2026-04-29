@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Mission | Mercy Children's Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#0a0e1a;--bg2:#0f1525;--bg3:#161d30;--card:#131929;--gold:#c9a84c;--gold2:#e8c97a;--blue:#2563eb;--text:#e8eaf0;--text2:#8892a4;--border:#1e2a40;--white:#ffffff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,26,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;}
+.nav-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.nav-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.1;}
+.nav-name small{display:block;font-family:'Outfit',sans-serif;font-size:10px;font-weight:400;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:14px;font-weight:500;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{background:linear-gradient(135deg,#1a3060,#2563eb);color:#fff !important;padding:9px 20px;border-radius:8px;font-weight:600 !important;font-size:13px !important;}
+.hamburger{display:none;cursor:pointer;color:var(--text);font-size:20px;}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--bg2);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+.mob-menu.open{display:flex;}
+.mob-menu a{text-decoration:none;color:var(--text);font-size:20px;font-weight:600;}
+.mob-close{position:absolute;top:20px;right:24px;font-size:24px;cursor:pointer;color:var(--text2);}
+
+.page-hero{padding:120px 5% 70px;background:radial-gradient(ellipse at 80% 30%,rgba(201,168,76,.08) 0%,transparent 60%),var(--bg);border-bottom:1px solid var(--border);}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:13px;color:var(--text2);}
+.breadcrumb a{color:var(--gold);text-decoration:none;}
+.sec-tag{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:5px 14px;border-radius:30px;margin-bottom:16px;}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,62px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:14px;}
+.page-hero h1 em{color:var(--gold);font-style:normal;}
+.page-hero p{font-size:16px;color:var(--text2);line-height:1.8;max-width:560px;}
+
+section{padding:80px 5%;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.sec-sub{font-size:15px;color:#94a3b8;line-height:1.8;max-width:620px;margin-bottom:52px;}
+
+/* PILLARS */
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.pillar-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative;overflow:hidden;transition:border-color .25s,transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s;}
+.pillar-card:hover{border-color:rgba(201,168,76,.4);transform:translateY(-8px);box-shadow:0 20px 50px rgba(201,168,76,.1);}
+.pillar-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s;}
+.pillar-card:hover::after{opacity:1;}
+.p-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:rgba(201,168,76,.15);line-height:1;margin-bottom:16px;}
+.p-icon{width:52px;height:52px;border-radius:14px;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.p-icon svg{width:26px;height:26px;fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.pillar-card h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#f1f5f9;margin-bottom:12px;}
+.pillar-card p{font-size:14px;color:#8892a4;line-height:1.75;}
+
+/* IMPACT */
+.impact-section{background:var(--bg2);}
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.impact-text p{font-size:15px;color:#94a3b8;line-height:1.9;margin-bottom:16px;}
+.impact-text p strong{color:var(--gold);}
+.impact-list{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:14px;}
+.impact-list li{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:#cbd5e1;line-height:1.6;}
+.impact-list li svg{width:18px;height:18px;flex-shrink:0;margin-top:2px;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.impact-visual{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.impact-stat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:transform .3s,border-color .3s;}
+.impact-stat:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.3);}
+.impact-val{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--gold);animation:statGlow 2.5s ease-in-out infinite;}
+.impact-lbl{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:5px;}
+@keyframes statGlow{0%,100%{text-shadow:0 0 0 rgba(201,168,76,0);}50%{text-shadow:0 0 20px rgba(201,168,76,.7);}}
+
+/* VISION */
+.vision-section{background:var(--bg);}
+.vision-band{background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(201,168,76,.05));border:1px solid rgba(37,99,235,.2);border-radius:24px;padding:48px;text-align:center;max-width:800px;margin:0 auto;}
+.vision-band .sec-tag{margin-bottom:20px;}
+.vision-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,38px);font-weight:700;color:var(--white);line-height:1.3;margin-bottom:16px;}
+.vision-band p{font-size:15px;color:#94a3b8;line-height:1.9;}
+.vision-band p em{color:var(--gold);font-style:normal;font-weight:600;}
+
+/* TIMELINE */
+.timeline-section{background:var(--bg2);}
+.timeline{display:flex;flex-direction:column;gap:0;max-width:680px;margin:0 auto;position:relative;}
+.timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:1px;background:var(--border);}
+.tl-item{display:flex;gap:24px;padding-bottom:36px;position:relative;}
+.tl-dot{width:42px;height:42px;border-radius:50%;background:var(--card);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+.tl-dot svg{width:18px;height:18px;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.tl-content{padding-top:8px;}
+.tl-year{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
+.tl-content h4{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--white);margin-bottom:6px;}
+.tl-content p{font-size:13px;color:#94a3b8;line-height:1.7;}
+
+/* CTA */
+.cta-band{background:linear-gradient(135deg,rgba(220,38,38,.12),rgba(37,99,235,.08));border:1px solid rgba(220,38,38,.25);border-radius:20px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:0 5% 80px;}
+.cta-band h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);}
+.cta-band p{font-size:14px;color:#94a3b8;margin-top:4px;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2),#f5d98a,var(--gold));background-size:300% auto;animation:shimmerBtn 3s linear infinite;color:#0a0e1a;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(201,168,76,.3);}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,.4);}
+@keyframes shimmerBtn{0%{background-position:-200% center;}100%{background-position:200% center;}}
+
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 5%;text-align:center;}
+footer p{font-size:13px;color:var(--text2);}
+footer a{color:var(--gold);text-decoration:none;}
+
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:none;}
+
+@media(max-width:900px){
+  .pillars-grid{grid-template-columns:1fr 1fr;}
+  .impact-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .hamburger{display:block;}
+}
+@media(max-width:600px){
+  .pillars-grid{grid-template-columns:1fr;}
+  .impact-visual{grid-template-columns:1fr 1fr;}
+  .cta-band{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="mob-menu" id="mobMenu">
+  <span class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open')"><i class="fas fa-times"></i></span>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="mission.html">Mission</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="videos.html">Videos</a>
+  <a href="index.html#donate">Donate</a>
+</div>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="nav-name">Mercy Children's Home<small>Kasanda Bukuya · UGANDA</small></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="mission.html" class="active">Mission</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="videos.html">Videos</a>
+    <a href="index.html#donate" class="nav-cta"><i class="fas fa-heart" style="font-size:12px;"></i> Donate Now</a>
+  </div>
+  <div class="hamburger" onclick="document.getElementById('mobMenu').classList.add('open')"><i class="fas fa-bars"></i></div>
+</nav>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Our Mission</span></div>
+  <div class="sec-tag">Our Mission</div>
+  <h1>What We Provide<br><em>Every Single Day</em></h1>
+  <p>We provide holistic care that nurtures every aspect of a child's development — body, mind, and spirit. This is what drives us forward.</p>
+</div>
+
+<!-- PILLARS -->
+<section>
+  <div class="sec-tag">What We Do</div>
+  <h2 class="sec-title">Six Pillars of Care</h2>
+  <p class="sec-sub">Every child in our home receives comprehensive support across all areas of life. Nothing is left out.</p>
+  <div class="pillars-grid">
+    <div class="pillar-card fade-up">
+      <div class="p-num">01</div>
+      <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <h3>Safe Shelter</h3>
+      <p>Many of our children come from situations of neglect and uncertainty. Here, they find more than just a roof — they find a place where they are safe, loved, and finally at peace.</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="p-num">02</div>
+      <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+      <h3>Education</h3>
+      <p>Every child deserves a chance to learn and dream. We provide school fees, uniforms, books, and support — giving each child the opportunity to build a brighter future.</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="p-num">03</div>
+      <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+      <h3>Nutrition</h3>
+      <p>For many of our children, regular meals were never guaranteed. Today, we provide three nourishing meals a day — restoring their strength, health, and hope.</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="p-num">04</div>
+      <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <h3>Healthcare</h3>
+      <p>We ensure every child receives the medical care they need — from routine checkups to urgent treatment — so they can grow up strong and healthy.</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="p-num">05</div>
+      <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+      <h3>Spiritual Care</h3>
+      <p>Beyond physical needs, we nurture the heart. Through faith, love, and guidance, we help each child discover their value and purpose in God's plan.</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="p-num">06</div>
+      <div class="p-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h3>Future Skills</h3>
+      <p>As they grow, we equip our children with practical skills and confidence — preparing them for independent, meaningful lives beyond the home.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact-section">
+  <div class="impact-grid">
+    <div class="fade-up">
+      <div class="sec-tag">Our Impact</div>
+      <h2 class="sec-title">Making a Difference Every Day</h2>
+      <p class="impact-text"><p style="font-size:15px;color:#94a3b8;line-height:1.9;margin-bottom:16px;">Since 2020, Mercy Children's Home has been a beacon of hope for the most vulnerable children in Kasanda Bukuya. <strong>Every day</strong> we wake up committed to the mission.</p></p>
+      <ul class="impact-list">
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>32 children receive shelter, love, and care every day</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>3 nutritious meals provided daily to every child</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>All children enrolled in school with full support</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Regular medical checkups and healthcare access</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Weekly faith-based programs and spiritual mentorship</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supported by a global community of donors and volunteers</li>
+      </ul>
+    </div>
+    <div class="impact-visual fade-up">
+      <div class="impact-stat"><div class="impact-val">32</div><div class="impact-lbl">Children Supported</div></div>
+      <div class="impact-stat"><div class="impact-val">3</div><div class="impact-lbl">Meals Daily</div></div>
+      <div class="impact-stat"><div class="impact-val">2020</div><div class="impact-lbl">Year Founded</div></div>
+      <div class="impact-stat"><div class="impact-val">100%</div><div class="impact-lbl">Love & Care</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="vision-section">
+  <div class="vision-band fade-up">
+    <div class="sec-tag">Our Vision</div>
+    <h2>A Uganda Where No Child is Left Behind</h2>
+    <p>We envision a future where every orphaned and vulnerable child in Uganda has access to <em>safety, education, and love</em>. We are building that future one child at a time — and with your support, we can reach more families, more communities, and more lives.</p>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div style="text-align:center;margin-bottom:52px;">
+    <div class="sec-tag">Our Journey</div>
+    <h2 class="sec-title" style="text-align:center;">How It All Began</h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-item fade-up">
+      <div class="tl-dot"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="tl-content">
+        <div class="tl-year">2020</div>
+        <h4>Mercy Children's Home is Founded</h4>
+        <p>Out of a deep calling to serve vulnerable children in Kasanda Bukuya, Mercy Children's Home opened its doors for the first time — welcoming its first children with love and faith.</p>
+      </div>
+    </div>
+    <div class="tl-item fade-up">
+      <div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+      <div class="tl-content">
+        <div class="tl-year">2021</div>
+        <h4>Growing Our Family</h4>
+        <p>More children found their way to the home as word spread through the community. The team expanded, and so did our programs — adding structured education support and healthcare access.</p>
+      </div>
+    </div>
+    <div class="tl-item fade-up">
+      <div class="tl-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10z"/></svg></div>
+      <div class="tl-content">
+        <div class="tl-year">2022–2023</div>
+        <h4>Reaching the World</h4>
+        <p>Global supporters began partnering with the mission — from individuals to churches around the world. Every contribution helped provide more meals, more education, and more hope.</p>
+      </div>
+    </div>
+    <div class="tl-item fade-up">
+      <div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+      <div class="tl-content">
+        <div class="tl-year">Today</div>
+        <h4>32 Children & Growing</h4>
+        <p>Today we care for 32 children and continue to grow. The mission remains the same — love every child, serve every need, and never stop believing in a better future for Uganda's most vulnerable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div>
+    <h3>Join the Mission</h3>
+    <p>Your support directly funds shelter, meals, school fees, and healthcare for 32 children.</p>
+  </div>
+  <a href="index.html#donate" class="btn-gold">
+    <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+    Donate Now
+  </a>
+</div>
+
+<footer>
+  <p style="margin-bottom:8px;"><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="about.html">About</a> &nbsp;·&nbsp; <a href="mission.html">Mission</a> &nbsp;·&nbsp; <a href="gallery.html">Gallery</a> &nbsp;·&nbsp; <a href="videos.html">Videos</a> &nbsp;·&nbsp; <a href="index.html#donate">Donate</a></p>
+  <p>© 2024 Mercy Children's Home · Kasanda Bukuya, Uganda · ✝ Together We Are The Church ✝</p>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.12});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>document.querySelector('nav').style.boxShadow=scrollY>20?'0 4px 30px rgba(0,0,0,.5)':'');
+</script>
+</body>
+</html>

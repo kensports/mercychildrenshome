@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Videos | Mercy Children's Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#0a0e1a;--bg2:#0f1525;--bg3:#161d30;--card:#131929;--gold:#c9a84c;--gold2:#e8c97a;--blue:#2563eb;--text:#e8eaf0;--text2:#8892a4;--border:#1e2a40;--white:#ffffff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,26,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;}
+.nav-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.nav-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.1;}
+.nav-name small{display:block;font-family:'Outfit',sans-serif;font-size:10px;font-weight:400;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:14px;font-weight:500;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{background:linear-gradient(135deg,#1a3060,#2563eb);color:#fff !important;padding:9px 20px;border-radius:8px;font-weight:600 !important;font-size:13px !important;}
+.hamburger{display:none;cursor:pointer;color:var(--text);font-size:20px;}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--bg2);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+.mob-menu.open{display:flex;}
+.mob-menu a{text-decoration:none;color:var(--text);font-size:20px;font-weight:600;}
+.mob-close{position:absolute;top:20px;right:24px;font-size:24px;cursor:pointer;color:var(--text2);}
+
+.page-hero{padding:120px 5% 60px;background:radial-gradient(ellipse at 40% 60%,rgba(37,99,235,.1) 0%,transparent 60%),var(--bg);border-bottom:1px solid var(--border);}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:13px;color:var(--text2);}
+.breadcrumb a{color:var(--gold);text-decoration:none;}
+.sec-tag{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:5px 14px;border-radius:30px;margin-bottom:16px;}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,62px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:14px;}
+.page-hero h1 em{color:var(--gold);font-style:normal;}
+.page-hero p{font-size:16px;color:var(--text2);line-height:1.8;max-width:540px;}
+
+/* FILTER */
+.filter-bar{padding:28px 5% 0;display:flex;gap:10px;flex-wrap:wrap;}
+.filter-btn{background:var(--card);border:1px solid var(--border);color:var(--text2);padding:8px 18px;border-radius:99px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;}
+.filter-btn:hover,.filter-btn.active{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.35);color:var(--gold);}
+
+/* VIDEO GRID */
+.videos-wrap{padding:28px 5% 80px;}
+.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.video-card{background:var(--bg2);border-radius:14px;overflow:hidden;border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;cursor:pointer;}
+.video-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.4);}
+.video-thumb{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;}
+.video-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.video-card:hover .video-thumb img{transform:scale(1.05);}
+.play-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);transition:background .2s;}
+.video-card:hover .play-btn{background:rgba(0,0,0,.5);}
+.play-btn svg{width:50px;height:50px;fill:rgba(255,255,255,.9);filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));}
+.video-info{padding:14px 16px;}
+.video-tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:600;margin-bottom:8px;}
+.video-tag.yt{background:rgba(255,0,0,.15);color:#ff4444;border:1px solid rgba(255,0,0,.3);}
+.video-tag.upload{background:rgba(30,111,255,.15);color:#4488ff;border:1px solid rgba(30,111,255,.3);}
+.video-tag.activity{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.video-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.4;}
+.video-meta{font-size:11px;color:var(--text2);}
+
+/* SKELETON */
+@keyframes shimmerLoad{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+.skeleton{background:linear-gradient(90deg,var(--card) 25%,var(--bg3) 50%,var(--card) 75%);background-size:200% 100%;animation:shimmerLoad 1.5s infinite;}
+
+.videos-empty{text-align:center;padding:80px 20px;color:var(--text2);grid-column:1/-1;}
+.videos-empty svg{width:48px;height:48px;fill:none;stroke:var(--border);stroke-width:1.5;margin-bottom:16px;display:block;margin-left:auto;margin-right:auto;}
+
+/* MODAL */
+.video-modal{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:900;display:none;align-items:center;justify-content:center;padding:20px;}
+.video-modal.open{display:flex;}
+.vm-inner{width:100%;max-width:860px;position:relative;}
+.vm-inner.portrait{max-width:380px;}
+.vm-close{position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;padding:8px;}
+.vm-inner:not(.portrait) iframe,.vm-inner:not(.portrait) video{width:100%;aspect-ratio:16/9;border-radius:10px;border:none;background:#000;display:block;}
+.vm-inner.portrait iframe,.vm-inner.portrait video{width:100%;aspect-ratio:9/16;max-height:88vh;border-radius:14px;border:none;background:#000;display:block;}
+
+/* YT CHANNEL BTN */
+.yt-btn{display:flex;align-items:center;gap:10px;background:rgba(255,0,0,.12);border:1px solid rgba(255,0,0,.3);color:#ff4444;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;margin:0 auto 36px;width:fit-content;}
+.yt-btn svg{width:24px;height:24px;fill:#ff4444;}
+
+/* CTA */
+.cta-band{background:linear-gradient(135deg,rgba(220,38,38,.12),rgba(37,99,235,.08));border:1px solid rgba(220,38,38,.25);border-radius:20px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:0 5% 80px;}
+.cta-band h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);}
+.cta-band p{font-size:14px;color:#94a3b8;margin-top:4px;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2),#f5d98a,var(--gold));background-size:300% auto;animation:shimmerBtn 3s linear infinite;color:#0a0e1a;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(201,168,76,.3);}
+.btn-gold:hover{transform:translateY(-2px);}
+@keyframes shimmerBtn{0%{background-position:-200% center;}100%{background-position:200% center;}}
+
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 5%;text-align:center;}
+footer p{font-size:13px;color:var(--text2);}
+footer a{color:var(--gold);text-decoration:none;}
+
+@media(max-width:900px){.video-grid{grid-template-columns:1fr 1fr;}.nav-links{display:none;}.hamburger{display:block;}}
+@media(max-width:500px){.video-grid{grid-template-columns:1fr;}.cta-band{flex-direction:column;text-align:center;}.vm-inner.portrait{max-width:100%;}}
+</style>
+</head>
+<body>
+
+<div class="mob-menu" id="mobMenu">
+  <span class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open')"><i class="fas fa-times"></i></span>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="mission.html">Mission</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="videos.html">Videos</a>
+  <a href="index.html#donate">Donate</a>
+</div>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    <div class="nav-name">Mercy Children's Home<small>Kasanda Bukuya · UGANDA</small></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="mission.html">Mission</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="videos.html" class="active">Videos</a>
+    <a href="index.html#donate" class="nav-cta"><i class="fas fa-heart" style="font-size:12px;"></i> Donate Now</a>
+  </div>
+  <div class="hamburger" onclick="document.getElementById('mobMenu').classList.add('open')"><i class="fas fa-bars"></i></div>
+</nav>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Videos</span></div>
+  <div class="sec-tag">Videos</div>
+  <h1>Watch Our<br><em>Story Unfold</em></h1>
+  <p>See the faces, hear the laughter, and witness the transformation happening every day at Mercy Children's Home.</p>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterVideos('all',this)">All Videos</button>
+  <button class="filter-btn" onclick="filterVideos('activity',this)">Activities</button>
+  <button class="filter-btn" onclick="filterVideos('youtube',this)">YouTube</button>
+  <button class="filter-btn" onclick="filterVideos('upload',this)">Uploaded</button>
+</div>
+
+<div class="videos-wrap">
+  <div id="ytChannelWrap" style="display:none;text-align:center;margin-bottom:32px;">
+    <a class="yt-btn" id="ytChannelBtn" href="#" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0a0e1a"/></svg>
+      Visit Our YouTube Channel
+    </a>
+  </div>
+  <div class="video-grid" id="videoGrid">
+    <div class="video-card skeleton" style="aspect-ratio:16/9;border-radius:14px;"></div>
+    <div class="video-card skeleton" style="aspect-ratio:16/9;border-radius:14px;"></div>
+    <div class="video-card skeleton" style="aspect-ratio:16/9;border-radius:14px;"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="video-modal" id="videoModal" onclick="closeModal(event)">
+  <div class="vm-inner" id="vmInner">
+    <button class="vm-close" onclick="closeModal({target:document.getElementById('videoModal')})"><i class="fas fa-times"></i></button>
+    <div id="vmContent"></div>
+  </div>
+</div>
+
+<div class="cta-band">
+  <div>
+    <h3>Help us create more of these moments</h3>
+    <p>Every donation goes directly to the children you see in these videos.</p>
+  </div>
+  <a href="index.html#donate" class="btn-gold">
+    <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+    Donate Now
+  </a>
+</div>
+
+<footer>
+  <p style="margin-bottom:8px;"><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="about.html">About</a> &nbsp;·&nbsp; <a href="mission.html">Mission</a> &nbsp;·&nbsp; <a href="gallery.html">Gallery</a> &nbsp;·&nbsp; <a href="videos.html">Videos</a> &nbsp;·&nbsp; <a href="index.html#donate">Donate</a></p>
+  <p>© 2024 Mercy Children's Home · Kasanda Bukuya, Uganda · ✝ Together We Are The Church ✝</p>
+</footer>
+
+<script>
+var SUPA_URL = localStorage.getItem('mch_supa_url')||'';
+var SUPA_KEY = localStorage.getItem('mch_supa_key')||'';
+var VIDEO_TABLE = 'mch_videos';
+
+var allVideos = [];
+var filteredVideos = [];
+
+function getYTId(url) {
+  var m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([^&\n?#]+)/);
+  return m ? m[1] : null;
+}
+function ytThumb(id){ return 'https://img.youtube.com/vi/'+id+'/hqdefault.jpg'; }
+
+async function loadVideos() {
+  if (!SUPA_URL || !SUPA_KEY) { showFallback(); return; }
+  try {
+    var r = await fetch(SUPA_URL+'/rest/v1/'+VIDEO_TABLE+'?order=created_at.desc', {
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+    });
+    if (!r.ok) throw new Error();
+    allVideos = await r.json();
+    // Show YT channel button if any YT videos
+    var ytVids = allVideos.filter(v=>v.type==='youtube');
+    if (ytVids.length) {
+      document.getElementById('ytChannelWrap').style.display='block';
+      var firstYT = getYTId(ytVids[0].url);
+      if (firstYT) {
+        document.getElementById('ytChannelBtn').href='https://www.youtube.com/channel/'+firstYT;
+      }
+    }
+    filteredVideos = [...allVideos];
+    renderVideos(filteredVideos);
+  } catch(e) { showFallback(); }
+}
+
+function showFallback() {
+  document.getElementById('videoGrid').innerHTML=`<div class="videos-empty">
+    <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+    <p>Videos will appear here once added in the admin panel on the main site.</p>
+  </div>`;
+}
+
+function renderVideos(videos) {
+  var grid = document.getElementById('videoGrid');
+  if (!videos.length) {
+    grid.innerHTML=`<div class="videos-empty"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><p>No videos in this category yet.</p></div>`;
+    return;
+  }
+  grid.innerHTML = videos.map((v,i)=>{
+    var isYT = v.type==='youtube';
+    var ytId = isYT ? getYTId(v.url) : null;
+    var thumb = v.thumb || (ytId ? ytThumb(ytId) : '');
+    var tagClass = isYT ? 'yt' : (v.category==='activity' ? 'activity' : 'upload');
+    var tagLabel = isYT ? 'YouTube' : (v.category==='activity' ? 'Activity' : 'Video');
+    return `<div class="video-card" onclick="openVideo(${i})">
+      <div class="video-thumb">
+        ${thumb ? `<img src="${thumb}" alt="${v.title}" loading="lazy">` : '<div style="width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;"><svg style="width:40px;height:40px;fill:rgba(255,255,255,.2)" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>'}
+        <div class="play-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div>
+      </div>
+      <div class="video-info">
+        <span class="video-tag ${tagClass}">${tagLabel}</span>
+        <div class="video-title">${v.title}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterVideos(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if (cat==='all') filteredVideos = [...allVideos];
+  else if (cat==='youtube') filteredVideos = allVideos.filter(v=>v.type==='youtube');
+  else if (cat==='upload') filteredVideos = allVideos.filter(v=>v.type==='upload');
+  else filteredVideos = allVideos.filter(v=>v.category===cat);
+  renderVideos(filteredVideos);
+}
+
+function openVideo(i) {
+  var v = filteredVideos[i];
+  var isYT = v.type==='youtube';
+  var ytId = isYT ? getYTId(v.url) : null;
+  var inner = document.getElementById('vmInner');
+  var content = document.getElementById('vmContent');
+  // Detect portrait (shorts)
+  var isPortrait = v.url && v.url.includes('/shorts/');
+  inner.className = 'vm-inner' + (isPortrait?' portrait':'');
+  if (isYT && ytId) {
+    var embedUrl = isPortrait
+      ? 'https://www.youtube.com/embed/'+ytId+'?autoplay=1'
+      : 'https://www.youtube.com/embed/'+ytId+'?autoplay=1';
+    content.innerHTML = `<iframe src="${embedUrl}" allowfullscreen allow="autoplay"></iframe>`;
+  } else {
+    content.innerHTML = `<video src="${v.url}" controls autoplay playsinline></video>`;
+  }
+  document.getElementById('videoModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(e) {
+  if (!e || e.target===document.getElementById('videoModal') || e.target.closest('.vm-close')) {
+    document.getElementById('vmContent').innerHTML='';
+    document.getElementById('videoModal').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal({target:document.getElementById('videoModal')}); });
+
+window.addEventListener('DOMContentLoaded',()=>{
+  SUPA_URL=localStorage.getItem('mch_supa_url')||'';
+  SUPA_KEY=localStorage.getItem('mch_supa_key')||'';
+  loadVideos();
+});
+window.addEventListener('scroll',()=>document.querySelector('nav').style.boxShadow=scrollY>20?'0 4px 30px rgba(0,0,0,.5)':'');
+</script>
+</body>
+</html>

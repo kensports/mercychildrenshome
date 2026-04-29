@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | Mercy Children's Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#0a0e1a;--bg2:#0f1525;--bg3:#161d30;--card:#131929;--gold:#c9a84c;--gold2:#e8c97a;--blue:#2563eb;--text:#e8eaf0;--text2:#8892a4;--border:#1e2a40;--white:#ffffff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,26,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;}
+.nav-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.nav-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.1;}
+.nav-name small{display:block;font-family:'Outfit',sans-serif;font-size:10px;font-weight:400;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:14px;font-weight:500;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{background:linear-gradient(135deg,#1a3060,#2563eb);color:#fff !important;padding:9px 20px;border-radius:8px;font-weight:600 !important;font-size:13px !important;}
+.hamburger{display:none;cursor:pointer;color:var(--text);font-size:20px;}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--bg2);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+.mob-menu.open{display:flex;}
+.mob-menu a{text-decoration:none;color:var(--text);font-size:20px;font-weight:600;}
+.mob-close{position:absolute;top:20px;right:24px;font-size:24px;cursor:pointer;color:var(--text2);}
+
+/* PAGE HERO */
+.page-hero{padding:120px 5% 70px;background:radial-gradient(ellipse at 20% 50%,rgba(37,99,235,.1) 0%,transparent 60%),var(--bg);border-bottom:1px solid var(--border);}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:13px;color:var(--text2);}
+.breadcrumb a{color:var(--gold);text-decoration:none;}
+.breadcrumb span{color:var(--text2);}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,62px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:14px;}
+.page-hero h1 em{color:var(--gold);font-style:normal;}
+.page-hero p{font-size:16px;color:var(--text2);line-height:1.8;max-width:560px;}
+.sec-tag{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:5px 14px;border-radius:30px;margin-bottom:16px;}
+
+/* SECTIONS */
+section{padding:80px 5%;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.sec-sub{font-size:15px;color:#94a3b8;line-height:1.8;max-width:600px;margin-bottom:48px;}
+
+/* WHO WE ARE */
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.who-text p{font-size:15px;color:#94a3b8;line-height:1.9;margin-bottom:18px;}
+.who-text p strong{color:var(--gold);}
+.who-text blockquote{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 14px 14px 0;padding:18px 22px;margin:24px 0;}
+.who-text blockquote p{font-size:15px;color:#e2e8f0;font-style:italic;margin:0;}
+.who-text blockquote cite{font-size:12px;color:var(--gold);font-weight:700;font-style:normal;display:block;margin-top:8px;}
+
+.info-cards{display:flex;flex-direction:column;gap:16px;}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s;}
+.info-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-2px);}
+.info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .2s;}
+.info-card:hover::before{opacity:1;}
+.info-card-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.info-card-icon svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.info-card h4{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:6px;}
+.info-card p{font-size:13px;color:#94a3b8;line-height:1.7;}
+
+/* STATS ROW */
+.stats-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.stat-box{text-align:center;padding:40px 20px;border-right:1px solid var(--border);}
+.stat-box:last-child{border-right:none;}
+.stat-val{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;color:var(--gold);line-height:1;animation:statGlow 2.5s ease-in-out infinite;}
+.stat-lbl{font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:6px;}
+@keyframes statGlow{0%,100%{text-shadow:0 0 0px rgba(201,168,76,0);}50%{text-shadow:0 0 24px rgba(201,168,76,.7);}}
+
+/* VALUES */
+.values-section{background:var(--bg);}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.value-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;transition:border-color .2s,transform .3s;}
+.value-card:hover{border-color:rgba(201,168,76,.35);transform:translateY(-6px);}
+.v-icon{width:50px;height:50px;border-radius:13px;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.v-icon svg{width:24px;height:24px;fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.value-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#f1f5f9;margin-bottom:10px;}
+.value-card p{font-size:13px;color:#8892a4;line-height:1.7;}
+
+/* LOCATION */
+.location-section{background:var(--bg2);}
+.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.location-map{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;height:320px;display:flex;align-items:center;justify-content:center;position:relative;}
+.location-map iframe{width:100%;height:100%;border:none;filter:invert(90%) hue-rotate(180deg);}
+.location-text p{font-size:15px;color:#94a3b8;line-height:1.9;margin-bottom:14px;}
+.loc-detail{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:14px;color:#cbd5e1;}
+.loc-detail svg{width:18px;height:18px;flex-shrink:0;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* CTA BAND */
+.cta-band{background:linear-gradient(135deg,rgba(220,38,38,.12),rgba(37,99,235,.08));border:1px solid rgba(220,38,38,.25);border-radius:20px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:0 5% 80px;}
+.cta-band h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);}
+.cta-band p{font-size:14px;color:#94a3b8;margin-top:4px;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2),#f5d98a,var(--gold));background-size:300% auto;animation:shimmerBtn 3s linear infinite;color:#0a0e1a;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(201,168,76,.3);}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,.4);}
+@keyframes shimmerBtn{0%{background-position:-200% center;}100%{background-position:200% center;}}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 5%;text-align:center;}
+footer p{font-size:13px;color:var(--text2);}
+footer a{color:var(--gold);text-decoration:none;}
+
+/* SCROLL ANIM */
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:none;}
+
+@media(max-width:900px){
+  .who-grid,.location-grid{grid-template-columns:1fr;}
+  .values-grid{grid-template-columns:1fr 1fr;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .stat-box:nth-child(2){border-right:none;}
+  .nav-links{display:none;}
+  .hamburger{display:block;}
+}
+@media(max-width:600px){
+  .values-grid{grid-template-columns:1fr;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .cta-band{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <span class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open')"><i class="fas fa-times"></i></span>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="mission.html">Mission</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="videos.html">Videos</a>
+  <a href="index.html#donate">Donate</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="index.html">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="nav-name">Mercy Children's Home<small>Kasanda Bukuya · UGANDA</small></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="mission.html">Mission</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="videos.html">Videos</a>
+    <a href="index.html#donate" class="nav-cta">
+      <i class="fas fa-heart" style="font-size:12px;"></i> Donate Now
+    </a>
+  </div>
+  <div class="hamburger" onclick="document.getElementById('mobMenu').classList.add('open')"><i class="fas fa-bars"></i></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    <span>About Us</span>
+  </div>
+  <div class="sec-tag">About Us</div>
+  <h1>More Than a Shelter —<br>We Are <em>Family</em></h1>
+  <p>Learn who we are, where we come from, and why we believe every child in Uganda deserves love, safety, and a future worth dreaming about.</p>
+</div>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-val">32</div><div class="stat-lbl">Children in Our Care</div></div>
+    <div class="stat-box"><div class="stat-val">3</div><div class="stat-lbl">Meals Every Day</div></div>
+    <div class="stat-box"><div class="stat-val">2020</div><div class="stat-lbl">Year Founded</div></div>
+    <div class="stat-box"><div class="stat-val">🌍</div><div class="stat-lbl">Worldwide Support</div></div>
+  </div>
+</div>
+
+<!-- WHO WE ARE -->
+<section>
+  <div class="who-grid">
+    <div class="who-text fade-up">
+      <div class="sec-tag">Who We Are</div>
+      <h2 class="sec-title">A Faith-Based Family in the Heart of Uganda</h2>
+      <p>Mercy Children's Home is a <strong>faith-based organisation</strong> located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned, abandoned, and vulnerable children.</p>
+      <p>We believe every child deserves more than survival — they deserve a future filled with <strong>hope, purpose, and opportunity</strong>. Through faith, care, and community support, we are helping these children grow into strong, confident, and God-fearing individuals.</p>
+      <p>We currently support <strong>32 children</strong>, providing them with shelter, three nutritious meals daily, education, healthcare, and most importantly — love.</p>
+      <blockquote>
+        <p>"Every child who walks through our doors finds safety, love, and a community that cares. This is not just a home — it is a family."</p>
+        <cite>— Mercy Children's Home</cite>
+      </blockquote>
+      <p style="color:#cbd5e1;font-style:italic;">But this mission is only possible with the help of people like you.</p>
+    </div>
+    <div class="info-cards fade-up">
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h4>Our Community</h4>
+        <p>We are a tight-knit community of children, caregivers, volunteers, and supporters from around the world united by one goal — giving every child a chance at life.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <h4>Our Foundation</h4>
+        <p>Founded in 2020, Mercy Children's Home was built on the belief that faith and compassion can transform lives. Every decision we make is guided by love and purpose.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h4>Global Support</h4>
+        <p>Supporters from across the world help make our mission possible. Every donation, prayer, and share brings us closer to reaching more children in need.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="sec-tag">Our Values</div>
+  <h2 class="sec-title">What We Stand For</h2>
+  <p class="sec-sub">Everything we do flows from these core values that guide our team every single day.</p>
+  <div class="values-grid">
+    <div class="value-card fade-up">
+      <div class="v-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+      <h3>Unconditional Love</h3>
+      <p>Every child receives love without condition — regardless of their background, history, or circumstances. Love is the foundation of everything we do.</p>
+    </div>
+    <div class="value-card fade-up">
+      <div class="v-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h3>Faith & Purpose</h3>
+      <p>We are a faith-driven organisation. We believe God's purpose for every child is greatness, and we work to help each child discover that truth.</p>
+    </div>
+    <div class="value-card fade-up">
+      <div class="v-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+      <h3>Education First</h3>
+      <p>We invest in every child's education because we know learning is the most powerful tool for breaking cycles of poverty and building futures.</p>
+    </div>
+    <div class="value-card fade-up">
+      <div class="v-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></div>
+      <h3>Community</h3>
+      <p>No child thrives in isolation. We build a strong community within our home and connect with the wider village of supporters around the world.</p>
+    </div>
+    <div class="value-card fade-up">
+      <div class="v-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <h3>Holistic Care</h3>
+      <p>We care for the whole child — body, mind, and spirit. From medical care to emotional support, every aspect of development matters to us.</p>
+    </div>
+    <div class="value-card fade-up">
+      <div class="v-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>Safety & Dignity</h3>
+      <p>Every child deserves to feel safe and valued. We protect, respect, and honour the dignity of every child in our home, always.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section">
+  <div class="location-grid">
+    <div class="fade-up">
+      <div class="sec-tag">Where We Are</div>
+      <h2 class="sec-title">Kasanda Bukuya, Uganda</h2>
+      <p class="location-text"><p style="font-size:15px;color:#94a3b8;line-height:1.9;margin-bottom:18px;">We are based in Kasanda Bukuya, a rural district in central Uganda. This community is home to many vulnerable families, and it is here that Mercy Children's Home has set down its roots.</p></p>
+      <div class="loc-detail">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Kasanda Bukuya, Central Uganda
+      </div>
+      <div class="loc-detail">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Serving children since 2020
+      </div>
+      <div class="loc-detail">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Currently home to 32 children
+      </div>
+    </div>
+    <div class="location-map fade-up">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63720.73!2d31.75!3d0.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177da5cb4a31b0e3%3A0x0!2sKasanda%2C%20Uganda!5e0!3m2!1sen!2sug!4v1"
+        allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div>
+    <h3>You can be part of this story</h3>
+    <p>Your support helps provide shelter, food, and education to 32 children every single day.</p>
+  </div>
+  <a href="index.html#donate" class="btn-gold">
+    <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+    Make a Difference Today
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:8px;">
+    <a href="index.html">Home</a> &nbsp;·&nbsp;
+    <a href="about.html">About</a> &nbsp;·&nbsp;
+    <a href="mission.html">Mission</a> &nbsp;·&nbsp;
+    <a href="gallery.html">Gallery</a> &nbsp;·&nbsp;
+    <a href="videos.html">Videos</a> &nbsp;·&nbsp;
+    <a href="index.html#donate">Donate</a>
+  </p>
+  <p>© 2024 Mercy Children's Home · Kasanda Bukuya, Uganda · ✝ Together We Are The Church ✝</p>
+</footer>
+
+<script>
+// Scroll animations
+const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+// Nav scroll shadow
+window.addEventListener('scroll',()=>document.querySelector('nav').style.boxShadow=scrollY>20?'0 4px 30px rgba(0,0,0,.5)':'');
+</script>
+</body>
+</html>
