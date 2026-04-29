@@ -166,9 +166,18 @@ section{padding:88px 5%;}
 .video-tag.activity{background:rgba(240,165,0,0.15);color:var(--gold);border:1px solid rgba(240,165,0,0.3);}
 .video-modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:900;display:none;align-items:center;justify-content:center;padding:20px;}
 .video-modal.open{display:flex !important;}
+/* Default = landscape/movie */
 .video-modal-inner{width:100%;max-width:860px;position:relative;}
+/* Portrait = TikTok style */
+.video-modal-inner.portrait{max-width:380px;width:100%;}
+@media(max-width:480px){.video-modal-inner.portrait{max-width:100%;padding:0;}}
 .video-modal-close{position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;padding:8px;}
-.video-modal iframe,.video-modal video{width:100%;aspect-ratio:16/9;border-radius:10px;border:none;background:#000;}
+/* Landscape videos */
+.video-modal-inner:not(.portrait) iframe,
+.video-modal-inner:not(.portrait) video{width:100%;aspect-ratio:16/9;border-radius:10px;border:none;background:#000;display:block;}
+/* Portrait/TikTok videos */
+.video-modal-inner.portrait iframe,
+.video-modal-inner.portrait video{width:100%;aspect-ratio:9/16;max-height:88vh;border-radius:14px;border:none;background:#000;display:block;}
 .yt-channel-btn{display:flex;align-items:center;gap:10px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.3);color:#ff4444;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;margin:0 auto 32px;width:fit-content;}
 .yt-channel-btn svg{width:24px;height:24px;fill:#ff4444;}
 .videos-empty{text-align:center;padding:60px 20px;color:var(--text2);font-size:15px;}
@@ -827,7 +836,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <h2 class="sec-title">Thank You, Dear Sponsors</h2>
     <p style="font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:32px;">From the bottom of our hearts — and from every child at Mercy Children's Home — we give glory to God for the incredible generosity of our sponsors, many of whom are all the way from the <strong style="color:var(--gold);">United States of <strong>AMERICA</strong></strong>.</p>
     <div style="background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(37,99,235,.06));border:1px solid rgba(201,168,76,.2);border-radius:24px;padding:44px;margin-bottom:32px;">
-      <div style="font-size:40px;margin-bottom:16px;">🇺🇸 🙏 🇺🇬</div>
+      <div style="font-size:40px;margin-bottom:16px;">🌍 🙏 🇺🇬</div>
       <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3vw,24px);color:#f8faff;line-height:1.75;font-style:italic;margin-bottom:20px;">"God has used you to be His hands across the ocean. Your faithfulness has put food on our table, clothes on our children, and kept them in school. You may be far away, but in God's kingdom, you are <em style="color:var(--gold);font-style:normal;font-weight:700;">family</em>."</p>
       <p style="font-size:14px;color:var(--gold);font-weight:700;letter-spacing:1px;">— SSENGONZI ALEX, FOUNDER</p>
     </div>
@@ -992,7 +1001,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 
 <!-- Video Modal -->
 <div class="video-modal" id="videoModal" style="display:none;">
-  <div class="video-modal-inner">
+  <div class="video-modal-inner" id="videoModalInner">
     <button class="video-modal-close" onclick="closeVideoModal()">✕</button>
     <div id="videoModalContent"></div>
   </div>
@@ -2956,19 +2965,38 @@ function renderVideoAdminList(vids){
   });
 }
 function playVideoItem(v){
-  var modal=document.getElementById('videoModal');var content=document.getElementById('videoModalContent');
+  var modal=document.getElementById('videoModal');
+  var content=document.getElementById('videoModalContent');
+  var inner=document.getElementById('videoModalInner');
   if(!modal||!content)return;
+
+  /* ── Detect portrait (TikTok/Shorts) vs landscape (movie) ── */
+  var isPortrait=false;
+  if(v.portrait){isPortrait=true;}
+  if(v.type==='youtube'){
+    var rawUrl=(v.url||'').toLowerCase();
+    if(rawUrl.indexOf('/shorts/')!==-1||rawUrl.indexOf('shorts%2f')!==-1){isPortrait=true;}
+  }
+  var titleLow=(v.title||'').toLowerCase();
+  var catLow=(v.category||'').toLowerCase();
+  if(catLow==='tiktok'||titleLow.indexOf('tiktok')!==-1||catLow==='short'||titleLow.indexOf('#short')!==-1){isPortrait=true;}
+
+  /* Apply portrait class */
+  if(inner){isPortrait?inner.classList.add('portrait'):inner.classList.remove('portrait');}
+
   if(v.type==='youtube'){
     var yi3=getYTId(v.url||'');if(!yi3){showToast('Invalid YouTube link',true);return;}
-    content.innerHTML='<iframe src="'+ytEmbed(yi3)+'" allowfullscreen allow="autoplay; fullscreen" style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;"></iframe>';
+    content.innerHTML='<iframe src="'+ytEmbed(yi3)+'" allowfullscreen allow="autoplay; fullscreen"></iframe>';
   }else{
-    content.innerHTML='<video src="'+v.url+'" controls autoplay playsinline style="width:100%;aspect-ratio:16/9;border-radius:10px;background:#000;display:block;"></video>';
+    content.innerHTML='<video src="'+v.url+'" controls autoplay playsinline></video>';
   }
   modal.classList.add('open');document.body.style.overflow='hidden';
 }
 function closeVideoModal(){
   var modal=document.getElementById('videoModal');
+  var inner=document.getElementById('videoModalInner');
   if(modal){modal.classList.remove('open');var c=document.getElementById('videoModalContent');if(c)c.innerHTML='';}
+  if(inner){inner.classList.remove('portrait');}
   document.body.style.overflow='';
 }
 /* ── Device video handlers ── */
