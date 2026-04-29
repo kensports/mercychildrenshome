@@ -2975,6 +2975,38 @@ async function deleteVideo(id){
 }
 setTimeout(loadVideos,2000);
 
+// ===== PAGE STARTUP =====
+(async function init(){
+  // 1. Apply local data immediately (zero delay, no network)
+  applyData();
+  applyMotto(getData());
+
+  // 2. Load logo instantly from cache, then refresh from Supabase
+  await loadLogo();
+
+  // 3. Load photos instantly from cache, then refresh from Supabase
+  await loadAllPhotos();
+
+  // 4. Sync remote settings (site text, motto, password)
+  await syncRemoteData();
+
+  // 5. Load captions from Supabase
+  await loadCaptionsFromSupabase();
+
+  // 6. Render public sections
+  await renderPublicSponsors();
+  await renderSupportersPublic();
+
+  // 7. Make gallery photos clickable (lightbox)
+  makeGalleryClickable();
+
+  // 8. Floating donate button
+  initFloatDonate();
+
+  // 9. Scroll animations
+  initScrollAnimations();
+})();
+
 </script>
 </body>
 </html>
