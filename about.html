@@ -120,9 +120,94 @@ footer a{color:var(--gold);text-decoration:none;}
   .stats-row{grid-template-columns:1fr 1fr;}
   .cta-band{flex-direction:column;text-align:center;}
 }
+
+/* ===== PAGE TRANSITION OVERLAY ===== */
+#page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  background: #0a0e1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#page-transition-overlay .pt-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#page-transition-overlay.pt-entering .pt-inner {
+  opacity: 1;
+}
+#page-transition-overlay .pt-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg,#1a3060,#2563eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pt-pulse 1.2s ease-in-out infinite;
+}
+#page-transition-overlay .pt-logo svg {
+  width: 26px; height: 26px;
+  fill: none; stroke: #fff; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+#page-transition-overlay .pt-bar-wrap {
+  width: 160px;
+  height: 3px;
+  background: rgba(201,168,76,.18);
+  border-radius: 99px;
+  overflow: hidden;
+}
+#page-transition-overlay .pt-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #c9a84c, #e8c97a);
+  border-radius: 99px;
+  transition: width 0.55s cubic-bezier(.4,0,.2,1);
+}
+@keyframes pt-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(37,99,235,.5); }
+  50%      { box-shadow: 0 0 0 12px rgba(37,99,235,0); }
+}
+
+/* Body starts invisible, fades in */
+body.pt-page-loaded {
+  animation: pt-fadeIn 0.45s ease forwards;
+}
+@keyframes pt-fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* Overlay animation states */
+#page-transition-overlay {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+#page-transition-overlay.pt-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
 </style>
 </head>
 <body>
+
+<!-- PAGE TRANSITION OVERLAY -->
+<div id="page-transition-overlay">
+  <div class="pt-inner">
+    <div class="pt-logo">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="pt-bar-wrap"><div class="pt-bar" id="ptBar"></div></div>
+  </div>
+</div>
+
 
 <!-- MOBILE MENU -->
 <div class="mob-menu" id="mobMenu">
@@ -318,6 +403,71 @@ const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isInters
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 // Nav scroll shadow
 window.addEventListener('scroll',()=>document.querySelector('nav').style.boxShadow=scrollY>20?'0 4px 30px rgba(0,0,0,.5)':'');
+</script>
+<script>
+// ===== PAGE TRANSITION SYSTEM =====
+(function(){
+  var overlay = document.getElementById('page-transition-overlay');
+  var bar = document.getElementById('ptBar');
+
+  // On page load: animate bar then hide overlay, reveal page
+  function revealPage() {
+    overlay.classList.add('pt-entering');
+    bar.style.width = '100%';
+    setTimeout(function(){
+      overlay.classList.add('pt-hidden');
+      document.body.classList.add('pt-page-loaded');
+      setTimeout(function(){ overlay.style.display='none'; }, 450);
+    }, 500);
+  }
+
+  // Intercept all internal navigation links
+  function interceptLinks() {
+    document.querySelectorAll('a[href]').forEach(function(link) {
+      var href = link.getAttribute('href') || '';
+      // Only intercept same-site .html links and hash links on other pages
+      if (href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel')) return;
+      // Skip pure hash anchors (same page scrolls)
+      if (href.startsWith('#')) return;
+      // Skip links that already have onclick with critical logic (like secretTap, toggleMenu)
+      var onclick = link.getAttribute('onclick') || '';
+      if (onclick.indexOf('secretTap') !== -1) return;
+
+      link.addEventListener('click', function(e) {
+        // If modifier key held, allow default
+        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+        var target = link.getAttribute('href');
+        if (!target || target === '#') return;
+        e.preventDefault();
+        // Show overlay with animation
+        overlay.style.display = 'flex';
+        overlay.style.opacity = '1';
+        overlay.classList.remove('pt-hidden');
+        overlay.classList.add('pt-entering');
+        bar.style.width = '0%';
+        // Trigger bar fill
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            bar.style.width = '85%';
+          });
+        });
+        // Navigate after short delay
+        setTimeout(function(){
+          window.location.href = target;
+        }, 380);
+      });
+    });
+  }
+
+  // Run reveal immediately
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ revealPage(); interceptLinks(); });
+  } else {
+    revealPage(); interceptLinks();
+  }
+  // Also intercept after dynamic content loads (mob menu etc)
+  window.addEventListener('load', interceptLinks);
+})();
 </script>
 </body>
 </html>
