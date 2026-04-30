@@ -114,67 +114,39 @@ footer a{color:var(--gold);text-decoration:none;}
   opacity: 0;
   pointer-events: none;
 }
-.pt-logo-wrap {
-  width: 72px; height: 72px;
-  border-radius: 20px;
-  background: linear-gradient(135deg,#1a3060,#2563eb);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 0 0 0 rgba(37,99,235,.5);
-  animation: pt-pulse 1.4s ease-in-out infinite;
-}
-.pt-logo-wrap img { width:100%;height:100%;object-fit:cover;border-radius:20px; }
-.pt-logo-wrap svg { width:34px;height:34px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round; }
-@keyframes pt-pulse {
-  0%,100% { box-shadow: 0 0 0 0 rgba(37,99,235,.45); }
-  50%      { box-shadow: 0 0 0 16px rgba(37,99,235,0); }
-}
 .pt-ring {
-  width: 44px; height: 44px;
+  width: 48px; height: 48px;
   border: 3px solid rgba(201,168,76,.2);
   border-top-color: #c9a84c;
   border-radius: 50%;
   animation: pt-spin 0.8s linear infinite;
 }
 @keyframes pt-spin { to { transform: rotate(360deg); } }
-.pt-text {
-  font-family: 'Outfit', sans-serif;
-  font-size: 13px;
-  color: rgba(232,202,122,0.7);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-weight: 500;
-}
 </style>
 </head>
 <body>
 <script>
-// Load logo from cache instantly — no flash
 (function(){
-  try{
-    var cached=localStorage.getItem('mch_logo_cache');
-    if(cached){
-      // Nav logo
+  function applyNavLogo(){
+    try{
+      var cached=localStorage.getItem('mch_logo_cache');
+      if(!cached)return;
       var si=document.getElementById('navLogoSvg');
       var im=document.getElementById('navLogoImg');
       if(im){im.src=cached;im.style.display='block';}
       if(si){si.style.display='none';}
-      // Overlay logo
-      var pl=document.getElementById('ptLogo');
-      if(pl){pl.innerHTML='<img src="'+cached+'" style="width:100%;height:100%;object-fit:cover;border-radius:20px;"/>';}
-    }
-  }catch(e){}
+    }catch(e){}
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',applyNavLogo);
+  } else { applyNavLogo(); }
 })();
 </script>
 
 
 <!-- PAGE TRANSITION OVERLAY -->
 <div id="page-transition-overlay">
-  <div class="pt-logo-wrap" id="ptLogo">
-    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-  </div>
   <div class="pt-ring"></div>
-  <div class="pt-text" id="ptText">Loading</div>
 </div>
 
 
@@ -377,21 +349,11 @@ window.addEventListener('scroll',()=>document.querySelector('nav').style.boxShad
 (function(){
   var overlay = document.getElementById('page-transition-overlay');
   var ptText = document.getElementById('ptText');
-  var ptLogo = document.getElementById('ptLogo');
-
   var PAGE_LABELS = {
     'index.html': 'Home', 'about.html': 'About Us',
     'mission.html': 'Our Mission', 'gallery.html': 'Gallery',
     'videos.html': 'Videos'
   };
-
-  // Load logo from cache into overlay immediately
-  try {
-    var cached = localStorage.getItem('mch_logo_cache');
-    if (cached) {
-      ptLogo.innerHTML = '<img src="' + cached + '" />';
-    }
-  } catch(e) {}
 
   // Hide overlay after page is ready
   function hideOverlay() {
@@ -400,11 +362,10 @@ window.addEventListener('scroll',()=>document.querySelector('nav').style.boxShad
   }
 
   // Show overlay when navigating away
-  function showOverlay(label) {
+  function showOverlay() {
     overlay.style.display = 'flex';
     overlay.style.opacity = '1';
     overlay.classList.remove('pt-done');
-    if (ptText) ptText.textContent = label || 'Loading';
   }
 
   // Handle bfcache (browser back/forward cache) — page shows instantly from cache
@@ -435,7 +396,7 @@ window.addEventListener('scroll',()=>document.querySelector('nav').style.boxShad
         e.preventDefault();
         var filename = target.split('/').pop().split('?')[0].split('#')[0] || 'index.html';
         var label = PAGE_LABELS[filename] || 'Loading';
-        showOverlay(label);
+        showOverlay();
         setTimeout(function(){ window.location.href = target; }, 420);
       });
     });
