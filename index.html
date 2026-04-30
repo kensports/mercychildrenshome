@@ -1136,6 +1136,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     </div>
     <div class="adm-tabs">
       <button class="adm-tab active" onclick="admTab('photos',this)">Photos</button>
+      <button class="adm-tab" onclick="admTab('videos',this)">🎬 Videos</button>
       <button class="adm-tab" onclick="admTab('captions',this)">Captions</button>
       <button class="adm-tab" onclick="admTab('supporters',this)">Volunteers</button>
       <button class="adm-tab" onclick="admTab('sponsors',this)">Sponsors</button>
@@ -1143,7 +1144,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <button class="adm-tab" onclick="admTab('contact',this)">Contact</button>
       <button class="adm-tab" onclick="admTab('stats',this)">Stats</button>
       <button class="adm-tab" onclick="admTab('settings',this)">Settings</button>
-      <button class="adm-tab" onclick="admTab('videos',this)">🎬 Videos</button>
     </div>
     <div class="adm-body">
 
@@ -2145,6 +2145,14 @@ async function openAdmin(){
 function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');}
 async function checkPwd(){
   var v=document.getElementById('pwdInput').value;
+  // First try to fetch latest password from Supabase so all devices are in sync
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/mch_photos?id=eq.admin_pwd&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    var rows=await r.json();
+    if(Array.isArray(rows)&&rows.length>0){
+      localStorage.setItem(AKEY,rows[0].filename);
+    }
+  }catch(e){}
   if(v===getPwd()){
     unlocked=true;
     document.getElementById('pwdOverlay').style.display='none';
