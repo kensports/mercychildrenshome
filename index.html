@@ -499,6 +499,23 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 </style>
 </head>
 <body>
+<script>
+// Load logo from cache instantly
+(function(){
+  try{
+    var cached=localStorage.getItem('mch_logo_cache');
+    if(cached){
+      var si=document.getElementById('navLogoSvg');
+      var im=document.getElementById('navLogoImg');
+      if(im){im.src=cached;im.style.display='block';}
+      if(si){si.style.display='none';}
+      var pl=document.getElementById('ptLogo');
+      if(pl){pl.innerHTML='<img src="'+cached+'" style="width:100%;height:100%;object-fit:cover;border-radius:20px;"/>';}
+    }
+  }catch(e){}
+})();
+</script>
+
 
 <!-- PAGE TRANSITION OVERLAY -->
 <div id="page-transition-overlay">

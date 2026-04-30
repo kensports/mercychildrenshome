@@ -145,6 +145,25 @@ footer a{color:var(--gold);text-decoration:none;}
 </style>
 </head>
 <body>
+<script>
+// Load logo from cache instantly — no flash
+(function(){
+  try{
+    var cached=localStorage.getItem('mch_logo_cache');
+    if(cached){
+      // Nav logo
+      var si=document.getElementById('navLogoSvg');
+      var im=document.getElementById('navLogoImg');
+      if(im){im.src=cached;im.style.display='block';}
+      if(si){si.style.display='none';}
+      // Overlay logo
+      var pl=document.getElementById('ptLogo');
+      if(pl){pl.innerHTML='<img src="'+cached+'" style="width:100%;height:100%;object-fit:cover;border-radius:20px;"/>';}
+    }
+  }catch(e){}
+})();
+</script>
+
 
 <!-- PAGE TRANSITION OVERLAY -->
 <div id="page-transition-overlay">
@@ -168,7 +187,7 @@ footer a{color:var(--gold);text-decoration:none;}
 
 <nav>
   <a class="nav-brand" href="index.html">
-    <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    <div class="nav-icon" id="navIconWrap" style="overflow:hidden;padding:0;"><svg id="navLogoSvg" viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><img id="navLogoImg" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:10px;" /></div>
     <div class="nav-name">Mercy Children's Home<small>Kasanda Bukuya · UGANDA</small></div>
   </a>
   <div class="nav-links">
