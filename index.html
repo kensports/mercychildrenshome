@@ -1425,8 +1425,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         </div>
       </div>
     </div>
+    <div id="v-direct-fields" style="display:none;">
       <div class="af"><label>Video URL * (.mp4 or archive.org)</label><input type="text" id="v-direct-url" placeholder="https://archive.org/download/..."/></div>
       <div class="af"><label>Thumbnail URL (optional)</label><input type="text" id="v-thumb-url" placeholder="https://... image URL"/></div>
+    </div>
     </div>
     <div class="af"><label>Category</label>
       <select id="v-cat" style="width:100%;padding:10px;border-radius:8px;background:var(--bg2);border:1px solid var(--border);color:var(--text);font-size:13px;">
@@ -3160,7 +3162,7 @@ async function addVideo(){
     var dvp=document.getElementById('v-device-video-preview');if(dvp)dvp.style.display='none';
     var dtp=document.getElementById('v-device-thumb-preview');if(dtp)dtp.style.display='none';
     loadVideos();
-  }catch(e){showToast('Create mch_videos table in Supabase first!',true);console.error(e);}
+  }catch(e){showToast('Error: '+e.message,true);console.error(e);}
 }
 async function deleteVideo(id){
   if(!confirm('Delete this video?'))return;
