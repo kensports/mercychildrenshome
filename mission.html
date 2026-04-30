@@ -116,26 +116,31 @@ footer a{color:var(--gold);text-decoration:none;}
 }
 
 /* ===== PAGE TRANSITION OVERLAY ===== */
+/* Overlay is HIDDEN by default — only shown during navigation */
 #page-transition-overlay {
   position: fixed;
   inset: 0;
   z-index: 99999;
   pointer-events: none;
   background: #0a0e1a;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+#page-transition-overlay.pt-show {
+  display: flex;
+  pointer-events: all;
+}
+#page-transition-overlay.pt-visible {
+  opacity: 1;
 }
 #page-transition-overlay .pt-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 18px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-#page-transition-overlay.pt-entering .pt-inner {
-  opacity: 1;
 }
 #page-transition-overlay .pt-logo {
   width: 52px;
@@ -164,29 +169,19 @@ footer a{color:var(--gold);text-decoration:none;}
   width: 0%;
   background: linear-gradient(90deg, #c9a84c, #e8c97a);
   border-radius: 99px;
-  transition: width 0.55s cubic-bezier(.4,0,.2,1);
+  transition: width 0.4s cubic-bezier(.4,0,.2,1);
 }
 @keyframes pt-pulse {
   0%,100% { box-shadow: 0 0 0 0 rgba(37,99,235,.5); }
   50%      { box-shadow: 0 0 0 12px rgba(37,99,235,0); }
 }
-
-/* Body starts invisible, fades in */
-body.pt-page-loaded {
-  animation: pt-fadeIn 0.45s ease forwards;
+/* Page entry fade-in */
+body {
+  animation: pt-fadeIn 0.4s ease both;
 }
 @keyframes pt-fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-/* Overlay animation states */
-#page-transition-overlay {
-  opacity: 1;
-  transition: opacity 0.4s ease;
-}
-#page-transition-overlay.pt-hidden {
-  opacity: 0;
-  pointer-events: none;
 }
 </style>
 </head>
@@ -386,62 +381,43 @@ window.addEventListener('scroll',()=>document.querySelector('nav').style.boxShad
   var overlay = document.getElementById('page-transition-overlay');
   var bar = document.getElementById('ptBar');
 
-  // On page load: animate bar then hide overlay, reveal page
-  function revealPage() {
-    overlay.classList.add('pt-entering');
-    bar.style.width = '100%';
-    setTimeout(function(){
-      overlay.classList.add('pt-hidden');
-      document.body.classList.add('pt-page-loaded');
-      setTimeout(function(){ overlay.style.display='none'; }, 450);
-    }, 500);
-  }
-
   // Intercept all internal navigation links
   function interceptLinks() {
     document.querySelectorAll('a[href]').forEach(function(link) {
+      if (link._ptBound) return;
+      link._ptBound = true;
       var href = link.getAttribute('href') || '';
-      // Only intercept same-site .html links and hash links on other pages
       if (href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel')) return;
-      // Skip pure hash anchors (same page scrolls)
       if (href.startsWith('#')) return;
-      // Skip links that already have onclick with critical logic (like secretTap, toggleMenu)
       var onclick = link.getAttribute('onclick') || '';
       if (onclick.indexOf('secretTap') !== -1) return;
 
       link.addEventListener('click', function(e) {
-        // If modifier key held, allow default
         if (e.metaKey || e.ctrlKey || e.shiftKey) return;
         var target = link.getAttribute('href');
         if (!target || target === '#') return;
         e.preventDefault();
-        // Show overlay with animation
-        overlay.style.display = 'flex';
-        overlay.style.opacity = '1';
-        overlay.classList.remove('pt-hidden');
-        overlay.classList.add('pt-entering');
+        // Show overlay: first display it, then trigger opacity transition
+        overlay.classList.add('pt-show');
         bar.style.width = '0%';
-        // Trigger bar fill
         requestAnimationFrame(function(){
           requestAnimationFrame(function(){
+            overlay.classList.add('pt-visible');
             bar.style.width = '85%';
           });
         });
-        // Navigate after short delay
         setTimeout(function(){
           window.location.href = target;
-        }, 380);
+        }, 400);
       });
     });
   }
 
-  // Run reveal immediately
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function(){ revealPage(); interceptLinks(); });
+    document.addEventListener('DOMContentLoaded', interceptLinks);
   } else {
-    revealPage(); interceptLinks();
+    interceptLinks();
   }
-  // Also intercept after dynamic content loads (mob menu etc)
   window.addEventListener('load', interceptLinks);
 })();
 </script>
