@@ -91,6 +91,38 @@ section{padding:80px 5%;}
 footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 5%;text-align:center;}
 footer p{font-size:13px;color:var(--text2);}
 footer a{color:var(--gold);text-decoration:none;}
+
+/* ── OCEAN BLUE THEME (about page) ── */
+:root{--accent:#0ea5e9;--accent2:#38bdf8;}
+/* Hero gradient shifts to blue-teal */
+.hero-bg{background:radial-gradient(ellipse at 15% 55%,rgba(14,165,233,.16) 0%,transparent 55%),radial-gradient(ellipse at 85% 25%,rgba(201,168,76,.09) 0%,transparent 50%),#0a0e1a !important;}
+/* Blue-tinted eyebrow line */
+.eyebrow-line{background:linear-gradient(90deg,#0ea5e9,#38bdf8) !important;}
+/* Nav cta keeps blue */
+.nav-cta{background:linear-gradient(135deg,#0369a1,#0ea5e9) !important;}
+/* Info card icon — blue gradient */
+.ic-icon{background:linear-gradient(135deg,#0369a1,#0ea5e9) !important;}
+/* Value card icon stays gold */
+.v-icon svg{stroke:var(--gold) !important;}
+/* Stats value glow blue */
+@keyframes statGlowBlue{0%,100%{text-shadow:0 0 0 rgba(14,165,233,0);}50%{text-shadow:0 0 24px rgba(14,165,233,.7);}}
+.stat-val{animation:statGlowBlue 2.5s ease-in-out infinite !important;color:#38bdf8 !important;}
+/* Blockquote border teal */
+.blockquote{border-left-color:#0ea5e9 !important;}
+/* Hero h1 em — teal */
+.hero h1 em{color:#38bdf8 !important;animation:none !important;}
+/* Section tags — teal */
+.sec-tag{color:#38bdf8 !important;border-color:rgba(14,165,233,.35) !important;background:rgba(14,165,233,.08) !important;}
+/* CTA band — blue */
+.cta-band{background:linear-gradient(135deg,rgba(14,165,233,.12),rgba(201,168,76,.06)) !important;border-color:rgba(14,165,233,.3) !important;}
+/* Loc detail icons — teal */
+.loc-detail svg{stroke:#0ea5e9 !important;}
+/* Scroll animations */
+.fade-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease;}
+.fade-left.visible{opacity:1;transform:none;}
+.fade-right{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s ease;}
+.fade-right.visible{opacity:1;transform:none;}
+
 .fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
 .fade-up.visible{opacity:1;transform:none;}
 .fade-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease;}

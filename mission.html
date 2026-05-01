@@ -91,6 +91,40 @@ section{padding:80px 5%;}
 .cta-band p{font-size:14px;color:#94a3b8;margin-top:4px;}
 footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 5%;text-align:center;}
 footer p{font-size:13px;color:var(--text2);}footer a{color:var(--gold);text-decoration:none;}
+
+/* ── EMERALD GREEN THEME (mission page) ── */
+:root{--grn:#10b981;--grn2:#34d399;}
+/* Hero gradient — green tints */
+.hero-bg{background:radial-gradient(ellipse at 80% 30%,rgba(16,185,129,.12) 0%,transparent 55%),radial-gradient(ellipse at 20% 70%,rgba(37,99,235,.1) 0%,transparent 55%),#0a0e1a !important;}
+/* Eyebrow line green */
+.eyebrow-line{background:linear-gradient(90deg,#10b981,#34d399) !important;}
+/* Hero em green */
+.hero h1 em{color:#34d399 !important;animation:none !important;}
+/* Sec tags green */
+.sec-tag{color:#34d399 !important;border-color:rgba(16,185,129,.4) !important;background:rgba(16,185,129,.08) !important;}
+/* Pillar icons green */
+.p-icon svg{stroke:#10b981 !important;}
+/* Pillar hover border green */
+.pillar:hover{border-color:rgba(16,185,129,.45) !important;box-shadow:0 20px 50px rgba(16,185,129,.08) !important;}
+.pillar::after{background:linear-gradient(90deg,transparent,#10b981,transparent) !important;}
+/* Impact list check icons green */
+.impact-list li svg{stroke:#10b981 !important;}
+/* Impact stat values green */
+.i-val{color:#34d399 !important;}
+@keyframes statGlowGreen{0%,100%{text-shadow:0 0 0 rgba(16,185,129,0);}50%{text-shadow:0 0 24px rgba(16,185,129,.7);}}
+.i-val{animation:statGlowGreen 2.5s ease-in-out infinite !important;}
+/* Timeline dot border green */
+.tl-dot{border-color:#10b981 !important;}
+.tl-dot svg{stroke:#10b981 !important;}
+/* Vision band — green */
+.vision-band{background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(201,168,76,.06)) !important;border-color:rgba(16,185,129,.25) !important;}
+.vision-band em{color:#34d399 !important;}
+/* CTA band green */
+.cta-band{background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(37,99,235,.06)) !important;border-color:rgba(16,185,129,.3) !important;}
+/* Strong highlights green */
+.impact-text p strong{color:#34d399 !important;}
+/* Nav cta keeps blue for consistency */
+
 .fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
 .fade-up.visible{opacity:1;transform:none;}
 .fade-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease;}

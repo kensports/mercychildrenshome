@@ -473,6 +473,54 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   animation: pt-spin 0.8s linear infinite;
 }
 @keyframes pt-spin { to { transform: rotate(360deg); } }
+
+/* ═══ SHARE SIDEBAR ═══ */
+.share-sidebar{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:0;border-radius:14px 0 0 14px;overflow:hidden;box-shadow:-4px 4px 24px rgba(0,0,0,.4);}
+.sh-btn{width:46px;height:46px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:width .25s,opacity .2s;position:relative;cursor:pointer;border:none;font-family:'Outfit',sans-serif;}
+.sh-btn:hover{width:58px;opacity:.9;}
+.sh-btn svg{width:20px;height:20px;flex-shrink:0;}
+.sh-btn .sh-tip{position:absolute;right:54px;background:rgba(15,21,37,.95);color:#fff;font-size:12px;font-weight:600;white-space:nowrap;padding:5px 10px;border-radius:8px;opacity:0;transition:opacity .2s;pointer-events:none;}
+.sh-btn:hover .sh-tip{opacity:1;}
+@media(max-width:600px){.share-sidebar{top:auto;bottom:0;right:0;left:0;flex-direction:row;transform:none;border-radius:0;border-top:1px solid rgba(255,255,255,.1);}.sh-btn{flex:1;height:52px;width:auto;border-radius:0;}.sh-btn:hover{width:auto;}.sh-btn .sh-tip{display:none;}}
+
+/* ═══ VOLUNTEER SECTION ═══ */
+.vol-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1100px;margin:0 auto;}
+.vol-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 22px;text-align:center;transition:transform .35s cubic-bezier(.34,1.56,.64,1),border-color .25s,box-shadow .35s;}
+.vol-card:hover{transform:translateY(-8px);border-color:rgba(201,168,76,.35);box-shadow:0 20px 50px rgba(201,168,76,.07);}
+.vol-icon{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:26px;}
+.vol-card h3{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--white);margin-bottom:8px;}
+.vol-card p{font-size:13px;color:#8892a4;line-height:1.75;}
+.vol-cta{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:12px;font-weight:600;color:var(--gold);text-decoration:none;}
+@media(max-width:900px){.vol-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.vol-grid{grid-template-columns:1fr;}}
+
+/* ═══ PRAYER WALL ═══ */
+.prayer-form-wrap{max-width:680px;margin:0 auto 60px;}
+.prayer-input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;color:var(--text);font-size:14px;font-family:'Outfit',sans-serif;resize:vertical;min-height:90px;outline:none;transition:border-color .2s;}
+.prayer-input:focus{border-color:rgba(201,168,76,.5);}
+.prayer-name-row{display:flex;gap:12px;margin-bottom:12px;}
+.prayer-name-inp{flex:1;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-size:14px;font-family:'Outfit',sans-serif;outline:none;transition:border-color .2s;}
+.prayer-name-inp:focus{border-color:rgba(201,168,76,.5);}
+.prayer-submit-btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;border:none;border-radius:10px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:transform .2s,box-shadow .2s;}
+.prayer-submit-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.35);}
+.prayers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1100px;margin:0 auto;}
+.prayer-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;position:relative;overflow:hidden;}
+.prayer-card::before{content:'✝';position:absolute;top:14px;right:16px;font-size:16px;color:rgba(201,168,76,.25);}
+.prayer-text{font-size:14px;color:#cbd5e1;line-height:1.75;margin-bottom:12px;font-style:italic;}
+.prayer-from{font-size:12px;color:var(--gold);font-weight:600;}
+.prayer-date{font-size:11px;color:var(--text2);margin-top:2px;}
+@media(max-width:900px){.prayers-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.prayers-grid{grid-template-columns:1fr;}.prayer-name-row{flex-direction:column;}}
+
+/* ═══ NEWSLETTER ═══ */
+.newsletter-wrap{max-width:640px;margin:0 auto;text-align:center;}
+.nl-form{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;}
+.nl-inp{flex:1;min-width:180px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;color:var(--text);font-size:14px;font-family:'Outfit',sans-serif;outline:none;transition:border-color .2s;}
+.nl-inp:focus{border-color:rgba(201,168,76,.5);}
+.nl-btn{background:linear-gradient(135deg,var(--gold),var(--gold2),#f5d98a,var(--gold));background-size:300% auto;animation:shimmerBtn 3s linear infinite;color:#0a0e1a;border:none;border-radius:12px;padding:14px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:transform .2s,box-shadow .2s;white-space:nowrap;}
+.nl-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(201,168,76,.4);}
+.nl-note{font-size:12px;color:var(--text2);margin-top:12px;line-height:1.6;}
+
 </style>
 </head>
 <body>
@@ -496,6 +544,27 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 
 
 <!-- PAGE TRANSITION OVERLAY -->
+
+<!-- ═══ FLOATING SHARE SIDEBAR ═══ -->
+<div class="share-sidebar" id="shareSidebar">
+  <a class="sh-btn" href="https://wa.me/?text=🙏%20Support%2032%20orphaned%20children%20at%20Mercy%20Children's%20Home,%20Uganda.%20Donate%20here:%20https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US%20|%20See%20our%20story:%20https://kensports.github.io/mercychildrenshome" target="_blank" style="background:#25d366;" title="Share on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" style="color:#fff;"><path d="M17.47 14.38c-.27-.14-1.6-.79-1.85-.88s-.43-.14-.61.14-.7.88-.86 1.06-.32.2-.59.07a7.43 7.43 0 01-2.19-1.35 8.2 8.2 0 01-1.51-1.88c-.16-.27 0-.42.12-.56s.27-.32.4-.48a1.76 1.76 0 00.27-.45.5.5 0 000-.48c-.07-.14-.61-1.47-.84-2s-.44-.46-.61-.47h-.52a1 1 0 00-.72.34A3.06 3.06 0 008 10.22a5.3 5.3 0 001.1 2.81 12.13 12.13 0 004.67 4.1 13.53 13.53 0 001.55.57 3.73 3.73 0 001.71.11 2.81 2.81 0 001.84-1.3 2.28 2.28 0 00.16-1.3c-.07-.11-.25-.18-.52-.32zM12 2a10 10 0 00-8.67 14.95L2 22l5.2-1.36A10 10 0 1012 2z"/></svg>
+    <span class="sh-tip">Share on WhatsApp</span>
+  </a>
+  <a class="sh-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://kensports.github.io/mercychildrenshome" target="_blank" style="background:#1877f2;" title="Share on Facebook">
+    <svg viewBox="0 0 24 24" fill="currentColor" style="color:#fff;"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.49 0-1.95.93-1.95 1.88v2.27h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+    <span class="sh-tip">Share on Facebook</span>
+  </a>
+  <a class="sh-btn" href="https://twitter.com/intent/tweet?text=Support+32+orphaned+children+at+Mercy+Children%27s+Home+Uganda&url=https://kensports.github.io/mercychildrenshome" target="_blank" style="background:#000;" title="Share on X">
+    <svg viewBox="0 0 24 24" fill="currentColor" style="color:#fff;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    <span class="sh-tip">Share on X / Twitter</span>
+  </a>
+  <button class="sh-btn" onclick="copyPageLink()" style="background:#334155;" title="Copy link" id="copyShareBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+    <span class="sh-tip">Copy Link</span>
+  </button>
+</div>
+
 <div id="page-transition-overlay">
   <div class="pt-ring"></div>
 </div>
@@ -1013,6 +1082,87 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   </div>
 </section>
 
+
+<!-- ═══ VOLUNTEER SECTION ═══ -->
+<section style="background:var(--bg);padding:88px 5%;" id="volunteer">
+  <div style="text-align:center;margin-bottom:52px;">
+    <div class="sec-tag">Help Beyond Donations</div>
+    <h2 class="sec-title">Volunteer & Support</h2>
+    <p style="font-size:15px;color:#94a3b8;line-height:1.8;max-width:600px;margin:16px auto 0;">You don't need money to make a difference. There are many ways people from around the world help the children of Mercy Children's Home.</p>
+  </div>
+  <div class="vol-grid">
+    <div class="vol-card fade-up">
+      <div class="vol-icon" style="background:linear-gradient(135deg,#0a4a2a,#10b981);">🌐</div>
+      <h3>Social Media Volunteer</h3>
+      <p>Share our posts, stories, and updates on your social media to help us reach more potential donors and supporters worldwide.</p>
+      <a href="https://youtube.com/@mercychidrenshomeug4969" target="_blank" class="vol-cta">Our YouTube Channel →</a>
+    </div>
+    <div class="vol-card fade-up">
+      <div class="vol-icon" style="background:linear-gradient(135deg,#1a3060,#2563eb);">💻</div>
+      <h3>Online Tutor</h3>
+      <p>Teach a subject remotely via video call — English, Math, Science, or any skill you have. Even one hour a month changes lives.</p>
+      <a href="https://wa.me/256700000000" target="_blank" class="vol-cta">Contact Us to Start →</a>
+    </div>
+    <div class="vol-card fade-up">
+      <div class="vol-icon" style="background:linear-gradient(135deg,#7c1d0a,#f59e0b);">💰</div>
+      <h3>Fundraise For Us</h3>
+      <p>Organise a local fundraiser, birthday donation, or charity event in your city. Every cent raised goes directly to the children.</p>
+      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="vol-cta">Start a GoFundMe →</a>
+    </div>
+    <div class="vol-card fade-up">
+      <div class="vol-icon" style="background:linear-gradient(135deg,#4a1060,#9333ea);">🙏</div>
+      <h3>Prayer Partner</h3>
+      <p>Commit to praying for these 32 children daily. Your prayers are as powerful as any donation. Join our prayer wall below.</p>
+      <a href="#prayer-wall" class="vol-cta" onclick="document.getElementById('prayer-wall').scrollIntoView({behavior:'smooth'})">Join the Prayer Wall →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRAYER WALL ═══ -->
+<section style="background:var(--bg2);padding:88px 5%;" id="prayer-wall">
+  <div style="text-align:center;margin-bottom:48px;">
+    <div class="sec-tag">✝ Community of Faith</div>
+    <h2 class="sec-title">Prayer Wall</h2>
+    <p style="font-size:15px;color:#94a3b8;line-height:1.8;max-width:560px;margin:14px auto 0;">Submit a prayer for the children, the staff, and the mission of Mercy Children's Home. Your prayer matters.</p>
+  </div>
+  <!-- Submit Form -->
+  <div class="prayer-form-wrap">
+    <div class="prayer-name-row">
+      <input class="prayer-name-inp" id="prayerName" placeholder="Your name (optional — or leave blank to be Anonymous)" maxlength="80">
+    </div>
+    <textarea class="prayer-input" id="prayerText" placeholder="Write your prayer or message of support for the children here..." maxlength="500"></textarea>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;flex-wrap:wrap;gap:10px;">
+      <span style="font-size:12px;color:var(--text2);" id="prayerCharCount">0 / 500 characters</span>
+      <button class="prayer-submit-btn" onclick="submitPrayer()">
+        🙏 &nbsp;Send Prayer
+      </button>
+    </div>
+  </div>
+  <!-- Prayer Cards -->
+  <div class="prayers-grid" id="prayersGrid">
+    <div class="prayer-card" style="grid-column:1/-1;text-align:center;padding:40px 20px;border-style:dashed;">
+      <div style="font-size:32px;margin-bottom:12px;">🙏</div>
+      <p style="color:var(--text2);font-size:14px;">Loading prayers...</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ NEWSLETTER ═══ -->
+<section style="background:linear-gradient(135deg,rgba(201,168,76,.06),rgba(37,99,235,.04));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:88px 5%;" id="newsletter">
+  <div class="newsletter-wrap">
+    <div class="sec-tag">Stay Connected</div>
+    <h2 class="sec-title" style="margin-bottom:14px;">Get Monthly Updates</h2>
+    <p style="font-size:15px;color:#94a3b8;line-height:1.8;">Be the first to hear about the children's progress, new milestones, urgent needs, and how your support is making a difference. No spam — ever.</p>
+    <div class="nl-form">
+      <input class="nl-inp" id="nlName" placeholder="Your first name" maxlength="60">
+      <input class="nl-inp" id="nlEmail" type="email" placeholder="Your email address" maxlength="120">
+      <button class="nl-btn" onclick="subscribeNewsletter()">Subscribe →</button>
+    </div>
+    <p class="nl-note">✉️ We send updates once a month. Unsubscribe any time by emailing us. Your data is never shared.</p>
+  </div>
+</section>
+
+
 <!-- FOOTER -->
 
 
@@ -1291,7 +1441,28 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <button class="adm-btn" onclick="saveContent()">Save Content</button>
       </div>
 
-      <!-- CONTACT TAB -->
+      
+<!-- NEWSLETTER TAB -->
+<div id="tab-newsletter" style="display:none;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+    <div><h3 style="font-size:16px;font-weight:700;color:var(--white);margin-bottom:4px;">Newsletter Subscribers</h3><p style="font-size:13px;color:var(--text2);" id="nlSubCount">Loading...</p></div>
+    <button onclick="exportNewsletter()" style="background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-family:'Outfit',sans-serif;">⬇ Export CSV</button>
+  </div>
+  <div id="nlSubList" style="display:flex;flex-direction:column;gap:8px;"></div>
+</div>
+
+<!-- PRAYERS TAB -->
+<div id="tab-prayers" style="display:none;">
+  <h3 style="font-size:16px;font-weight:700;color:var(--white);margin-bottom:20px;">Prayer Wall Moderation</h3>
+  <div style="display:flex;gap:10px;margin-bottom:16px;">
+    <button onclick="loadAdminPrayers('all')" style="background:var(--card);border:1px solid var(--border);color:var(--gold);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-family:'Outfit',sans-serif;">All</button>
+    <button onclick="loadAdminPrayers(true)" style="background:var(--card);border:1px solid var(--border);color:#4ade80;padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-family:'Outfit',sans-serif;">Approved</button>
+    <button onclick="loadAdminPrayers(false)" style="background:var(--card);border:1px solid var(--border);color:#f87171;padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-family:'Outfit',sans-serif;">Hidden</button>
+  </div>
+  <div id="adminPrayerList" style="display:flex;flex-direction:column;gap:10px;"></div>
+</div>
+
+<!-- CONTACT TAB -->
       <div class="adm-sec" id="adm-contact">
         <div class="af"><label>Location</label><input type="text" id="ei-location" value="Kasanda Bukuya, Uganda"/></div>
         <div class="af"><label>Phone / WhatsApp</label><input type="text" id="ei-phone" value="+256 751 442 505"/></div>
@@ -3144,6 +3315,192 @@ setTimeout(loadVideos,2000);
 
 </script>
 <script>
+
+// ═══════════════════════════════
+// SHARE — Copy link
+// ═══════════════════════════════
+
+// ═══════════════════════════════
+// ADMIN — Newsletter
+// ═══════════════════════════════
+async function loadAdminNewsletter(){
+  var list=document.getElementById('nlSubList');
+  var count=document.getElementById('nlSubCount');
+  if(!list)return;
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/mch_newsletter?select=*&order=created_at.desc',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    var subs=await r.json();
+    if(!Array.isArray(subs)){list.innerHTML='<p style="color:var(--text2);">Create mch_newsletter table first.</p>';return;}
+    if(count)count.textContent=subs.length+' subscriber'+(subs.length!==1?'s':'');
+    if(!subs.length){list.innerHTML='<p style="color:var(--text2);text-align:center;padding:20px;">No subscribers yet.</p>';return;}
+    list.innerHTML=subs.map(function(s){
+      return '<div style="display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;gap:12px;flex-wrap:wrap;">'
+        +'<div><div style="font-size:14px;font-weight:600;color:var(--text);">'+(s.name||'—')+'</div><div style="font-size:13px;color:var(--gold);">'+s.email+'</div></div>'
+        +'<div style="font-size:11px;color:var(--text2);">'+new Date(s.created_at).toLocaleDateString()+'</div>'
+        +'</div>';
+    }).join('');
+  }catch(e){if(list)list.innerHTML='<p style="color:var(--text2);">Could not load subscribers.</p>';}
+}
+
+function exportNewsletter(){
+  var list=document.getElementById('nlSubList');
+  if(!list||!list.children.length)return;
+  fetch(SUPA_URL+'/rest/v1/mch_newsletter?select=*&order=created_at.desc',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}}).then(function(r){return r.json();}).then(function(subs){
+    if(!Array.isArray(subs))return;
+    var csv='Name,Email,Date\n'+subs.map(function(s){return '"'+(s.name||'')+'",'+(s.email||'')+','+new Date(s.created_at).toLocaleDateString();}).join('\n');
+    var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+    a.download='mch_newsletter_'+Date.now()+'.csv';a.click();
+  });
+}
+
+// ═══════════════════════════════
+// ADMIN — Prayers
+// ═══════════════════════════════
+async function loadAdminPrayers(filter){
+  var list=document.getElementById('adminPrayerList');
+  if(!list)return;
+  list.innerHTML='<p style="color:var(--text2);padding:12px;">Loading...</p>';
+  try{
+    var url=SUPA_URL+'/rest/v1/mch_prayers?select=*&order=created_at.desc';
+    if(filter===true)url+='&approved=eq.true';
+    else if(filter===false)url+='&approved=eq.false';
+    var r=await fetch(url,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    var prayers=await r.json();
+    if(!Array.isArray(prayers)||!prayers.length){list.innerHTML='<p style="color:var(--text2);text-align:center;padding:20px;">No prayers found.</p>';return;}
+    list.innerHTML=prayers.map(function(p){
+      return '<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;">'
+        +'<div style="font-size:13px;color:#cbd5e1;line-height:1.7;margin-bottom:10px;font-style:italic;">'+eh(p.prayer)+'</div>'
+        +'<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">'
+        +'<div><span style="font-size:12px;color:var(--gold);font-weight:600;">🙏 '+eh(p.name||'Anonymous')+'</span> <span style="font-size:11px;color:var(--text2);margin-left:8px;">'+new Date(p.created_at).toLocaleDateString()+'</span></div>'
+        +'<div style="display:flex;gap:8px;">'
+        +'<button onclick="togglePrayer(''+p.id+'','+(p.approved?'false':'true')+')" style="background:'+(p.approved?'rgba(248,113,113,.1)':'rgba(74,222,128,.1)')+';border:1px solid '+(p.approved?'rgba(248,113,113,.35)':'rgba(74,222,128,.35)')+';color:'+(p.approved?'#f87171':'#4ade80')+';padding:5px 12px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;font-family:'Outfit',sans-serif;">'+(p.approved?'Hide':'Approve')+'</button>'
+        +'<button onclick="deletePrayer(''+p.id+'')" style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);color:#f87171;padding:5px 10px;border-radius:7px;cursor:pointer;font-size:12px;font-family:'Outfit',sans-serif;">🗑</button>'
+        +'</div></div></div>';
+    }).join('');
+  }catch(e){list.innerHTML='<p style="color:var(--text2);">Create mch_prayers table in Supabase to manage prayers.</p>';}
+}
+
+async function togglePrayer(id,approved){
+  try{
+    await fetch(SUPA_URL+'/rest/v1/mch_prayers?id=eq.'+id,{method:'PATCH',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({approved:approved})});
+    loadAdminPrayers('all');showToast(approved?'Prayer approved ✅':'Prayer hidden');
+  }catch(e){showToast('Error updating prayer',true);}
+}
+
+async function deletePrayer(id){
+  if(!confirm('Delete this prayer permanently?'))return;
+  try{
+    await fetch(SUPA_URL+'/rest/v1/mch_prayers?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    loadAdminPrayers('all');showToast('Prayer deleted');
+  }catch(e){showToast('Error deleting prayer',true);}
+}
+
+function copyPageLink(){
+  try{
+    navigator.clipboard.writeText('https://kensports.github.io/mercychildrenshome').then(function(){
+      var btn=document.getElementById('copyShareBtn');
+      var origHTML=btn.innerHTML;
+      btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="sh-tip">Copied!</span>';
+      setTimeout(function(){btn.innerHTML=origHTML;},2000);
+    });
+  }catch(e){
+    prompt('Copy this link:','https://kensports.github.io/mercychildrenshome');
+  }
+}
+
+// ═══════════════════════════════
+// PRAYER WALL
+// ═══════════════════════════════
+document.addEventListener('DOMContentLoaded',function(){
+  var ta=document.getElementById('prayerText');
+  var cc=document.getElementById('prayerCharCount');
+  if(ta&&cc){
+    ta.addEventListener('input',function(){cc.textContent=ta.value.length+' / 500 characters';});
+  }
+  loadPrayers();
+});
+
+async function loadPrayers(){
+  var grid=document.getElementById('prayersGrid');
+  if(!grid)return;
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/mch_prayers?select=*&approved=eq.true&order=created_at.desc&limit=12',{
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+    });
+    if(!r.ok)throw new Error();
+    var prayers=await r.json();
+    if(!Array.isArray(prayers)||!prayers.length){
+      grid.innerHTML='<div class="prayer-card" style="grid-column:1/-1;text-align:center;padding:40px 20px;border-style:dashed;"><div style="font-size:32px;margin-bottom:12px;">🙏</div><p style="color:var(--text2);font-size:14px;">Be the first to pray. Your prayer will appear here.</p></div>';
+      return;
+    }
+    grid.innerHTML=prayers.map(function(p){
+      var d=new Date(p.created_at);
+      var dateStr=d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+      return '<div class="prayer-card"><p class="prayer-text">'+eh(p.prayer)+'</p><div class="prayer-from">🙏 '+(p.name&&p.name.trim()?eh(p.name):'Anonymous')+'</div><div class="prayer-date">'+dateStr+'</div></div>';
+    }).join('');
+  }catch(e){
+    grid.innerHTML='<div class="prayer-card" style="grid-column:1/-1;text-align:center;padding:40px;border-style:dashed;"><p style="color:var(--text2);">Create the <strong style="color:var(--gold);">mch_prayers</strong> table in Supabase to enable the prayer wall.</p></div>';
+  }
+}
+
+async function submitPrayer(){
+  var name=(document.getElementById('prayerName').value||'').trim()||'Anonymous';
+  var prayer=(document.getElementById('prayerText').value||'').trim();
+  if(!prayer){showToast('Please write a prayer before sending.',true);return;}
+  if(prayer.length<10){showToast('Prayer is too short. Please write more.',true);return;}
+  var btn=document.querySelector('.prayer-submit-btn');
+  var orig=btn.innerHTML;btn.innerHTML='Sending...';btn.disabled=true;
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/mch_prayers',{
+      method:'POST',
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=representation'},
+      body:JSON.stringify({name:name,prayer:prayer,approved:true})
+    });
+    if(!r.ok)throw new Error(await r.text());
+    document.getElementById('prayerName').value='';
+    document.getElementById('prayerText').value='';
+    document.getElementById('prayerCharCount').textContent='0 / 500 characters';
+    showToast('🙏 Your prayer has been added to the wall!');
+    loadPrayers();
+  }catch(e){
+    showToast('Could not send prayer. Create mch_prayers table in Supabase first.',true);
+  }finally{
+    btn.innerHTML=orig;btn.disabled=false;
+  }
+}
+
+// ═══════════════════════════════
+// NEWSLETTER
+// ═══════════════════════════════
+async function subscribeNewsletter(){
+  var name=(document.getElementById('nlName').value||'').trim();
+  var email=(document.getElementById('nlEmail').value||'').trim();
+  if(!email||!email.includes('@')||!email.includes('.')){showToast('Please enter a valid email address.',true);return;}
+  var btn=document.querySelector('.nl-btn');
+  var orig=btn.innerHTML;btn.innerHTML='Subscribing...';btn.disabled=true;
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/mch_newsletter',{
+      method:'POST',
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=ignore-duplicates'},
+      body:JSON.stringify({name:name,email:email})
+    });
+    if(!r.ok)throw new Error(await r.text());
+    document.getElementById('nlName').value='';
+    document.getElementById('nlEmail').value='';
+    showToast('✅ You're subscribed! Thank you for staying connected.');
+  }catch(e){
+    if(e.message&&e.message.includes('duplicate')){
+      showToast('You are already subscribed with this email! ✅');
+    }else{
+      showToast('Could not subscribe. Create mch_newsletter table in Supabase first.',true);
+    }
+  }finally{
+    btn.innerHTML=orig;btn.disabled=false;
+  }
+}
+
+function eh(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
 // ===== PAGE TRANSITION SYSTEM =====
 (function(){
   var overlay = document.getElementById('page-transition-overlay');
