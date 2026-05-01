@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Donate — Mercy Children's Home Uganda</title>
+<meta name="description" content="Every way to donate to Mercy Children's Home Uganda — GoFundMe, MTN Mobile Money, Airtel Money, PayPal, Wise and bank transfer. Choose what works for you."/>
+<meta property="og:title" content="Donate — Mercy Children's Home Uganda"/>
+<meta property="og:description" content="Help 32 orphaned children in Uganda. Donate via GoFundMe, Mobile Money, PayPal or bank transfer."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#0a0e1a;--bg2:#0f1520;--card:#131929;--border:rgba(255,255,255,.08);--gold:#c9a84c;--white:#f1f5f9;--text2:#8892a4;}
+body{background:var(--bg);color:var(--white);font-family:'Outfit',sans-serif;min-height:100vh;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,26,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-name{font-size:15px;font-weight:700;color:var(--white);}
+.nav-name small{display:block;font-size:10px;color:var(--text2);font-weight:400;letter-spacing:.5px;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:14px;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+.hero{padding:120px 5% 80px;text-align:center;background:linear-gradient(180deg,rgba(201,168,76,.05) 0%,transparent 100%);border-bottom:1px solid var(--border);}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:700;color:var(--white);margin-bottom:16px;}
+.hero h1 span{color:var(--gold);}
+.hero p{font-size:16px;color:var(--text2);max-width:580px;margin:0 auto;line-height:1.8;}
+.container{max-width:1000px;margin:0 auto;padding:72px 5%;}
+.method-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.method-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:32px;position:relative;overflow:hidden;}
+.method-card.featured{border-color:rgba(201,168,76,.4);}
+.method-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),#f0c040);}
+.badge{display:inline-block;background:rgba(201,168,76,.15);color:var(--gold);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:3px 10px;border-radius:30px;margin-bottom:16px;}
+.badge.blue{background:rgba(59,130,246,.15);color:#60a5fa;}
+.badge.green{background:rgba(16,185,129,.15);color:#34d399;}
+.badge.purple{background:rgba(139,92,246,.15);color:#a78bfa;}
+.method-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--white);margin-bottom:10px;}
+.method-desc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px;}
+.method-detail{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.detail-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.detail-label{color:var(--text2);}
+.detail-val{color:var(--white);font-weight:600;}
+.btn-donate{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:transform .2s;cursor:pointer;border:none;font-family:'Outfit',sans-serif;}
+.btn-donate:hover{transform:translateY(-2px);}
+.btn-gold{background:var(--gold);color:#000;}
+.btn-green{background:#25d366;color:#fff;}
+.btn-blue{background:#0070ba;color:#fff;}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--white);}
+.impact-bar{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.03));border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:32px;margin-top:48px;text-align:center;}
+.impact-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--white);margin-bottom:24px;}
+.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.impact-item{background:var(--card);border-radius:14px;padding:16px;}
+.impact-amount{font-size:22px;font-weight:800;color:var(--gold);font-family:'Cormorant Garamond',serif;}
+.impact-desc{font-size:12px;color:var(--text2);margin-top:6px;line-height:1.5;}
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:32px 5%;text-align:center;font-size:13px;color:var(--text2);}
+@media(max-width:700px){.method-grid{grid-template-columns:1fr;}.impact-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="index.html">
+    <svg viewBox="0 0 36 36" style="width:36px;height:36px;" fill="none"><path d="M18 32 C18 32 6 22 6 14 A8 8 0 0 1 18 8 A8 8 0 0 1 30 14 C30 22 18 32 18 32Z" fill="none" stroke="#c9a84c" stroke-width="2.5"/><line x1="18" y1="12" x2="18" y2="28" stroke="#c9a84c" stroke-width="2"/><line x1="12" y1="18" x2="24" y2="18" stroke="#c9a84c" stroke-width="2"/></svg>
+    <div class="nav-name">Mercy Children's Home<small>Kasanda Bukuya · UGANDA</small></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <h1>Every Way to <span>Donate</span></h1>
+  <p>Choose the method that works best for you. 100% of every donation goes directly to caring for our 32 children in Kasanda Bukuya, Uganda.</p>
+</div>
+
+<div class="container">
+
+  <!-- Impact amounts -->
+  <div class="impact-bar">
+    <div class="impact-title">What Your Donation Does</div>
+    <div class="impact-grid">
+      <div class="impact-item"><div class="impact-amount">$10</div><div class="impact-desc">Feeds one child for a full week</div></div>
+      <div class="impact-item"><div class="impact-amount">$25</div><div class="impact-desc">Buys school books and stationery</div></div>
+      <div class="impact-item"><div class="impact-amount">$50</div><div class="impact-desc">Covers a child's school uniform</div></div>
+      <div class="impact-item"><div class="impact-amount">$100</div><div class="impact-desc">Pays for a full medical check-up</div></div>
+      <div class="impact-item"><div class="impact-amount">$200</div><div class="impact-desc">Covers school fees for one term</div></div>
+      <div class="impact-item"><div class="impact-amount">$300</div><div class="impact-desc">Feeds all 32 children for a month</div></div>
+      <div class="impact-item"><div class="impact-amount">$500</div><div class="impact-desc">Sponsors one child for a full year</div></div>
+      <div class="impact-item"><div class="impact-amount">Any</div><div class="impact-desc">Every shilling changes a life</div></div>
+    </div>
+  </div>
+
+  <div class="method-grid" style="margin-top:48px;">
+
+    <!-- GoFundMe -->
+    <div class="method-card featured">
+      <div class="badge">Most Popular</div>
+      <div class="method-title">GoFundMe</div>
+      <div class="method-desc">The easiest way to donate from anywhere in the world using your card, PayPal or bank. Secure, trusted and instant.</div>
+      <div class="method-detail">
+        <div class="detail-row"><span class="detail-label">Accepts</span><span class="detail-val">Visa, Mastercard, PayPal, Apple Pay</span></div>
+        <div class="detail-row"><span class="detail-label">Countries</span><span class="detail-val">Worldwide</span></div>
+        <div class="detail-row"><span class="detail-label">Minimum</span><span class="detail-val">$1</span></div>
+      </div>
+      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="btn-donate btn-gold">Donate on GoFundMe ↗</a>
+    </div>
+
+    <!-- MTN Mobile Money -->
+    <div class="method-card">
+      <div class="badge green">Uganda Only</div>
+      <div class="method-title">MTN Mobile Money</div>
+      <div class="method-desc">Send money directly via MTN MoMo. Instant and free for the sender within Uganda. Best for local donors.</div>
+      <div class="method-detail">
+        <div class="detail-row"><span class="detail-label">MTN Number</span><span class="detail-val">+256 751 442 505</span></div>
+        <div class="detail-row"><span class="detail-label">Name</span><span class="detail-val">Kenneth [Mercy Children's Home]</span></div>
+        <div class="detail-row"><span class="detail-label">Network</span><span class="detail-val">MTN Uganda</span></div>
+      </div>
+      <a href="https://wa.me/256751442505?text=Hello%2C%20I%20just%20sent%20a%20donation%20via%20MTN%20Mobile%20Money.%20Please%20confirm%20receipt." target="_blank" class="btn-donate btn-green">Confirm via WhatsApp ↗</a>
+    </div>
+
+    <!-- Airtel Money -->
+    <div class="method-card">
+      <div class="badge green">Uganda Only</div>
+      <div class="method-title">Airtel Money</div>
+      <div class="method-desc">Send via Airtel Money if you are on the Airtel network in Uganda. Quick and easy with no transfer fees.</div>
+      <div class="method-detail">
+        <div class="detail-row"><span class="detail-label">Airtel Number</span><span class="detail-val">+256 751 442 505</span></div>
+        <div class="detail-row"><span class="detail-label">Name</span><span class="detail-val">Kenneth [Mercy Children's Home]</span></div>
+        <div class="detail-row"><span class="detail-label">Network</span><span class="detail-val">Airtel Uganda</span></div>
+      </div>
+      <a href="https://wa.me/256751442505?text=Hello%2C%20I%20just%20sent%20a%20donation%20via%20Airtel%20Money.%20Please%20confirm%20receipt." target="_blank" class="btn-donate btn-green">Confirm via WhatsApp ↗</a>
+    </div>
+
+    <!-- WhatsApp Direct -->
+    <div class="method-card">
+      <div class="badge purple">Direct Contact</div>
+      <div class="method-title">WhatsApp Kenneth</div>
+      <div class="method-desc">Message Kenneth directly on WhatsApp to discuss your donation or ask questions. He responds personally to every message.</div>
+      <div class="method-detail">
+        <div class="detail-row"><span class="detail-label">WhatsApp</span><span class="detail-val">+256 751 442 505</span></div>
+        <div class="detail-row"><span class="detail-label">Response time</span><span class="detail-val">Usually within 24 hours</span></div>
+        <div class="detail-row"><span class="detail-label">Language</span><span class="detail-val">English &amp; Luganda</span></div>
+      </div>
+      <a href="https://wa.me/256751442505?text=Hello%20Kenneth%2C%20I%20would%20like%20to%20support%20Mercy%20Children%27s%20Home%20Uganda." target="_blank" class="btn-donate btn-green">Chat on WhatsApp ↗</a>
+    </div>
+
+  </div>
+
+  <!-- Note -->
+  <div style="margin-top:40px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;display:flex;gap:16px;align-items:flex-start;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <div>
+      <div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:6px;">Our Transparency Promise</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.7;">100% of your donation goes directly to the children. No salaries, no overhead deductions. Kenneth personally oversees every shilling spent. After donating, WhatsApp us and we will send you a photo update of how your donation was used.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2020 – 2026 Mercy Children's Home, Uganda · All rights reserved · <a href="privacy.html" style="color:var(--gold);">Privacy Policy</a> · Designed by <strong style="color:var(--gold);">KENPRO UG</strong></p>
+</footer>
+</body>
+</html>
