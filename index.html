@@ -473,6 +473,58 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 @keyframes pt-spin { to { transform: rotate(360deg); } }
 
 }
+
+/* ═══ VOLUNTEER CARDS ═══ */
+.vol-section{background:var(--bg);padding:88px 5%;}
+.vol-header{text-align:center;margin-bottom:56px;}
+.vol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto;}
+.vol-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:32px 28px;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.34,1.56,.64,1),border-color .3s,box-shadow .4s;}
+.vol-card:hover{transform:translateY(-10px);border-color:rgba(201,168,76,.4);box-shadow:0 24px 60px rgba(0,0,0,.45);}
+.vc-icon{width:64px;height:64px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;flex-shrink:0;}
+.vc-icon svg{flex-shrink:0;}
+.vc-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:10px;line-height:1.2;}
+.vc-desc{font-size:14px;color:#8892a4;line-height:1.8;flex:1;margin-bottom:20px;}
+.vc-link{font-size:13px;font-weight:700;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:gap .2s;}
+.vc-link:hover{gap:10px;}
+.vc-body{display:flex;flex-direction:column;flex:1;min-width:0;}
+@media(max-width:760px){
+  .vol-grid{grid-template-columns:1fr;gap:14px;}
+  .vol-card{flex-direction:row;align-items:flex-start;padding:20px;gap:18px;border-radius:18px;}
+  .vc-icon{width:52px;height:52px;border-radius:14px;margin-bottom:0;}
+  .vc-icon svg{width:24px !important;height:24px !important;}
+  .vc-title{font-size:17px;margin-bottom:6px;}
+  .vc-desc{font-size:13px;margin-bottom:12px;}
+  .vc-link{font-size:12px;}
+  .vol-section{padding:60px 4%;}
+}
+@media(min-width:761px) and (max-width:1000px){.vol-grid{grid-template-columns:1fr 1fr;}}
+
+
+/* ═══ NUCLEAR FIX: Remove any black artifacts in hero stats ═══ */
+.hero-stats *::before,
+.hero-stats *::after,
+.hero-stats > div::before,
+.hero-stats > div::after,
+.stat-num::before,
+.stat-num::after,
+.stat-label::before,
+.stat-label::after{content:none !important;display:none !important;background:none !important;}
+.stat-num,.stat-label{
+  background:transparent !important;
+  text-decoration:none !important;
+  border:none !important;
+  position:relative !important;
+}
+.stat-num{
+  background:transparent !important;
+  background-color:transparent !important;
+  box-shadow:none !important;
+}
+.hero-stats > div{
+  background:transparent !important;
+  border:none !important;
+  padding:0 !important;
+}
 </style>
 
 <div id="page-transition-overlay">
@@ -912,75 +964,69 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   </div>
   <div class="vol-grid">
 
-    <!-- Social Media -->
-    <div class="vol-card fade-up" style="--card-color:#10b981;">
+    <div class="vol-card fade-up">
       <div class="vc-icon" style="background:linear-gradient(135deg,#064e3b,#10b981);">
-        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       </div>
       <div class="vc-body">
         <div class="vc-title">Social Media</div>
         <div class="vc-desc">Share our posts, stories and updates to help us reach more donors and supporters worldwide.</div>
-        <a href="https://youtube.com/@mercychidrenshomeug4969" target="_blank" class="vc-link">Our YouTube Channel <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="https://youtube.com/@mercychidrenshomeug4969" target="_blank" class="vc-link">Our YouTube Channel <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
 
-    <!-- Online Tutor -->
-    <div class="vol-card fade-up" style="--card-color:#3b82f6;">
+    <div class="vol-card fade-up">
       <div class="vc-icon" style="background:linear-gradient(135deg,#1e3a8a,#3b82f6);">
-        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
       </div>
       <div class="vc-body">
         <div class="vc-title">Online Tutor</div>
         <div class="vc-desc">Teach a subject via video call — English, Math, Science. One hour a month changes a child's life.</div>
-        <a href="https://wa.me/256751442505?text=Hello%2C%20I%20would%20like%20to%20volunteer%20as%20an%20Online%20Tutor%20for%20Mercy%20Children%27s%20Home%20Uganda" target="_blank" class="vc-link" style="color:#25d366;">WhatsApp Us to Start <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="https://wa.me/256751442505?text=Hello%2C%20I%20would%20like%20to%20volunteer%20as%20an%20Online%20Tutor%20for%20Mercy%20Children%27s%20Home%20Uganda" target="_blank" class="vc-link" style="color:#25d366;">WhatsApp Us to Start <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
 
-    <!-- Prayer Partner -->
-    <div class="vol-card fade-up" style="--card-color:#9333ea;">
+    <div class="vol-card fade-up">
       <div class="vc-icon" style="background:linear-gradient(135deg,#581c87,#9333ea);">
-        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
       </div>
       <div class="vc-body">
         <div class="vc-title">Prayer Partner</div>
         <div class="vc-desc">Commit to praying for these 32 children daily. Your prayers are as powerful as any donation.</div>
-        <a href="#prayer-wall" class="vc-link">Join the Prayer Wall <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#prayer-wall" class="vc-link">Join the Prayer Wall <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
 
-    <!-- Fundraise -->
-    <div class="vol-card fade-up" style="--card-color:#f59e0b;">
+    <div class="vol-card fade-up">
       <div class="vc-icon" style="background:linear-gradient(135deg,#78350f,#f59e0b);">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
       </div>
       <div class="vc-body">
         <div class="vc-title">Fundraise For Us</div>
         <div class="vc-desc">Organise a local fundraiser, birthday donation, or charity event. Every cent goes to the children.</div>
-        <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="vc-link">Start on GoFundMe <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="vc-link">Start on GoFundMe <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
 
-    <!-- Send Supplies -->
-    <div class="vol-card fade-up" style="--card-color:#16a34a;">
+    <div class="vol-card fade-up">
       <div class="vc-icon" style="background:linear-gradient(135deg,#14532d,#16a34a);">
-        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
       </div>
       <div class="vc-body">
         <div class="vc-title">Send Supplies</div>
         <div class="vc-desc">Books, clothes, school stationery, or medical supplies. Contact us to find out what's needed most.</div>
-        <a href="https://wa.me/256751442505?text=Hello%2C%20I%20would%20like%20to%20send%20supplies%20to%20Mercy%20Children%27s%20Home%20Uganda.%20What%20do%20you%20need%20most%3F" target="_blank" class="vc-link" style="color:#25d366;">WhatsApp Us <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="https://wa.me/256751442505?text=Hello%2C%20I%20would%20like%20to%20send%20supplies%20to%20Mercy%20Children%27s%20Home%20Uganda.%20What%20do%20you%20need%20most%3F" target="_blank" class="vc-link" style="color:#25d366;">WhatsApp Us <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
 
-    <!-- Become a Sponsor -->
-    <div class="vol-card fade-up" style="--card-color:#0ea5e9;">
+    <div class="vol-card fade-up">
       <div class="vc-icon" style="background:linear-gradient(135deg,#0c4a6e,#0ea5e9);">
-        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
       <div class="vc-body">
         <div class="vc-title">Become a Sponsor</div>
         <div class="vc-desc">$500 sponsors a child for a full year — school fees, uniform, and books. Your name honours a future.</div>
-        <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="vc-link">Donate on GoFundMe <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="vc-link">Donate on GoFundMe <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
 
