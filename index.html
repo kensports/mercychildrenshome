@@ -343,28 +343,29 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 .toast-icon.err{color:var(--red);}
 
 /* FLOATING DONATE - Professional pill */
-.float-donate{position:fixed;bottom:28px;left:20px;z-index:400;pointer-events:none;opacity:0;transition:opacity .5s ease;}
-.float-donate.visible{opacity:1;pointer-events:auto;}
-.float-btn-wrap{position:relative;}
+
+
+
 .float-pulse-ring,.float-pulse-ring2,.float-circle,.float-label{display:none;}
-@keyframes pillGlow{0%,100%{box-shadow:0 4px 20px rgba(0,0,0,.8),0 0 0px rgba(220,38,38,0);}50%{box-shadow:0 4px 20px rgba(0,0,0,.8),0 0 18px rgba(220,38,38,.4);}}
-@keyframes pillFloat{0%,100%{transform:translateY(0px);}50%{transform:translateY(-5px);}}
-@keyframes heartBeat{0%,100%{transform:scale(1);}14%{transform:scale(1.18);}28%{transform:scale(1);}42%{transform:scale(1.1);}70%{transform:scale(1);}}
-.float-pill{display:flex;align-items:center;gap:12px;background:#0a0e1a;border:1.5px solid rgba(220,38,38,.7);border-radius:14px;padding:10px 18px 10px 10px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.8);animation:pillFloat 3s ease-in-out infinite,pillGlow 3s ease-in-out infinite;transition:transform .25s,box-shadow .25s;}
-.float-pill:hover{animation:none;transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.9),0 0 22px rgba(220,38,38,.4);}
-.float-pill:active{transform:scale(.97);}
-.float-pill-icon{width:46px;height:46px;background:transparent;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.float-pill-icon .heart-anim{animation:heartBeat 1.8s ease-in-out infinite;transform-origin:center;}
-.float-pill-text{display:flex;flex-direction:column;line-height:1.3;}
-.float-pill-sub{font-size:9px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;}
-.float-pill-main{font-size:13px;color:#fff;font-weight:700;}
+50%{box-shadow:0 4px 20px rgba(0,0,0,.8),0 0 18px rgba(220,38,38,.4);}}
+50%{transform:translateY(-5px);}}
+14%{transform:scale(1.18);}28%{transform:scale(1);}42%{transform:scale(1.1);}70%{transform:scale(1);}}
+
+
+
+
+
+
+
+
 
 /* LIGHTBOX */
 .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:800;display:none;align-items:center;justify-content:center;padding:20px;}
 .lightbox.open{display:flex;}
 .lightbox-img{max-width:100%;max-height:88vh;border-radius:12px;object-fit:contain;}
 .lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:white;width:42px;height:42px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:white;width:44px;height:44px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:white;width:44px;height:44px;border-radius:50%;font-size:18px;cursor:pointer;display:none;align-items:center;justify-content:center;}
+.lightbox.open .lightbox-nav{display:flex;}
 .lightbox-prev{left:12px;}.lightbox-next{right:12px;}
 .lightbox-caption{position:absolute;bottom:60px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);backdrop-filter:blur(8px);color:rgba(255,255,255,.9);font-size:13px;padding:8px 18px;border-radius:20px;white-space:nowrap;max-width:80%;text-align:center;}
 .lightbox-counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:13px;}
@@ -474,15 +475,15 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 @keyframes pt-spin { to { transform: rotate(360deg); } }
 
 /* ═══ SHARE SIDEBAR ═══ */
-.share-sidebar{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:0;border-radius:14px 0 0 14px;overflow:hidden;box-shadow:-4px 4px 24px rgba(0,0,0,.4);}
+.share-sidebar{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:2px;border-radius:14px 0 0 14px;overflow:visible;box-shadow:-4px 4px 24px rgba(0,0,0,.4);}
 .sh-btn{width:46px;height:46px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:width .25s,opacity .2s;position:relative;cursor:pointer;border:none;font-family:'Outfit',sans-serif;}
 .sh-btn:hover{width:58px;opacity:.9;}
 .sh-btn svg{width:20px;height:20px;flex-shrink:0;}
 .sh-btn .sh-tip{position:absolute;right:54px;background:rgba(15,21,37,.95);color:#fff;font-size:12px;font-weight:600;white-space:nowrap;padding:5px 10px;border-radius:8px;opacity:0;transition:opacity .2s;pointer-events:none;}
 .sh-btn:hover .sh-tip{opacity:1;}
 @media(max-width:768px){
-  .share-sidebar{top:auto;bottom:16px;right:12px;left:auto;flex-direction:column;transform:none;border-radius:50px;overflow:visible;background:transparent;box-shadow:none;gap:6px;}
-  .sh-btn{width:38px !important;height:38px !important;border-radius:50% !important;box-shadow:0 3px 12px rgba(0,0,0,.5);flex:none !important;}
+  .share-sidebar{top:50%;right:0;transform:translateY(-50%);flex-direction:column;overflow:visible;background:transparent;box-shadow:none;gap:0;border-radius:14px 0 0 14px;}
+  .sh-btn{width:44px !important;height:44px !important;border-radius:50% !important;box-shadow:0 3px 12px rgba(0,0,0,.5);flex:none !important;}
   .sh-btn svg{width:16px;height:16px;}
   .sh-btn .sh-tip{display:none;}
   .sh-btn:hover{width:38px !important;}
@@ -597,11 +598,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 
 <!-- ═══ FLOATING WHATSAPP CONTACT BUTTON ═══ -->
 <a href="https://wa.me/256751442505?text=Hello%20Mercy%20Children%27s%20Home%2C%20I%20would%20like%20to%20support%20your%20work%20with%20children%20in%20Uganda." target="_blank" id="waFloatBtn" title="Chat with us on WhatsApp"
-   style="position:fixed;left:20px;bottom:108px;z-index:160;width:52px;height:52px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.45);transition:transform .25s,box-shadow .25s;text-decoration:none;"
+   style="position:fixed;left:20px;bottom:28px;z-index:160;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.45);transition:transform .25s,box-shadow .25s;text-decoration:none;"
    onmouseover="this.style.transform='scale(1.12)';this.style.boxShadow='0 8px 28px rgba(37,211,102,.6)'"
    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,211,102,.45)'">
   <!-- WhatsApp logo SVG -->
-  <svg viewBox="0 0 48 48" fill="none" style="width:28px;height:28px;">
+  <svg viewBox="0 0 48 48" fill="none" style="width:32px;height:32px;">
     <path fill="#fff" d="M35.2 12.7A15.9 15.9 0 0 0 24 8C15.2 8 8 15.2 8 24c0 2.8.7 5.5 2.1 7.9L8 40l8.3-2.2a15.9 15.9 0 0 0 7.7 2h.1c8.8 0 16-7.2 16-16 0-4.3-1.7-8.3-4.9-11.1zm-11.2 24.6h-.1a13.2 13.2 0 0 1-6.7-1.8l-.5-.3-5 1.3 1.3-4.8-.3-.5a13.2 13.2 0 0 1-2-7.1C10.7 17 16.8 10.7 24 10.7c3.5 0 6.8 1.4 9.3 3.8a13 13 0 0 1 3.9 9.4c-.1 7.3-6.1 13.4-13.2 13.4zm7.2-9.9c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-.9 1.2-1.2 1.5-.2.3-.4.3-.8.1a10.3 10.3 0 0 1-3-1.9 11.3 11.3 0 0 1-2.1-2.6c-.2-.4 0-.6.2-.8l.5-.6c.2-.2.3-.4.4-.6.1-.2 0-.5-.1-.6-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.7c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.3 0 2 1.5 3.9 1.7 4.1.2.3 2.9 4.4 7 6.2 1 .4 1.7.7 2.3.8 1 .3 1.8.3 2.5.2.8-.1 2.4-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.2-.4-.3-.8-.5z"/>
   </svg>
   <!-- Pulse ring animation -->
@@ -667,7 +668,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
           <span id="mottoText" style="font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#c9a84c;font-size:10px;white-space:nowrap;">✝&nbsp;&nbsp;Together We Are The Church&nbsp;&nbsp;✝</span>
         </div>
       </div>
-      <div style="width:4px;height:4px;border-radius:50%;background:rgba(201,168,76,.35);flex-shrink:0;"></div>
       <div class="hero-badge" style="margin:0;">
         <svg style="width:11px;height:11px;fill:currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         <span id="heroTag">Serving <strong>UGANDA</strong>'s Children Since 2020</span>
@@ -1545,17 +1545,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 </div>
 
 <!-- FLOATING DONATE -->
-<div class="float-donate" id="floatDonate">
-  <div class="float-btn-wrap">
-    <div class="float-pill" onclick="window.open('https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US','_blank')">
-      <div class="float-pill-icon">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAQJUlEQVR4nO1beZBcxXn/fd1vZk8hkNgVaEErdJijkGOZo0xhRwJsY0NcxMcicGxjx5TBJolNQRKqcDFyyo5dOPEVY8dgYRRBWTUk5gikamPskYIlJGMpOq0THSvtNbPXaGfneO91//LHvLeaHe2pXUmQ2l9V78y81/1196+/7+uvjwWmMY1pTGMa05jGNKZx1kBASEosFlOMxzVJISmnLY8UxmKKpA4+T1vWOQXjcZ1YtswZ8X1Tk55I5+LxuI4DeoTXEpI/4YaebZAUAir8rWaeB5IXplKpudkjB288QdaRrBzM39SkMUq3SEq8qUmX/K7NkvPyx47dniUvJVmH6qqT+WMxNaygceCMs0tSRIQA4JHLs08/05TbuOFGe+TIgujxVu3UVFXnotF+e83VyZqrr/nBzPvvf0FEWsvLlshTImIBwPO6PlRY/R9f7v/v166Vtw7X1UWqKrtzmZyd3+hXXnnFjqrl73syeusd/ykivfGmJn3n88+bM93fCSFUb5LOifgvHyvccw/9ujkkMJhcwFqABqB/UQN7Pve5rnyi+VOh1pWOfvidZGX/que+k/zwR13v/Jm0gawC4BOgD5AC8oormLzvKzv7/nf99QAQK9Hicw7GYoqAIjmzd9WTbw5ctogZwBDwKGKMUtaIWCuKVMpSxBDwfYDZa69h5zOr1kp1dVEWKYzHdfD9ytRjK7cMXLKQHmA9wKd2LLW2VmtSa0vtWFeL8QEvC2Hqlg+y59e/fgQRB4lYbEQfeFbBpiYNx0H7448/axvm0QNct0LRF0ULDJ9ESK1sAfBy8+ax95vfeY5kdQJwAGAjWdVx191beN4M5gG3EHGsgaLFUJmE0FPCXERodMR4gBm4+YNs/c1vPgwUJ4tzS07QgPTGxIPZq6+lC7gmomhEaOCMSBBFaEXoRTUN4PKSBnb/6EcvQ2uQbEx9/t4/DChNH/BykQr6EiUBGhkqxxfQVcLQdN0KMS7gt9/xqQ6SFwOTc9yTJ6gY51Qc/8t7DxcA62ptKMVRDRtemowUE0VIERql6Ec0fcAtLFjI9L/Hv9ry6MOv8LyZ9JV4ntak6GI+AS2GyvQU6GrQF0VPCY04NMrxvLo6Jn/6xDMkndHCjTNLTqg9mzbc3vfud9MFfCuKViTozKnJDwiygwRJ0clqTQOYzJKr2XPxRfQBQ6Vog/chseUEhU47fO+Lph+J2Cxg2+7+TJrkhcDJSWQ0TD2LTzwhANC/YdMt9W1tiAAkCQihOHpRggABRQEhgDEQERXductGAVGiFGkBCMjSGOVUwQQQBggihDWUKMRGd+6MpPfunQ+gC0URo7Zq6u1w/XqLiAN9rP1ypy8NCARBx8cLghgsQEIrUaJFjNjiY05AGADQwghgQTu7kK/iwf3vBwCsWzlm/8+EoyIcB1FIg/gefDX5KmxR6pgaOFazIgBsIYv+zm4XALBu7FJngiCBbyCu18aogkx0tIeBtsUklFLdGjesFM3NALDRKKoumDnuFcTUE7RsmYLnIVMhW6W6ltqSk1/QcDAJJr4+EghEAA8AL5iNiisvK3K8fPmYZaeeoAceIABErr12uzl/rhhApoChSUEx/AOdqWvwZ1y5dB0AYPlyO2bZKW/N7t0EgOpPf3pb6tKGjABKlS04zzYsAMfQRLWWgcXzd+rqqj/GAIVz1a44oCEKh7/0hVcYcSxF+VZUEJeMHCiWR8RTlXwl9CGe3zCPnfE1jwAAx7kmOyPhdlMsJqDFzE9+4nlv0WKxtKRW4Ai1CU+m8YByMo2VDwBEBD7oJK+73tY3febZ4PWY5nXGEGxVCMmq9i/ce8Qqoe9ok9d6SjRiPBpX+p4i/kDtTJtcveolRKPndh02SFKw49f1/POf6FvwLuMDvqcc+ursEDS45NDK5gGTvPNukmwEAPJtQBAQkKQUjj7wV+tMpaYvyneVmrSvGZsgGdwd8AA/O6+BXa+88DM4GvF407nd6igF43FNQJhuv/3ErbfSA7yCo60vMi7zOF0iDRQ90XQ1fN+JsPX++34/uEN5rmOOcoSm1vn4Tx7w5s6jD3h2mJlsSmc1AT3HsVnAdN+8rNDXdvQaACBHmibOIcITCKmpxpGH/269WxklRfzRSJosQb5SNICXvnQhW55ecy+Ac7+LOBoYi6kYoPLk4ramT7V4AAuOMiMRMBmCKEIf8Arnz2TLt1a+DCU4Z5tjE0E4grm9e2/pXv6nngt4vnasP4a5jS8Vdys9JfSV8hmNMvm1Bw6SvIDAO+PwEAD+8KUvRQDg+Asvr+h/7w00gOdHKoonG5MkyhMhtfgDgE1+4s7j7kDX9cDb1O+MBsZiDrRGx5r4D/NXXUkPcKmdSRHkKdDXEesBpufjH2Pf0dbi6UUi8fY3rVMgggTgIOKg7akf/6ywcCEJuNSjHAeN5nMAeo62WcAkl9/kJ3e8cRvwTiUnQBCTaFRUIPlP31vNeY0k4HlaFzfZ1egb8ibQGi9YwviA27v8/ez5w6/vAfDOcMpjgaTEAa2qq9H+2Ne/X2hoIAHP1xE7dBZTp5BkoOmLoh/RNgtw4CMfYd/vNt4PnPRz/y8weOtDKRz9+0cfKSyYzzzg+tqxRVKEZjiCRLMQUSYP+B03Lsv2bFj3VQBIxN4hmhNciFKJRMIhOZgSiYQTK1tJk5TEsmUOtMLRH35/pbfkT1gAfKMj1kKfGg+J0GiYfoC5T97FzJ5dnwcw7v2dc4aAFE1yzIiVpAryymBZQMNx0PnMMw/3vmcp84ClUsaXwC8BtOKQgJ+BZt9n7+l3jx/+CgDsisejZVUISRWPx3U8HtciEj7TwWCdvdgoFlx9K33W2NhY+dZbb123devWz504ceL7J06cWJPNZh/evHlz04YNGxpL8wYNFgCIBQeZHb997b6OD91s8gDzjvhGaRYcxQLg5Wpq2Xr/lw+TXAhgcK0XooSQIRjuWdj2+JlYhoQaE/5+8cUXZ2zcuPHjR48e/WVXV9dhay2HQy6Xy/X09Ly2e/fuFY2NjZUl8hySelcsFgWAniNv3Z7+5N2tRkdpANcHXL9hLnv+IfZ7kosBDLnKUj5QmzdvftevfvWrP3vuueduC5/t27fvtlwu99cHDhy4NZFIDNYd1D/pgFLCRpAcbNi6desWt7a2/jSfzx8bhg+vLPmlL/v6+v546NChh1etWlVXWtHhX/yiMmj0xan7/maLbbiIhWuvZ+YH//JDknUAkEjEnHg8rgM/N0jMtm3bPtbX17cxk8m4YT3Hjh37eU9Pz3+V1t3V1bX2Jz/53oJMJvPZN954/f0TZiO035CQchV96KGHalpaWr6Vz+czJfWagAQzkgaRtEGeQbKy2WxrR0fHj3fv3v3BRYsWVZTWQ7IqufKxR5OrVt0JxwmflfscPPvss41dXV3fNsaU1jWknqB9HkmTzWa9ZDLZF9TPVCp1XyB7iLkN66hEBBzmRLS5ufmyCy64YOn8+fMbReTLF1544eLglW+t1UqpiTo+G6RBjezt7T3geV6iq6vrd461O7799W/2eKueSJ/X3KxvzeWq/vzee9vCvNu3b79l1qxZC6urqz8ajUbvqK2tFRQPUIHigUTYnvDZKb7GWusqpZxkMrlvzpw5V7HsXmR5h4QkRISrV69e1tvbW/PFL35xZktLy/Vz5sxZVllZuaSmpqZ0OjVlDTktWGuplAplDfoCYwx6urtNRTSqCdCJRLIDAwM7M5nMS4cOHUovWrTobq317MrKSh2NRpXjODU1NTVzx1ltSIIPILJt27Z/XLp06aOBtfjDlwgcVSqVetr3fbquy2Hgh2o6kg1NEqEZeOPIWzDGtPX19R1OJpNH29vbXztw4MDTruvmx9M+Y4xHkj09PXvj8fhFDC63j0SOBiCbNm26KSgfOlWfpGeKxj2iYzkTCPyYLUujDtD+/fu/29LSspEkTZlDKoNPkq7r5pLJ5HtLFaQU5Q84b968+0rUTwfJUUpN2pQmAAJgGOCVJQ3ACTtjraW11lhr8wDQ0NDwHqWUO4ZsH4BOpVIthw8fvqG+vn4rS+5flyK8dywiYuLx+KyamprbAIi19qzt4VprQ2cdovQSB3HSmfthEhEDwCqlRCmllVKVmUymfe3atd+srKycBYCq7G5SUA8AOO3t7c2vv/76+y6//PJtQXB5CjmDYDC17dy5MzSvM+VfRoXneSaXy3kkO0m2kewfq0wmk+nt7+/fcOTQke89+eSTH+js6FgbvBrsQ2CqHkkODAx4e/bs+U44ABxjaRTOSAIA9fX1N5WM2NnYqqTruiadTm/q7e0tRCIRRqPRWbW1tblCofDbzs7Oi6uqqlrT6fTVAM5bsmTJW2+++abMmDEDvu//PpVK5evr6/sKhULDJZdc8r677rrrhRkzZswOZsXQBG3w1WltbT2yZcuWu++4445NJGXlypUq0MQRMWQF7LruApwlP8NiOCEDAwPIZrP1DQ0Nc2pqamaWZLmxrq4OIpLu6emxtbW1+XQ6XT1r1izU19cjnU4vWbx4cW1FRcUV0Wi0NHA0SimNwCyVUo4xBh0dHf/21FNPPfSNb3yjiyen8nFdlxAWHZ7yPO9/Aq0csiSYCAKnebrFyeJMFUbk4xXkG2P8knKDIUJHR8fmAwcO3BR2dqILUwcAAgel0+n0/NmzZwMT0CKSIGmVUrYoSnQwMqHqCkYJJoPylCLC/FKeR0RorR1uxEUphcCMBt1CNps9mE6n/3nu3LlPA3BZ9DV2LJMqhwJObgW4rjt8BDlMv1AkwIgIAnt3AOju7m4YYyT47aA4LQsAY601ACxLljFBeSlf65UiJE4VM6qAEBt8hlO/dl3Xz2QyG3bt2vXg448/vnTu3Ln/KiJuMEuZ8n+tGg/C0SIAnclkdtfU1FyO4Z106LyJEt+Vz+fhed7WdDq9saWlZf3LL7+8b8WKFZWFQuG6xsbGxbW1tUu01jdUVwf/unMSvrVWgg6OeDcz1LBAQ4mThAMAMplMX6FQ2NrW1hZ3HCdx1VVX7S8pG07fk7tqx2D7orW19fnA7j2SNMbYwLaHhP39/f3m+PHjv9u+fftXm5ub3zOW/JdeeumyvXv3rkilUmv7+/sPjRDghvWUp6EOylr29PTsPn78+FObNm26PR6PX1TWFwm2QKZusgkJ2rFjxyNBO3Isc9TZbHago6Pj1f379z/y6quvLiktH6z+HZI62DMq3Y8eookPPvhg1datW687evTog729vS9ms9l9uVxuxEnB930ODAy0d3Z2vrJnz56/3bJlyw0oW5WXkHJmQpOgU7J+/fpLe3t7+8LGnThxorelpeWlgwcPfq25ufmy021UyUbbcDOIs2/fvgVvvPHGikQi8dnu7u5vtbS0rO7r6/vuli1bPrN///6lsVjs/PJCobwp1ZTREHZ0+/btH0ilUj/fsWPHX6xZs+bi8jzDacUE65HTkROWCabpc3MZYbjRIKmHO66ZyjpDkxzumCgg5u1zOyMcqSl3dNOYxjSmMY1pTOMs4/8Awqp8lGErIfsAAAAASUVORK5CYII=" class="heart-anim" style="width:42px;height:42px;object-fit:contain;" />
-      </div>
-      <div class="float-pill-text">
-        <span class="float-pill-sub">Help Us</span>
-        <span class="float-pill-main">Donate Now</span>
-      </div>
-    </div>
+
   </div>
 </div>
 
@@ -2199,13 +2189,6 @@ function secretTap(){
 function setAmt(v,btn){
   document.querySelectorAll('.amt-btn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
-  document.getElementById('donateAmt').value=v;
-}
-function goDonate(){
-  var a=document.getElementById('donateAmt').value;
-  if(!a||a<1){showToast('Enter a valid amount',true);return;}
-  window.open('https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US','_blank');
-  showToast('Opening GoFundMe... 💙');
 }
 function submitForm(){showToast("Message sent! We'll get back to you soon. 🙏");}
 
@@ -3302,8 +3285,6 @@ setTimeout(loadVideos,2000);
   // 7. Make gallery photos clickable (lightbox)
   makeGalleryClickable();
 
-  // 8. Floating donate button
-  initFloatDonate();
 
   // 9. Scroll animations
   initScrollAnimations();
