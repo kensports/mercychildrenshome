@@ -11,6 +11,13 @@
 :root{--bg:#0a0e1a;--bg2:#0f1525;--bg3:#161d30;--card:#131929;--gold:#c9a84c;--gold2:#e8c97a;--text:#e8eaf0;--text2:#8892a4;--border:#1e2a40;--white:#ffffff;}
 *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+/* Unique about background — deep ocean blue tint */
+body::before{content:'';position:fixed;inset:0;z-index:-1;
+  background:radial-gradient(ellipse at 10% 20%,rgba(14,165,233,.08) 0%,transparent 55%),
+             radial-gradient(ellipse at 90% 80%,rgba(56,189,248,.05) 0%,transparent 50%),
+             #080d1a;
+  pointer-events:none;}
+body{background:#080d1a !important;}
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,26,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:box-shadow .3s;}
 nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}

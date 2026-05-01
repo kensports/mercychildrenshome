@@ -41,20 +41,10 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .mob-close{position:absolute;top:20px;right:24px;font-size:24px;cursor:pointer;color:var(--text2);}
 
 /* MOTTO */
-#mottoBar{
-  position:relative;
-  z-index:10;
-  padding:0;
-  background:transparent !important;
-  background-color:transparent !important;
-  background-image:none !important;
-  border:none;
-  overflow:visible;
-  display:block;
-}
+#mottoBar{display:block;text-align:left;}
 #mottoBar.pos-left .motto-pill{margin-left:0;margin-right:auto;}
 #mottoBar.pos-right .motto-pill{margin-left:auto;margin-right:0;}
-#mottoBar .motto-pill{display:inline-flex;}
+#mottoBar .motto-pill{display:inline-flex;max-width:fit-content;}
 .motto-pill{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(201,168,76,.35);border-radius:999px;padding:5px 16px;transition:background .2s;}
 /* Force motto to never have purple/blue background */
 #mottoBar *{background-image:none !important;}
@@ -152,6 +142,14 @@ section{padding:88px 5%;}
 .m-card p{font-size:13px;color:#8892a4;line-height:1.7;}
 
 /* FOUNDER */
+
+/* FOUNDER IMAGE ANIMATION */
+@keyframes founderFloat{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-8px) scale(1.01);}}
+@keyframes founderGlow{0%,100%{box-shadow:0 0 0 rgba(201,168,76,0),0 8px 40px rgba(0,0,0,.4);}50%{box-shadow:0 0 40px rgba(201,168,76,.15),0 8px 40px rgba(0,0,0,.5);}}
+@keyframes founderReveal{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
+.founder-img-box{animation:founderFloat 6s ease-in-out infinite,founderGlow 6s ease-in-out infinite !important;}
+.founder-photo-wrap{animation:founderReveal .9s .2s both;}
+
 .founder-section{background:var(--bg2);padding:88px 5%;}
 .founder-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:960px;margin:0 auto;}
 .founder-photo-wrap{position:relative;}
@@ -481,7 +479,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 .sh-btn svg{width:20px;height:20px;flex-shrink:0;}
 .sh-btn .sh-tip{position:absolute;right:54px;background:rgba(15,21,37,.95);color:#fff;font-size:12px;font-weight:600;white-space:nowrap;padding:5px 10px;border-radius:8px;opacity:0;transition:opacity .2s;pointer-events:none;}
 .sh-btn:hover .sh-tip{opacity:1;}
-@media(max-width:600px){.share-sidebar{top:auto;bottom:0;right:0;left:0;flex-direction:row;transform:none;border-radius:0;border-top:1px solid rgba(255,255,255,.1);}.sh-btn{flex:1;height:52px;width:auto;border-radius:0;}.sh-btn:hover{width:auto;}.sh-btn .sh-tip{display:none;}}
+@media(max-width:768px){
+  .share-sidebar{top:auto;bottom:80px;right:12px;left:auto;flex-direction:column;transform:none;border-radius:12px 0 0 12px;border-radius:50px;overflow:visible;background:transparent;box-shadow:none;gap:6px;}
+  .sh-btn{width:38px !important;height:38px !important;border-radius:50% !important;box-shadow:0 3px 12px rgba(0,0,0,.5);flex:none !important;}
+  .sh-btn svg{width:16px;height:16px;}
+  .sh-btn .sh-tip{display:none;}
+  .sh-btn:hover{width:38px !important;}
+}
 
 /* ═══ VOLUNTEER SECTION ═══ */
 .vol-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1100px;margin:0 auto;}
@@ -814,7 +818,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     </div>
     <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="btn-gold" style="display:inline-flex;">
       <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-      Join Our Sponsors — Donate Today
+      Join Our Supporters — Donate Today
     </a>
   </div>
 </section>
@@ -879,7 +883,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <div style="width:72px;height:72px;border-radius:18px;background:linear-gradient(135deg,#0a4a2a,#10b981);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
         <svg style="width:34px;height:34px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
       </div>
-      <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">📸 Photos &amp; 🎬 Videos</div>
+      <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Photos &amp;
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Videos
+      </div>
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--white);margin-bottom:14px;">Gallery &amp; Videos</h3>
       <p style="font-size:15px;color:#94a3b8;line-height:1.8;max-width:440px;margin:0 auto 28px;">See the real faces, moments of joy and watch our videos — daily life, learning, play and community at Mercy Children's Home.</p>
       <div style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:700;">
@@ -929,79 +938,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
         Donate Now
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- SPONSORS THANK YOU -->
-<section style="background:var(--bg);padding:88px 5%;">
-  <div style="max-width:800px;margin:0 auto;text-align:center;">
-    <div class="sec-tag">A Message of Gratitude</div>
-    <h2 class="sec-title">Thank You, Dear Sponsors</h2>
-    <p style="font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:32px;">From the bottom of our hearts — and from every child at Mercy Children's Home — we give glory to God for the incredible generosity of our sponsors, many of whom are all the way from the <strong style="color:var(--gold);">United States of <strong>AMERICA</strong></strong>.</p>
-    <div style="background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(37,99,235,.06));border:1px solid rgba(201,168,76,.2);border-radius:24px;padding:44px;margin-bottom:32px;">
-      <div style="font-size:40px;margin-bottom:16px;">🌍 🙏 🇺🇬</div>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3vw,24px);color:#f8faff;line-height:1.75;font-style:italic;margin-bottom:20px;">"God has used you to be His hands across the ocean. Your faithfulness has put food on our table, clothes on our children, and kept them in school. You may be far away, but in God's kingdom, you are <em style="color:var(--gold);font-style:normal;font-weight:700;">family</em>."</p>
-      <p style="font-size:14px;color:var(--gold);font-weight:700;letter-spacing:1px;">— SSENGONZI ALEX, FOUNDER</p>
-    </div>
-    <div id="fundsRaisedBar" style="display:none;" class="funds-raised-bar">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-        <div><div style="font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Total Raised</div><div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--gold);" id="goalRaisedAmt">$0</div></div>
-        <div style="text-align:right;"><div style="font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Sponsors</div><div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--white);" id="goalSponsorCount">0</div></div>
-      </div>
-      <div class="funds-bar-track"><div class="funds-bar-fill" id="fundsBarFill"></div></div>
-      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2);"><span>$0 raised</span><span id="goalTarget">Goal: $10,000</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- DONATE -->
-<section class="donate" id="donate">
-  <div style="text-align:center;margin-bottom:48px;">
-    <div class="sec-tag">Make a Difference</div>
-    <h2 class="sec-title">Your Gift Changes a Child's Life</h2>
-    <p class="sec-sub" style="margin:0 auto 12px;">Every dollar you give goes <strong style="color:var(--gold);">directly</strong> to feeding, clothing, educating, and caring for our 32 children in <strong>UGANDA</strong>.</p>
-    <p style="font-size:15px;color:var(--gold);font-weight:600;max-width:560px;margin:0 auto;">32 children depend on daily support for food, care, and education.</p>
-  </div>
-  <div class="donate-wrap">
-    <div class="donate-text">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);margin-bottom:8px;">What Your Donation Does</h3>
-      <p style="font-size:15px;color:#94a3b8;line-height:1.8;">You can be part of this story. Your support helps provide these essentials to 32 children every day.</p>
-      <ul class="donate-perks">
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong style="color:var(--gold);">$10</strong> feeds a child for a week</span></li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong style="color:var(--gold);">$25</strong> covers school supplies for a term</span></li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong style="color:var(--gold);">$50</strong> provides clothing for one child</span></li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong style="color:var(--gold);">$100</strong> pays school fees for a month</span></li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong style="color:var(--gold);">$500</strong> sponsors a child for a full year</span></li>
-      </ul>
-    </div>
-    <div class="donate-box">
-      <h3>Donate via GoFundMe</h3>
-      <p>Choose an amount — every contribution matters.</p>
-      <div class="amt-grid">
-        <div class="amt-btn" onclick="setAmt(10,this)">$10</div>
-        <div class="amt-btn active" onclick="setAmt(25,this)">$25</div>
-        <div class="amt-btn" onclick="setAmt(50,this)">$50</div>
-        <div class="amt-btn" onclick="setAmt(100,this)">$100</div>
-        <div class="amt-btn" onclick="setAmt(250,this)">$250</div>
-        <div class="amt-btn" onclick="setAmt(500,this)">$500</div>
-      </div>
-      <div class="amt-input-wrap">
-        <span class="amt-symbol">$</span>
-        <input type="number" class="amt-input" id="donateAmt" value="25"/>
-      </div>
-      <div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px;margin-bottom:14px;text-align:center;">
-        <p style="font-size:13px;color:#e2e8f0;font-weight:600;margin-bottom:4px;">32 children depend on daily support for food, care, and education.</p>
-        <p style="font-size:12px;color:var(--gold);font-weight:600;">Your donation today can change a child's life.</p>
-      </div>
-      <button class="donate-btn" onclick="goDonate()">
-        <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-        Donate Now
-      </button>
-      <p class="donate-note">
-        <svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        Secure donation · 100% goes to the children
-      </p>
     </div>
   </div>
 </section>
@@ -1059,109 +995,54 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   </div>
 </section>
 
-<!-- SPONSORS WALL -->
+<!-- VOLUNTEERS SECTION -->
 <section style="background:var(--bg);padding:88px 5%;" id="sponsors">
-  <div style="max-width:900px;margin:0 auto;">
-    <div class="sec-hdr" style="text-align:center;">
-      <div class="sec-tag">Hall of Faith</div>
-      <h2 class="sec-title">Our Generous Sponsors</h2>
-      <p class="sec-sub" style="margin:0 auto;">To every soul who has given — God sees your heart. Thank you.</p>
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="sec-hdr" style="text-align:center;margin-bottom:52px;">
+      <div class="sec-tag">Help Beyond Donations</div>
+      <h2 class="sec-title">Volunteer &amp; Support</h2>
+      <p class="sec-sub" style="margin:0 auto;max-width:600px;">You don't need money to make a difference. There are many meaningful ways people from around the world help the children of Mercy Children's Home.</p>
     </div>
-    <div id="publicSponsors" style="display:none;">
-      <div style="overflow-x:auto;border-radius:16px;border:1px solid var(--border);background:var(--card);">
-        <table class="sponsor-table">
-          <thead><tr><th>Name</th><th>Country</th><th>Amount</th><th>Date</th><th>Message</th></tr></thead>
-          <tbody id="sponsorTableBody"></tbody>
-        </table>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;">
+      <div class="mission-card fade-up" style="border-radius:20px;background:var(--card);border:1px solid var(--border);padding:32px;text-align:center;transition:transform .35s cubic-bezier(.34,1.56,.64,1),border-color .25s,box-shadow .35s;">
+        <div style="width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#0a4a2a,#10b981);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;">🌐</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--white);margin-bottom:10px;">Social Media</h3>
+        <p style="font-size:13px;color:#8892a4;line-height:1.75;margin-bottom:18px;">Share our posts, stories and updates on your social media to help us reach more donors worldwide.</p>
+        <a href="https://youtube.com/@mercychidrenshomeug4969" target="_blank" style="font-size:12px;font-weight:600;color:var(--gold);text-decoration:none;">Our YouTube Channel →</a>
       </div>
-      <div style="text-align:center;margin-top:32px;" id="sponsorTotals"></div>
-    </div>
-    <div id="noSponsors" style="text-align:center;padding:40px 20px;background:var(--card);border:1px solid var(--border);border-radius:16px;">
-      <p style="font-size:14px;color:var(--text2);">Be the first to sponsor — your name will appear here. <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" style="color:var(--gold);text-decoration:none;">Donate now →</a></p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══ VOLUNTEER SECTION ═══ -->
-<section style="background:var(--bg);padding:88px 5%;" id="volunteer">
-  <div style="text-align:center;margin-bottom:52px;">
-    <div class="sec-tag">Help Beyond Donations</div>
-    <h2 class="sec-title">Volunteer & Support</h2>
-    <p style="font-size:15px;color:#94a3b8;line-height:1.8;max-width:600px;margin:16px auto 0;">You don't need money to make a difference. There are many ways people from around the world help the children of Mercy Children's Home.</p>
-  </div>
-  <div class="vol-grid">
-    <div class="vol-card fade-up">
-      <div class="vol-icon" style="background:linear-gradient(135deg,#0a4a2a,#10b981);">🌐</div>
-      <h3>Social Media Volunteer</h3>
-      <p>Share our posts, stories, and updates on your social media to help us reach more potential donors and supporters worldwide.</p>
-      <a href="https://youtube.com/@mercychidrenshomeug4969" target="_blank" class="vol-cta">Our YouTube Channel →</a>
-    </div>
-    <div class="vol-card fade-up">
-      <div class="vol-icon" style="background:linear-gradient(135deg,#1a3060,#2563eb);">💻</div>
-      <h3>Online Tutor</h3>
-      <p>Teach a subject remotely via video call — English, Math, Science, or any skill you have. Even one hour a month changes lives.</p>
-      <a href="https://wa.me/256700000000" target="_blank" class="vol-cta">Contact Us to Start →</a>
-    </div>
-    <div class="vol-card fade-up">
-      <div class="vol-icon" style="background:linear-gradient(135deg,#7c1d0a,#f59e0b);">💰</div>
-      <h3>Fundraise For Us</h3>
-      <p>Organise a local fundraiser, birthday donation, or charity event in your city. Every cent raised goes directly to the children.</p>
-      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="vol-cta">Start a GoFundMe →</a>
-    </div>
-    <div class="vol-card fade-up">
-      <div class="vol-icon" style="background:linear-gradient(135deg,#4a1060,#9333ea);">🙏</div>
-      <h3>Prayer Partner</h3>
-      <p>Commit to praying for these 32 children daily. Your prayers are as powerful as any donation. Join our prayer wall below.</p>
-      <a href="#prayer-wall" class="vol-cta" onclick="document.getElementById('prayer-wall').scrollIntoView({behavior:'smooth'})">Join the Prayer Wall →</a>
+      <div class="mission-card fade-up" style="border-radius:20px;background:var(--card);border:1px solid var(--border);padding:32px;text-align:center;transition:transform .35s cubic-bezier(.34,1.56,.64,1),border-color .25s,box-shadow .35s;">
+        <div style="width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;">💻</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--white);margin-bottom:10px;">Online Tutor</h3>
+        <p style="font-size:13px;color:#8892a4;line-height:1.75;margin-bottom:18px;">Teach a subject remotely via video call — English, Math, Science. Even one hour a month changes a child's life.</p>
+        <a href="#contact" style="font-size:12px;font-weight:600;color:var(--gold);text-decoration:none;">Contact Us to Start →</a>
+      </div>
+      <div class="mission-card fade-up" style="border-radius:20px;background:var(--card);border:1px solid var(--border);padding:32px;text-align:center;transition:transform .35s cubic-bezier(.34,1.56,.64,1),border-color .25s,box-shadow .35s;">
+        <div style="width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#4a1060,#9333ea);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;">🙏</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--white);margin-bottom:10px;">Prayer Partner</h3>
+        <p style="font-size:13px;color:#8892a4;line-height:1.75;margin-bottom:18px;">Commit to praying for these 32 children daily. Your prayers are as powerful as any donation. Join our prayer wall.</p>
+        <a href="#prayer-wall" style="font-size:12px;font-weight:600;color:var(--gold);text-decoration:none;">Join the Prayer Wall →</a>
+      </div>
+      <div class="mission-card fade-up" style="border-radius:20px;background:var(--card);border:1px solid var(--border);padding:32px;text-align:center;transition:transform .35s cubic-bezier(.34,1.56,.64,1),border-color .25s,box-shadow .35s;">
+        <div style="width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#7c1d0a,#f59e0b);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;">💰</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--white);margin-bottom:10px;">Fundraise For Us</h3>
+        <p style="font-size:13px;color:#8892a4;line-height:1.75;margin-bottom:18px;">Organise a local fundraiser, birthday donation, or charity event in your city. Every cent raised goes directly to the children.</p>
+        <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" style="font-size:12px;font-weight:600;color:var(--gold);text-decoration:none;">Start a GoFundMe →</a>
+      </div>
+      <div class="mission-card fade-up" style="border-radius:20px;background:var(--card);border:1px solid var(--border);padding:32px;text-align:center;transition:transform .35s cubic-bezier(.34,1.56,.64,1),border-color .25s,box-shadow .35s;">
+        <div style="width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#1a3020,#16a34a);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;">📦</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--white);margin-bottom:10px;">Send Supplies</h3>
+        <p style="font-size:13px;color:#8892a4;line-height:1.75;margin-bottom:18px;">Books, clothes, school stationery, or medical supplies. Contact us to find out exactly what the children need most right now.</p>
+        <a href="#contact" style="font-size:12px;font-weight:600;color:var(--gold);text-decoration:none;">Contact Us →</a>
+      </div>
+      <div class="mission-card fade-up" style="border-radius:20px;background:var(--card);border:1px solid var(--border);padding:32px;text-align:center;transition:transform .35s cubic-bezier(.34,1.56,.64,1),border-color .25s,box-shadow .35s;">
+        <div style="width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#1e3a5f,#0ea5e9);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;">🤝</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--white);margin-bottom:10px;">Become a Sponsor</h3>
+        <p style="font-size:13px;color:#8892a4;line-height:1.75;margin-bottom:18px;">Sponsor a child's education for a full year — $500 covers school fees, uniform, and books. Your name honours a child's future.</p>
+        <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" style="font-size:12px;font-weight:600;color:var(--gold);text-decoration:none;">Donate on GoFundMe →</a>
+      </div>
     </div>
   </div>
 </section>
-
-<!-- ═══ PRAYER WALL ═══ -->
-<section style="background:var(--bg2);padding:88px 5%;" id="prayer-wall">
-  <div style="text-align:center;margin-bottom:48px;">
-    <div class="sec-tag">✝ Community of Faith</div>
-    <h2 class="sec-title">Prayer Wall</h2>
-    <p style="font-size:15px;color:#94a3b8;line-height:1.8;max-width:560px;margin:14px auto 0;">Submit a prayer for the children, the staff, and the mission of Mercy Children's Home. Your prayer matters.</p>
-  </div>
-  <!-- Submit Form -->
-  <div class="prayer-form-wrap">
-    <div class="prayer-name-row">
-      <input class="prayer-name-inp" id="prayerName" placeholder="Your name (optional — or leave blank to be Anonymous)" maxlength="80">
-    </div>
-    <textarea class="prayer-input" id="prayerText" placeholder="Write your prayer or message of support for the children here..." maxlength="500"></textarea>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;flex-wrap:wrap;gap:10px;">
-      <span style="font-size:12px;color:var(--text2);" id="prayerCharCount">0 / 500 characters</span>
-      <button class="prayer-submit-btn" onclick="submitPrayer()">
-        🙏 &nbsp;Send Prayer
-      </button>
-    </div>
-  </div>
-  <!-- Prayer Cards -->
-  <div class="prayers-grid" id="prayersGrid">
-    <div class="prayer-card" style="grid-column:1/-1;text-align:center;padding:40px 20px;border-style:dashed;">
-      <div style="font-size:32px;margin-bottom:12px;">🙏</div>
-      <p style="color:var(--text2);font-size:14px;">Loading prayers...</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ NEWSLETTER ═══ -->
-<section style="background:linear-gradient(135deg,rgba(201,168,76,.06),rgba(37,99,235,.04));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:88px 5%;" id="newsletter">
-  <div class="newsletter-wrap">
-    <div class="sec-tag">Stay Connected</div>
-    <h2 class="sec-title" style="margin-bottom:14px;">Get Monthly Updates</h2>
-    <p style="font-size:15px;color:#94a3b8;line-height:1.8;">Be the first to hear about the children's progress, new milestones, urgent needs, and how your support is making a difference. No spam — ever.</p>
-    <div class="nl-form">
-      <input class="nl-inp" id="nlName" placeholder="Your first name" maxlength="60">
-      <input class="nl-inp" id="nlEmail" type="email" placeholder="Your email address" maxlength="120">
-      <button class="nl-btn" onclick="subscribeNewsletter()">Subscribe →</button>
-    </div>
-    <p class="nl-note">✉️ We send updates once a month. Unsubscribe any time by emailing us. Your data is never shared.</p>
-  </div>
-</section>
-
 
 <!-- FOOTER -->
 
@@ -1224,13 +1105,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <div class="adm-tabs">
       <button class="adm-tab active" onclick="admTab('photos',this)">Photos</button>
       <button class="adm-tab" onclick="admTab('captions',this)">Captions</button>
+      <button class="adm-tab" onclick="admTab('videos',this)">🎬 Videos</button>
       <button class="adm-tab" onclick="admTab('supporters',this)">Volunteers</button>
       <button class="adm-tab" onclick="admTab('sponsors',this)">Sponsors</button>
       <button class="adm-tab" onclick="admTab('content',this)">Content</button>
       <button class="adm-tab" onclick="admTab('contact',this)">Contact</button>
       <button class="adm-tab" onclick="admTab('stats',this)">Stats</button>
       <button class="adm-tab" onclick="admTab('settings',this)">Settings</button>
-      <button class="adm-tab" onclick="admTab('videos',this)">🎬 Videos</button>
+
     </div>
     <div class="adm-body">
 
@@ -1254,7 +1136,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
           <p style="font-size:12px;font-weight:700;color:#60a5fa;margin-bottom:4px;">🖼️ Banner Photos (Full-width sections)</p>
           <p style="font-size:11px;color:var(--text2);line-height:1.6;"><strong style="color:#fff;">Banner 1</strong> = "A Place to Call Home" section<br><strong style="color:#fff;">Banner 2</strong> = "Learning in God's Light" section<br>These are the big full-width photos behind the overlay text.</p>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">📷 All Photos</div>
+        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> All Photos</div>
         <div id="photoGrid" style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;"></div>
         <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;">👤 Founder Photo</div>
         <div id="founderPhotoGrid" style="display:flex;flex-direction:column;gap:10px;"></div>
@@ -1359,9 +1241,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <button class="adm-btn danger" onclick="clearSupporters()">Clear All Supporters</button>
       </div>
 
-      <!-- SPONSORS TAB -->
+      <!-- DONORS TAB -->
       <div class="adm-sec" id="adm-sponsors">
-        <p style="font-size:12px;color:var(--text2);margin-bottom:16px;">Add sponsor names, countries and donation amounts.</p>
+        <p style="font-size:12px;color:var(--text2);margin-bottom:16px;">Track donor names, countries and donation amounts here.</p>
         <div id="sponsorList" style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;"></div>
         <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px;">
           <p style="font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">Add New Sponsor</p>
@@ -1488,7 +1370,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <button class="adm-btn" onclick="saveStats()">Save Stats</button>
       </div>
 
-      <!-- SETTINGS TAB -->
+      <!-- VIDEOS TAB -->
       <div class="adm-sec" id="adm-videos">
   <h3 style="color:var(--gold);margin-bottom:16px;font-family:'Cormorant Garamond',serif;font-size:22px;">🎬 Video Manager</h3>
   <div style="background:var(--bg);border-radius:12px;padding:16px;border:1px solid var(--border);margin-bottom:20px;">
@@ -1570,7 +1452,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <img src="data:image/png;base64,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" class="heart-anim" style="width:42px;height:42px;object-fit:contain;" />
       </div>
       <div class="float-pill-text">
-        <span class="float-pill-sub">Support Us</span>
+        <span class="float-pill-sub">Help Us</span>
         <span class="float-pill-main">Donate Now</span>
       </div>
     </div>
@@ -2222,7 +2104,7 @@ function setAmt(v,btn){
 function goDonate(){
   var a=document.getElementById('donateAmt').value;
   if(!a||a<1){showToast('Enter a valid amount',true);return;}
-  window.open(getData().gfm,'_blank');
+  window.open('https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US','_blank');
   showToast('Opening GoFundMe... 💙');
 }
 function submitForm(){showToast("Message sent! We'll get back to you soon. 🙏");}
@@ -3283,6 +3165,8 @@ setTimeout(loadVideos,2000);
 (async function init(){
   // 1. Apply local data immediately (zero delay, no network)
   applyData();
+  // Always force the correct GoFundMe link (clear any cached old link)
+  try{var _d=JSON.parse(localStorage.getItem(DKEY)||'{}');if(_d.gfm&&_d.gfm.indexOf('mercy-childrens-home-growing')>-1){_d.gfm='https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US';localStorage.setItem(DKEY,JSON.stringify(_d));}}catch(e){}
   // Save Supabase credentials to localStorage so sub-pages can use them
   try{localStorage.setItem('mch_supa_url',SUPA_URL);localStorage.setItem('mch_supa_key',SUPA_KEY);}catch(e){}
   applyMotto(getData());
