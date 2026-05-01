@@ -595,6 +595,26 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   </button>
 </div>
 
+<!-- ═══ FLOATING WHATSAPP CONTACT BUTTON ═══ -->
+<a href="https://wa.me/256751442505?text=Hello%20Mercy%20Children%27s%20Home%2C%20I%20would%20like%20to%20support%20your%20work%20with%20children%20in%20Uganda." target="_blank" id="waFloatBtn" title="Chat with us on WhatsApp"
+   style="position:fixed;left:20px;bottom:108px;z-index:160;width:52px;height:52px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.45);transition:transform .25s,box-shadow .25s;text-decoration:none;"
+   onmouseover="this.style.transform='scale(1.12)';this.style.boxShadow='0 8px 28px rgba(37,211,102,.6)'"
+   onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,211,102,.45)'">
+  <!-- WhatsApp logo SVG -->
+  <svg viewBox="0 0 48 48" fill="none" style="width:28px;height:28px;">
+    <path fill="#fff" d="M35.2 12.7A15.9 15.9 0 0 0 24 8C15.2 8 8 15.2 8 24c0 2.8.7 5.5 2.1 7.9L8 40l8.3-2.2a15.9 15.9 0 0 0 7.7 2h.1c8.8 0 16-7.2 16-16 0-4.3-1.7-8.3-4.9-11.1zm-11.2 24.6h-.1a13.2 13.2 0 0 1-6.7-1.8l-.5-.3-5 1.3 1.3-4.8-.3-.5a13.2 13.2 0 0 1-2-7.1C10.7 17 16.8 10.7 24 10.7c3.5 0 6.8 1.4 9.3 3.8a13 13 0 0 1 3.9 9.4c-.1 7.3-6.1 13.4-13.2 13.4zm7.2-9.9c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-.9 1.2-1.2 1.5-.2.3-.4.3-.8.1a10.3 10.3 0 0 1-3-1.9 11.3 11.3 0 0 1-2.1-2.6c-.2-.4 0-.6.2-.8l.5-.6c.2-.2.3-.4.4-.6.1-.2 0-.5-.1-.6-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.7c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.3 0 2 1.5 3.9 1.7 4.1.2.3 2.9 4.4 7 6.2 1 .4 1.7.7 2.3.8 1 .3 1.8.3 2.5.2.8-.1 2.4-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.2-.4-.3-.8-.5z"/>
+  </svg>
+  <!-- Pulse ring animation -->
+  <span style="position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(37,211,102,.5);animation:waPulse 2s ease-out infinite;pointer-events:none;"></span>
+</a>
+<style>
+@keyframes waPulse{0%{transform:scale(1);opacity:.8;}100%{transform:scale(1.6);opacity:0;}}
+/* Tooltip label on hover */
+#waFloatBtn::after{content:'Chat on WhatsApp';position:absolute;left:64px;background:rgba(15,21,37,.95);color:#fff;font-size:12px;font-weight:600;white-space:nowrap;padding:6px 12px;border-radius:8px;opacity:0;transition:opacity .2s;pointer-events:none;font-family:'Outfit',sans-serif;border:1px solid rgba(37,211,102,.3);}
+#waFloatBtn:hover::after{opacity:1;}
+@media(max-width:600px){#waFloatBtn::after{display:none;}}
+</style>
+
 <div id="page-transition-overlay">
   <div class="pt-ring"></div>
 </div>
@@ -1054,7 +1074,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <div class="vc-body">
         <div class="vc-title">Online Tutor</div>
         <div class="vc-desc">Teach a subject via video call — English, Math, Science. One hour a month changes a child's life.</div>
-        <a href="#contact" class="vc-link">Contact Us to Start <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="https://wa.me/256751442505?text=Hello%2C%20I%20would%20like%20to%20volunteer%20as%20an%20Online%20Tutor%20for%20Mercy%20Children%27s%20Home%20Uganda" target="_blank" class="vc-link" style="color:#25d366;">WhatsApp Us to Start <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
 
@@ -1090,7 +1110,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <div class="vc-body">
         <div class="vc-title">Send Supplies</div>
         <div class="vc-desc">Books, clothes, school stationery, or medical supplies. Contact us to find out what's needed most.</div>
-        <a href="#contact" class="vc-link">Contact Us <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="https://wa.me/256751442505?text=Hello%2C%20I%20would%20like%20to%20send%20supplies%20to%20Mercy%20Children%27s%20Home%20Uganda.%20What%20do%20you%20need%20most%3F" target="_blank" class="vc-link" style="color:#25d366;">WhatsApp Us <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
 
