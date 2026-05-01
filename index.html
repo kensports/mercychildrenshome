@@ -3364,20 +3364,36 @@ async function loadAdminPrayers(filter){
     var url=SUPA_URL+'/rest/v1/mch_prayers?select=*&order=created_at.desc';
     if(filter===true)url+='&approved=eq.true';
     else if(filter===false)url+='&approved=eq.false';
-    var r=await fetch(url,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    var r=await fetch(url,{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}});
     var prayers=await r.json();
-    if(!Array.isArray(prayers)||!prayers.length){list.innerHTML='<p style="color:var(--text2);text-align:center;padding:20px;">No prayers found.</p>';return;}
-    list.innerHTML=prayers.map(function(p){
-      return '<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;">'
-        +'<div style="font-size:13px;color:#cbd5e1;line-height:1.7;margin-bottom:10px;font-style:italic;">'+eh(p.prayer)+'</div>'
+    if(!Array.isArray(prayers)||!prayers.length){
+      list.innerHTML='<p style="color:var(--text2);text-align:center;padding:20px;">No prayers found.</p>';return;
+    }
+    list.innerHTML='';
+    prayers.forEach(function(p){
+      var div=document.createElement('div');
+      div.style.cssText='background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px;';
+      var approved=p.approved;
+      var dateStr=new Date(p.created_at).toLocaleDateString();
+      div.innerHTML='<div style="font-size:13px;color:#cbd5e1;line-height:1.7;margin-bottom:10px;font-style:italic;">'+eh(p.prayer||'')+'</div>'
         +'<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">'
-        +'<div><span style="font-size:12px;color:var(--gold);font-weight:600;">🙏 '+eh(p.name||'Anonymous')+'</span> <span style="font-size:11px;color:var(--text2);margin-left:8px;">'+new Date(p.created_at).toLocaleDateString()+'</span></div>'
+        +'<div><span style="font-size:12px;color:var(--gold);font-weight:600;">🙏 '+eh(p.name||'Anonymous')+'</span>'
+        +' <span style="font-size:11px;color:var(--text2);margin-left:8px;">'+dateStr+'</span></div>'
         +'<div style="display:flex;gap:8px;">'
-        +'<button onclick="togglePrayer(''+p.id+'','+(p.approved?'false':'true')+')" style="background:'+(p.approved?'rgba(248,113,113,.1)':'rgba(74,222,128,.1)')+';border:1px solid '+(p.approved?'rgba(248,113,113,.35)':'rgba(74,222,128,.35)')+';color:'+(p.approved?'#f87171':'#4ade80')+';padding:5px 12px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;font-family:'Outfit',sans-serif;">'+(p.approved?'Hide':'Approve')+'</button>'
-        +'<button onclick="deletePrayer(''+p.id+'')" style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);color:#f87171;padding:5px 10px;border-radius:7px;cursor:pointer;font-size:12px;font-family:'Outfit',sans-serif;">🗑</button>'
-        +'</div></div></div>';
-    }).join('');
-  }catch(e){list.innerHTML='<p style="color:var(--text2);">Create mch_prayers table in Supabase to manage prayers.</p>';}
+        +'<button class="apr-btn" style="background:'+(approved?'rgba(248,113,113,.1)':'rgba(74,222,128,.1)')+';border:1px solid '+(approved?'rgba(248,113,113,.35)':'rgba(74,222,128,.35)')+';color:'+(approved?'#f87171':'#4ade80')+';padding:5px 12px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;font-family:Outfit,sans-serif;">'+(approved?'Hide':'Approve')+'</button>'
+        +'<button class="del-btn" style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);color:#f87171;padding:5px 10px;border-radius:7px;cursor:pointer;font-size:12px;font-family:Outfit,sans-serif;">🗑</button>'
+        +'</div></div>';
+      var aprBtn=div.querySelector('.apr-btn');
+      var delBtn=div.querySelector('.del-btn');
+      (function(pid,papp){
+        aprBtn.addEventListener('click',function(){togglePrayer(pid,!papp);});
+        delBtn.addEventListener('click',function(){deletePrayer(pid);});
+      })(p.id,approved);
+      list.appendChild(div);
+    });
+  }catch(e){
+    if(list)list.innerHTML='<p style="color:var(--text2);">Create mch_prayers table in Supabase to manage prayers.</p>';
+  }
 }
 
 async function togglePrayer(id,approved){
@@ -3487,7 +3503,7 @@ async function subscribeNewsletter(){
     if(!r.ok)throw new Error(await r.text());
     document.getElementById('nlName').value='';
     document.getElementById('nlEmail').value='';
-    showToast('✅ You're subscribed! Thank you for staying connected.');
+    showToast('\u2705 You are subscribed! Thank you for staying connected.');
   }catch(e){
     if(e.message&&e.message.includes('duplicate')){
       showToast('You are already subscribed with this email! ✅');
