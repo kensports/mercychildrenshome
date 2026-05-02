@@ -516,6 +516,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 </head>
 <body>
 <script>
+var SUPA_URL='https://jnaotcafejjuwepufjix.supabase.co';
+var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYW90Y2FmZWpqdXdlcHVmaml4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MDQxMjksImV4cCI6MjA5Mjk4MDEyOX0.iF-jq1Ip-zLdVyBP_8Xz0fDI5tCA7wP6sgqHR4FB9o0';
+var SUPA_BUCKET='mercy-photos';
+
 (function(){
   function applyNavLogo(){
     try{
@@ -3062,6 +3066,111 @@ async function deleteVideo(id){
 setTimeout(loadVideos,2000);
 
 // ===== PAGE STARTUP =====
+
+// ═══════════════════════════════════════════
+// CORE DATA FUNCTIONS
+// ═══════════════════════════════════════════
+var DEF={
+  heroTitle:"Every Child Deserves Love & Hope",
+  heroSub:"Supporting vulnerable children in Kasanda Bukuya, Uganda",
+  heroDesc:"Mercy Children\'s Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda. Together we can change their story.",
+  aboutText:"Mercy Children\'s Home is a faith-based organisation located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned and vulnerable children.",
+  year:"2020",
+  location:"Kalaata, Bukuya Sub-county, Kasanda District, Uganda",
+  phone:"+256 751 442 505",
+  email:"mercychildrenshome@gmail.com",
+  fb:"#",ig:"#",yt:"https://youtube.com/@mercychidrenshomeug4969",tt:"#",
+  gfm:"https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US",
+  mottoText:"Together We Are The Church",
+  mottoColor:"#c9a84c",
+  mottoSize:"11",
+  mottoPos:"left",
+  founderName:"SSENGONZI ALEX",
+  founderBio1:"Alex Ssengonzi founded Mercy Children\'s Home in 2020 with a single mission: to give orphaned and vulnerable children in Uganda a safe place to grow, learn and thrive.",
+  founderBio2:"What began as one man\'s vision has grown into a home for 32 children who call Kalaata, Kasanda District their family.",
+  founderQuote:"Every child deserves to feel safe, loved and valued. That is why Mercy Children\'s Home exists.",
+  childCount:"32",
+  s1n:"32+",s1l:"Children Helped",
+  s2n:"3",s2l:"Meals Daily",
+  s3n:"100%",s3l:"Love & Care",
+  adminPass:"mercy2020"
+};
+
+function getData(){
+  try{
+    var raw=localStorage.getItem('mch_data');
+    if(raw){
+      var d=JSON.parse(raw);
+      if(d.heroTitle&&d.heroTitle.indexOf('Chinld')>-1){d.heroTitle=d.heroTitle.replace('Chinld','Child');localStorage.setItem('mch_data',JSON.stringify(d));}
+      return Object.assign({},DEF,d);
+    }
+  }catch(e){}
+  return Object.assign({},DEF);
+}
+
+function saveData(d){
+  try{localStorage.setItem('mch_data',JSON.stringify(d));}catch(e){}
+}
+
+function applyData(){
+  var d=getData();
+  // Hero
+  var ht=document.getElementById('heroTitle');
+  if(ht)ht.innerHTML=(d.heroTitle||DEF.heroTitle).replace('Chinld','Child').replace('Love & Hope','<em>Love &amp; Hope</em>');
+  var hs=document.getElementById('heroSub');if(hs)hs.textContent=d.heroSub||DEF.heroSub;
+  var hd=document.getElementById('heroDesc');if(hd)hd.textContent=d.heroDesc||DEF.heroDesc;
+  var hg=document.getElementById('heroTag');if(hg)hg.textContent="Serving UGANDA\'s Children Since "+(d.year||'2020')+' · 6 Years of Love';
+  // Stats
+  var s1n=document.getElementById('stat1n');if(s1n)s1n.textContent=d.s1n||'32+';
+  var s1l=document.getElementById('stat1l');if(s1l)s1l.textContent=d.s1l||'Children Helped';
+  var s2n=document.getElementById('stat2n');if(s2n)s2n.textContent=d.s2n||'3';
+  var s2l=document.getElementById('stat2l');if(s2l)s2l.textContent=d.s2l||'Meals Daily';
+  var s3n=document.getElementById('stat3n');if(s3n)s3n.textContent=d.s3n||'100%';
+  var s3l=document.getElementById('stat3l');if(s3l)s3l.textContent=d.s3l||'Love & Care';
+  // About
+  var ab=document.getElementById('aboutText');if(ab)ab.textContent=d.aboutText||DEF.aboutText;
+  // Contact
+  var ph=document.getElementById('contactPhone');if(ph)ph.textContent=d.phone||DEF.phone;
+  var em=document.getElementById('contactEmail');if(em)em.textContent=d.email||DEF.email;
+  var lo=document.getElementById('contactLocation');if(lo)lo.textContent=d.location||DEF.location;
+  // Motto
+  applyMotto(d);
+  // Founder
+  var fn=document.getElementById('founderName');if(fn)fn.textContent=d.founderName||DEF.founderName;
+  var fb1=document.getElementById('founderBio1');if(fb1)fb1.textContent=d.founderBio1||DEF.founderBio1;
+  var fb2=document.getElementById('founderBio2');if(fb2)fb2.textContent=d.founderBio2||DEF.founderBio2;
+  var fq=document.getElementById('founderQuote');if(fq)fq.textContent=d.founderQuote||DEF.founderQuote;
+}
+
+async function syncRemoteData(){
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/mch_photos?id=in.(site_settings,admin_pass)&select=id,filename',{
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+    });
+    if(!r.ok)return;
+    var rows=await r.json();
+    var d=getData();
+    rows.forEach(function(row){
+      if(row.id==='site_settings'){
+        try{var s=JSON.parse(row.filename||'{}');Object.assign(d,s);}catch(e){}
+      }
+      if(row.id==='admin_pass'&&row.filename){d.adminPass=row.filename;}
+    });
+    saveData(d);
+    applyData();
+  }catch(e){}
+}
+
+function applyMotto(d){
+  var mt=document.getElementById('mottoText');
+  if(mt)mt.textContent=d.mottoText||DEF.mottoText;
+  var mb=document.getElementById('mottoBar');
+  if(mb){
+    mb.className='';
+    if(d.mottoPos)mb.classList.add('pos-'+d.mottoPos);
+  }
+}
+
 (async function init(){
   // 1. Apply local data immediately (zero delay, no network)
   applyData();
