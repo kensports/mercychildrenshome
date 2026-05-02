@@ -516,10 +516,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 </head>
 <body>
 <script>
-var SUPA_URL='https://jnaotcafejjuwepufjix.supabase.co';
-var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYW90Y2FmZWpqdXdlcHVmaml4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MDQxMjksImV4cCI6MjA5Mjk4MDEyOX0.iF-jq1Ip-zLdVyBP_8Xz0fDI5tCA7wP6sgqHR4FB9o0';
-var SUPA_BUCKET='mercy-photos';
-
 (function(){
   function applyNavLogo(){
     try{
@@ -1636,7 +1632,300 @@ var SUPA_BUCKET='mercy-photos';
         </div>
         <div style="height:1px;background:var(--border);margin:16px 0;"></div>
         <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">👤 Founder Section</div>
-        ';
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPA_URL='https://jnaotcafejjuwepufjix.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYW90Y2FmZWpqdXdlcHVmaml4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MDQxMjksImV4cCI6MjA5Mjk4MDEyOX0.iF-jq1Ip-zLdVyBP_8Xz0fDI5tCA7wP6sgqHR4FB9o0';
+
+// ===== CONSTANTS =====
+var DKEY='mch_data',AKEY='mch_admin',CAP_KEY='mch_caps',SUP_KEY='mch_supporters';
+var SPONSORS_KEY='mch_sponsors';
+
+// ===== MISSING CORE FUNCTIONS =====
+
+// Admin password
+function getPwd(){return localStorage.getItem(AKEY)||'mercy2020';}
+
+// Upload any file to Supabase storage
+async function uploadToSupabase(file, namePrefix){
+  var ext=file.name?file.name.split('.').pop():'jpg';
+  var path=namePrefix+'_'+Date.now()+'.'+ext;
+  var uploadFile=file;
+  try{uploadFile=await compressImage(file,1200,0.82);}catch(e){}
+  var r=await fetch(SUPA_URL+'/storage/v1/object/mercy-photos/'+path,{
+    method:'POST',
+    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':uploadFile.type||'image/jpeg','x-upsert':'true'},
+    body:uploadFile
+  });
+  if(!r.ok){var t=await r.text();throw new Error('Upload failed: '+t);}
+  return path;
+}
+
+// Compress image before upload
+function compressImage(file,maxSize,quality){
+  return new Promise(function(resolve){
+    var reader=new FileReader();
+    reader.onload=function(e){
+      var img=new Image();
+      img.onload=function(){
+        var w=img.width,h=img.height;
+        if(w>maxSize){h=Math.round(h*maxSize/w);w=maxSize;}
+        if(h>maxSize){w=Math.round(w*maxSize/h);h=maxSize;}
+        var canvas=document.createElement('canvas');
+        canvas.width=w;canvas.height=h;
+        canvas.getContext('2d').drawImage(img,0,0,w,h);
+        canvas.toBlob(function(blob){
+          if(!blob){resolve(file);return;}
+          var out=new File([blob],file.name||'photo.jpg',{type:'image/jpeg'});
+          resolve(out);
+        },'image/jpeg',quality||0.82);
+      };
+      img.onerror=function(){resolve(file);};
+      img.src=e.target.result;
+    };
+    reader.onerror=function(){resolve(file);};
+    reader.readAsDataURL(file);
+  });
+}
+
+// Sponsors (stored in Supabase mch_photos with id='sponsors_data')
+var _sponsorsCache=null;
+async function getSponsors(){
+  if(_sponsorsCache)return _sponsorsCache;
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/mch_photos?id=eq.sponsors_data&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    var rows=await r.json();
+    if(Array.isArray(rows)&&rows.length>0&&rows[0].filename){
+      _sponsorsCache=JSON.parse(rows[0].filename);
+      return _sponsorsCache;
+    }
+  }catch(e){}
+  try{return JSON.parse(localStorage.getItem(SPONSORS_KEY)||'[]');}catch(e){return[];}
+}
+async function setSponsors(arr){
+  _sponsorsCache=arr;
+  var json=JSON.stringify(arr);
+  try{localStorage.setItem(SPONSORS_KEY,json);}catch(e){}
+  try{
+    await fetch(SUPA_URL+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'sponsors_data',filename:json})});
+  }catch(e){}
+}
+var tapCount=0,tapTimer=null,adminOpen=false;
+var DEF={
+  heroTitle:'SECURE A SAFE HOME FOR ORPHANED CHILDREN IN UGANDA',
+  heroSub:'32 orphaned children need YOUR help. The land they live on is not secure.',
+  heroDesc:'Help us buy permanent land in Kalaata, Kasanda District, Uganda. Every donation brings these children closer to a safe, permanent home.',
+  mottoText:'Together We Are The Church',founderName:'Ssengonzi Alex',childCount:'32',
+  founderBio1:'Ssengonzi Alex founded Mercy Children\'s Home in 2020 with a vision to provide shelter, food, education and spiritual nourishment to orphaned and vulnerable children in Kasanda District, Uganda.',
+  founderBio2:'What began as a small act of faith has grown into a community of 32 children who call this place home. With support from generous sponsors in the USA and around the world, the home continues to thrive.',
+  founderQuote:'Every child deserves a family, a home, and a future. With God\'s grace, we provide all three.',
+  year:'2020',location:'Kalaata, Kasanda District, Uganda',phone:'+256 751 442 505',
+  email:'mercychildrenshomeug2024@gmail.com',fb:'https://www.facebook.com/TheloveofJesusfoundation',
+  ig:'#',yt:'https://youtube.com/@mercychidrenshomeug4969',tt:'https://www.tiktok.com/@mercy.home.ug',
+  gfm:'https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US',
+  s1n:'',s1l:'',s2n:'',s2l:'',s3n:'',s3l:''
+};
+
+// ===== DATA =====
+function getData(){try{var d=JSON.parse(localStorage.getItem(DKEY)||'{}');return Object.assign({},DEF,d);}catch(e){return Object.assign({},DEF);}}
+function setData(d){localStorage.setItem(DKEY,JSON.stringify(d));}
+function applyData(){
+  var d=getData();
+  var ht=document.getElementById('heroTitle');if(ht)ht.innerHTML=(d.heroTitle||DEF.heroTitle).replace(/\n/g,'<br>');
+  var hs=document.getElementById('heroSub');if(hs)hs.textContent=d.heroSub||DEF.heroSub;
+  var hp=document.getElementById('heroDesc');if(hp)hp.textContent=d.heroDesc||DEF.heroDesc;
+  var cc=document.getElementById('childCount');if(cc)cc.textContent=d.childCount||DEF.childCount;
+  var ce=document.getElementById('contactEmail');if(ce){ce.textContent=d.email||DEF.email;ce.href='mailto:'+(d.email||DEF.email);}
+  var cp=document.getElementById('contactPhone');if(cp)cp.textContent=d.phone||DEF.phone;
+  var cl=document.getElementById('contactLocation');if(cl)cl.textContent=d.location||DEF.location;
+  var fb=document.getElementById('socFb');if(fb)fb.href=d.fb||DEF.fb;
+  var ig=document.getElementById('socIg');if(ig)ig.href=d.ig||DEF.ig;
+  var yt=document.getElementById('socYt');if(yt)yt.href=d.yt||DEF.yt;
+  var tt=document.getElementById('socTt');if(tt)tt.href=d.tt||DEF.tt;
+  var fy=document.getElementById('footerYear');if(fy)fy.textContent=d.year||DEF.year;
+  var fy2=document.getElementById('footerYear2');if(fy2)fy2.textContent=d.year||DEF.year;
+  var fn=document.getElementById('founderName');if(fn)fn.textContent=d.founderName||DEF.founderName;
+  var fb1=document.getElementById('founderBio1');if(fb1)fb1.textContent=d.founderBio1||DEF.founderBio1;
+  var fb2=document.getElementById('founderBio2');if(fb2)fb2.textContent=d.founderBio2||DEF.founderBio2;
+  var fq=document.getElementById('founderQuote');if(fq)fq.textContent=d.founderQuote||DEF.founderQuote;
+  applyMotto(d);
+}
+
+// ===== CAPTIONS =====
+function getCaptions(){try{return JSON.parse(localStorage.getItem(CAP_KEY)||'{}');}catch(e){return{};}}
+async function setCaptions(caps){
+  try{localStorage.setItem(CAP_KEY,JSON.stringify(caps));}catch(e){}
+  try{await fetch(SUPA_URL+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'captions_data',filename:JSON.stringify(caps)})});}catch(e){}
+}
+function applyCaptions(){
+  var caps=getCaptions();
+  for(var i=0;i<=17;i++){var el=document.getElementById('gi-'+i);if(!el)continue;var capEl=el.querySelector('.g-cap');if(capEl)capEl.textContent=caps['cap-'+i]||'';}
+  var fCap=document.getElementById('founderCaption');if(fCap)fCap.textContent=caps['cap-founder']||'';
+}
+
+// ===== PHOTO META =====
+var _photoMetaCache=null;
+async function getPhotoMeta(force){
+  if(_photoMetaCache&&!force)return _photoMetaCache;
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/mch_photos?select=id,filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    var rows=await r.json();
+    var meta={};
+    if(Array.isArray(rows))rows.forEach(function(row){meta[row.id]=row.filename;});
+    _photoMetaCache=meta;
+    return meta;
+  }catch(e){return{};}
+}
+function getSupaPhotoURL(filename){
+  if(!filename)return'';
+  if(filename.startsWith('http'))return filename;
+  return SUPA_URL+'/storage/v1/object/public/mercy-photos/'+filename;
+}
+
+// ===== LOAD ALL PHOTOS TO PAGE =====
+async function loadAllPhotos(){
+  var meta=await getPhotoMeta(true);
+  // Gallery photos (skip i=1 — that slot is used for the founder photo)
+  for(var i=0;i<=17;i++){
+    if(i===1)continue;
+    var filename=meta['gallery_'+i];
+    var el=document.getElementById('gi-'+i);
+    if(!el)continue;
+    if(filename){
+      var url=getSupaPhotoURL(filename);
+      var img=el.querySelector('img');
+      if(img){img.src=url;img.style.display='block';}
+      else{var ni=document.createElement('img');ni.src=url;ni.style.cssText='width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;';el.style.position='relative';el.appendChild(ni);}
+      el.style.display='';
+    } else {
+      el.style.display='none';
+    }
+  }
+  // Founder photo → goes into gi-1
+  var founderFilename=meta['founder'];
+  var gi1=document.getElementById('gi-1');
+  if(gi1&&founderFilename){
+    var furl=getSupaPhotoURL(founderFilename);
+    var fimg=gi1.querySelector('img');
+    if(fimg){fimg.src=furl;fimg.style.cssText='width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;';}
+    else{
+      var nfimg=document.createElement('img');
+      nfimg.src=furl;
+      nfimg.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;';
+      gi1.style.position='relative';
+      var svg=gi1.querySelector('svg');if(svg)svg.style.display='none';
+      gi1.insertBefore(nfimg,gi1.firstChild);
+    }
+  }
+  // Logo
+  if(meta['logo']){var logoUrl=getSupaPhotoURL(meta['logo']);applyLogo(logoUrl);try{localStorage.setItem('mch_logo_cache',logoUrl);}catch(e){}}
+  applyCaptions();
+}
+
+// ===== SYNC REMOTE DATA =====
+async function syncRemoteData(){
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/mch_photos?id=eq.site_settings&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    var rows=await r.json();
+    if(rows&&rows[0]&&rows[0].filename){
+      var remote=JSON.parse(rows[0].filename);
+      var local=getData();
+      var merged=Object.assign({},DEF,remote,local);
+      // If remote has admin pwd, apply it
+      if(remote&&remote.adminPwd){try{localStorage.setItem(AKEY,remote.adminPwd);}catch(e){}}
+      // Apply motto from remote if not overridden locally
+      applyMotto(merged);
+    }
+  }catch(e){}
+}
+
+// ===== LOAD CAPTIONS FROM SUPABASE =====
+async function loadCaptionsFromSupabase(){
+  try{
+    var r=await fetch(SUPA_URL+'/rest/v1/mch_photos?id=eq.captions_data&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+    var rows=await r.json();
+    if(rows&&rows[0]&&rows[0].filename){
+      var caps=JSON.parse(rows[0].filename);
+      try{localStorage.setItem(CAP_KEY,JSON.stringify(caps));}catch(e){}
+      applyCaptions();
+    }
+  }catch(e){}
+}
+
+// ===== PHOTO ADMIN GRID =====
+var PHOTO_SLOTS=[
+  {id:'gallery_0',label:'Gallery 1'},{id:'gallery_1',label:'Gallery 2'},{id:'gallery_2',label:'Gallery 3'},
+  {id:'gallery_3',label:'Gallery 4'},{id:'gallery_4',label:'Gallery 5'},{id:'gallery_5',label:'Gallery 6'},
+  {id:'gallery_6',label:'Gallery 7'},{id:'gallery_7',label:'Gallery 8'},{id:'gallery_8',label:'Gallery 9'},
+  {id:'gallery_9',label:'Gallery 10'},{id:'gallery_10',label:'Gallery 11'},{id:'gallery_11',label:'Gallery 12'},
+  {id:'gallery_12',label:'Gallery 13'},{id:'gallery_13',label:'Gallery 14'},{id:'gallery_14',label:'Gallery 15'},
+  {id:'gallery_15',label:'Gallery 16'},{id:'gallery_16',label:'Gallery 17'},{id:'gallery_17',label:'Gallery 18'}
+];
+async function renderPhotoGrid(){
+  var meta=await getPhotoMeta(true);
+  var grid=document.getElementById('photoGrid');if(!grid)return;
+  grid.innerHTML='';
+  PHOTO_SLOTS.forEach(function(slot){
+    var filename=meta[slot.id];var url=filename?getSupaPhotoURL(filename):'';
+    var div=document.createElement('div');
+    div.style.cssText='background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px;display:grid;grid-template-columns:70px 1fr;gap:12px;align-items:center;margin-bottom:8px;';
+    div.innerHTML='<div style="width:70px;height:54px;border-radius:8px;overflow:hidden;background:var(--card);border:1px solid var(--border);">'+(url?'<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;display:block;" />':'')+'</div>'
+      +'<div><div style="font-size:11px;font-weight:700;color:var(--gold);margin-bottom:6px;">'+slot.label+'</div>'
+      +'<label style="display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#000;padding:6px 12px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;">📷 Upload<input type="file" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event,\''+slot.id+'\')"/></label>'
+      +(url?' <button onclick="deletePhoto(\''+slot.id+'\')" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:6px 10px;border-radius:7px;font-size:11px;cursor:pointer;">✕</button>':'')
+      +'</div></div>';
+    grid.appendChild(div);
+  });
+}
+async function renderFounderPhotoGrid(){
+  var meta=await getPhotoMeta();
+  var grid=document.getElementById('founderPhotoGrid');if(!grid)return;
+  var filename=meta['founder'];var url=filename?getSupaPhotoURL(filename):'';
+  grid.innerHTML='<div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px;display:grid;grid-template-columns:70px 1fr;gap:12px;align-items:center;">'
+    +'<div style="width:70px;height:70px;border-radius:50%;overflow:hidden;background:var(--card);border:2px solid var(--gold);">'+(url?'<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;display:block;"/>':'')+'</div>'
+    +'<div><div style="font-size:11px;font-weight:700;color:var(--gold);margin-bottom:6px;">Founder Photo</div>'
+    +'<label style="display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#000;padding:6px 12px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;">📷 Upload<input type="file" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event,\'founder\')"/></label>'
+    +(url?' <button onclick="deletePhoto(\'founder\')" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:6px 10px;border-radius:7px;font-size:11px;cursor:pointer;">✕</button>':'')
+    +'</div></div>';
+}
+async function handlePhotoUpload(event,slotId){
+  var file=event.target.files[0];if(!file)return;
+  showToast('Uploading... ⏳');
+  var ext=file.name.split('.').pop();var path=slotId+'_'+Date.now()+'.'+ext;
+  var r=await fetch(SUPA_URL+'/storage/v1/object/mercy-photos/'+path,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type,'x-upsert':'true'},body:file});
+  if(!r.ok){showToast('Upload failed.',true);return;}
+  await fetch(SUPA_URL+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:slotId,filename:path})});
+  _photoMetaCache=null;showToast('Photo uploaded! ✅');
+  renderPhotoGrid();renderFounderPhotoGrid();loadAllPhotos();
+}
+async function deletePhoto(slotId){
+  if(!confirm('Delete this photo?'))return;
+  await fetch(SUPA_URL+'/rest/v1/mch_photos?id=eq.'+slotId,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+  _photoMetaCache=null;showToast('Deleted.');renderPhotoGrid();renderFounderPhotoGrid();loadAllPhotos();
+}
+
+// ===== RENDER CAPTIONS ADMIN =====
+async function renderCaptionsAdmin(){
+  var meta=await getPhotoMeta();
+  var caps=getCaptions();
+  var list=document.getElementById('captionsList');if(!list)return;
+  list.innerHTML='';
+  var captionDefs=[
+    {id:'0',label:'Gallery 1'},{id:'1',label:'Gallery 2'},{id:'2',label:'Gallery 3'},
+    {id:'3',label:'Gallery 4'},{id:'4',label:'Gallery 5'},{id:'5',label:'Gallery 6'},
+    {id:'6',label:'Gallery 7'},{id:'7',label:'Gallery 8'},{id:'8',label:'Gallery 9'},
+    {id:'9',label:'Gallery 10'},{id:'10',label:'Gallery 11'},{id:'11',label:'Gallery 12'},
+    {id:'12',label:'Gallery 13'},{id:'13',label:'Gallery 14'},{id:'14',label:'Gallery 15'},
+    {id:'15',label:'Gallery 16'},{id:'16',label:'Gallery 17'},{id:'17',label:'Gallery 18'},
+    {id:'founder',label:'Founder Photo'}
+  ];
+  captionDefs.forEach(function(cd){
+    var filename=cd.id==='founder'?meta['founder']:meta['gallery_'+cd.id];
+    var imgHtml=filename?'<img src="'+getSupaPhotoURL(filename)+'" style="width:100%;height:100%;object-fit:cover;display:block;" />':'';
     var statusBadge=filename
       ?'<span style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#10b981;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;">✓ Photo uploaded</span>'
       :'<span style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;">No photo yet</span>';
@@ -3066,111 +3355,6 @@ async function deleteVideo(id){
 setTimeout(loadVideos,2000);
 
 // ===== PAGE STARTUP =====
-
-// ═══════════════════════════════════════════
-// CORE DATA FUNCTIONS
-// ═══════════════════════════════════════════
-var DEF={
-  heroTitle:"Every Child Deserves Love & Hope",
-  heroSub:"Supporting vulnerable children in Kasanda Bukuya, Uganda",
-  heroDesc:"Mercy Children\'s Home provides shelter, education, nutrition, and unconditional love to orphaned and vulnerable children in Kasanda Bukuya, Uganda. Together we can change their story.",
-  aboutText:"Mercy Children\'s Home is a faith-based organisation located in Kasanda Bukuya, Uganda, dedicated to providing comprehensive care for orphaned and vulnerable children.",
-  year:"2020",
-  location:"Kalaata, Bukuya Sub-county, Kasanda District, Uganda",
-  phone:"+256 751 442 505",
-  email:"mercychildrenshome@gmail.com",
-  fb:"#",ig:"#",yt:"https://youtube.com/@mercychidrenshomeug4969",tt:"#",
-  gfm:"https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US",
-  mottoText:"Together We Are The Church",
-  mottoColor:"#c9a84c",
-  mottoSize:"11",
-  mottoPos:"left",
-  founderName:"SSENGONZI ALEX",
-  founderBio1:"Alex Ssengonzi founded Mercy Children\'s Home in 2020 with a single mission: to give orphaned and vulnerable children in Uganda a safe place to grow, learn and thrive.",
-  founderBio2:"What began as one man\'s vision has grown into a home for 32 children who call Kalaata, Kasanda District their family.",
-  founderQuote:"Every child deserves to feel safe, loved and valued. That is why Mercy Children\'s Home exists.",
-  childCount:"32",
-  s1n:"32+",s1l:"Children Helped",
-  s2n:"3",s2l:"Meals Daily",
-  s3n:"100%",s3l:"Love & Care",
-  adminPass:"mercy2020"
-};
-
-function getData(){
-  try{
-    var raw=localStorage.getItem('mch_data');
-    if(raw){
-      var d=JSON.parse(raw);
-      if(d.heroTitle&&d.heroTitle.indexOf('Chinld')>-1){d.heroTitle=d.heroTitle.replace('Chinld','Child');localStorage.setItem('mch_data',JSON.stringify(d));}
-      return Object.assign({},DEF,d);
-    }
-  }catch(e){}
-  return Object.assign({},DEF);
-}
-
-function saveData(d){
-  try{localStorage.setItem('mch_data',JSON.stringify(d));}catch(e){}
-}
-
-function applyData(){
-  var d=getData();
-  // Hero
-  var ht=document.getElementById('heroTitle');
-  if(ht)ht.innerHTML=(d.heroTitle||DEF.heroTitle).replace('Chinld','Child').replace('Love & Hope','<em>Love &amp; Hope</em>');
-  var hs=document.getElementById('heroSub');if(hs)hs.textContent=d.heroSub||DEF.heroSub;
-  var hd=document.getElementById('heroDesc');if(hd)hd.textContent=d.heroDesc||DEF.heroDesc;
-  var hg=document.getElementById('heroTag');if(hg)hg.textContent="Serving UGANDA\'s Children Since "+(d.year||'2020')+' · 6 Years of Love';
-  // Stats
-  var s1n=document.getElementById('stat1n');if(s1n)s1n.textContent=d.s1n||'32+';
-  var s1l=document.getElementById('stat1l');if(s1l)s1l.textContent=d.s1l||'Children Helped';
-  var s2n=document.getElementById('stat2n');if(s2n)s2n.textContent=d.s2n||'3';
-  var s2l=document.getElementById('stat2l');if(s2l)s2l.textContent=d.s2l||'Meals Daily';
-  var s3n=document.getElementById('stat3n');if(s3n)s3n.textContent=d.s3n||'100%';
-  var s3l=document.getElementById('stat3l');if(s3l)s3l.textContent=d.s3l||'Love & Care';
-  // About
-  var ab=document.getElementById('aboutText');if(ab)ab.textContent=d.aboutText||DEF.aboutText;
-  // Contact
-  var ph=document.getElementById('contactPhone');if(ph)ph.textContent=d.phone||DEF.phone;
-  var em=document.getElementById('contactEmail');if(em)em.textContent=d.email||DEF.email;
-  var lo=document.getElementById('contactLocation');if(lo)lo.textContent=d.location||DEF.location;
-  // Motto
-  applyMotto(d);
-  // Founder
-  var fn=document.getElementById('founderName');if(fn)fn.textContent=d.founderName||DEF.founderName;
-  var fb1=document.getElementById('founderBio1');if(fb1)fb1.textContent=d.founderBio1||DEF.founderBio1;
-  var fb2=document.getElementById('founderBio2');if(fb2)fb2.textContent=d.founderBio2||DEF.founderBio2;
-  var fq=document.getElementById('founderQuote');if(fq)fq.textContent=d.founderQuote||DEF.founderQuote;
-}
-
-async function syncRemoteData(){
-  try{
-    var r=await fetch(SUPA_URL+'/rest/v1/mch_photos?id=in.(site_settings,admin_pass)&select=id,filename',{
-      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
-    });
-    if(!r.ok)return;
-    var rows=await r.json();
-    var d=getData();
-    rows.forEach(function(row){
-      if(row.id==='site_settings'){
-        try{var s=JSON.parse(row.filename||'{}');Object.assign(d,s);}catch(e){}
-      }
-      if(row.id==='admin_pass'&&row.filename){d.adminPass=row.filename;}
-    });
-    saveData(d);
-    applyData();
-  }catch(e){}
-}
-
-function applyMotto(d){
-  var mt=document.getElementById('mottoText');
-  if(mt)mt.textContent=d.mottoText||DEF.mottoText;
-  var mb=document.getElementById('mottoBar');
-  if(mb){
-    mb.className='';
-    if(d.mottoPos)mb.classList.add('pos-'+d.mottoPos);
-  }
-}
-
 (async function init(){
   // 1. Apply local data immediately (zero delay, no network)
   applyData();
