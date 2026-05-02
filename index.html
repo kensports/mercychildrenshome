@@ -671,10 +671,27 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 
     <!-- CTA row -->
     <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
-      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#b8860b,#c9a84c,#f0c040);color:#000;font-size:16px;font-weight:800;text-decoration:none;padding:16px 36px;border-radius:14px;box-shadow:0 8px 32px rgba(201,168,76,.3);letter-spacing:.3px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-        Donate on GoFundMe
-      </a>
+      <!-- 3D FLIP DONATE BUTTON -->
+      <div style="perspective:800px;display:inline-block;cursor:pointer;" id="btn3DWrap">
+        <div id="btn3DInner" style="width:240px;height:58px;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.34,1.56,.64,1);animation:btn3Dflip 5s ease-in-out infinite;">
+          <!-- FRONT: GoFundMe -->
+          <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" style="position:absolute;inset:0;background:linear-gradient(135deg,#8B6914,#c9a84c,#f0c040,#c9a84c,#8B6914);background-size:300%;animation:btnShimmer 3s ease infinite;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:800;color:#000;box-shadow:0 8px 0 #5a3e08,0 14px 32px rgba(0,0,0,.5);backface-visibility:hidden;-webkit-backface-visibility:hidden;text-decoration:none;letter-spacing:.3px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            Donate on GoFundMe
+          </a>
+          <!-- BACK: WhatsApp -->
+          <a href="https://wa.me/256751442505?text=Hello%20Alex%2C%20I%20want%20to%20donate%20to%20Mercy%20Children%27s%20Home%20Uganda" target="_blank" style="position:absolute;inset:0;background:linear-gradient(135deg,#0a3d1a,#16a34a,#25d366,#16a34a,#0a3d1a);background-size:300%;animation:btnShimmer2 3s ease infinite;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:800;color:#fff;box-shadow:0 8px 0 #0a2e11,0 14px 32px rgba(0,0,0,.5);backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);text-decoration:none;letter-spacing:.3px;">
+            <svg viewBox="0 0 48 48" fill="none" style="width:20px;height:20px;flex-shrink:0;"><path fill="#fff" d="M35.2 12.7A15.9 15.9 0 0 0 24 8C15.2 8 8 15.2 8 24c0 2.8.7 5.5 2.1 7.9L8 40l8.3-2.2a15.9 15.9 0 0 0 7.7 2h.1c8.8 0 16-7.2 16-16 0-4.3-1.7-8.3-4.9-11.1zm-11.2 24.6h-.1a13.2 13.2 0 0 1-6.7-1.8l-.5-.3-5 1.3 1.3-4.8-.3-.5a13.2 13.2 0 0 1-2-7.1C10.7 17 16.8 10.7 24 10.7c3.5 0 6.8 1.4 9.3 3.8a13 13 0 0 1 3.9 9.4c-.1 7.3-6.1 13.4-13.2 13.4zm7.2-9.9c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-.9 1.2-1.2 1.5-.2.3-.4.3-.8.1a10.3 10.3 0 0 1-3-1.9 11.3 11.3 0 0 1-2.1-2.6c-.2-.4 0-.6.2-.8l.5-.6c.2-.2.3-.4.4-.6.1-.2 0-.5-.1-.6-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.7c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.3 0 2 1.5 3.9 1.7 4.1.2.3 2.9 4.4 7 6.2 1 .4 1.7.7 2.3.8 1 .3 1.8.3 2.5.2.8-.1 2.4-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.2-.4-.3-.8-.5z"/></svg>
+            Donate via WhatsApp
+          </a>
+        </div>
+      </div>
+      <style>
+      @keyframes btnShimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+      @keyframes btnShimmer2{0%{background-position:100% 50%}50%{background-position:0% 50%}100%{background-position:100% 50%}}
+      @keyframes btn3Dflip{0%,30%{transform:rotateY(0deg)}50%,80%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)}}
+      #btn3DWrap:hover #btn3DInner{animation:none;transform:rotateY(180deg) scale(1.04);}
+      </style>
       <a href="https://wa.me/?text=Please+help+secure+a+safe+home+for+32+orphaned+children+in+Uganda.+Donate+here:+https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet%26utm_content=amp17_control-amp20_control%26utm_medium=customer%26utm_source=messenger%26lang=en_US" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#25d366;color:#fff;font-size:15px;font-weight:700;text-decoration:none;padding:16px 28px;border-radius:14px;">
         <svg viewBox="0 0 48 48" fill="none" style="width:20px;height:20px;"><path fill="#fff" d="M35.2 12.7A15.9 15.9 0 0 0 24 8C15.2 8 8 15.2 8 24c0 2.8.7 5.5 2.1 7.9L8 40l8.3-2.2a15.9 15.9 0 0 0 7.7 2h.1c8.8 0 16-7.2 16-16 0-4.3-1.7-8.3-4.9-11.1zm-11.2 24.6h-.1a13.2 13.2 0 0 1-6.7-1.8l-.5-.3-5 1.3 1.3-4.8-.3-.5a13.2 13.2 0 0 1-2-7.1C10.7 17 16.8 10.7 24 10.7c3.5 0 6.8 1.4 9.3 3.8a13 13 0 0 1 3.9 9.4c-.1 7.3-6.1 13.4-13.2 13.4zm7.2-9.9c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-.9 1.2-1.2 1.5-.2.3-.4.3-.8.1a10.3 10.3 0 0 1-3-1.9 11.3 11.3 0 0 1-2.1-2.6c-.2-.4 0-.6.2-.8l.5-.6c.2-.2.3-.4.4-.6.1-.2 0-.5-.1-.6-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.7c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.3 0 2 1.5 3.9 1.7 4.1.2.3 2.9 4.4 7 6.2 1 .4 1.7.7 2.3.8 1 .3 1.8.3 2.5.2.8-.1 2.4-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.2-.4-.3-.8-.5z"/></svg>
         Share on WhatsApp
@@ -2456,6 +2473,8 @@ async function loadStoriesDynamic(){
 var selectedStoryColor='#3b82f6';
 function selectStoryColor(c,btn){selectedStoryColor=c;document.getElementById('st-color').value=c;document.querySelectorAll('[onclick^="selectStoryColor"]').forEach(function(b){b.style.border='3px solid transparent';});btn.style.border='3px solid white';}
 async function uploadStoryPhoto(file){if(!file)return null;var ext=file.name.split('.').pop();var path='story_'+Date.now()+'.'+ext;var r=await fetch(SUPA_URL+'/storage/v1/object/mercy-photos/'+path,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type,'x-upsert':'true'},body:file});if(r.ok)return SUPA_URL+'/storage/v1/object/public/mercy-photos/'+path;return null;}
+function applyStoryTemplate(v){if(!v)return;var t=document.getElementById("st-story");if(t){t.value=v;t.focus();}}
+var editingStoryId=null;
 async function saveStory(){
   var name=document.getElementById('st-name').value.trim();
   var age=parseInt(document.getElementById('st-age').value)||0;
@@ -2480,7 +2499,7 @@ async function saveStory(){
     r=await fetch(SUPA_URL+'/rest/v1/mch_stories',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(payload)});
   }
   if(r.ok||r.status===201||r.status===204){
-    showToast(editingStoryId?'Story updated! ✅':'Story saved! ✅');
+    showToast(editingStoryId?'Story updated!':'Story saved! ✅');
     cancelEditStory();
     loadStoriesAdmin();
     loadStoriesDynamic();
