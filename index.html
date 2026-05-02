@@ -705,14 +705,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   <div class="hero-grid"></div>
   <div class="hero-content">
     <!-- TOP BADGES ROW -->
+    <div style="margin-bottom:16px;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3.2vw,42px);font-weight:700;color:#ffffff;text-transform:uppercase;letter-spacing:4px;line-height:1;text-shadow:0 2px 16px rgba(0,0,0,.8);white-space:nowrap;background:none;" id="mottoText">Together We Are The Church</p>
+    </div>
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:28px;">
-      <!-- Motto - no box, just elegant text -->
-      <div id="mottoBar" style="display:inline-flex;align-items:center;gap:10px;margin-bottom:0;">
-        <div style="width:28px;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.6));"></div>
-        <span id="mottoText" style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:3px;white-space:nowrap;">Together We Are The Church</span>
-        <div style="width:28px;height:1px;background:linear-gradient(to left,transparent,rgba(201,168,76,.6));"></div>
-      </div>
-      <!-- Hero badge -->
       <div class="hero-badge" style="display:inline-flex;align-items:center;gap:8px;">
         <svg style="width:11px;height:11px;fill:currentColor;flex-shrink:0;" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         <span id="heroTag" style="white-space:nowrap;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">Serving Uganda's Children Since 2020 &nbsp;·&nbsp; 6 Years of Love</span>
@@ -1712,43 +1708,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 
       <!-- CONTENT TAB -->
       <div class="adm-sec" id="adm-content">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
-            <div>
-              <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Text Color</label>
-              <div style="display:flex;gap:6px;align-items:center;">
-                <input type="color" id="ei-mottoColor" value="#c9a84c" oninput="document.getElementById('ei-mottoColorHex').value=this.value;previewMotto();" style="width:40px;height:34px;border:1px solid var(--border);border-radius:7px;cursor:pointer;padding:2px;background:none;flex-shrink:0;"/>
-                <input type="text" id="ei-mottoColorHex" value="#c9a84c" maxlength="7" oninput="if(/^#[0-9A-Fa-f]{6}$/.test(this.value)){document.getElementById('ei-mottoColor').value=this.value;previewMotto();}" style="flex:1;padding:7px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:7px;font-size:12px;color:var(--text);outline:none;font-family:monospace;"/>
-              </div>
-            </div>
-            <div>
-              <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Background</label>
-              <div style="display:flex;gap:6px;align-items:center;">
-                <input type="color" id="ei-mottoBg" value="#0a0e1a" oninput="document.getElementById('ei-mottoBgHex').value=this.value;previewMotto();" style="width:40px;height:34px;border:1px solid var(--border);border-radius:7px;cursor:pointer;padding:2px;background:none;flex-shrink:0;"/>
-                <input type="text" id="ei-mottoBgHex" value="#0a0e1a" maxlength="7" oninput="if(/^#[0-9A-Fa-f]{6}$/.test(this.value)){document.getElementById('ei-mottoBg').value=this.value;previewMotto();}" style="flex:1;padding:7px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:7px;font-size:12px;color:var(--text);outline:none;font-family:monospace;"/>
-              </div>
-            </div>
-          </div>
-          <div style="margin-bottom:14px;">
-            <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Font Size — <span id="mottoSizeVal">14px</span></label>
-            <input type="range" id="ei-mottoSize" min="10" max="26" value="14" oninput="document.getElementById('mottoSizeVal').textContent=this.value+'px';previewMotto();" style="width:100%;"/>
-          </div>
-          <div id="mottoPrevBox" style="border-radius:8px;padding:10px;text-align:center;margin-bottom:12px;background:#0a0e1a;transition:background .2s;">
-            <span style="font-size:10px;color:var(--text2);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Live Preview</span>
-            <span id="mottoPreviewText" style="font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a84c;font-size:14px;">✝   Together We Are The Church   ✝</span>
-          </div>
-          <div style="margin-bottom:14px;">
-            <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Position</label>
-            <div style="display:flex;gap:8px;">
-              <button onclick="setMottoPos('left',this)" id="mpos-left" style="flex:1;padding:8px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-size:12px;cursor:pointer;">⬅ Left</button>
-              <button onclick="setMottoPos('center',this)" id="mpos-center" style="flex:1;padding:8px;border-radius:8px;background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gold);font-size:12px;cursor:pointer;font-weight:700;">⬛ Center</button>
-              <button onclick="setMottoPos('right',this)" id="mpos-right" style="flex:1;padding:8px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-size:12px;cursor:pointer;">Right ➡</button>
-            </div>
-          </div>
-          <button class="adm-btn" onclick="saveMotto()" style="width:100%;font-size:14px;padding:12px;">💾 Save Motto</button>
-        </div>
-        <div style="height:1px;background:var(--border);margin:16px 0;"></div>
-        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">👤 Founder Section</div>
-      </div>
+        <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">👤 Founder Section</div>
 
       <!-- CONTACT TAB -->
       <div class="adm-sec" id="adm-contact">
@@ -2723,34 +2683,17 @@ async function saveMotto(){
 
 function applyMotto(d){
   if(!d) return;
-  var color = d.mottoColor || '#c9a84c';
-  var sz = parseInt(d.mottoSize||11);
   var mt = document.getElementById('mottoText');
   if(mt){
     mt.textContent = d.mottoText || DEF.mottoText;
-    // Use setProperty with important so color always wins
-    mt.style.setProperty('color', color, 'important');
-    mt.style.setProperty('font-size', sz+'px', 'important');
+    mt.style.setProperty('color', '#ffffff', 'important');
+    mt.style.setProperty('font-size', 'clamp(20px,3.2vw,42px)', 'important');
     mt.style.setProperty('font-weight', '700', 'important');
-    mt.style.setProperty('letter-spacing', '2px', 'important');
+    mt.style.setProperty('letter-spacing', '4px', 'important');
     mt.style.setProperty('text-transform', 'uppercase', 'important');
+    mt.style.setProperty('text-shadow', '0 2px 16px rgba(0,0,0,.8)', 'important');
     mt.style.setProperty('white-space', 'nowrap', 'important');
-  }
-  var pill = document.querySelector('.motto-pill');
-  if(pill){
-    pill.style.borderColor = color+'55';
-    pill.style.background = 'transparent';
-  }
-  var bar = document.getElementById('mottoBar');
-  if(bar){
-    bar.style.setProperty('background','#0a0e1a','important');
-    bar.style.setProperty('background-color','#0a0e1a','important');
-    bar.style.setProperty('background-image','none','important');
-    bar.classList.remove('pos-left','pos-right');
-    var pos = d.mottoPos||'center';
-    if(pos==='left') bar.classList.add('pos-left');
-    else if(pos==='right') bar.classList.add('pos-right');
-    try{localStorage.setItem('mch_motto_pos', pos);}catch(e){}
+    mt.style.setProperty('background', 'none', 'important');
   }
 }
 
