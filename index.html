@@ -392,7 +392,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 /* ADMIN */
 .admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:600;display:none;align-items:flex-end;justify-content:center;}
 .admin-overlay.open{display:flex;}
-.admin-panel{background:var(--bg2);border-radius:24px 24px 0 0;width:100%;max-width:720px;max-height:90vh;overflow-y:auto;border-top:1px solid var(--border);}
+.admin-panel{background:var(--bg2);border-radius:20px 20px 0 0;width:100%;max-width:min(1100px,98vw);max-height:95vh;overflow-y:auto;border-top:2px solid var(--gold);}
 .adm-handle{width:36px;height:3px;background:var(--border);border-radius:2px;margin:12px auto;}
 .adm-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 24px 14px;border-bottom:1px solid var(--border);}
 .adm-hdr h2{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);}
@@ -929,7 +929,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   <div style="max-width:800px;margin:0 auto;text-align:center;">
     <div class="sec-tag">A Message of Gratitude</div>
     <h2 class="sec-title">Thank You, Dear Sponsors</h2>
-    <p style="font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:32px;">From the bottom of our hearts — and from every child at Mercy Children's Home — we give glory to God for the incredible generosity of our sponsors, many of whom are all the way from the <strong style="color:var(--gold);">United States of <strong>AMERICA</strong></strong>.</p>
+    <p style="font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:32px;">From the bottom of our hearts — and from every child at Mercy Children's Home — we give glory to God for the incredible generosity of our sponsors, many of whom are all the way from the <strong style="color:var(--gold);">around the world</strong>.</p>
     <div style="background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(37,99,235,.06));border:1px solid rgba(201,168,76,.2);border-radius:24px;padding:44px;margin-bottom:32px;">
       <div style="font-size:40px;margin-bottom:16px;">🌍 🙏 🇺🇬</div>
       <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3vw,24px);color:#f8faff;line-height:1.75;font-style:italic;margin-bottom:20px;">"God has used you to be His hands across the ocean. Your faithfulness has put food on our table, clothes on our children, and kept them in school. You may be far away, but in God's kingdom, you are <em style="color:var(--gold);font-style:normal;font-weight:700;">family</em>."</p>
@@ -1122,9 +1122,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <div style="background:var(--card);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         <span style="font-size:13px;font-weight:600;color:var(--white);">Kalaata, Bukuya Sub-county, Kasanda District, Uganda</span>
-        <a href="https://www.google.com/maps/place/Kalaata,+Kasanda+District,+Uganda/@0.3547,31.7417,16z" target="_blank" style="margin-left:auto;font-size:12px;color:var(--gold);text-decoration:none;">Open in Maps ↗</a>
+        <a href="https://www.google.com/maps/@0.3580,31.7380,16z?t=k" target="_blank" style="margin-left:auto;font-size:12px;color:var(--gold);text-decoration:none;">Open in Maps ↗</a>
       </div>
-      <iframe src="https://maps.google.com/maps?q=Kalaata,Kasanda,Uganda&ll=0.3547,31.7417&t=k&z=16&output=embed" width="100%" height="300" style="border:none;display:block;" allowfullscreen="" loading="lazy">play:block;" allowfullscreen="" loading="lazy"></iframe>
+      <iframe src="https://maps.google.com/maps?q=0.3580,31.7380&t=k&z=16&output=embed&iwloc=B" width="100%" height="300" style="border:none;display:block;" allowfullscreen="" loading="lazy">play:block;" allowfullscreen="" loading="lazy"></iframe>
     </div>
 
 </section>
@@ -1197,6 +1197,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <button class="adm-tab" onclick="admTab('stats',this)">Stats</button>
       <button class="adm-tab" onclick="admTab('settings',this)">Settings</button>
       <button class="adm-tab" onclick="admTab('videos',this)">🎬 Videos</button>
+      <button class="adm-tab" onclick="admTab('stories',this)">📖 Stories & Progress</button>
     </div>
     <div class="adm-body">
 
@@ -2806,7 +2807,7 @@ function getCountryCode(country){
   if(!country) return null;
   var codes={
     /* Americas */
-    'usa':'us','united states':'us','united states of america':'us','us':'us','america':'us',
+    'usa':'us','united states':'us','around the world':'us','us':'us','america':'us',
     'canada':'ca','ca':'ca',
     'brazil':'br','br':'br',
     'mexico':'mx','mx':'mx',
