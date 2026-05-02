@@ -767,10 +767,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <p class="sec-sub" style="margin-top:12px;max-width:580px;margin-left:auto;margin-right:auto;">Every child at Mercy Children's Home has a unique story. Names changed for privacy but their journeys are real.</p>
     </div>
     <div id="storiesGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;"><div style="height:5px;background:#3b82f6;"></div><div style="padding:28px;flex:1;display:flex;flex-direction:column;"><div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;"><div style="width:52px;height:52px;border-radius:50%;background:#3b82f633;border:2px solid #3b82f6;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👦🏿</div><div><div style="font-size:17px;font-weight:700;color:var(--white);font-family:'Cormorant Garamond',serif;">David, Age 9</div><div style="font-size:12px;color:#64748b;margin-top:2px;">At Mercy since 2022</div></div></div><p style="font-size:14px;color:#94a3b8;line-height:1.9;flex:1;">"David arrived at Mercy in 2022 with no shoes and very little hope. He had been living on the streets after losing both parents. Today David is in Primary 3, loves maths, and dreams of being a doctor."</p><div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:#3b82f6;font-weight:600;">✓ Now attending school full-time</div></div></div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;"><div style="height:5px;background:#10b981;"></div><div style="padding:28px;flex:1;display:flex;flex-direction:column;"><div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;"><div style="width:52px;height:52px;border-radius:50%;background:#10b98133;border:2px solid #10b981;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👧🏿</div><div><div style="font-size:17px;font-weight:700;color:var(--white);font-family:'Cormorant Garamond',serif;">Grace, Age 7</div><div style="font-size:12px;color:#64748b;margin-top:2px;">At Mercy since 2021</div></div></div><p style="font-size:14px;color:#94a3b8;line-height:1.9;flex:1;">"Grace came to us at age 5, malnourished and withdrawn. Within weeks of regular meals and love she began to sing. Today Grace leads the children in morning prayer songs."</p><div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:#10b981;font-weight:600;">✓ Healthy and growing strong</div></div></div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;"><div style="height:5px;background:#f59e0b;"></div><div style="padding:28px;flex:1;display:flex;flex-direction:column;"><div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;"><div style="width:52px;height:52px;border-radius:50%;background:#f59e0b33;border:2px solid #f59e0b;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👦🏾</div><div><div style="font-size:17px;font-weight:700;color:var(--white);font-family:'Cormorant Garamond',serif;">Emmanuel, Age 12</div><div style="font-size:12px;color:#64748b;margin-top:2px;">At Mercy since 2020</div></div></div><p style="font-size:14px;color:#94a3b8;line-height:1.9;flex:1;">"Emmanuel was one of our first children in 2020. Abandoned at age 6, he was angry and withdrawn. Six years later he is a role model to the younger children and is preparing for his Primary Leaving Exams."</p><div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:#f59e0b;font-weight:600;">✓ Preparing for PLE exams</div></div></div>
-    </div>
+      <!-- Stories load from admin panel -->
+    </div></div>
     <div style="text-align:center;margin-top:40px;">
       <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#000;font-size:14px;font-weight:700;text-decoration:none;padding:13px 28px;border-radius:12px;">Write Their Next Chapter — Donate Now</a>
     </div>
@@ -1623,7 +1621,23 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
             <div class="af"><label>Child Name (can be changed for privacy)</label><input type="text" id="st-name" placeholder="e.g. David"/></div>
             <div class="af"><label>Age</label><input type="number" id="st-age" placeholder="e.g. 9" min="1" max="18"/></div>
             <div class="af"><label>At Mercy Since (year)</label><input type="text" id="st-since" placeholder="e.g. 2022"/></div>
-            <div class="af"><label>Achievement / Status line</label><input type="text" id="st-ach" placeholder="e.g. Now attending school full-time"/></div>
+            <div class="af"><label>Achievement / Status</label>
+          <select id="st-ach" style="width:100%;padding:11px;border-radius:10px;background:var(--bg2);border:1px solid var(--border);color:var(--text);font-size:13px;margin-bottom:8px;outline:none;">
+            <option value="">-- Choose or type below --</option>
+            <option value="Now attending school full-time">📚 Now attending school full-time</option>
+            <option value="Healthy and growing strong">💪 Healthy and growing strong</option>
+            <option value="Preparing for PLE exams">🎓 Preparing for PLE exams</option>
+            <option value="Learning to read and write">✏️ Learning to read and write</option>
+            <option value="Top of the class in school">⭐ Top of the class in school</option>
+            <option value="Dreams of becoming a doctor">🏥 Dreams of becoming a doctor</option>
+            <option value="Dreams of becoming a teacher">👩‍🏫 Dreams of becoming a teacher</option>
+            <option value="Dreams of becoming an engineer">⚙️ Dreams of becoming an engineer</option>
+            <option value="Loves singing and worship">🎵 Loves singing and worship</option>
+            <option value="Role model to younger children">🌟 Role model to younger children</option>
+            <option value="Receiving medical care">❤️ Receiving medical care</option>
+            <option value="Recently joined our family">🏠 Recently joined our family</option>
+          </select>
+          <input type="text" id="st-ach-custom" placeholder="Or type a custom achievement..." style="width:100%;padding:11px;border-radius:10px;background:var(--bg2);border:1px solid var(--border);color:var(--text);font-size:13px;outline:none;"/></div>
           </div>
           <div class="af"><label>Story</label><textarea id="st-story" rows="4" placeholder="David arrived at Mercy Children's Home in 2022..."></textarea></div>
           <div class="af"><label>Photo (upload child photo)</label><input type="file" id="st-photo" accept="image/*" style="background:var(--bg2);border:1px solid var(--border);padding:8px;border-radius:8px;width:100%;color:var(--text);"/></div>
@@ -2446,7 +2460,9 @@ async function saveStory(){
   var name=document.getElementById('st-name').value.trim();
   var age=parseInt(document.getElementById('st-age').value)||0;
   var since=document.getElementById('st-since').value.trim()||'2020';
-  var ach=document.getElementById('st-ach').value.trim();
+  var achSel=document.getElementById('st-ach').value.trim();
+  var achCustom=document.getElementById('st-ach-custom').value.trim();
+  var ach=achCustom||achSel;
   var story=document.getElementById('st-story').value.trim();
   var color=document.getElementById('st-color').value||'#3b82f6';
   var photoFile=document.getElementById('st-photo').files[0];
@@ -2468,7 +2484,10 @@ async function saveStory(){
     cancelEditStory();
     loadStoriesAdmin();
     loadStoriesDynamic();
-  }else{showToast('Could not save.',true);}
+  }else{
+    var errText=await r.text();
+    showToast('Error '+r.status+': '+errText.substring(0,80),true);
+  }
 }
 function delS(btn){deleteStory(btn.getAttribute("data-sid"));}
 function delStoryBtn(btn){deleteStory(btn.getAttribute("data-id"));}
