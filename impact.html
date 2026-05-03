@@ -10,21 +10,23 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--bg:#0a0e1a;--bg2:#0f1520;--card:#131929;--border:rgba(255,255,255,.08);--gold:#c9a84c;--white:#f1f5f9;--text2:#8892a4;}
-body{background:var(--bg);color:var(--white);font-family:'Outfit',sans-serif;}
+body{background:var(--bg);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden;}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,26,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
 .nav-name{font-size:15px;font-weight:700;color:var(--white);}
 .nav-name small{display:block;font-size:10px;color:var(--text2);font-weight:400;}
 section{padding:80px 5%;}
-.container{max-width:1100px;margin:0 auto;}
-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,68px);font-weight:700;color:var(--white);line-height:1.1;}
+.container{max-width:1100px;margin:0 auto;width:100%;}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:700;color:var(--white);line-height:1.1;}
 h1 span{color:var(--gold);}
-h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--white);}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:var(--white);}
 .sec-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--gold);padding:5px 14px;border-radius:30px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
-.stat-big{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:var(--gold);line-height:1;}
-.stat-lbl{font-size:13px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:6px;}
-.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;}
+.stat-big{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,56px);font-weight:700;color:var(--gold);line-height:1;}
+.stat-lbl{font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:6px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;background:var(--gold);color:#000;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr);}section{padding:60px 4%;}.tl-row{flex-direction:column;gap:16px;}.tl-dot{width:40px;height:40px;font-size:11px;}.tl-dot-wrap{display:none;}}
 footer{background:var(--bg2);border-top:1px solid var(--border);padding:32px 5%;text-align:center;font-size:13px;color:var(--text2);}
 </style>
 </head>
@@ -42,7 +44,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:32px 5%;
   <div class="sec-tag">6 Years of Love</div>
   <h1>Our <span>Impact</span><br/>2020 — 2026</h1>
   <p style="font-size:17px;color:var(--text2);max-width:580px;line-height:1.8;margin-top:16px;margin-bottom:48px;">Every number below represents a real child, a real meal, a real future made possible by generous donors around the world.</p>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+  <div class="stats-grid">
     <div class="card"><div class="stat-big">32+</div><div class="stat-lbl">Children in Our Care</div></div>
     <div class="card"><div class="stat-big">210K+</div><div class="stat-lbl">Meals Provided</div></div>
     <div class="card"><div class="stat-big">18</div><div class="stat-lbl">School Terms Funded</div></div>
