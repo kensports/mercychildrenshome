@@ -174,7 +174,7 @@ section{padding:88px 5%;}
 
 /* DONATE CTA BAND */
 .page-link-card{text-decoration:none;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:14px;transition:border-color .25s,transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s;position:relative;overflow:hidden;}
-.page-link-card:hover{border-color:rgba(201,168,76,.4);transform:translateY(-6px);box-shadow:0 20px 50px rgba(201,168,76,.1);}
+.page-link-card:hover{border-color:rgba(201,168,76,.4);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.15);}
 .plc-top{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .plc-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .plc-icon{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;}
@@ -235,9 +235,9 @@ section{padding:88px 5%;}
 
 /* GALLERY */
 /* SKELETON SHIMMER */
-@keyframes shimmerLoad{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
-.skeleton{background:linear-gradient(90deg,var(--card) 25%,var(--bg3) 50%,var(--card) 75%);background-size:200% 100%;animation:shimmerLoad 1.5s infinite;}
-.photo-banner-img.skeleton,.g-item.skeleton{animation:shimmerLoad 1.5s infinite;}
+/* shimmerLoad removed */100%{background-position:200% 0;}}
+.skeleton{}
+.photo-banner-img.skeleton,.g-item.skeleton{}
 
 .gallery-section{background:var(--bg);padding:88px 5%;}
 .video-section{background:var(--bg2);padding:88px 5%;}
@@ -307,18 +307,18 @@ section{padding:88px 5%;}
 .scroll-anim.visible{opacity:1 !important;transform:none !important;}
 .scroll-anim.d1{transition-delay:.1s;}.scroll-anim.d2{transition-delay:.2s;}.scroll-anim.d3{transition-delay:.3s;}.scroll-anim.d4{transition-delay:.4s;}.scroll-anim.d5{transition-delay:.5s;}
 /* Hover lift on cards */
-.m-card{transition:border-color .25s,transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s;}
-.m-card:hover{border-color:rgba(201,168,76,.4);transform:translateY(-8px);box-shadow:0 20px 50px rgba(201,168,76,.1);}
-.fstat{transition:transform .3s,border-color .3s;}
-.fstat:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.3);}
+.m-card{transition:border-color .25s,transform .25s ease,box-shadow .25s;}
+.m-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.2);}
+.fstat{transition:transform .2s ease,border-color .2s;}
+.fstat:hover{transform:translateY(-2px);border-color:rgba(201,168,76,.25);}
 /* Shimmer on gold donate buttons */
-@keyframes shimmerBtn{0%{background-position:-200% center;}100%{background-position:200% center;}}
-.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2),#f5d98a,var(--gold));background-size:300% auto;animation:shimmerBtn 3s linear infinite;}
+/* shimmerBtn removed */100%{background-position:200% center;}}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2),#f5d98a,var(--gold));background-size:300% auto;}
 /* Stat number glow */
-@keyframes statGlow{0%,100%{text-shadow:0 0 0px rgba(201,168,76,0);}50%{text-shadow:0 0 24px rgba(201,168,76,.7);}}
-.stat-num{animation:statGlow 2.5s ease-in-out infinite;}
+/* statGlow removed */50%{text-shadow:0 0 24px rgba(201,168,76,.7);}}
+.stat-num{}
 /* Trust band numbers */
-.trust-num{animation:statGlow 2.5s ease-in-out infinite;}
+.trust-num{}
 
 /* FULL WIDTH PHOTO SECTIONS */
 .photo-banner{position:relative;height:500px;overflow:hidden;}
@@ -410,9 +410,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 
 .float-btn-wrap{position:relative;}
 .float-pulse-ring,.float-pulse-ring2,.float-circle,.float-label{display:none;}
-@keyframes pillGlow{0%,100%{box-shadow:0 4px 20px rgba(0,0,0,.8),0 0 0px rgba(220,38,38,0);}50%{box-shadow:0 4px 20px rgba(0,0,0,.8),0 0 18px rgba(220,38,38,.4);}}
+/* pillGlow removed */50%{box-shadow:0 4px 20px rgba(0,0,0,.8),0 0 18px rgba(220,38,38,.4);}}
 50%{transform:translateY(-5px);}}
-@keyframes heartBeat{0%,100%{transform:scale(1);}14%{transform:scale(1.18);}28%{transform:scale(1);}42%{transform:scale(1.1);}70%{transform:scale(1);}}
+/* heartBeat removed */14%{transform:scale(1.18);}28%{transform:scale(1);}42%{transform:scale(1.1);}70%{transform:scale(1);}}
 
 
 
@@ -593,13 +593,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
 
 <!-- WELCOME POPUP -->
 <style>
-@keyframes welcomeFadeIn{from{opacity:0}to{opacity:1}}
-@keyframes welcomeSlideUp{from{transform:translateY(60px) scale(.92);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
-@keyframes welcomeGlow{0%,100%{box-shadow:0 0 40px rgba(201,168,76,.15),0 32px 80px rgba(0,0,0,.7)}50%{box-shadow:0 0 80px rgba(201,168,76,.3),0 32px 80px rgba(0,0,0,.7)}}
-@keyframes logoFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
-@keyframes shimmerLine{0%{background-position:200% center}100%{background-position:-200% center}}
-@keyframes heartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.15)}30%{transform:scale(1)}45%{transform:scale(1.08)}60%{transform:scale(1)}}
-@keyframes particleFloat{0%{transform:translateY(0) translateX(0);opacity:1}100%{transform:translateY(-120px) translateX(var(--tx));opacity:0}}
+/* welcomeFadeIn removed */to{opacity:1}}
+/* welcomeSlideUp removed */to{transform:translateY(0) scale(1);opacity:1}}
+/* welcomeGlow removed */50%{box-shadow:0 0 80px rgba(201,168,76,.3),0 32px 80px rgba(0,0,0,.7)}}
+/* logoFloat removed */50%{transform:translateY(-8px) rotate(2deg)}}
+/* shimmerLine removed */100%{background-position:-200% center}}
+/* heartbeat removed */15%{transform:scale(1.15)}30%{transform:scale(1)}45%{transform:scale(1.08)}60%{transform:scale(1)}}
+/* particleFloat removed */100%{transform:translateY(-120px) translateX(var(--tx));opacity:0}}
 </style>
 
 <!-- Welcome popup removed -->
@@ -657,7 +657,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
   <!-- Donate CTA -->
   <div style="padding:20px 24px;margin-top:auto;">
     <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" onclick="toggleMenu()" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--gold),#e8c97a);color:#000;font-size:15px;font-weight:800;padding:16px;border-radius:14px;text-decoration:none;border:none;">
-      <img src="GoFundMe-Symbol.png" style="height:16px;width:auto;vertical-align:middle;flex-shrink:0;" alt="GoFundMe"/>
+      
       Donate Now on GoFundMe
     </a>
   </div>
@@ -681,7 +681,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <a href="donate.html" style="background:rgba(201,168,76,.15);color:var(--gold);padding:6px 14px;border-radius:8px;">Donate</a>
     <a href="#contact">Contact</a>
     <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="nav-cta">
-      <img src="GoFundMe-Symbol.png" style="height:16px;width:auto;vertical-align:middle;flex-shrink:0;" alt="GoFundMe"/>
+      
       Donate Now
     </a>
   </div>
@@ -710,7 +710,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <p id="heroDesc">Caring for <strong style="color:var(--gold);">32 vulnerable children</strong> in <strong>UGANDA</strong> with shelter, food, and hope. Mercy Children's Home is a place where every child finds safety, love, and a future worth dreaming about.</p>
     <div class="hero-btns">
       <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="btn-gold">
-        <img src="GoFundMe-Symbol.png" style="height:16px;width:auto;vertical-align:middle;flex-shrink:0;" alt="GoFundMe"/>
+        
         Donate Now
       </a>
       <a href="about.html" class="btn-outline">
@@ -785,7 +785,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
     <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
       <!-- Main GoFundMe button -->
       <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#00b964;color:#fff;font-size:15px;font-weight:800;text-decoration:none;padding:16px 32px;border-radius:14px;box-shadow:0 6px 24px rgba(0,185,100,.35);letter-spacing:.3px;transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 32px rgba(0,185,100,.5)'" onmouseout="this.style.transform='';this.style.boxShadow='0 6px 24px rgba(0,185,100,.35)'">
-        <img src="GoFundMe-Symbol.png" style="height:20px;width:auto;vertical-align:middle;flex-shrink:0;" alt="GoFundMe"/>
+        
         Donate on GoFundMe
       </a>
       <!-- Share button -->
@@ -831,19 +831,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
           </div>
           <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" style="display:block;width:100%;padding:13px;background:#02a95c;color:white;text-align:center;font-size:15px;font-weight:700;border-radius:8px;text-decoration:none;margin-bottom:9px;box-shadow:0 3px 12px rgba(2,169,92,.3);">Donate now</a>
           <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_medium=customer&utm_source=copy_link" target="_blank" style="display:block;width:100%;padding:12px;background:#005c31;color:white;text-align:center;font-size:14px;font-weight:700;border-radius:8px;text-decoration:none;margin-bottom:14px;">Share</a>
-          <div style="padding-top:12px;border-top:1px solid #eee;font-size:11.5px;color:#555;line-height:1.5;display:flex;gap:8px;align-items:flex-start;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#02a95c" style="flex-shrink:0;margin-top:1px;"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-            <span><strong>GoFundMe protects your donation.</strong> We guarantee a full refund in the rare case that fraud occurs. <a href="https://www.gofundme.com/c/guarantee" target="_blank" style="color:#02a95c;">See our GoFundMe Giving Guarantee.</a></span>
-          </div>
+
         </div>
       </div>
     </div>
     <div style="text-align:center;">
-      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" style="display:inline-flex;align-items:center;gap:9px;background:#00b964;color:#fff;font-size:15px;font-weight:800;text-decoration:none;padding:13px 30px;border-radius:12px;box-shadow:0 6px 22px rgba(0,185,100,.35);">
-        <img src="GoFundMe-Symbol.png" style="height:16px;width:auto;" onerror="this.style.display='none'" alt=""/>
-        Open Real GoFundMe Page
+      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#0a0e1a;font-size:15px;font-weight:800;text-decoration:none;padding:14px 32px;border-radius:12px;box-shadow:0 6px 22px rgba(201,168,76,.4);letter-spacing:.02em;">
+        
+        Donate on GoFundMe
       </a>
-      <p style="font-size:12px;color:#8892a4;margin-top:10px;">32 children waiting · All donations go directly to Alex Ssengonzi</p>
+      <p style="font-size:12px;color:#8892a4;margin-top:10px;">32 children · All donations go directly to Alex Ssengonzi</p>
     </div>
   </div>
 </section>
@@ -878,7 +875,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <!-- Stories load from admin panel -->
     </div></div>
     <div style="text-align:center;margin-top:40px;">
-      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#00b964;color:#fff;font-size:14px;font-weight:700;text-decoration:none;padding:13px 28px;border-radius:12px;"><img src="GoFundMe-Symbol.png" style="height:14px;width:auto;flex-shrink:0;" alt="GoFundMe"/> Write Their Next Chapter — Donate Now</a>
+      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#00b964;color:#fff;font-size:14px;font-weight:700;text-decoration:none;padding:13px 28px;border-radius:12px;"> Write Their Next Chapter — Donate Now</a>
     </div>
     <style>@media(max-width:760px){#storiesGrid{grid-template-columns:1fr !important;}}</style>
   </div>
@@ -1008,7 +1005,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <p>Your support helps provide these essentials to 32 children every day.</p>
     </div>
     <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="btn-gold">
-      <img src="GoFundMe-Symbol.png" style="height:16px;width:auto;vertical-align:middle;flex-shrink:0;" alt="GoFundMe"/>
+      
       Support These Children
     </a>
   </div>
@@ -1061,7 +1058,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <p style="font-size:13px;color:var(--gold);font-weight:600;letter-spacing:1px;">— JEREMIAH 29:11</p>
     </div>
     <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="btn-gold" style="display:inline-flex;">
-      <img src="GoFundMe-Symbol.png" style="height:16px;width:auto;vertical-align:middle;flex-shrink:0;" alt="GoFundMe"/>
+      
       Join Our Sponsors — Donate Today
     </a>
   </div>
@@ -1108,7 +1105,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <p style="font-size:13px;color:var(--gold);font-weight:600;">32 children are waiting for your support today.</p>
     </div>
     <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="btn-gold" style="flex-shrink:0;">
-      <img src="GoFundMe-Symbol.png" style="height:16px;width:auto;vertical-align:middle;flex-shrink:0;" alt="GoFundMe"/>
+      
       Donate Now
     </a>
   </div>
@@ -1151,7 +1148,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <p>Each photo represents a real child whose life you can help change today.</p>
     </div>
     <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="btn-gold">
-      <img src="GoFundMe-Symbol.png" style="height:16px;width:auto;vertical-align:middle;flex-shrink:0;" alt="GoFundMe"/>
+      
       Donate Now
     </a>
   </div>
@@ -1200,7 +1197,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
       <p style="font-size:15px;color:#cbd5e1;margin-bottom:6px;">32 children depend on daily support for food, care, and education.</p>
       <p style="font-size:14px;color:var(--gold);font-weight:600;margin-bottom:24px;">Your donation today can change a child's life.</p>
       <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="btn-gold" style="display:inline-flex;margin-bottom:0;">
-        <img src="GoFundMe-Symbol.png" style="height:16px;width:auto;vertical-align:middle;flex-shrink:0;" alt="GoFundMe"/>
+        
         Donate Now
       </a>
     </div>
@@ -1269,7 +1266,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 2
         <p style="font-size:12px;color:var(--gold);font-weight:600;">Your donation today can change a child's life.</p>
       </div>
       <button class="donate-btn" onclick="goDonate()">
-        <img src="GoFundMe-Symbol.png" style="height:16px;width:auto;vertical-align:middle;flex-shrink:0;" alt="GoFundMe"/>
+        
         Donate Now
       </button>
       <p class="donate-note">
