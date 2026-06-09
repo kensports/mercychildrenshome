@@ -368,6 +368,15 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
   nav,.wa-float,#scrollProgress,.admin-overlay,.pwd-overlay,#toast,#pageLoader{display:none !important;}
   .reveal{opacity:1 !important;transform:none !important;}
 }
+
+/* VOLUNTEER GRID RESPONSIVE */
+@media(max-width:900px){#volGrid{grid-template-columns:repeat(2,1fr) !important;}}
+@media(max-width:500px){#volGrid{grid-template-columns:repeat(2,1fr) !important;}}
+/* ALEX SECTION RESPONSIVE */
+@media(max-width:1024px){
+  #founder > div{grid-template-columns:1fr !important;}
+  #alexPhotoWrap{aspect-ratio:4/3 !important;}
+}
 </style>
 </head>
 <body>
@@ -383,18 +392,18 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
 <!-- MOBILE MENU -->
 <div class="mob-menu" id="mobMenu">
   <div class="mob-top">
-    <div style="font-family:'Fraunces',serif;font-size:18px;color:#fff;letter-spacing:-.5px;">Mercy Children's Home</div>
-    <button class="mob-close" onclick="closeMobMenu()">✕</button>
+    <span style="font-family:'Fraunces',serif;font-size:17px;color:#fff;">Mercy Children's Home</span>
+    <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open')">✕</button>
   </div>
-  <a href="#about" onclick="closeMobMenu()">About Us</a>
-  <a href="#mission" onclick="closeMobMenu()">Our Mission</a>
+  <a href="#home" onclick="closeMobMenu()">Home</a>
+  <a href="#about" onclick="closeMobMenu()">About</a>
+  <a href="#founder" onclick="closeMobMenu()">Meet Alex</a>
+  <a href="#volunteers" onclick="closeMobMenu()">Volunteers</a>
+  <a href="#mission" onclick="closeMobMenu()">Mission</a>
   <a href="#gallery" onclick="closeMobMenu()">Gallery</a>
-  <a href="#stories" onclick="closeMobMenu()">Stories</a>
-  <a href="#donate" onclick="closeMobMenu()">Donate</a>
   <a href="#contact" onclick="closeMobMenu()">Contact</a>
   <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="mob-donate-btn">Donate on GoFundMe</a>
 </div>
-
 <!-- NAV -->
 <nav id="navbar">
   <a class="nav-logo" href="#" onclick="secretTap();return false;">
@@ -407,9 +416,9 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
   </a>
   <div class="nav-links">
     <a href="#about">About</a>
+    <a href="#founder">Founder</a>
     <a href="#mission">Mission</a>
     <a href="#gallery">Gallery</a>
-    <a href="#stories">Stories</a>
     <a href="#contact">Contact</a>
     <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="nav-donate">Donate Now</a>
   </div>
@@ -581,7 +590,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
 </div>
 
 <!-- IMPACT NUMBERS -->
-<div class="impact">
+<div class="impact" id="impact">
   <div class="section-inner">
     <div class="impact-grid">
       <div class="impact-item reveal"><div class="impact-num" id="imp1">32<span>+</span></div><div class="impact-label">Children in Care</div></div>
@@ -610,6 +619,55 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
       <div class="story-card reveal d3">
         <div class="story-img" id="storyImg3"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <div class="story-body"><div class="story-tag">Thriving</div><div class="story-name">David, Age 11</div><div class="story-meta">At Mercy since 2021</div><p class="story-text">"David arrived alone with nothing. Today he is a confident young boy who mentors the younger children with pride."</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- MEET ALEX -->
+<section id="founder" style="background:var(--navy);padding:100px 5%;">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:360px 1fr;gap:64px;align-items:center;">
+    <!-- Alex Photo -->
+    <div style="position:relative;" class="reveal from-left">
+      <div id="alexPhotoWrap" style="width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,var(--navy2),var(--navy3));display:flex;align-items:center;justify-content:center;overflow:hidden;">
+        <svg style="width:80px;height:80px;fill:none;stroke:rgba(201,168,76,.3);stroke-width:1.5;" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div style="position:absolute;bottom:-20px;left:20px;background:var(--gold);padding:18px 22px;">
+        <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:var(--navy);">Alex Ssengonzi</div>
+        <div style="font-size:10px;font-weight:700;color:rgba(13,31,60,.7);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;">Founder & Director</div>
+      </div>
+    </div>
+    <!-- Alex Text -->
+    <div class="reveal from-right" style="padding-top:20px;">
+      <div class="label" style="margin-bottom:20px;"><div class="label-line"></div><span style="color:var(--gold);">Meet the Founder</span></div>
+      <h2 class="big-title" style="color:#fff;margin-bottom:20px;">The Heart<br>Behind <em>Mercy</em></h2>
+      <p style="font-size:16px;color:rgba(255,255,255,.65);line-height:1.9;margin-bottom:16px;">Alex Ssengonzi grew up understanding poverty. When he saw children on the streets of Uganda with nowhere to go, he opened his own home — with no funding, no grants, just love and faith.</p>
+      <p style="font-size:16px;color:rgba(255,255,255,.65);line-height:1.9;margin-bottom:16px;">Today he leads a team of dedicated volunteers and staff to care for 32 children in Kasanda Bukuya. His dream is to secure permanent land so these children can have a forever home.</p>
+      <p style="font-size:15px;color:rgba(255,255,255,.5);line-height:1.9;font-style:italic;margin-bottom:32px;">"Every child I see on the street reminds me why I can never stop. Until every child has a home, I will keep going."</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:36px;padding:28px 0;border-top:1px solid var(--border-navy);border-bottom:1px solid var(--border-navy);">
+        <div><div style="font-family:'Fraunces',serif;font-size:36px;font-weight:900;color:var(--gold);line-height:1;">32</div><div style="font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Children in Care</div></div>
+        <div><div style="font-family:'Fraunces',serif;font-size:36px;font-weight:900;color:var(--gold);line-height:1;">6+</div><div style="font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Years of Service</div></div>
+        <div><div style="font-family:'Fraunces',serif;font-size:36px;font-weight:900;color:var(--gold);line-height:1;">100%</div><div style="font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Dedicated</div></div>
+      </div>
+      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="btn-gold">Help Alex's Mission</a>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEERS -->
+<section id="volunteers" style="background:var(--cream);padding:100px 5%;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="margin-bottom:56px;">
+      <div class="label reveal"><div class="label-line"></div><span>Our Team</span></div>
+      <h2 class="big-title reveal">Meet Our <em>Volunteers</em></h2>
+      <p style="font-size:16px;color:var(--text2);max-width:560px;line-height:1.8;" class="reveal">From Uganda and around the world — these dedicated people give their time and love to our 32 children every single day.</p>
+    </div>
+    <div id="volGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);">
+      <!-- Vol cards inserted by JS -->
+      <div class="vol-card-placeholder" style="background:#fff;overflow:hidden;text-align:center;">
+        <div style="width:100%;aspect-ratio:1;background:linear-gradient(135deg,var(--navy2),var(--navy3));display:flex;align-items:center;justify-content:center;"><svg style="width:40px;height:40px;fill:none;stroke:rgba(201,168,76,.3);stroke-width:1.5;" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div style="padding:18px 14px;"><div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Loading...</div></div>
       </div>
     </div>
   </div>
@@ -890,6 +948,41 @@ function loadSupabasePhotos(){
         (function(idx, url){
           el.onclick = function(){ openLightbox(galleryPhotos, idx); };
         })(i, galleryPhotos[i]);
+      }
+    }
+
+    // Alex founder photo
+    if(photoMap['founder']){
+      var ap = document.getElementById('alexPhotoWrap');
+      if(ap) ap.innerHTML = '<img src="'+photoUrl(photoMap['founder'])+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">';
+    }
+
+    // Volunteers grid - load all volunteer photos
+    var volNames = ['Debbie','Raymond','Simpson','Ann','Michael','Bushy','Jonathan','Spiers','Sheldon','Stensland','Alex'];
+    var volKeys = ['volunteer_0','volunteer_1','volunteer_2','volunteer_3','volunteer_4','volunteer_5','volunteer_6','volunteer_7','volunteer_8','volunteer_9','volunteer_10'];
+    var volGrid = document.getElementById('volGrid');
+    if(volGrid){
+      var volPhotos = volKeys.filter(function(k){ return photoMap[k]; });
+      if(volPhotos.length > 0){
+        volGrid.innerHTML = '';
+        volPhotos.forEach(function(k, i){
+          var name = volNames[volKeys.indexOf(k)] || 'Volunteer';
+          var card = document.createElement('div');
+          card.style.cssText = 'background:#fff;overflow:hidden;text-align:center;transition:transform .3s;';
+          card.innerHTML = 
+            '<div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">'+
+            '<img src="'+photoUrl(photoMap[k])+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="'+name+'">'+
+            '</div>'+
+            '<div style="padding:18px 14px;">'+
+            '<div style="font-family:Fraunces,serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">'+name+'</div>'+
+            '<div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Volunteer</div>'+
+            '</div>';
+          volGrid.appendChild(card);
+        });
+      } else {
+        // No volunteers uploaded — hide the section
+        var volSection = document.getElementById('volunteers');
+        if(volSection) volSection.style.display = 'none';
       }
     }
 
