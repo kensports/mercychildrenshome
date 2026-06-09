@@ -1,171 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Mission | Mercy Children's Home</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Our Mission — Mercy Children's Home Uganda</title>
+<meta name="description" content="Six pillars of care — shelter, nutrition, education, healthcare, spiritual care and permanent land. How Mercy Children's Home serves 32 children in Uganda."/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%230d1f3c'/%3E%3Cpath d='M20 55 L50 25 L80 55 L80 80 L60 80 L60 62 L40 62 L40 80 L20 80Z' fill='%23c9a84c'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--bg:#0a0e1a;--bg2:#0f1525;--bg3:#161d30;--card:#131929;--gold:#c9a84c;--gold2:#e8c97a;--text:#e8eaf0;--text2:#8892a4;--border:#1e2a40;--white:#ffffff;--green:#10b981;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,26,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
-.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.nav-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#1a3060,#2563eb);display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.nav-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.nav-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.1;}
-.nav-name small{display:block;font-family:'Outfit',sans-serif;font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;}
-.nav-links{display:flex;align-items:center;gap:24px;}
-.nav-links a{text-decoration:none;color:var(--text2);font-size:14px;font-weight:500;transition:color .2s;}
+:root{--navy:#0d1f3c;--navy2:#112348;--navy3:#162d58;--gold:#c9a84c;--gold2:#e8c97a;--gold-light:#fdf6e3;--cream:#faf8f5;--text:#0d1f3c;--text2:#4a5568;--text3:#8896a8;--border:#e2e8f0;--border-navy:rgba(255,255,255,.12);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;overflow-x:hidden;scroll-padding-top:72px;}
+body{font-family:'Manrope',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+#scrollProgress{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:200;width:0%;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:var(--navy);transition:box-shadow .3s;}
+nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.3);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.nav-logo-img{width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0;background:var(--navy2);display:flex;align-items:center;justify-content:center;}
+.nav-logo-name{font-family:'Fraunces',serif;font-size:16px;color:#fff;line-height:1.1;}
+.nav-logo-name small{display:block;font-family:'Manrope',sans-serif;font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,.7);font-size:13px;font-weight:500;transition:color .2s;}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);}
-.nav-cta{background:linear-gradient(135deg,#1a3060,#2563eb);color:#fff !important;padding:9px 20px;border-radius:8px;font-weight:600 !important;font-size:13px !important;}
-.hamburger{display:none;cursor:pointer;color:var(--text);font-size:22px;background:none;border:none;}
-.mob-menu{display:none;position:fixed;inset:0;background:var(--bg2);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+.nav-donate{background:var(--gold);color:var(--navy)!important;padding:10px 22px;font-weight:700!important;font-size:12px!important;text-transform:uppercase;letter-spacing:1.5px;}
+.hamburger{display:none;cursor:pointer;color:#fff;font-size:22px;border:none;background:none;}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--navy);z-index:200;flex-direction:column;}
 .mob-menu.open{display:flex;}
-.mob-menu a{text-decoration:none;color:var(--text);font-size:20px;font-weight:600;}
-.mob-close{position:absolute;top:20px;right:24px;font-size:24px;cursor:pointer;color:var(--text2);background:none;border:none;}
-.page-hero{padding:140px 5% 80px;background:linear-gradient(135deg,#080c18,#0a1628);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
-.page-hero::before{content:'';position:absolute;inset:0;opacity:.15;background:radial-gradient(ellipse at 70% 40%,rgba(37,99,235,.4),transparent 60%);}
-.page-hero-content{position:relative;z-index:1;max-width:700px;}
-.page-tag{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:5px 14px;border-radius:30px;margin-bottom:20px;}
-.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:700;color:#fff;line-height:1.15;margin-bottom:18px;}
-.page-hero p{font-size:17px;color:#cbd5e1;line-height:1.8;}
-section{padding:80px 5%;}
-.sec-tag{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:5px 14px;border-radius:30px;margin-bottom:16px;}
-.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:16px;}
-.pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:44px;}
-.pillar{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px 28px;display:flex;gap:20px;transition:transform .3s,box-shadow .3s;}
-.pillar:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.4);}
-.pillar-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.pillar h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:10px;}
-.pillar p{font-size:14px;color:#cbd5e1;line-height:1.7;}
-.needs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px;}
-.need-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 20px;text-align:center;position:relative;overflow:hidden;}
-.need-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
-.need-pct{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;line-height:1;margin-bottom:8px;}
-.need-card h4{font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
-.need-card p{font-size:13px;color:#cbd5e1;line-height:1.6;}
-.verse-box{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:44px 40px;text-align:center;max-width:700px;margin:0 auto;}
-.verse-box blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3vw,26px);color:#f1f5f9;font-style:italic;line-height:1.7;margin-bottom:16px;}
-.verse-ref{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:2px;}
-.cta-band{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(37,99,235,.06));border:1px solid rgba(201,168,76,.2);border-radius:22px;padding:44px 40px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;margin:0 0 80px;}
-.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.4);}
-footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 5% 24px;}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:44px;margin-bottom:28px;}
-.footer-col h4{font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;}
-.footer-col a{display:block;text-decoration:none;color:var(--text2);font-size:14px;margin-bottom:9px;transition:color .2s;}
-.footer-col a:hover{color:var(--gold);}
-.footer-bottom{border-top:1px solid var(--border);padding-top:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-.footer-bottom p{font-size:13px;color:#8892a4;}
-.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.mob-top{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border-navy);}
+.mob-close{background:none;border:none;font-size:26px;cursor:pointer;color:rgba(255,255,255,.6);}
+.mob-menu a{text-decoration:none;color:#fff;font-size:18px;font-weight:600;padding:20px 28px;border-bottom:1px solid var(--border-navy);}
+.mob-donate-link{background:var(--gold);color:var(--navy)!important;margin:20px;padding:16px!important;text-align:center;font-weight:800!important;text-transform:uppercase;border-bottom:none!important;}
+.btn-gold{background:var(--gold);color:var(--navy);padding:14px 32px;font-size:12px;font-weight:800;text-decoration:none;text-transform:uppercase;letter-spacing:2px;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .2s;}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);}
+.label{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.label-line{width:40px;height:1px;background:var(--gold);}
+.label span{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:3px;}
+.big-title{font-family:'Fraunces',serif;font-size:clamp(36px,4.5vw,68px);font-weight:900;line-height:1.0;letter-spacing:-1.5px;margin-bottom:24px;}
+.big-title em{color:var(--gold);font-style:italic;}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.reveal.from-left{transform:translateX(-60px);}.reveal.from-right{transform:translateX(60px);}
 .reveal.visible{opacity:1;transform:none;}
-.reveal.delay-1{transition-delay:.1s;}.reveal.delay-2{transition-delay:.2s;}.reveal.delay-3{transition-delay:.3s;}
-@media(max-width:768px){.nav-links{display:none;}.hamburger{display:block;}.pillars,.needs-grid{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr;}.cta-band{flex-direction:column;text-align:center;}}
+.reveal.d1{transition-delay:.1s;}.reveal.d2{transition-delay:.2s;}.reveal.d3{transition-delay:.3s;}.reveal.d4{transition-delay:.4s;}.reveal.d5{transition-delay:.5s;}.reveal.d6{transition-delay:.6s;}
+.page-hero{min-height:55vh;background:var(--navy);display:flex;align-items:center;position:relative;overflow:hidden;padding:140px 5% 80px;}
+.page-hero-bg{position:absolute;inset:0;}
+.page-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.2;display:block;}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,var(--navy) 40%,rgba(13,31,60,.6));}
+.page-hero-content{position:relative;z-index:2;max-width:700px;}
+.mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-navy);}
+.m-card{background:var(--navy2);padding:44px 36px;transition:background .3s;}
+.m-card:hover{background:var(--navy3);}
+.m-number{font-family:'Fraunces',serif;font-size:72px;font-weight:900;color:rgba(201,168,76,.12);line-height:1;margin-bottom:24px;letter-spacing:-2px;}
+.m-card h3{font-family:'Fraunces',serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:12px;}
+.m-card p{font-size:14px;color:rgba(255,255,255,.55);line-height:1.8;}
+.m-gold-line{width:28px;height:2px;background:var(--gold);margin-bottom:18px;}
+.donate-strip{background:var(--gold);padding:80px 5%;}
+.donate-strip-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.donate-perks{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:60px;}
+.perk-item{background:#fff;padding:36px 28px;text-align:center;}
+.perk-amount{font-family:'Fraunces',serif;font-size:40px;font-weight:900;color:var(--navy);line-height:1;margin-bottom:12px;}
+.perk-amount span{color:var(--gold);}
+.perk-label{font-size:13px;color:var(--text2);line-height:1.7;}
+.mobile-money{background:var(--cream);padding:80px 5%;}
+.mm-grid{max-width:900px;margin:40px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.mm-card{background:#fff;border:1px solid var(--border);padding:32px;display:flex;gap:20px;align-items:center;}
+.mm-icon{width:56px;height:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:28px;}
+.mm-name{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.mm-number{font-size:16px;font-weight:700;color:var(--gold);letter-spacing:1px;}
+.mm-label{font-size:12px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:1px;}
+.verse{background:var(--gold);padding:80px 5%;text-align:center;}
+.verse blockquote{font-family:'Fraunces',serif;font-size:clamp(24px,3.5vw,44px);font-weight:300;font-style:italic;color:var(--navy);line-height:1.3;max-width:800px;margin:0 auto 16px;letter-spacing:-1px;}
+.verse cite{font-size:12px;color:rgba(13,31,60,.6);text-transform:uppercase;letter-spacing:3px;font-style:normal;font-weight:700;}
+footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48px 5% 24px;}
+.footer-top{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:40px;}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.8;max-width:260px;margin-top:10px;}
+.footer-col h4{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:8px;transition:color .2s;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border-navy);padding-top:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,.3);}
+.footer-bottom a{color:var(--gold);text-decoration:none;}
+.wa-float{position:fixed;bottom:28px;left:28px;z-index:500;display:flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:13px 18px;border-radius:100px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s;}
+.wa-float:hover{transform:translateY(-3px);}.wa-float svg{width:20px;height:20px;flex-shrink:0;}
+@media(max-width:900px){.nav-links{display:none;}.hamburger{display:block;}.mission-grid{grid-template-columns:1fr 1fr;}.donate-perks{grid-template-columns:1fr 1fr;}.donate-strip-inner{grid-template-columns:1fr;}.mm-grid{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr;}}
+@media(max-width:600px){.mission-grid{grid-template-columns:1fr;}.donate-perks{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
+<div id="scrollProgress"></div>
+<div class="mob-menu" id="mobMenu">
+  <div class="mob-top"><span style="font-family:'Fraunces',serif;font-size:17px;color:#fff;">Mercy Children's Home</span><button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open')">✕</button></div>
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="mission.html" style="color:var(--gold);">Mission</a><a href="gallery.html">Gallery</a><a href="impact.html">Impact</a><a href="index.html#contact">Contact</a>
+  <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="mob-donate-link">Donate Now</a>
+</div>
 <nav id="navbar">
-  <a class="nav-brand" href="index.html">
-    <div class="nav-icon" id="navLogoIcon">
-      <svg id="navLogoSvg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <img id="navLogoImg" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:10px;"/>
-    </div>
-    <div class="nav-name">Mercy Children's Home<small>Kasanda Bukuya · Uganda</small></div>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-img" id="navLogoWrap"><svg style="width:20px;height:20px;fill:none;stroke:var(--gold);stroke-width:2;" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    <div class="nav-logo-name">Mercy Children's Home<small>Kasanda Bukuya · Uganda</small></div>
   </a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="mission.html" class="active">Mission</a>
-    <a href="index.html#gallery">Gallery</a>
-    <a href="index.html#contact">Contact</a>
-    <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="nav-cta">❤ Donate Now</a>
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="mission.html" class="active">Mission</a><a href="gallery.html">Gallery</a><a href="impact.html">Impact</a><a href="index.html#contact">Contact</a>
+    <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="nav-donate">Donate Now</a>
   </div>
-  <button class="hamburger" onclick="document.getElementById('mobMenu').classList.add('open')">☰</button>
+  <button class="hamburger" onclick="document.getElementById('mobMenu').classList.add('open')"><i class="fas fa-bars"></i></button>
 </nav>
-<div class="mob-menu" id="mobMenu">
-  <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open')">✕</button>
-  <a href="index.html">Home</a><a href="about.html">About</a><a href="mission.html">Mission</a>
-  <a href="index.html#gallery">Gallery</a><a href="index.html#contact">Contact</a>
-  <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="btn-gold">❤ Donate Now</a>
-</div>
 
 <div class="page-hero">
+  <div class="page-hero-bg"><img id="heroBgImg" src="" alt="" onerror="this.style.display='none'"></div>
+  <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
-    <div class="page-tag">Our Mission</div>
-    <h1>Giving Every Child<br>a Future Worth Living</h1>
-    <p>Our mission is simple: no child in our care will go to bed hungry, grow up unloved, or be denied an education. We exist to break the cycle of poverty through faith, love and action.</p>
+    <div class="label" style="margin-bottom:24px;"><div class="label-line"></div><span>What We Do</span></div>
+    <h1 class="big-title" style="color:#fff;">Six Pillars<br>of <em>Care</em></h1>
+    <p style="font-size:17px;color:rgba(255,255,255,.65);line-height:1.9;max-width:500px;margin-top:16px;">Every child at Mercy Children's Home receives holistic care across six key areas — ensuring they grow up healthy, educated, and full of purpose.</p>
   </div>
 </div>
 
-<section>
-  <div style="max-width:1100px;margin:0 auto;">
-    <div class="sec-tag reveal">Four Pillars</div>
-    <h2 class="sec-title reveal delay-1">How We Serve These Children</h2>
-    <div class="pillars">
-      <div class="pillar reveal"><div class="pillar-icon" style="background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.3);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div><div><h3>Food & Nutrition</h3><p>Three nutritious meals every single day. No child at Mercy Home goes to bed hungry. We grow vegetables on site and buy protein weekly from local markets.</p></div></div>
-      <div class="pillar reveal delay-1"><div class="pillar-icon" style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><div><h3>Education</h3><p>Every child attends school. We pay school fees, buy uniforms and provide books. Education is treated as a right, not a privilege — it is the key to their future.</p></div></div>
-      <div class="pillar reveal delay-2"><div class="pillar-icon" style="background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><h3>Shelter & Safety</h3><p>A safe, clean home where every child sleeps on a bed with a blanket. We are currently fundraising to purchase permanent land so this home is secure forever.</p></div></div>
-      <div class="pillar reveal delay-3"><div class="pillar-icon" style="background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div><h3>Spiritual Growth</h3><p>We raise children with faith, values and purpose. Weekly church, prayer, and Bible study teach them who they are and give them a foundation that lasts a lifetime.</p></div></div>
+<section style="background:var(--navy);padding:80px 5%;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="mission-grid">
+      <div class="m-card reveal d1"><div class="m-number">01</div><div class="m-gold-line"></div><h3>Safe Shelter</h3><p>A secure, loving home where every child feels protected and at peace — far from the dangers they once faced on Uganda's streets.</p></div>
+      <div class="m-card reveal d2"><div class="m-number">02</div><div class="m-gold-line"></div><h3>Daily Nutrition</h3><p>Three nourishing meals every single day — because no child at Mercy Children's Home should ever go to bed hungry.</p></div>
+      <div class="m-card reveal d3"><div class="m-number">03</div><div class="m-gold-line"></div><h3>Education</h3><p>School fees, uniforms, books — we invest in every child's mind and future, giving them the tools to build a better life.</p></div>
+      <div class="m-card reveal d4"><div class="m-number">04</div><div class="m-gold-line"></div><h3>Healthcare</h3><p>Regular checkups, medicines and emergency care so every child at Mercy can grow up strong, healthy and full of life.</p></div>
+      <div class="m-card reveal d5"><div class="m-number">05</div><div class="m-gold-line"></div><h3>Spiritual Care</h3><p>Faith, love and moral guidance — helping each child discover their God-given purpose and inner strength to overcome.</p></div>
+      <div class="m-card reveal d6"><div class="m-number">06</div><div class="m-gold-line"></div><h3>Permanent Land</h3><p>Our urgent mission — securing permanent land in Kalaata, Kasanda District so these children can have a forever home.</p></div>
     </div>
   </div>
 </section>
 
-<section style="background:var(--bg2);">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div class="sec-tag reveal">Where Your Money Goes</div>
-    <h2 class="sec-title reveal delay-1">100% Goes to the Children</h2>
-    <p style="font-size:15px;color:#cbd5e1;line-height:1.8;max-width:580px;" class="reveal delay-2">Alex personally oversees every shilling. No salaries are taken from donations. We are fully transparent and open to audit at any time.</p>
-    <div class="needs-grid">
-      <div class="need-card reveal"><div style="background:#c9a84c;" class=""></div><div class="need-pct" style="color:#c9a84c;">55%</div><h4>Food & Nutrition</h4><p>Three meals a day for 32 children, every single day of the year.</p></div>
-      <div class="need-card reveal delay-1"><div style="background:#3b82f6;"></div><div class="need-pct" style="color:#3b82f6;">25%</div><h4>Education</h4><p>School fees, uniforms, books and supplies for every child.</p></div>
-      <div class="need-card reveal delay-2"><div style="background:#10b981;"></div><div class="need-pct" style="color:#10b981;">12%</div><h4>Healthcare</h4><p>Medical care, clinic visits and medicine when children fall sick.</p></div>
+<section style="background:#fff;padding:80px 5%;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="label reveal"><div class="label-line"></div><span>Your Impact</span></div>
+    <h2 class="big-title reveal">What Your Gift <em>Buys</em></h2>
+    <div class="donate-perks reveal">
+      <div class="perk-item"><div class="perk-amount">$10</div><div class="perk-label">Feeds a child for one full week — 3 meals every day</div></div>
+      <div class="perk-item"><div class="perk-amount">$25</div><div class="perk-label">School supplies for a full term — books, pens and more</div></div>
+      <div class="perk-item"><div class="perk-amount">$100</div><div class="perk-label">School fees for a month — keeps a child in class</div></div>
+      <div class="perk-item"><div class="perk-amount">$500</div><div class="perk-label">Full sponsorship for a year — meals, school and healthcare</div></div>
     </div>
-    <p style="font-size:13px;color:#8892a4;text-align:center;margin-top:24px;">Remaining 8% covers shelter running costs and land savings.</p>
+    <div style="text-align:center;margin-top:48px;">
+      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="btn-gold">Donate on GoFundMe</a>
+    </div>
   </div>
 </section>
 
-<section>
-  <div class="verse-box reveal">
-    <div class="sec-tag" style="margin-bottom:24px;">Our Calling</div>
-    <blockquote>"Religion that God our Father accepts as pure and faultless is this: to look after orphans and widows in their distress."</blockquote>
-    <div class="verse-ref">— James 1:27</div>
+<section class="mobile-money">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="label reveal"><div class="label-line"></div><span>Mobile Money</span></div>
+    <h2 class="big-title reveal">Donate via <em>Mobile Money</em></h2>
+    <p style="font-size:16px;color:var(--text2);line-height:1.8;max-width:560px;" class="reveal">Uganda donors can send directly via MTN or Airtel Mobile Money — fast, safe, no middleman.</p>
+    <div class="mm-grid">
+      <div class="mm-card reveal from-left">
+        <div class="mm-icon" style="background:#ffd700;border-radius:12px;">📱</div>
+        <div>
+          <div class="mm-name">MTN Mobile Money</div>
+          <div class="mm-number">+256 751 442 505</div>
+          <div class="mm-label">Name: Alex Ssengonzi</div>
+        </div>
+      </div>
+      <div class="mm-card reveal from-right">
+        <div class="mm-icon" style="background:#ff4444;border-radius:12px;color:white;font-size:20px;">📲</div>
+        <div>
+          <div class="mm-name">Airtel Money</div>
+          <div class="mm-number">+256 751 442 505</div>
+          <div class="mm-label">Name: Alex Ssengonzi</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text3);margin-top:20px;text-align:center;">After sending, WhatsApp Alex at <strong>+256 751 442 505</strong> with your name and amount for confirmation.</p>
   </div>
 </section>
 
-<div style="padding:0 5%;">
-  <div class="cta-band">
-    <div>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;margin-bottom:8px;">Join Our Mission Today</h2>
-      <p style="font-size:15px;color:#cbd5e1;">Even $10 a month feeds a child for a week. Your gift makes a real, measurable difference in a child's life.</p>
-    </div>
-    <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="btn-gold">❤ Donate on GoFundMe</a>
-  </div>
+<div class="verse">
+  <blockquote>"Whoever is kind to the poor lends to the Lord, and he will reward them for what they have done."</blockquote>
+  <cite>— Proverbs 19:17</cite>
 </div>
 
 <footer>
-  <div class="footer-grid">
-    <div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-        <div class="nav-icon"><svg style="width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <span style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#fff;">Mercy Children's Home</span>
-      </div>
-      <p style="font-size:14px;color:#8892a4;line-height:1.7;">Providing shelter, love and opportunity to Uganda's most vulnerable children since 2020.</p>
-    </div>
-    <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="mission.html">Mission</a><a href="index.html#gallery">Gallery</a><a href="index.html#contact">Contact</a></div>
-    <div class="footer-col"><h4>Get Involved</h4><a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank">Donate Now</a><a href="index.html#supporters">Volunteer</a><a href="index.html#contact">Partner With Us</a></div>
+  <div class="footer-top">
+    <div><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;"><div style="width:32px;height:32px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;"><svg style="width:16px;height:16px;fill:none;stroke:var(--gold);stroke-width:2;" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span style="font-family:'Fraunces',serif;font-size:17px;color:#fff;">Mercy Children's Home</span></div><div class="footer-brand"><p>Shelter, love and opportunity for 32 orphaned children in Kasanda Bukuya, Uganda since 2020.</p></div></div>
+    <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="mission.html">Our Mission</a><a href="gallery.html">Gallery</a><a href="impact.html">Our Impact</a><a href="privacy.html">Privacy Policy</a></div>
+    <div class="footer-col"><h4>Get Involved</h4><a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank">Donate on GoFundMe</a><a href="index.html#contact">Contact Us</a><a href="https://wa.me/256751442505" target="_blank">WhatsApp Us</a><a href="index.html#contact">Volunteer</a></div>
   </div>
-  <div class="footer-bottom">
-    <p>© 2025 Mercy Children's Home, Uganda. All rights reserved.</p>
-    <p>Built with ♥ by <strong style="color:var(--gold);">KENPRO UG</strong></p>
-  </div>
+  <div class="footer-bottom"><p>© 2020 – <span class="footer-year"></span> Mercy Children's Home Uganda. All rights reserved.</p><p>Built by <a href="https://kenprotech.pro" target="_blank">KENPRO UG</a></p></div>
 </footer>
+<a class="wa-float" href="https://wa.me/256751442505?text=Hello%2C%20I%20want%20to%20know%20more%20about%20Mercy%20Children%27s%20Home" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Chat With Us</a>
 <script>
-(function(){var c=localStorage.getItem('mch_logo_cache');if(c){var im=document.getElementById('navLogoImg');var si=document.getElementById('navLogoSvg');if(im){im.src=c;im.style.display='block';}if(si)si.style.display='none';}})();
-var obs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');obs.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
-window.addEventListener('scroll',function(){document.getElementById('navbar').style.boxShadow=window.scrollY>50?'0 4px 30px rgba(0,0,0,.5)':'';});
+
+var SUPA='https://qbyisxlqpuwowbtrying.supabase.co';
+var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFieWlzeGxxcHV3b3didHJ5aW5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NzczNDMsImV4cCI6MjA5MTE1MzM0M30.D5SKyI3Ay5uFoVvxEOYIKKPnSORxwYoP0PPqdB1OTao';
+var BUCKET='mercy-photos';
+function photoUrl(f){return SUPA+'/storage/v1/object/public/'+BUCKET+'/'+f;}
+function loadPhotos(cb){
+  fetch(SUPA+'/rest/v1/mch_photos?select=id,filename&order=id',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}})
+  .then(function(r){return r.json();}).then(function(rows){
+    if(!Array.isArray(rows))return;
+    var pm={};rows.forEach(function(r){if(r.filename)pm[r.id]=r.filename;});cb(pm);
+  }).catch(function(){});
+}
+function setImg(id,src){var el=document.getElementById(id);if(el&&src)el.src=src;}
+function setImgBg(id,src){var el=document.getElementById(id);if(el&&src){el.innerHTML='<img src="'+src+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">';}}
+window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);},{passive:true});
+window.addEventListener('scroll',function(){var b=document.getElementById('scrollProgress');if(!b)return;b.style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';},{passive:true});
+function initReveal(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});}
+document.querySelectorAll('.footer-year').forEach(function(el){el.textContent=new Date().getFullYear();});
+
+window.addEventListener('load',function(){
+  loadPhotos(function(pm){
+    setImgBg('heroBgImg'.replace('Bg','').replace('Img','BgWrap'),null);
+    var hb=document.getElementById('heroBgImg');if(hb&&pm['gallery_1']){hb.src=photoUrl(pm['gallery_1']);hb.style.display='block';}
+    var nl=document.getElementById('navLogoWrap');if(nl&&pm['gallery_0'])nl.innerHTML='<img src="'+photoUrl(pm['gallery_0'])+'" style="width:100%;height:100%;object-fit:cover;">';
+  });
+  initReveal();
+});
 </script>
-</body>
-</html>
+</body></html>

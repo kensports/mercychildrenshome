@@ -1,95 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Our Impact — Mercy Children's Home Uganda</title>
-<meta name="description" content="6 years of impact — 32 children served, 210,000+ meals, 18 school terms funded. See how Mercy Children's Home is changing lives in Uganda since 2020."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<meta name="description" content="6 years of impact — 32 children served, 210,000 meals, 18 school terms funded. See how Mercy Children's Home is changing lives in Uganda since 2020."/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%230d1f3c'/%3E%3Cpath d='M20 55 L50 25 L80 55 L80 80 L60 80 L60 62 L40 62 L40 80 L20 80Z' fill='%23c9a84c'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{--bg:#0a0e1a;--bg2:#0f1520;--card:#131929;--border:rgba(255,255,255,.08);--gold:#c9a84c;--white:#f1f5f9;--text2:#8892a4;}
-body{background:var(--bg);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,26,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
-.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.nav-name{font-size:15px;font-weight:700;color:var(--white);}
-.nav-name small{display:block;font-size:10px;color:var(--text2);font-weight:400;}
-section{padding:80px 5%;}
-.container{max-width:1100px;margin:0 auto;width:100%;}
-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:700;color:var(--white);line-height:1.1;}
-h1 span{color:var(--gold);}
-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:var(--white);}
-.sec-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--gold);padding:5px 14px;border-radius:30px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
-.stat-big{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,56px);font-weight:700;color:var(--gold);line-height:1;}
-.stat-lbl{font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:6px;}
-.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;background:var(--gold);color:#000;}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-@media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr);}section{padding:60px 4%;}.tl-row{flex-direction:column;gap:16px;}.tl-dot{width:40px;height:40px;font-size:11px;}.tl-dot-wrap{display:none;}}
-footer{background:var(--bg2);border-top:1px solid var(--border);padding:32px 5%;text-align:center;font-size:13px;color:var(--text2);}
+:root{--navy:#0d1f3c;--navy2:#112348;--navy3:#162d58;--gold:#c9a84c;--gold2:#e8c97a;--cream:#faf8f5;--text:#0d1f3c;--text2:#4a5568;--text3:#8896a8;--border:#e2e8f0;--border-navy:rgba(255,255,255,.12);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;overflow-x:hidden;scroll-padding-top:72px;}
+body{font-family:'Manrope',sans-serif;background:var(--cream);color:var(--text);}
+#scrollProgress{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:200;width:0%;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:var(--navy);transition:box-shadow .3s;}
+nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.3);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.nav-logo-img{width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0;background:var(--navy2);display:flex;align-items:center;justify-content:center;}
+.nav-logo-name{font-family:'Fraunces',serif;font-size:16px;color:#fff;line-height:1.1;}
+.nav-logo-name small{display:block;font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,.7);font-size:13px;font-weight:500;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-donate{background:var(--gold);color:var(--navy)!important;padding:10px 22px;font-weight:700!important;font-size:12px!important;text-transform:uppercase;letter-spacing:1.5px;}
+.hamburger{display:none;cursor:pointer;color:#fff;font-size:22px;border:none;background:none;}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--navy);z-index:200;flex-direction:column;}
+.mob-menu.open{display:flex;}
+.mob-top{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border-navy);}
+.mob-close{background:none;border:none;font-size:26px;cursor:pointer;color:rgba(255,255,255,.6);}
+.mob-menu a{text-decoration:none;color:#fff;font-size:18px;font-weight:600;padding:20px 28px;border-bottom:1px solid var(--border-navy);}
+.mob-donate-link{background:var(--gold);color:var(--navy)!important;margin:20px;padding:16px!important;text-align:center;font-weight:800!important;text-transform:uppercase;border-bottom:none!important;}
+.btn-gold{background:var(--gold);color:var(--navy);padding:14px 32px;font-size:12px;font-weight:800;text-decoration:none;text-transform:uppercase;letter-spacing:2px;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .2s;}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);}
+.label{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.label-line{width:40px;height:1px;background:var(--gold);}
+.label span{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:3px;}
+.big-title{font-family:'Fraunces',serif;font-size:clamp(36px,4.5vw,68px);font-weight:900;line-height:1.0;letter-spacing:-1.5px;margin-bottom:24px;}
+.big-title em{color:var(--gold);font-style:italic;}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.reveal.from-left{transform:translateX(-60px);}.reveal.from-right{transform:translateX(60px);}
+.reveal.visible{opacity:1;transform:none;}
+.reveal.d1{transition-delay:.1s;}.reveal.d2{transition-delay:.2s;}.reveal.d3{transition-delay:.3s;}.reveal.d4{transition-delay:.4s;}
+.page-hero{min-height:55vh;background:var(--navy);display:flex;align-items:center;position:relative;overflow:hidden;padding:140px 5% 80px;}
+.page-hero-bg{position:absolute;inset:0;}
+.page-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.2;display:block;}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,var(--navy) 35%,rgba(13,31,60,.6));}
+.page-hero-content{position:relative;z-index:2;max-width:700px;}
+.stats-big-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);background:var(--border);}
+.stat-big-item{background:#fff;padding:48px 28px;text-align:center;transition:transform .3s;}
+.stat-big-item:hover{transform:translateY(-4px);}
+.stat-big-num{font-family:'Fraunces',serif;font-size:clamp(40px,5vw,72px);font-weight:900;color:var(--navy);line-height:1;letter-spacing:-2px;}
+.stat-big-num em{color:var(--gold);font-style:normal;}
+.stat-big-lbl{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-top:12px;font-weight:600;}
+.timeline{position:relative;padding-left:0;}
+.tl-line{position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),transparent);}
+.tl-item{display:flex;gap:32px;padding-bottom:48px;position:relative;z-index:1;}
+.tl-dot{width:56px;height:56px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy);font-size:12px;flex-shrink:0;}
+.tl-dot.outline{background:var(--navy2);border:2px solid var(--gold);color:var(--gold);}
+.tl-card{flex:1;background:#fff;border:1px solid var(--border);padding:28px 32px;}
+.tl-card h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:10px;}
+.tl-card p{font-size:14px;color:var(--text2);line-height:1.8;}
+.tl-card.current{border-color:var(--gold);background:linear-gradient(135deg,rgba(201,168,76,.04),#fff);}
+.tl-card.current h3{color:var(--gold);}
+.verse{background:var(--gold);padding:80px 5%;text-align:center;}
+.verse blockquote{font-family:'Fraunces',serif;font-size:clamp(24px,3.5vw,44px);font-weight:300;font-style:italic;color:var(--navy);line-height:1.3;max-width:800px;margin:0 auto 16px;letter-spacing:-1px;}
+.verse cite{font-size:12px;color:rgba(13,31,60,.6);text-transform:uppercase;letter-spacing:3px;font-style:normal;font-weight:700;}
+footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48px 5% 24px;}
+.footer-top{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:40px;}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.8;max-width:260px;margin-top:10px;}
+.footer-col h4{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:8px;transition:color .2s;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border-navy);padding-top:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,.3);}
+.footer-bottom a{color:var(--gold);text-decoration:none;}
+.wa-float{position:fixed;bottom:28px;left:28px;z-index:500;display:flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:13px 18px;border-radius:100px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s;}
+.wa-float:hover{transform:translateY(-3px);}.wa-float svg{width:20px;height:20px;flex-shrink:0;}
+@media(max-width:900px){.nav-links{display:none;}.hamburger{display:block;}.stats-big-grid{grid-template-columns:1fr 1fr;}.footer-top{grid-template-columns:1fr;}}
+@media(max-width:600px){.stats-big-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-<nav>
-  <a class="nav-brand" href="index.html">
-    <svg viewBox="0 0 36 36" style="width:36px;height:36px;" fill="none"><path d="M18 32 C18 32 6 22 6 14 A8 8 0 0 1 18 8 A8 8 0 0 1 30 14 C30 22 18 32 18 32Z" fill="none" stroke="#c9a84c" stroke-width="2.5"/><line x1="18" y1="12" x2="18" y2="28" stroke="#c9a84c" stroke-width="2"/><line x1="12" y1="18" x2="24" y2="18" stroke="#c9a84c" stroke-width="2"/></svg>
-    <div class="nav-name">Mercy Children's Home<small>Kasanda Bukuya · UGANDA</small></div>
+<div id="scrollProgress"></div>
+<div class="mob-menu" id="mobMenu">
+  <div class="mob-top"><span style="font-family:'Fraunces',serif;font-size:17px;color:#fff;">Mercy Children's Home</span><button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open')">✕</button></div>
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="mission.html">Mission</a><a href="gallery.html">Gallery</a><a href="impact.html" style="color:var(--gold);">Impact</a><a href="index.html#contact">Contact</a>
+  <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="mob-donate-link">Donate Now</a>
+</div>
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-img" id="navLogoWrap"><svg style="width:20px;height:20px;fill:none;stroke:var(--gold);stroke-width:2;" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    <div class="nav-logo-name">Mercy Children's Home<small>Kasanda Bukuya · Uganda</small></div>
   </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="mission.html">Mission</a><a href="gallery.html">Gallery</a><a href="impact.html" class="active">Impact</a><a href="index.html#contact">Contact</a>
+    <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="nav-donate">Donate Now</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('mobMenu').classList.add('open')"><i class="fas fa-bars"></i></button>
 </nav>
 
-<!-- HERO -->
-<section style="padding-top:140px;background:linear-gradient(180deg,rgba(201,168,76,.05),transparent);border-bottom:1px solid var(--border);">
-<div class="container">
-  <div class="sec-tag">6 Years of Love</div>
-  <h1>Our <span>Impact</span><br/>2020 — 2026</h1>
-  <p style="font-size:17px;color:var(--text2);max-width:580px;line-height:1.8;margin-top:16px;margin-bottom:48px;">Every number below represents a real child, a real meal, a real future made possible by generous donors around the world.</p>
-  <div class="stats-grid">
-    <div class="card"><div class="stat-big">32+</div><div class="stat-lbl">Children in Our Care</div></div>
-    <div class="card"><div class="stat-big">210K+</div><div class="stat-lbl">Meals Provided</div></div>
-    <div class="card"><div class="stat-big">18</div><div class="stat-lbl">School Terms Funded</div></div>
-    <div class="card"><div class="stat-big">6</div><div class="stat-lbl">Years of Service</div></div>
+<div class="page-hero">
+  <div class="page-hero-bg"><img id="heroBgImg" src="" alt="" onerror="this.style.display='none'"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="label" style="margin-bottom:24px;"><div class="label-line"></div><span>6 Years of Love</span></div>
+    <h1 class="big-title" style="color:#fff;">Our <em>Impact</em><br>2020 — 2026</h1>
+    <p style="font-size:17px;color:rgba(255,255,255,.65);line-height:1.9;max-width:520px;margin-top:16px;">Every number below represents a real child, a real meal, a real future made possible by generous donors from around the world.</p>
   </div>
 </div>
+
+<section style="background:var(--cream);padding:80px 5%;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="stats-big-grid reveal">
+      <div class="stat-big-item"><div class="stat-big-num">32<em>+</em></div><div class="stat-big-lbl">Children in Our Care</div></div>
+      <div class="stat-big-item"><div class="stat-big-num">210<em>K+</em></div><div class="stat-big-lbl">Meals Provided</div></div>
+      <div class="stat-big-item"><div class="stat-big-num">18</div><div class="stat-big-lbl">School Terms Funded</div></div>
+      <div class="stat-big-item"><div class="stat-big-num">6</div><div class="stat-big-lbl">Years of Service</div></div>
+    </div>
+  </div>
 </section>
 
-<!-- TIMELINE -->
-<section>
-<div class="container">
-  <div class="sec-tag">Our Journey</div>
-  <h2 style="margin-bottom:40px;">From 2020 to Today</h2>
-  <div style="display:flex;flex-direction:column;gap:0;position:relative;">
-    <div style="position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),transparent);"></div>
-    <div style="display:flex;gap:32px;padding-bottom:40px;padding-left:0;">
-      <div style="width:56px;height:56px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:13px;flex-shrink:0;z-index:1;">2020</div>
-      <div class="card" style="flex:1;"><div style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">Mercy Children's Home Opens</div><p style="font-size:14px;color:var(--text2);line-height:1.7;">Alex opens his home to the first 5 vulnerable children in Kasanda Bukuya, Mityana District. No funding, just faith and love. The journey begins.</p></div>
-    </div>
-    <div style="display:flex;gap:32px;padding-bottom:40px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:var(--card);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gold);font-size:13px;flex-shrink:0;z-index:1;">2021</div>
-      <div class="card" style="flex:1;"><div style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">Growing to 15 Children</div><p style="font-size:14px;color:var(--text2);line-height:1.7;">Word spreads. 15 children are now in the home. First international donors discover the home through YouTube. School fees are paid for the first term. A small garden is started for food.</p></div>
-    </div>
-    <div style="display:flex;gap:32px;padding-bottom:40px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:var(--card);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gold);font-size:13px;flex-shrink:0;z-index:1;">2022</div>
-      <div class="card" style="flex:1;"><div style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">25 Children &amp; First Website</div><p style="font-size:14px;color:var(--text2);line-height:1.7;">The home grows to 25 children. The GoFundMe campaign is launched. The YouTube channel grows. All children are enrolled in school. Medical care is provided for the first time to all.</p></div>
-    </div>
-    <div style="display:flex;gap:32px;padding-bottom:40px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:var(--card);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gold);font-size:13px;flex-shrink:0;z-index:1;">2023</div>
-      <div class="card" style="flex:1;"><div style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">30 Children &amp; Shelter Improvements</div><p style="font-size:14px;color:var(--text2);line-height:1.7;">30 children are now in the home. Shelter improvements are made. First international volunteer visits. 3 full meals per day become consistent. Donor community grows worldwide.</p></div>
-    </div>
-    <div style="display:flex;gap:32px;padding-bottom:40px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:var(--card);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gold);font-size:13px;flex-shrink:0;z-index:1;">2024</div>
-      <div class="card" style="flex:1;"><div style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">32 Children — A Full House of Love</div><p style="font-size:14px;color:var(--text2);line-height:1.7;">The home reaches 32 children. 100,000+ meals served since opening. A dedicated website is launched. The prayer wall and newsletter bring together a global community of supporters.</p></div>
-    </div>
-    <div style="display:flex;gap:32px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:12px;flex-shrink:0;z-index:1;">2026</div>
-      <div class="card" style="flex:1;border-color:rgba(201,168,76,.3);background:linear-gradient(135deg,rgba(201,168,76,.06),var(--card));"><div style="font-size:18px;font-weight:700;color:var(--gold);margin-bottom:8px;">Today — 6 Years Strong</div><p style="font-size:14px;color:var(--text2);line-height:1.7;">210,000+ meals served. 18 school terms funded. 32 children with shelter, food, education and love. With your help, we will reach our $10,000 goal and secure the next chapter for every child.</p><a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=messenger&lang=en_US" target="_blank" class="btn" style="margin-top:16px;font-size:13px;">Be Part of Year 7 →</a></div>
+<section style="background:#fff;padding:80px 5%;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="label reveal"><div class="label-line"></div><span>Our Journey</span></div>
+    <h2 class="big-title reveal">From <em>2020</em> to Today</h2>
+    <div class="timeline reveal" style="margin-top:48px;">
+      <div class="tl-line"></div>
+      <div class="tl-item"><div class="tl-dot">2020</div><div class="tl-card"><h3>Mercy Children's Home Opens</h3><p>Alex Ssengonzi opens his own home to the first 5 vulnerable children in Kasanda Bukuya. No funding, just faith and love. The journey begins.</p></div></div>
+      <div class="tl-item"><div class="tl-dot outline">2021</div><div class="tl-card"><h3>Growing to 15 Children</h3><p>Word spreads. 15 children are now in the home. First international donors discover the home. School fees paid for the first full term. A small garden is started for food.</p></div></div>
+      <div class="tl-item"><div class="tl-dot outline">2022</div><div class="tl-card"><h3>25 Children — GoFundMe Launched</h3><p>The home grows to 25 children. The GoFundMe campaign is launched. All children are enrolled in school. Medical care is provided for the first time to all children.</p></div></div>
+      <div class="tl-item"><div class="tl-dot outline">2023</div><div class="tl-card"><h3>30 Children — First Volunteers Arrive</h3><p>30 children in the home. Shelter improvements made. First international volunteers visit from the USA. 3 full meals per day become consistent. Donor community grows worldwide.</p></div></div>
+      <div class="tl-item"><div class="tl-dot outline">2024</div><div class="tl-card"><h3>32 Children — A Full House of Love</h3><p>The home reaches 32 children. 100,000+ meals served since opening. A dedicated professional website is launched. Newsletter brings together a global community of supporters.</p></div></div>
+      <div class="tl-item"><div class="tl-dot">2026</div><div class="tl-card current"><h3>Today — 6 Years Strong</h3><p>210,000+ meals served. 18 school terms funded. 32 children with shelter, food, education and love. With your help, we will secure permanent land and give every child a forever home.</p><a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="btn-gold" style="margin-top:20px;">Be Part of Year 7</a></div></div>
     </div>
   </div>
-</div>
 </section>
+
+<div class="verse">
+  <blockquote>"He has shown you, O mortal, what is good. And what does the Lord require of you? To act justly and to love mercy."</blockquote>
+  <cite>— Micah 6:8</cite>
+</div>
 
 <footer>
-  <p>© 2020 – 2026 Mercy Children's Home · <a href="index.html" style="color:var(--gold);">Home</a> · <a href="donate.html" style="color:var(--gold);">Donate</a> · <a href="privacy.html" style="color:var(--gold);">Privacy</a> · Built by <strong style="color:var(--gold);">KENPRO UG</strong></p>
+  <div class="footer-top">
+    <div><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;"><div style="width:32px;height:32px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;"><svg style="width:16px;height:16px;fill:none;stroke:var(--gold);stroke-width:2;" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span style="font-family:'Fraunces',serif;font-size:17px;color:#fff;">Mercy Children's Home</span></div><div class="footer-brand"><p>Shelter, love and opportunity for 32 orphaned children in Kasanda Bukuya, Uganda since 2020.</p></div></div>
+    <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="mission.html">Our Mission</a><a href="gallery.html">Gallery</a><a href="impact.html">Our Impact</a><a href="privacy.html">Privacy Policy</a></div>
+    <div class="footer-col"><h4>Get Involved</h4><a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank">Donate on GoFundMe</a><a href="index.html#contact">Contact Us</a><a href="https://wa.me/256751442505" target="_blank">WhatsApp Us</a><a href="index.html#contact">Volunteer</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2020 – <span class="footer-year"></span> Mercy Children's Home Uganda. All rights reserved.</p><p>Built by <a href="https://kenprotech.pro" target="_blank">KENPRO UG</a></p></div>
 </footer>
-</body>
-</html>
+<a class="wa-float" href="https://wa.me/256751442505?text=Hello" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Chat With Us</a>
+<script>
+
+var SUPA='https://qbyisxlqpuwowbtrying.supabase.co';var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFieWlzeGxxcHV3b3didHJ5aW5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NzczNDMsImV4cCI6MjA5MTE1MzM0M30.D5SKyI3Ay5uFoVvxEOYIKKPnSORxwYoP0PPqdB1OTao';var BUCKET='mercy-photos';
+function photoUrl(f){return SUPA+'/storage/v1/object/public/'+BUCKET+'/'+f;}
+function loadPhotos(cb){fetch(SUPA+'/rest/v1/mch_photos?select=id,filename&order=id',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}}).then(function(r){return r.json();}).then(function(rows){if(!Array.isArray(rows))return;var pm={};rows.forEach(function(r){if(r.filename)pm[r.id]=r.filename;});cb(pm);}).catch(function(){});}
+window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);},{passive:true});
+window.addEventListener('scroll',function(){var b=document.getElementById('scrollProgress');if(!b)return;b.style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';},{passive:true});
+function initReveal(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});}
+document.querySelectorAll('.footer-year').forEach(function(el){el.textContent=new Date().getFullYear();});
+
+window.addEventListener('load',function(){
+  loadPhotos(function(pm){
+    var hb=document.getElementById('heroBgImg');if(hb&&pm['gallery_2']){hb.src=photoUrl(pm['gallery_2']);hb.style.display='block';}
+    var nl=document.getElementById('navLogoWrap');if(nl&&pm['gallery_0'])nl.innerHTML='<img src="'+photoUrl(pm['gallery_0'])+'" style="width:100%;height:100%;object-fit:cover;">';
+  });
+  initReveal();
+});
+</script>
+</body></html>
