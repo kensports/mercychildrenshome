@@ -610,15 +610,15 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
     <h2 class="big-title reveal" style="max-width:600px;">The Children<br>We <em>Serve</em></h2>
     <p style="font-size:16px;color:var(--text2);max-width:500px;line-height:1.8;" class="reveal">Names changed for privacy. Every story is real. Every life is precious.</p>
     <div class="stories-grid">
-      <div class="story-card reveal d1">
+      <div class="story-card reveal d1" id="storyCard1">
         <div class="story-img" id="storyImg1"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <div class="story-body"><div class="story-tag" id="storyTag1">Top of Class</div><div class="story-name" id="storyName1">Hope, Age 8</div><div class="story-meta" id="storyMeta1">At Mercy since 2022</div><p class="story-text" id="storyText1">"Hope came to us after losing both parents. Today she is the top student in her class and dreams of becoming a doctor one day."</p></div>
       </div>
-      <div class="story-card reveal d2">
+      <div class="story-card reveal d2" id="storyCard2">
         <div class="story-img" id="storyImg2"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <div class="story-body"><div class="story-tag" id="storyTag2">Health Restored</div><div class="story-name" id="storyName2">Grace, Age 6</div><div class="story-meta" id="storyMeta2">At Mercy since 2023</div><p class="story-text" id="storyText2">"Grace arrived malnourished and afraid. Today she laughs loudly, plays freely and has gained a healthy weight."</p></div>
       </div>
-      <div class="story-card reveal d3">
+      <div class="story-card reveal d3" id="storyCard3">
         <div class="story-img" id="storyImg3"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <div class="story-body"><div class="story-tag" id="storyTag3">Thriving</div><div class="story-name" id="storyName3">David, Age 11</div><div class="story-meta" id="storyMeta3">At Mercy since 2021</div><p class="story-text" id="storyText3">"David arrived alone with nothing. Today he is a confident young boy who mentors the younger children with pride."</p></div>
       </div>
@@ -1080,6 +1080,7 @@ function loadAdminStories(){
         +(photoUrl?'<img src="'+photoUrl+'" id="admStoryPrev'+i+'" style="width:100%;height:100%;object-fit:cover;">':'<img id="admStoryPrev'+i+'" style="width:100%;height:100%;object-fit:cover;display:none;">')
         +'</div>'
         +'<label style="background:var(--navy);color:var(--gold);padding:6px 12px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;margin-bottom:8px;">Upload Photo<input type="file" accept="image/*" style="display:none;" onchange="uploadStoryPhoto('+i+',this)"/></label>'
+        +(photoUrl?'<button onclick="deleteStory('+i+')" style="background:#ef4444;color:#fff;border:none;padding:6px 12px;font-size:10px;font-weight:700;cursor:pointer;text-transform:uppercase;margin-bottom:8px;margin-left:6px;">Delete Story</button>':'')
         +'<input id="st-tag-'+i+'" placeholder="Tag (e.g. Top of Class)" value="'+(s.tag||'').replace(/"/g,'&quot;')+'" style="width:100%;box-sizing:border-box;padding:6px;font-size:12px;border:1px solid var(--border);margin-bottom:6px;">'
         +'<input id="st-name-'+i+'" placeholder="Name (e.g. Hope, Age 8)" value="'+(s.name||'').replace(/"/g,'&quot;')+'" style="width:100%;box-sizing:border-box;padding:6px;font-size:12px;border:1px solid var(--border);margin-bottom:6px;">'
         +'<input id="st-meta-'+i+'" placeholder="Meta (e.g. At Mercy since 2022)" value="'+(s.meta||'').replace(/"/g,'&quot;')+'" style="width:100%;box-sizing:border-box;padding:6px;font-size:12px;border:1px solid var(--border);margin-bottom:6px;">'
@@ -1105,11 +1106,37 @@ function uploadStoryPhoto(i,input){
     var prev=document.getElementById('admStoryPrev'+i);if(prev){prev.src=url;prev.style.display='block';}
     var si=document.getElementById('storyImg'+(i+1));
     if(si)si.innerHTML='<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;">';
+    var sc=document.getElementById('storyCard'+(i+1));if(sc)sc.style.display='';
     var ss=document.querySelector('.stories');if(ss)ss.style.display='block';
     if(status)status.textContent='Story photo '+(i+1)+' uploaded!';
     showToast('Story photo uploaded!');
   })
   .catch(function(e){if(status)status.textContent='Failed: '+e.message;showToast('Upload failed!');});
+}
+function deleteStory(i){
+  if(!confirm('Delete story '+(i+1)+'? The photo and text will be removed from the website.'))return;
+  var status=document.getElementById('storiesStatus');
+  if(status)status.textContent='Deleting...';
+  fetch(SUPA+'/rest/v1/mch_photos?id=eq.story_'+i+'&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+  .then(function(r){return r.json();})
+  .then(function(rows){
+    var fname=rows&&rows[0]?rows[0].filename:null;
+    var jobs=[fetch(SUPA+'/rest/v1/mch_photos?id=eq.story_'+i,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})];
+    if(fname)jobs.push(fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+fname,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}}));
+    return Promise.all(jobs);
+  })
+  .then(function(){
+    var tg=document.getElementById('st-tag-'+i);if(tg)tg.value='';
+    var nm=document.getElementById('st-name-'+i);if(nm)nm.value='';
+    var mt=document.getElementById('st-meta-'+i);if(mt)mt.value='';
+    var tx=document.getElementById('st-text-'+i);if(tx)tx.value='';
+    saveStories();
+    var sc=document.getElementById('storyCard'+(i+1));if(sc)sc.style.display='none';
+    loadAdminStories();
+    if(status)status.textContent='Story '+(i+1)+' deleted!';
+    showToast('Story deleted!');
+  })
+  .catch(function(){if(status)status.textContent='Delete failed!';showToast('Delete failed!');});
 }
 function saveStories(){
   var list=[];
@@ -1201,10 +1228,14 @@ function loadAllPhotos(){
     var storyKeys=['story_0','story_1','story_2'];
     var hasStories=false;
     storyKeys.forEach(function(k,i){
+      var card=document.getElementById('storyCard'+(i+1));
       if(pm[k]){
         hasStories=true;
+        if(card)card.style.display='';
         var si=document.getElementById('storyImg'+(i+1));
         if(si)si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;">';
+      }else{
+        if(card)card.style.display='none';
       }
     });
     var ss=document.querySelector('.stories');if(ss)ss.style.display=hasStories?'block':'none';
