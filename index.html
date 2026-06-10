@@ -956,110 +956,6 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
   <div class="admin-panel">
     <div class="adm-handle"></div>
     <div class="adm-hdr">
-      <h2>Admin Panel — Mercy Children's Home</h2>
-      <button class="adm-close" onclick="closeAdmin()">✕</button>
-    </div>
-    <div class="adm-tabs">
-      <button class="adm-tab active" onclick="admTab('photos',this)">📷 Photos</button>
-      <button class="adm-tab" onclick="admTab('gallery',this)">🖼 Gallery</button>
-      <button class="adm-tab" onclick="admTab('volunteers',this)">👥 Volunteers</button>
-      <button class="adm-tab" onclick="admTab('donate',this)">💰 Donate</button>
-      <button class="adm-tab" onclick="admTab('settings',this)">⚙️ Settings</button>
-    </div>
-    <div class="adm-body">
-
-      <!-- PHOTOS TAB -->
-      <div class="adm-sec active" id="adm-photos">
-        <p style="font-size:13px;color:var(--text3);margin-bottom:20px;">Upload key photos — saved to Supabase automatically.</p>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
-
-          <!-- Hero Photo -->
-          <div style="background:var(--cream);border:1px solid var(--border);padding:14px;">
-            <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Hero Background</div>
-            <div style="width:100%;aspect-ratio:16/9;background:#e2e8f0;margin-bottom:8px;overflow:hidden;">
-              <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_0_1776349884076.jpg" style="width:100%;height:100%;object-fit:cover;">
-            </div>
-            <label style="background:var(--navy);color:var(--gold);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;">
-              Upload New
-              <input type="file" accept="image/*" style="display:none;" onchange="uploadToSupa('gallery_0',this)"/>
-            </label>
-          </div>
-
-          <!-- Founder Photo -->
-          <div style="background:var(--cream);border:1px solid var(--border);padding:14px;">
-            <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Alex (Founder Photo)</div>
-            <div style="width:100%;aspect-ratio:1;background:#e2e8f0;margin-bottom:8px;overflow:hidden;">
-              <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/founder_1776258295994.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-            </div>
-            <label style="background:var(--navy);color:var(--gold);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;">
-              Upload New
-              <input type="file" accept="image/*" style="display:none;" onchange="uploadToSupa('founder',this)"/>
-            </label>
-          </div>
-
-          <!-- Logo -->
-          <div style="background:var(--cream);border:1px solid var(--border);padding:14px;">
-            <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Logo / Nav Icon</div>
-            <div style="width:100%;aspect-ratio:1;background:#e2e8f0;margin-bottom:8px;overflow:hidden;">
-              <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/logo_1777409225544.jpg" style="width:100%;height:100%;object-fit:cover;">
-            </div>
-            <label style="background:var(--navy);color:var(--gold);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;">
-              Upload New
-              <input type="file" accept="image/*" style="display:none;" onchange="uploadToSupa('logo',this)"/>
-            </label>
-          </div>
-        </div>
-        <div id="uploadStatus" style="margin-top:12px;font-size:13px;color:var(--text2);"></div>
-      </div>
-
-      <!-- GALLERY TAB -->
-      <div class="adm-sec" id="adm-gallery">
-        <p style="font-size:13px;color:var(--text3);margin-bottom:16px;">Manage gallery photos. Click photo to delete. Upload new ones below.</p>
-        <div id="admGalleryGrid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px;"></div>
-        <label style="background:var(--navy);color:var(--gold);padding:10px 20px;font-size:11px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;letter-spacing:1px;">
-          + Add Gallery Photo
-          <input type="file" accept="image/*" multiple style="display:none;" onchange="uploadGalleryPhotos(this)"/>
-        </label>
-        <div id="galleryUploadStatus" style="margin-top:12px;font-size:13px;color:var(--text2);"></div>
-      </div>
-
-      <!-- VOLUNTEERS TAB -->
-      <div class="adm-sec" id="adm-volunteers">
-        <p style="font-size:13px;color:var(--text3);margin-bottom:16px;">All volunteers load from Supabase automatically. Add or remove below.</p>
-        <div id="admVolGrid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;"></div>
-        <div style="border-top:1px solid var(--border);padding-top:16px;">
-          <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Add New Volunteer</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
-            <div class="af" style="margin:0;"><label>Name</label><input type="text" id="newVolName" placeholder="e.g. Sarah"/></div>
-            <div class="af" style="margin:0;"><label>Country</label><input type="text" id="newVolCountry" placeholder="e.g. USA"/></div>
-          </div>
-          <label style="background:var(--navy);color:var(--gold);padding:10px 20px;font-size:11px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;letter-spacing:1px;">
-            + Upload Photo
-            <input type="file" accept="image/*" style="display:none;" onchange="uploadNewVolunteer(this)"/>
-          </label>
-          <div id="volUploadStatus" style="margin-top:10px;font-size:13px;color:var(--text2);"></div>
-        </div>
-      </div>
-  </div>
-</div>
-
-<!-- ADMIN PASSWORD -->
-<div class="pwd-overlay" id="pwdOverlay" style="display:none;">
-  <div class="pwd-box">
-    <div style="font-size:40px;margin-bottom:14px;">🔐</div>
-    <h3>Admin Access</h3>
-    <p>Enter password to manage the website</p>
-    <input type="password" class="pwd-in" id="pwdInput" placeholder="••••••" onkeydown="if(event.key==='Enter')checkPwd()"/>
-    <button class="pwd-btn" onclick="checkPwd()">Enter</button>
-    <button class="pwd-cancel" onclick="document.getElementById('pwdOverlay').style.display='none'">Cancel</button>
-  </div>
-</div>
-
-<!-- ADMIN PANEL -->
-<div class="admin-overlay" id="adminOverlay">
-  <div class="admin-panel">
-    <div class="adm-handle"></div>
-    <div class="adm-hdr">
       <h2>Admin Panel</h2>
       <button class="adm-close" onclick="closeAdmin()">✕</button>
     </div>
@@ -1126,7 +1022,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
             <div class="af" style="margin:0;"><label>Name</label><input type="text" id="newVolName" placeholder="e.g. Sarah"/></div>
             <div class="af" style="margin:0;"><label>Country</label><input type="text" id="newVolCountry" placeholder="e.g. USA"/></div>
-            <div class="af" style="margin:0;"><label>Flag emoji</label><input type="text" id="newVolFlag" placeholder="e.g. 🇺🇸"/></div>
+            <div class="af" style="margin:0;"><label>Flag (auto)</label><input type="text" id="newVolFlag" placeholder="Auto from country" disabled/></div>
           </div>
           <label style="background:var(--navy);color:var(--gold);padding:10px 20px;font-size:11px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;letter-spacing:1px;">
             + Upload Photo
@@ -1198,9 +1094,9 @@ function loadVolunteers(){
       var roleText=isFounder?'Founder & Director':'International Volunteer';
       var roleColor=isFounder?'#c9a84c':'var(--gold)';
       var country=(v.country||'').trim();
-      var flags={'USA':'US','Australia':'AU','Canada':'CA','Uganda':'UG','Scotland':'GB','UK':'GB','Ireland':'IE'};
+      var flags={'USA':'us','United States':'us','America':'us','Australia':'au','Canada':'ca','Uganda':'ug','Scotland':'gb-sct','UK':'gb','United Kingdom':'gb','England':'gb-eng','Wales':'gb-wls','Ireland':'ie','Germany':'de','France':'fr','Italy':'it','Spain':'es','Portugal':'pt','Netherlands':'nl','Belgium':'be','Switzerland':'ch','Austria':'at','Sweden':'se','Norway':'no','Denmark':'dk','Finland':'fi','Iceland':'is','Poland':'pl','Czech Republic':'cz','Czechia':'cz','Slovakia':'sk','Hungary':'hu','Romania':'ro','Bulgaria':'bg','Greece':'gr','Croatia':'hr','Serbia':'rs','Slovenia':'si','Ukraine':'ua','Russia':'ru','Estonia':'ee','Latvia':'lv','Lithuania':'lt','Luxembourg':'lu','Malta':'mt','Cyprus':'cy','Albania':'al','Bosnia':'ba','Macedonia':'mk','Montenegro':'me','Moldova':'md','Belarus':'by','Monaco':'mc','Kenya':'ke','Tanzania':'tz','Rwanda':'rw','Nigeria':'ng','Ghana':'gh','South Africa':'za','Ethiopia':'et','Egypt':'eg','India':'in','China':'cn','Japan':'jp','Brazil':'br','Mexico':'mx','New Zealand':'nz','International':''};
       var code=flags[country];
-      var flagHtml=code?'<img src="https://flagcdn.com/20x15/'+code.toLowerCase()+'.png" style="vertical-align:middle;margin-right:4px;" alt="'+country+'">':'';
+      var flagHtml=code?'<img src="https://flagcdn.com/20x15/'+code+'.png" style="vertical-align:middle;margin-right:4px;" alt="'+country+'">':'';
       var card=document.createElement('div');
       card.style.cssText='background:#fff;overflow:hidden;text-align:center;';
       card.innerHTML='<div style="width:100%;height:220px;overflow:hidden;background:var(--navy2);">'
@@ -1520,8 +1416,8 @@ function uploadNewVolunteer(input){
   var file=input.files[0];if(!file)return;
   var name=document.getElementById('newVolName').value.trim()||'Volunteer';
   var country=document.getElementById('newVolCountry').value.trim()||'';
-  var flag=document.getElementById('newVolFlag').value.trim()||'';
-  var displayCountry=flag?flag+' '+country:country;
+  var flag='';
+  var displayCountry=country;
   var status=document.getElementById('volUploadStatus');
   if(status)status.textContent='Uploading...';
   var ext=file.name.split('.').pop();
