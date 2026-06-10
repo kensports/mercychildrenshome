@@ -1043,221 +1043,283 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
   </div>
 </div>
 
+<!-- ADMIN PASSWORD -->
+<div class="pwd-overlay" id="pwdOverlay" style="display:none;">
+  <div class="pwd-box">
+    <div style="font-size:40px;margin-bottom:14px;">🔐</div>
+    <h3>Admin Access</h3>
+    <p>Enter password to manage the website</p>
+    <input type="password" class="pwd-in" id="pwdInput" placeholder="••••••" onkeydown="if(event.key==='Enter')checkPwd()"/>
+    <button class="pwd-btn" onclick="checkPwd()">Enter</button>
+    <button class="pwd-cancel" onclick="document.getElementById('pwdOverlay').style.display='none'">Cancel</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <div class="adm-handle"></div>
+    <div class="adm-hdr">
+      <h2>Admin Panel</h2>
+      <button class="adm-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="adm-tabs">
+      <button class="adm-tab active" onclick="admTab('photos',this)">Photos</button>
+      <button class="adm-tab" onclick="admTab('gallery',this)">Gallery</button>
+      <button class="adm-tab" onclick="admTab('volunteers',this)">Volunteers</button>
+      <button class="adm-tab" onclick="admTab('settings',this)">Settings</button>
+    </div>
+    <div class="adm-body">
+
+      <!-- PHOTOS -->
+      <div class="adm-sec active" id="adm-photos">
+        <p style="font-size:13px;color:var(--text3);margin-bottom:20px;">Upload key photos — saved to Supabase instantly.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+          <div style="background:var(--cream);border:1px solid var(--border);padding:14px;">
+            <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Founder (Alex)</div>
+            <div style="width:100%;aspect-ratio:1;background:#e2e8f0;margin-bottom:8px;overflow:hidden;">
+              <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776349728259_1776349730412.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" id="adminFounderPreview">
+            </div>
+            <label style="background:var(--navy);color:var(--gold);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;">
+              Upload New<input type="file" accept="image/*" style="display:none;" onchange="uploadKeyPhoto('founder',this,'adminFounderPreview')"/>
+            </label>
+          </div>
+          <div style="background:var(--cream);border:1px solid var(--border);padding:14px;">
+            <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Hero Background</div>
+            <div style="width:100%;aspect-ratio:16/9;background:#e2e8f0;margin-bottom:8px;overflow:hidden;">
+              <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_0_1776349884076.jpg" style="width:100%;height:100%;object-fit:cover;" id="adminHeroPreview">
+            </div>
+            <label style="background:var(--navy);color:var(--gold);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;">
+              Upload New<input type="file" accept="image/*" style="display:none;" onchange="uploadKeyPhoto('gallery_0',this,'adminHeroPreview')"/>
+            </label>
+          </div>
+          <div style="background:var(--cream);border:1px solid var(--border);padding:14px;">
+            <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Logo / Nav Icon</div>
+            <div style="width:100%;aspect-ratio:1;background:#e2e8f0;margin-bottom:8px;overflow:hidden;">
+              <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/logo_1777409225544.jpg" style="width:100%;height:100%;object-fit:cover;" id="adminLogoPreview">
+            </div>
+            <label style="background:var(--navy);color:var(--gold);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;">
+              Upload New<input type="file" accept="image/*" style="display:none;" onchange="uploadKeyPhoto('logo',this,'adminLogoPreview')"/>
+            </label>
+          </div>
+        </div>
+        <div id="photoUploadStatus" style="margin-top:12px;font-size:13px;color:var(--text2);"></div>
+      </div>
+
+      <!-- GALLERY -->
+      <div class="adm-sec" id="adm-gallery">
+        <p style="font-size:13px;color:var(--text3);margin-bottom:16px;">Tap X to delete a photo. Upload new ones below.</p>
+        <div id="admGalleryGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;"></div>
+        <label style="background:var(--navy);color:var(--gold);padding:10px 20px;font-size:11px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;letter-spacing:1px;">
+          + Add Gallery Photos
+          <input type="file" accept="image/*" multiple style="display:none;" onchange="uploadGalleryPhotos(this)"/>
+        </label>
+        <div id="galleryUploadStatus" style="margin-top:10px;font-size:13px;color:var(--text2);"></div>
+      </div>
+
+      <!-- VOLUNTEERS -->
+      <div class="adm-sec" id="adm-volunteers">
+        <p style="font-size:13px;color:var(--text3);margin-bottom:16px;">All volunteers load from Supabase. Tap Remove to delete. Add new below.</p>
+        <div id="admVolGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px;"></div>
+        <div style="border-top:1px solid var(--border);padding-top:16px;">
+          <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Add New Volunteer</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
+            <div class="af" style="margin:0;"><label>Name</label><input type="text" id="newVolName" placeholder="e.g. Sarah"/></div>
+            <div class="af" style="margin:0;"><label>Country</label><input type="text" id="newVolCountry" placeholder="e.g. USA"/></div>
+            <div class="af" style="margin:0;"><label>Flag emoji</label><input type="text" id="newVolFlag" placeholder="e.g. 🇺🇸"/></div>
+          </div>
+          <label style="background:var(--navy);color:var(--gold);padding:10px 20px;font-size:11px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;letter-spacing:1px;">
+            + Upload Photo
+            <input type="file" accept="image/*" style="display:none;" onchange="uploadNewVolunteer(this)"/>
+          </label>
+          <div id="volUploadStatus" style="margin-top:10px;font-size:13px;color:var(--text2);"></div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="adm-sec" id="adm-settings">
+        <div style="margin-bottom:24px;">
+          <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Donation Link</div>
+          <div class="af"><label>GoFundMe URL</label><input type="text" id="ei-donateUrl" value="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda"/></div>
+          <button class="adm-btn" onclick="saveDonate()">Save Link</button>
+        </div>
+        <div style="margin-bottom:24px;border-top:1px solid var(--border);padding-top:20px;">
+          <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Change Password</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+            <div class="af" style="margin:0;"><label>New Password</label><input type="password" id="newPwd" placeholder="Min 6 characters"/></div>
+            <div class="af" style="margin:0;"><label>Confirm</label><input type="password" id="newPwd2" placeholder="Repeat password"/></div>
+          </div>
+          <button class="adm-btn" onclick="changePwd()">Change Password</button>
+        </div>
+        <div style="border-top:1px solid var(--border);padding-top:20px;">
+          <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Danger Zone</div>
+          <button class="adm-btn danger" onclick="if(confirm('Reset all local data?')){localStorage.clear();location.reload();}">Reset Local Data</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div id="toast"><span id="toastMsg">Saved!</span></div>
 
 <script>
-// ═══ MERCY CHILDREN HOME — MAIN JS ═══
 var SUPA = 'https://qbyisxlqpuwowbtrying.supabase.co';
 var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFieWlzeGxxcHV3b3didHJ5aW5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NzczNDMsImV4cCI6MjA5MTE1MzM0M30.D5SKyI3Ay5uFoVvxEOYIKKPnSORxwYoP0PPqdB1OTao';
 var BUCKET = 'mercy-photos';
-
+var GFM_URL = 'https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda';
+var BASE = SUPA+'/storage/v1/object/public/'+BUCKET+'/';
 var GALLERY_PHOTOS = [
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_0_1776349884076.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_1_1776260536136.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_2_1776349507194.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_3_1776241179893.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_4_1776241313598.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_5_1776241197267.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_6_1776241401689.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_7_1776241301058.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_8_1776332642000.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_9_1776332666104.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_10_1776332747379.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_11_1776332789001.jpg",
-  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_12_1776332800562.jpg",
+  BASE+'gallery_0_1776349884076.jpg',BASE+'gallery_1_1776260536136.jpg',
+  BASE+'gallery_2_1776349507194.jpg',BASE+'gallery_3_1776241179893.jpg',
+  BASE+'gallery_4_1776241313598.jpg',BASE+'gallery_5_1776241197267.jpg',
+  BASE+'gallery_6_1776241401689.jpg',BASE+'gallery_7_1776241301058.jpg',
+  BASE+'gallery_8_1776332642000.jpg',BASE+'gallery_9_1776332666104.jpg',
+  BASE+'gallery_10_1776332747379.jpg',BASE+'gallery_11_1776332789001.jpg',
+  BASE+'gallery_12_1776332800562.jpg'
 ];
 
-var VOLUNTEERS_DATA = [
-  {name:"Raymond",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776344182957_1776344183676.jpg"},
-  {name:"Debbie",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776346414462_1776346414690.jpg"},
-  {name:"Simpson",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776346523245_1776346523504.jpg"},
-  {name:"Sheryl",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776346882081_1776346882385.jpg"},
-  {name:"Michael",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776346969278_1776346969381.jpg"},
-  {name:"Bushy Brum",country:"Australia",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776347034257_1776347034433.jpg"},
-  {name:"Jonathan",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776347245676_1776347245895.jpg"},
-  {name:"Spiers",country:"Scotland",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776347325615_1776347325773.jpg"},
-  {name:"Scammell",country:"International",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776347419504_1776347420234.jpg"},
-  {name:"Stensland",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776347497678_1776347497858.jpg"},
-];
-
-// ── VOLUNTEER LOADER FROM SUPABASE ──
-function loadVolunteers() {
-  fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list&select=filename', {
-    headers: {'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+function loadVolunteers(){
+  fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list&select=filename',{
+    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
   })
   .then(function(r){return r.json();})
   .then(function(rows){
     if(!rows||!rows[0]) return;
-    var list;
-    try{ list = JSON.parse(rows[0].filename); }catch(e){ return; }
-    var grid = document.getElementById('volGrid');
+    var list; try{list=JSON.parse(rows[0].filename);}catch(e){return;}
+    var grid=document.getElementById('volGrid');
     if(!grid) return;
-    grid.innerHTML = '';
-    // Change columns based on count
-    var count = list.length;
-    var cols = count <= 4 ? count : count <= 6 ? 3 : count <= 8 ? 4 : 5;
-    grid.style.gridTemplateColumns = 'repeat('+cols+',1fr)';
+    grid.innerHTML='';
+    var cols=list.length<=4?list.length:list.length<=6?3:list.length<=8?4:5;
+    grid.style.gridTemplateColumns='repeat('+cols+',1fr)';
     list.forEach(function(v){
-      var isFounder = v.category === 'Director & Founder' || v.name.toLowerCase().includes('alex');
-      var roleText = isFounder ? 'Founder & Director' : 'International Volunteer';
-      var roleColor = isFounder ? '#c9a84c' : 'var(--gold)';
-      var card = document.createElement('div');
-      card.style.cssText = 'background:#fff;overflow:hidden;text-align:center;';
-      card.innerHTML =
-        '<div style="width:100%;height:220px;overflow:hidden;background:var(--navy2);">'+
-        '<img src="'+v.photoUrl+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="'+v.name+'">'+
-        '</div>'+
-        '<div style="padding:14px 8px;">'+
-        '<div style="font-family:Fraunces,serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px;">'+v.name+'</div>'+
-        '<div style="font-size:10px;font-weight:700;color:'+roleColor+';text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">'+roleText+'</div>'+
-        '<div style="font-size:11px;color:var(--text3);">'+(v.country||'')+'</div>'+
-        '</div>';
+      var isFounder=v.category==='Director & Founder'||v.name.toLowerCase().indexOf('alex ssengonzi')!==-1;
+      var roleText=isFounder?'Founder & Director':'International Volunteer';
+      var roleColor=isFounder?'#c9a84c':'var(--gold)';
+      var card=document.createElement('div');
+      card.style.cssText='background:#fff;overflow:hidden;text-align:center;';
+      card.innerHTML='<div style="width:100%;height:220px;overflow:hidden;background:var(--navy2);">'
+        +'<img src="'+v.photoUrl+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="'+v.name+'">'
+        +'</div><div style="padding:14px 8px;">'
+        +'<div style="font-family:Fraunces,serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px;">'+v.name+'</div>'
+        +'<div style="font-size:10px;font-weight:700;color:'+roleColor+';text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">'+roleText+'</div>'
+        +'<div style="font-size:12px;color:var(--text3);">'+(v.country||'')+'</div>'
+        +'</div>';
       grid.appendChild(card);
     });
   })
-  .catch(function(e){ console.log('Volunteer load error:',e); });
+  .catch(function(e){console.log('Vol load error:',e);});
 }
 
-// ── PHOTO LOADER ──
-function loadAllPhotos() {
-  fetch(SUPA+'/rest/v1/mch_photos?select=id,filename&order=id', {
-    headers: {'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+function loadAllPhotos(){
+  fetch(SUPA+'/rest/v1/mch_photos?select=id,filename&order=id',{
+    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
   })
   .then(function(r){return r.json();})
   .then(function(rows){
     if(!Array.isArray(rows)) return;
-    var pm = {};
-    rows.forEach(function(r){if(r.filename) pm[r.id]=r.filename;});
+    var pm={};
+    rows.forEach(function(r){if(r.filename)pm[r.id]=r.filename;});
     function url(f){return SUPA+'/storage/v1/object/public/'+BUCKET+'/'+f;}
-
-    // Gallery section - load all photos
-    var gl = ['gallery_0','gallery_1','gallery_2','gallery_3','gallery_4','gallery_5',
-              'gallery_6','gallery_7','gallery_8','gallery_9','gallery_10','gallery_11','gallery_12'];
+    var nl=document.getElementById('navLogoWrap');
+    if(nl&&pm['logo']){nl.innerHTML='<img src="'+url(pm['logo'])+'" style="width:100%;height:100%;object-fit:cover;">';}
+    if(pm['gallery_0']){
+      var hw=document.getElementById('heroBgWrap');
+      if(hw){hw.innerHTML='<img src="'+url(pm['gallery_0'])+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.75;display:block;">';}
+    }
+    var aw=document.getElementById('aboutImgWrap');
+    if(aw&&pm['gallery_2']){aw.innerHTML='<img src="'+url(pm['gallery_2'])+'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">';}
     for(var i=0;i<5;i++){
       var el=document.getElementById('gi-'+i);
-      if(el&&pm[gl[i]]){
-        el.innerHTML='<img src="'+url(pm[gl[i]])+'" style="width:100%;height:100%;object-fit:cover;display:block;" onclick="openLB('+i+')">';
+      if(el&&pm['gallery_'+i]){
+        (function(idx){el.innerHTML='<img src="'+url(pm['gallery_'+idx])+'" style="width:100%;height:100%;object-fit:cover;display:block;" onclick="openLB('+idx+')">';})(i);
       }
     }
-
-    // Stories - only show if story photos uploaded
     var storyKeys=['story_0','story_1','story_2'];
     var hasStories=false;
     storyKeys.forEach(function(k,i){
       if(pm[k]){
         hasStories=true;
         var si=document.getElementById('storyImg'+(i+1));
-        if(si) si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;">';
+        if(si)si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;">';
       }
     });
-    if(!hasStories){
-      var ss=document.querySelector('.stories');
-      if(ss) ss.style.display='none';
-    }
+    if(!hasStories){var ss=document.querySelector('.stories');if(ss)ss.style.display='none';}
   })
-  .catch(function(e){console.log('Photo load error:',e);});
+  .catch(function(e){console.log('Photo error:',e);});
 }
 
-// ── GALLERY LIGHTBOX ──
 function openLB(idx){
   window._lbIdx=idx;
   var lb=document.getElementById('lightbox');
-  var img=document.getElementById('lightboxImg');
-  var ctr=document.getElementById('lightboxCounter');
-  if(!lb||!img) return;
+  if(!lb)return;
   lb.style.display='flex';
-  img.src=GALLERY_PHOTOS[idx];
-  if(ctr) ctr.textContent=(idx+1)+' / '+GALLERY_PHOTOS.length;
+  document.getElementById('lightboxImg').src=GALLERY_PHOTOS[idx];
+  var ctr=document.getElementById('lightboxCounter');
+  if(ctr)ctr.textContent=(idx+1)+' / '+GALLERY_PHOTOS.length;
   document.body.style.overflow='hidden';
 }
-function closeLightbox(){
-  document.getElementById('lightbox').style.display='none';
-  document.body.style.overflow='';
-}
+function closeLightbox(){document.getElementById('lightbox').style.display='none';document.body.style.overflow='';}
 function closeLightboxBg(e){if(e.target===document.getElementById('lightbox'))closeLightbox();}
 function lightboxNav(dir){
   var i=((window._lbIdx||0)+dir+GALLERY_PHOTOS.length)%GALLERY_PHOTOS.length;
   window._lbIdx=i;
   document.getElementById('lightboxImg').src=GALLERY_PHOTOS[i];
   var ctr=document.getElementById('lightboxCounter');
-  if(ctr) ctr.textContent=(i+1)+' / '+GALLERY_PHOTOS.length;
+  if(ctr)ctr.textContent=(i+1)+' / '+GALLERY_PHOTOS.length;
 }
 document.addEventListener('keydown',function(e){
   if(document.getElementById('lightbox').style.display==='flex'){
-    if(e.key==='Escape') closeLightbox();
-    if(e.key==='ArrowRight') lightboxNav(1);
-    if(e.key==='ArrowLeft') lightboxNav(-1);
+    if(e.key==='Escape')closeLightbox();
+    if(e.key==='ArrowRight')lightboxNav(1);
+    if(e.key==='ArrowLeft')lightboxNav(-1);
   }
 });
 
-// ── NAV & SCROLL ──
 window.addEventListener('scroll',function(){
   var nav=document.getElementById('navbar');
-  if(nav) nav.classList.toggle('scrolled',window.scrollY>50);
+  if(nav)nav.classList.toggle('scrolled',window.scrollY>50);
 },{passive:true});
 window.addEventListener('scroll',function(){
   var b=document.getElementById('scrollProgress');
-  if(!b) return;
+  if(!b)return;
   var h=document.documentElement.scrollHeight-window.innerHeight;
   b.style.width=(h>0?window.scrollY/h*100:0)+'%';
 },{passive:true});
 function openMobMenu(){document.getElementById('mobMenu').classList.add('open');}
 function closeMobMenu(){document.getElementById('mobMenu').classList.remove('open');}
 
-// ── SCROLL REVEAL ANIMATIONS ──
 function initReveal(){
-  if(!window.IntersectionObserver) {
-    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});
-    return;
-  }
+  if(!window.IntersectionObserver){document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});return;}
   var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}
-    });
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
   },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 }
 
-// ── PAGE LOADER HIDE ──
 window.addEventListener('load',function(){
   var loader=document.getElementById('pageLoader');
   setTimeout(function(){
-    if(loader){
-      loader.classList.add('hidden');
-      setTimeout(function(){if(loader)loader.style.display='none';},600);
-    }
+    if(loader){loader.classList.add('hidden');setTimeout(function(){if(loader)loader.style.display='none';},600);}
   },1000);
   loadAllPhotos();
   loadVolunteers();
   initReveal();
 });
-// Also hide loader after 3 seconds no matter what
 setTimeout(function(){
   var loader=document.getElementById('pageLoader');
-  if(loader&&loader.style.display!=='none'){
-    loader.classList.add('hidden');
-    setTimeout(function(){if(loader)loader.style.display='none';},600);
-  }
+  if(loader&&loader.style.display!=='none'){loader.classList.add('hidden');setTimeout(function(){if(loader)loader.style.display='none';},600);}
 },3000);
 
-// ── DONATE BUTTON ──
-function setAmt(v,btn){
-  document.querySelectorAll('.amt-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
-  document.getElementById('donateAmt').value=v;
-}
-function goDonate(){
-  var url=localStorage.getItem('mch_donate_url')||'https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda';
-  window.open(url,'_blank');
-}
+function setAmt(v,btn){document.querySelectorAll('.amt-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');document.getElementById('donateAmt').value=v;}
+function goDonate(){window.open(localStorage.getItem('mch_donate_url')||GFM_URL,'_blank');}
 function submitForm(){showToast('Message sent! Thank you.');}
 function submitNewsletter(){
   var name=document.getElementById('nlName').value.trim();
   var email=document.getElementById('nlEmail').value.trim();
   if(!email||!email.includes('@')){showToast('Please enter a valid email');return;}
-  var subs=[];
-  try{subs=JSON.parse(localStorage.getItem('mch_newsletter')||'[]');}catch(e){}
+  var subs=[];try{subs=JSON.parse(localStorage.getItem('mch_newsletter')||'[]');}catch(e){}
   if(subs.find(function(s){return s.email===email;})){showToast('Already subscribed!');return;}
   subs.push({name:name,email:email,date:new Date().toISOString()});
   localStorage.setItem('mch_newsletter',JSON.stringify(subs));
@@ -1266,24 +1328,21 @@ function submitNewsletter(){
   showToast('Subscribed! Thank you.');
 }
 
-// ── SECRET ADMIN TAP ──
 var tapCount=0,tapTimer=null,unlocked=false;
 function secretTap(){
   tapCount++;
-  if(tapTimer) clearTimeout(tapTimer);
+  if(tapTimer)clearTimeout(tapTimer);
   tapTimer=setTimeout(function(){tapCount=0;},2000);
   if(tapCount>=5){tapCount=0;openAdmin();}
 }
-
-// ── ADMIN PANEL ──
 function openAdmin(){
   if(!unlocked){
     document.getElementById('pwdOverlay').style.display='flex';
     setTimeout(function(){var p=document.getElementById('pwdInput');if(p)p.focus();},100);
   }else{
     document.getElementById('adminOverlay').classList.add('open');
-    loadAdminGallery();
-    loadAdminVols();
+    var firstTab=document.querySelector('.adm-tab');
+    if(firstTab)admTab('photos',firstTab);
   }
 }
 function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');}
@@ -1295,8 +1354,8 @@ function checkPwd(){
     document.getElementById('pwdOverlay').style.display='none';
     document.getElementById('pwdInput').value='';
     document.getElementById('adminOverlay').classList.add('open');
-    loadAdminGallery();
-    loadAdminVols();
+    var firstTab=document.querySelector('.adm-tab');
+    if(firstTab)admTab('photos',firstTab);
   }else{
     showToast('Wrong password!');
     document.getElementById('pwdInput').value='';
@@ -1305,10 +1364,11 @@ function checkPwd(){
 function admTab(tab,el){
   document.querySelectorAll('.adm-tab').forEach(function(t){t.classList.remove('active');});
   document.querySelectorAll('.adm-sec').forEach(function(s){s.classList.remove('active');});
-  el.classList.add('active');
-  document.getElementById('adm-'+tab).classList.add('active');
-  if(tab==='gallery') loadAdminGallery();
-  if(tab==='volunteers') loadAdminVols();
+  if(el)el.classList.add('active');
+  var sec=document.getElementById('adm-'+tab);
+  if(sec)sec.classList.add('active');
+  if(tab==='gallery')loadAdminGallery();
+  if(tab==='volunteers')loadAdminVols();
 }
 function saveDonate(){
   var url=document.getElementById('ei-donateUrl').value;
@@ -1326,232 +1386,172 @@ function changePwd(){
   showToast('Password changed!');
 }
 
-// ── UPLOAD TO SUPABASE ──
-function uploadToSupa(id,input){
-  var file=input.files[0];
-  if(!file) return;
-  var status=document.getElementById('uploadStatus');
-  if(status) status.textContent='Uploading...';
+function uploadKeyPhoto(id,input,previewId){
+  var file=input.files[0];if(!file)return;
+  var status=document.getElementById('photoUploadStatus');
+  if(status)status.textContent='Uploading...';
   var ext=file.name.split('.').pop();
   var filename=id+'_'+Date.now()+'.'+ext;
   fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{
-    method:'POST',
-    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},
-    body:file
+    method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},body:file
   })
   .then(function(r){
-    if(r.ok||r.status===200||r.status===201){
-      return fetch(SUPA+'/rest/v1/mch_photos',{
-        method:'POST',
-        headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},
-        body:JSON.stringify({id:id,filename:filename})
-      });
-    }
-    throw new Error('Upload failed: '+r.status);
+    if(!r.ok&&r.status!==200&&r.status!==201)throw new Error('Upload failed '+r.status);
+    return fetch(SUPA+'/rest/v1/mch_photos',{
+      method:'POST',
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},
+      body:JSON.stringify({id:id,filename:filename})
+    });
   })
   .then(function(){
     var url=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
+    var prev=document.getElementById(previewId);if(prev)prev.src=url;
     if(id==='founder'){
       var ap=document.getElementById('alexPhotoWrap');
-      if(ap){var img=ap.querySelector('img');if(img)img.src=url;}
-      var gf=document.getElementById('gfm-founder-img');
-      if(gf) gf.src=url;
+      if(ap){var img=ap.querySelector('img');if(img){img.src=url;img.style.objectPosition='center 60%';}}
+      var gf=document.getElementById('gfm-founder-img');if(gf)gf.src=url;
     }
-    if(id==='logo'){
-      var nl=document.getElementById('navLogoWrap');
-      if(nl){var img=nl.querySelector('img');if(img)img.src=url;}
-    }
-    if(status) status.textContent=id+' uploaded!';
-    showToast('Photo uploaded!');
-    // Update preview in admin
-    var prev=input.parentElement.previousElementSibling;
-    if(prev){var pi=prev.querySelector('img');if(pi)pi.src=url;}
+    if(id==='logo'){var nl=document.getElementById('navLogoWrap');if(nl){var img=nl.querySelector('img');if(img)img.src=url;}}
+    if(id==='gallery_0'){var hw=document.getElementById('heroBgWrap');if(hw){var img=hw.querySelector('img');if(img)img.src=url;}}
+    if(status)status.textContent=id+' updated!';
+    showToast('Photo updated!');
   })
-  .catch(function(e){
-    if(status) status.textContent='Upload failed: '+e.message;
-    showToast('Upload failed!');
-  });
+  .catch(function(e){if(status)status.textContent='Failed: '+e.message;showToast('Upload failed!');});
 }
 
-// ── ADMIN GALLERY ──
 function loadAdminGallery(){
   var grid=document.getElementById('admGalleryGrid');
-  if(!grid) return;
+  if(!grid)return;
   grid.innerHTML='<p style="font-size:12px;color:var(--text3);">Loading...</p>';
   fetch(SUPA+'/rest/v1/mch_photos?id=like.gallery_*&select=id,filename&order=id',{
     headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
   })
   .then(function(r){return r.json();})
   .then(function(rows){
-    if(!Array.isArray(rows)||!rows.length){
-      grid.innerHTML='<p style="color:var(--text3);">No gallery photos</p>';
-      return;
-    }
+    if(!Array.isArray(rows)||!rows.length){grid.innerHTML='<p>No photos</p>';return;}
     grid.innerHTML='';
     rows.forEach(function(row){
       var imgUrl=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+row.filename;
       var div=document.createElement('div');
       div.style.cssText='position:relative;aspect-ratio:1;overflow:hidden;background:#e2e8f0;';
-      var img=document.createElement('img');
-      img.src=imgUrl;
-      img.style.cssText='width:100%;height:100%;object-fit:cover;';
-      var btn=document.createElement('button');
-      btn.textContent='X';
+      var img=document.createElement('img');img.src=imgUrl;img.style.cssText='width:100%;height:100%;object-fit:cover;';
+      var btn=document.createElement('button');btn.textContent='X';
       btn.style.cssText='position:absolute;top:3px;right:3px;background:#ef4444;border:none;color:#fff;width:22px;height:22px;font-size:11px;cursor:pointer;border-radius:3px;';
-      var rowId=row.id;
-      var rowFile=row.filename;
+      var rowId=row.id,rowFile=row.filename;
       btn.onclick=function(){deleteGalleryPhoto(rowId,rowFile,div);};
-      var lbl=document.createElement('div');
-      lbl.textContent=row.id;
+      var lbl=document.createElement('div');lbl.textContent=row.id;
       lbl.style.cssText='position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;font-size:9px;padding:3px 5px;';
-      div.appendChild(img);
-      div.appendChild(btn);
-      div.appendChild(lbl);
+      div.appendChild(img);div.appendChild(btn);div.appendChild(lbl);
       grid.appendChild(div);
     });
   })
-  .catch(function(){grid.innerHTML='<p style="color:red;">Failed to load</p>';});
+  .catch(function(){grid.innerHTML='<p style="color:red;">Failed</p>';});
 }
 function deleteGalleryPhoto(id,filename,cardEl){
-  if(!confirm('Delete '+id+'?')) return;
-  fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{
-    method:'DELETE',
-    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
-  })
-  .then(function(){
-    return fetch(SUPA+'/rest/v1/mch_photos?id=eq.'+id,{
-      method:'DELETE',
-      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
-    });
-  })
-  .then(function(){if(cardEl)cardEl.remove();showToast('Photo deleted!');  })
+  if(!confirm('Delete '+id+'?'))return;
+  fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+  .then(function(){return fetch(SUPA+'/rest/v1/mch_photos?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});})
+  .then(function(){if(cardEl)cardEl.remove();showToast('Deleted!');})
   .catch(function(){showToast('Delete failed!');});
 }
 function uploadGalleryPhotos(input){
   var files=Array.from(input.files);
   var status=document.getElementById('galleryUploadStatus');
-  if(!files.length) return;
-  fetch(SUPA+'/rest/v1/mch_photos?id=like.gallery_*&select=id&order=id',{
-    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
-  })
+  if(!files.length)return;
+  fetch(SUPA+'/rest/v1/mch_photos?id=like.gallery_*&select=id&order=id',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
   .then(function(r){return r.json();})
   .then(function(rows){
     var used=rows.map(function(r){return parseInt(r.id.replace('gallery_',''));});
-    var nextId=0;
-    while(used.indexOf(nextId)!==-1) nextId++;
+    var nextId=0;while(used.indexOf(nextId)!==-1)nextId++;
     var uploaded=0;
     files.forEach(function(file,i){
       var gid='gallery_'+(nextId+i);
       var ext=file.name.split('.').pop();
       var fname=gid+'_'+Date.now()+'.'+ext;
-      fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+fname,{
-        method:'POST',
-        headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},
-        body:file
-      })
-      .then(function(){
-        return fetch(SUPA+'/rest/v1/mch_photos',{
-          method:'POST',
-          headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},
-          body:JSON.stringify({id:gid,filename:fname})
-        });
-      })
-      .then(function(){
-        uploaded++;
-        if(status) status.textContent=uploaded+'/'+files.length+' uploaded';
-        if(uploaded===files.length){loadAdminGallery();showToast('Gallery updated!');}
-      })
-      .catch(function(){if(status) status.textContent='Upload failed';});
+      fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+fname,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},body:file})
+      .then(function(){return fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:gid,filename:fname})});})
+      .then(function(){uploaded++;if(status)status.textContent=uploaded+'/'+files.length+' uploaded';if(uploaded===files.length){loadAdminGallery();showToast('Gallery updated!');}})
+      .catch(function(){if(status)status.textContent='Upload failed';});
     });
   });
 }
+
 function loadAdminVols(){
   var grid=document.getElementById('admVolGrid');
-  if(!grid) return;
-  grid.innerHTML='<p style="font-size:12px;color:var(--text3);grid-column:span 5;">Loading...</p>';
-  fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list&select=filename',{
-    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
-  })
+  if(!grid)return;
+  grid.innerHTML='<p style="font-size:12px;color:var(--text3);">Loading...</p>';
+  fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
   .then(function(r){return r.json();})
   .then(function(rows){
-    var list=[];
-    try{list=JSON.parse(rows[0].filename);}catch(e){}
+    var list=[];try{list=JSON.parse(rows[0].filename);}catch(e){}
     grid.innerHTML='';
     list.forEach(function(v,i){
       var div=document.createElement('div');
-      div.style.cssText='text-align:center;position:relative;';
-      var img=document.createElement('img');
-      img.src=v.photoUrl;
-      img.style.cssText='width:100%;aspect-ratio:1;object-fit:cover;object-position:center top;display:block;';
-      var name=document.createElement('div');
-      name.textContent=v.name;
-      name.style.cssText='font-size:11px;font-weight:700;color:var(--navy);margin-top:4px;';
-      var country=document.createElement('div');
-      country.textContent=v.country||'';
-      country.style.cssText='font-size:10px;color:var(--text3);';
-      var btn=document.createElement('button');
-      btn.textContent='Remove';
-      btn.style.cssText='background:#ef4444;color:#fff;border:none;padding:3px 8px;font-size:10px;cursor:pointer;margin-top:4px;width:100%;';
-      var idx=i;
-      btn.onclick=function(){removeVolunteer(idx);};
+      div.style.cssText='text-align:center;background:var(--cream);padding:8px;';
+      var img=document.createElement('img');img.src=v.photoUrl;img.style.cssText='width:100%;aspect-ratio:1;object-fit:cover;object-position:center top;display:block;margin-bottom:4px;';
+      var name=document.createElement('div');name.textContent=v.name;name.style.cssText='font-size:11px;font-weight:700;color:var(--navy);';
+      var country=document.createElement('div');country.textContent=v.country||'';country.style.cssText='font-size:10px;color:var(--text3);margin-bottom:4px;';
+      var btn=document.createElement('button');btn.textContent='Remove';
+      btn.style.cssText='background:#ef4444;color:#fff;border:none;padding:3px 8px;font-size:10px;cursor:pointer;width:100%;';
+      var idx=i;btn.onclick=function(){removeVolunteer(idx);};
       div.appendChild(img);div.appendChild(name);div.appendChild(country);div.appendChild(btn);
       grid.appendChild(div);
     });
   })
-  .catch(function(){grid.innerHTML='<p style="color:red;">Failed to load</p>';});
+  .catch(function(){grid.innerHTML='<p style="color:red;">Failed</p>';});
 }
-
 function removeVolunteer(idx){
-  if(!confirm('Remove this volunteer?')) return;
-  fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list&select=filename',{
-    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
-  })
+  if(!confirm('Remove volunteer?'))return;
+  fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
   .then(function(r){return r.json();})
   .then(function(rows){
-    var list=[];
-    try{list=JSON.parse(rows[0].filename);}catch(e){}
+    var list=[];try{list=JSON.parse(rows[0].filename);}catch(e){}
     list.splice(idx,1);
-    return fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list',{
-      method:'PATCH',
-      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json'},
-      body:JSON.stringify({filename:JSON.stringify(list)})
+    return fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list',{method:'PATCH',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({filename:JSON.stringify(list)})});
+  })
+  .then(function(){showToast('Removed!');loadAdminVols();loadVolunteers();})
+  .catch(function(){showToast('Failed!');});
+}
+function uploadNewVolunteer(input){
+  var file=input.files[0];if(!file)return;
+  var name=document.getElementById('newVolName').value.trim()||'Volunteer';
+  var country=document.getElementById('newVolCountry').value.trim()||'';
+  var flag=document.getElementById('newVolFlag').value.trim()||'';
+  var displayCountry=flag?flag+' '+country:country;
+  var status=document.getElementById('volUploadStatus');
+  if(status)status.textContent='Uploading...';
+  var ext=file.name.split('.').pop();
+  var filename='supporter_'+Date.now()+'_'+Date.now()+'.'+ext;
+  fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},body:file})
+  .then(function(r){
+    if(!r.ok&&r.status!==200&&r.status!==201)throw new Error('Upload failed');
+    var photoUrl=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
+    return fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+    .then(function(r){return r.json();})
+    .then(function(rows){
+      var list=[];try{list=JSON.parse(rows[0].filename);}catch(e){}
+      list.push({name:name,country:displayCountry,quote:'',category:'Volunteer',photoUrl:photoUrl});
+      return fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list',{method:'PATCH',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({filename:JSON.stringify(list)})});
     });
   })
-  .then(function(){showToast('Volunteer removed!');loadAdminVols();loadVolunteers();})
-  .catch(function(){showToast('Failed to remove');});
+  .then(function(){
+    if(status)status.textContent=name+' added!';
+    showToast(name+' added!');
+    loadAdminVols();loadVolunteers();
+    document.getElementById('newVolName').value='';
+    document.getElementById('newVolCountry').value='';
+    document.getElementById('newVolFlag').value='';
+  })
+  .catch(function(e){if(status)status.textContent='Failed: '+e.message;showToast('Upload failed!');});
 }
 
-function loadAdminVols_OLD(){
-  var grid=document.getElementById('admVolGrid');
-  if(!grid) return;
-  grid.innerHTML='';
-  [].forEach(function(v){
-    var div=document.createElement('div');
-    div.style.cssText='text-align:center;';
-    var img=document.createElement('img');
-    img.src=v.photo;
-    img.style.cssText='width:100%;aspect-ratio:1;object-fit:cover;object-position:center top;display:block;margin-bottom:6px;';
-    var name=document.createElement('div');
-    name.textContent=v.name;
-    name.style.cssText='font-size:11px;font-weight:700;color:var(--navy);';
-    var country=document.createElement('div');
-    country.textContent=v.country;
-    country.style.cssText='font-size:10px;color:var(--text3);';
-    div.appendChild(img);div.appendChild(name);div.appendChild(country);
-    grid.appendChild(div);
-  });
-}
-
-// ── TOAST ──
 function showToast(msg){
   var t=document.getElementById('toast');
-  if(!t) return;
+  if(!t)return;
   t.textContent=msg;
   t.classList.add('show');
   setTimeout(function(){t.classList.remove('show');},3000);
 }
-
-// ── FOOTER YEAR ──
 document.querySelectorAll('.footer-year').forEach(function(el){el.textContent=new Date().getFullYear();});
-// ═══ END MAIN JS ═══
+
 </script>
