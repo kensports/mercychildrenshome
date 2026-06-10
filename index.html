@@ -495,7 +495,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
         <div class="gfm-card-body">
           <div class="gfm-founder-row">
             <div class="gfm-founder-avatar">
-              <img id="gfm-founder-img" src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/founder_1776258295994.jpg" alt="Alex Ssengonzi"
+              <img id="gfm-founder-img" src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776349728259_1776349730412.jpg" alt="Alex Ssengonzi"
                    onload="this.style.display='block';document.getElementById('gfm-fa').style.display='none';"
                    onerror="this.style.display='none';">
               <span id="gfm-fa">A</span>
@@ -700,7 +700,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
   <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:380px 1fr;gap:64px;align-items:start;">
     <!-- Alex Photo -->
     <div style="position:relative;" class="reveal from-left">
-      <div id="alexPhotoWrap" style="width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--navy2);"><img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/founder_1776258295994.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Alex Ssengonzi - Founder"></div>
+      <div id="alexPhotoWrap" style="width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--navy2);"><img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776349728259_1776349730412.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;display:block;" alt="Alex Ssengonzi"></div>
       <div style="position:absolute;bottom:0;left:0;right:0;background:var(--gold);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
         <div><div style="font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:var(--navy);">Alex Ssengonzi</div><div style="font-size:10px;font-weight:700;color:rgba(13,31,60,.7);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;">Founder &amp; Director</div></div><div style="font-size:20px;">🇺🇬</div>
       </div>
@@ -1193,10 +1193,14 @@ function loadVolunteers(){
     grid.innerHTML='';
     var cols=list.length<=4?list.length:list.length<=6?3:list.length<=8?4:5;
     grid.style.gridTemplateColumns='repeat('+cols+',1fr)';
-    list.forEach(function(v){
+        list.forEach(function(v){
       var isFounder=v.category==='Director & Founder'||v.name.toLowerCase().indexOf('alex ssengonzi')!==-1;
       var roleText=isFounder?'Founder & Director':'International Volunteer';
       var roleColor=isFounder?'#c9a84c':'var(--gold)';
+      var country=(v.country||'').trim();
+      var flags={'USA':'US','Australia':'AU','Canada':'CA','Uganda':'UG','Scotland':'GB','UK':'GB','Ireland':'IE'};
+      var code=flags[country];
+      var flagHtml=code?'<img src="https://flagcdn.com/20x15/'+code.toLowerCase()+'.png" style="vertical-align:middle;margin-right:4px;" alt="'+country+'">':'';
       var card=document.createElement('div');
       card.style.cssText='background:#fff;overflow:hidden;text-align:center;';
       card.innerHTML='<div style="width:100%;height:220px;overflow:hidden;background:var(--navy2);">'
@@ -1204,7 +1208,7 @@ function loadVolunteers(){
         +'</div><div style="padding:14px 8px;">'
         +'<div style="font-family:Fraunces,serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px;">'+v.name+'</div>'
         +'<div style="font-size:10px;font-weight:700;color:'+roleColor+';text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">'+roleText+'</div>'
-        +'<div style="font-size:12px;color:var(--text3);">'+(v.country||'')+'</div>'
+        +'<div style="font-size:12px;color:var(--text3);">'+flagHtml+country+'</div>'
         +'</div>';
       grid.appendChild(card);
     });
