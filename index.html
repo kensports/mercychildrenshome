@@ -1404,8 +1404,11 @@ function loadAdminGallery(){
       btn.style.cssText='position:absolute;top:3px;right:3px;background:#ef4444;border:none;color:#fff;width:22px;height:22px;font-size:11px;cursor:pointer;border-radius:3px;';
       var rowId=row.id,rowFile=row.filename;
       btn.onclick=function(){deleteGalleryPhoto(rowId,rowFile,div);};
-      var lbl=document.createElement('div');lbl.textContent=row.id;
-      lbl.style.cssText='position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;font-size:9px;padding:3px 5px;';
+      var SPECIAL={'gallery_0':'⭐ HERO BACKGROUND','gallery_2':'⭐ ABOUT SECTION IMAGE'};
+      var isSpecial=!!SPECIAL[row.id];
+      var lbl=document.createElement('div');lbl.textContent=isSpecial?SPECIAL[row.id]:row.id;
+      lbl.style.cssText='position:absolute;bottom:0;left:0;right:0;background:'+(isSpecial?'rgba(201,168,76,.95)':'rgba(0,0,0,.6)')+';color:'+(isSpecial?'#0d1f3c':'#fff')+';font-size:9px;font-weight:'+(isSpecial?'700':'400')+';padding:3px 5px;';
+      if(isSpecial){div.style.outline='2px solid #c9a84c';}
       div.appendChild(img);div.appendChild(btn);div.appendChild(lbl);
       grid.appendChild(div);
     });
@@ -1413,6 +1416,10 @@ function loadAdminGallery(){
   .catch(function(){grid.innerHTML='<p style="color:red;">Failed</p>';});
 }
 function deleteGalleryPhoto(id,filename,cardEl){
+  var SPECIAL={'gallery_0':'the HERO BACKGROUND (top of website)','gallery_2':'the ABOUT SECTION image'};
+  if(SPECIAL[id]){
+    if(!confirm('⚠️ WARNING: This photo is '+SPECIAL[id]+'!\n\nDeleting it will remove it from the website. Are you SURE?'))return;
+  }
   if(!confirm('Delete '+id+'?'))return;
   fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
   .then(function(){return fetch(SUPA+'/rest/v1/mch_photos?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});})
