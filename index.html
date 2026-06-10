@@ -672,7 +672,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
 </div>
 
 <!-- STORIES -->
-<section class="stories" id="stories">
+<section class="stories" id="stories" style="display:none;">
   <div class="section-inner">
     <div class="label reveal"><div class="label-line"></div><span>Their Stories</span></div>
     <h2 class="big-title reveal" style="max-width:600px;">The Children<br>We <em>Serve</em></h2>
@@ -700,7 +700,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
   <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:380px 1fr;gap:64px;align-items:start;">
     <!-- Alex Photo -->
     <div style="position:relative;" class="reveal from-left">
-      <div id="alexPhotoWrap" style="width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--navy2);"><img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776349728259_1776349730412.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;display:block;" alt="Alex Ssengonzi"></div>
+      <div id="alexPhotoWrap" style="width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--navy2);"><img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/supporter_1776349728259_1776349730412.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 25%;display:block;" alt="Alex Ssengonzi"></div>
       <div style="position:absolute;bottom:0;left:0;right:0;background:var(--gold);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
         <div><div style="font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:var(--navy);">Alex Ssengonzi</div><div style="font-size:10px;font-weight:700;color:rgba(13,31,60,.7);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;">Founder &amp; Director</div></div><div style="font-size:20px;">🇺🇬</div>
       </div>
@@ -1095,7 +1095,7 @@ function loadVolunteers(){
       var roleColor=isFounder?'#c9a84c':'var(--gold)';
       var country=(v.country||'').trim();
       var flags={'USA':'us','United States':'us','America':'us','Australia':'au','Canada':'ca','Uganda':'ug','Scotland':'gb-sct','UK':'gb','United Kingdom':'gb','England':'gb-eng','Wales':'gb-wls','Ireland':'ie','Germany':'de','France':'fr','Italy':'it','Spain':'es','Portugal':'pt','Netherlands':'nl','Belgium':'be','Switzerland':'ch','Austria':'at','Sweden':'se','Norway':'no','Denmark':'dk','Finland':'fi','Iceland':'is','Poland':'pl','Czech Republic':'cz','Czechia':'cz','Slovakia':'sk','Hungary':'hu','Romania':'ro','Bulgaria':'bg','Greece':'gr','Croatia':'hr','Serbia':'rs','Slovenia':'si','Ukraine':'ua','Russia':'ru','Estonia':'ee','Latvia':'lv','Lithuania':'lt','Luxembourg':'lu','Malta':'mt','Cyprus':'cy','Albania':'al','Bosnia':'ba','Macedonia':'mk','Montenegro':'me','Moldova':'md','Belarus':'by','Monaco':'mc','Kenya':'ke','Tanzania':'tz','Rwanda':'rw','Nigeria':'ng','Ghana':'gh','South Africa':'za','Ethiopia':'et','Egypt':'eg','India':'in','China':'cn','Japan':'jp','Brazil':'br','Mexico':'mx','New Zealand':'nz','International':''};
-      var code=flags[country];
+      var countryNorm=country.charAt(0).toUpperCase()+country.slice(1).toLowerCase();if(country.toUpperCase()==='USA'||country.toUpperCase()==='UK')countryNorm=country.toUpperCase();var code=flags[country]||flags[countryNorm];
       var flagHtml=code?'<img src="https://flagcdn.com/20x15/'+code+'.png" style="vertical-align:middle;margin-right:4px;" alt="'+country+'">':'';
       var card=document.createElement('div');
       card.style.cssText='background:#fff;overflow:hidden;text-align:center;';
@@ -1145,7 +1145,7 @@ function loadAllPhotos(){
         if(si)si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;">';
       }
     });
-    if(!hasStories){var ss=document.querySelector('.stories');if(ss)ss.style.display='none';}
+    var ss=document.querySelector('.stories');if(ss)ss.style.display=hasStories?'block':'none';
   })
   .catch(function(e){console.log('Photo error:',e);});
 }
@@ -1391,14 +1391,60 @@ function loadAdminVols(){
       var img=document.createElement('img');img.src=v.photoUrl;img.style.cssText='width:100%;aspect-ratio:1;object-fit:cover;object-position:center top;display:block;margin-bottom:4px;';
       var name=document.createElement('div');name.textContent=v.name;name.style.cssText='font-size:11px;font-weight:700;color:var(--navy);';
       var country=document.createElement('div');country.textContent=v.country||'';country.style.cssText='font-size:10px;color:var(--text3);margin-bottom:4px;';
+      var idx=i;
+      var editBtn=document.createElement('button');editBtn.textContent='Edit';
+      editBtn.style.cssText='background:var(--navy);color:#fff;border:none;padding:3px 8px;font-size:10px;cursor:pointer;width:100%;margin-bottom:3px;';
+      editBtn.onclick=function(){editVolunteer(idx);};
+      var photoBtn=document.createElement('label');photoBtn.textContent='Change Photo';
+      photoBtn.style.cssText='background:#0ea5e9;color:#fff;border:none;padding:3px 8px;font-size:10px;cursor:pointer;width:100%;margin-bottom:3px;display:block;box-sizing:border-box;';
+      var photoInput=document.createElement('input');photoInput.type='file';photoInput.accept='image/*';photoInput.style.display='none';
+      photoInput.onchange=function(){changeVolunteerPhoto(idx,photoInput);};
+      photoBtn.appendChild(photoInput);
       var btn=document.createElement('button');btn.textContent='Remove';
       btn.style.cssText='background:#ef4444;color:#fff;border:none;padding:3px 8px;font-size:10px;cursor:pointer;width:100%;';
-      var idx=i;btn.onclick=function(){removeVolunteer(idx);};
-      div.appendChild(img);div.appendChild(name);div.appendChild(country);div.appendChild(btn);
+      btn.onclick=function(){removeVolunteer(idx);};
+      div.appendChild(img);div.appendChild(name);div.appendChild(country);div.appendChild(editBtn);div.appendChild(photoBtn);div.appendChild(btn);
       grid.appendChild(div);
     });
   })
   .catch(function(){grid.innerHTML='<p style="color:red;">Failed</p>';});
+}
+function editVolunteer(idx){
+  fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+  .then(function(r){return r.json();})
+  .then(function(rows){
+    var list=[];try{list=JSON.parse(rows[0].filename);}catch(e){return;}
+    var v=list[idx];if(!v)return;
+    var newName=prompt('Volunteer name:',v.name);
+    if(newName===null)return;
+    var newCountry=prompt('Country (e.g. USA, Germany, Scotland):',v.country||'');
+    if(newCountry===null)return;
+    list[idx].name=newName.trim()||v.name;
+    list[idx].country=newCountry.trim();
+    return fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list',{method:'PATCH',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({filename:JSON.stringify(list)})})
+    .then(function(){showToast('Volunteer updated!');loadAdminVols();loadVolunteers();});
+  })
+  .catch(function(){showToast('Edit failed!');});
+}
+function changeVolunteerPhoto(idx,input){
+  var file=input.files[0];if(!file)return;
+  showToast('Uploading photo...');
+  var ext=file.name.split('.').pop();
+  var filename='supporter_'+Date.now()+'_'+Date.now()+'.'+ext;
+  fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},body:file})
+  .then(function(r){
+    if(!r.ok&&r.status!==200&&r.status!==201)throw new Error('Upload failed');
+    var photoUrl=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
+    return fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+    .then(function(r){return r.json();})
+    .then(function(rows){
+      var list=[];try{list=JSON.parse(rows[0].filename);}catch(e){}
+      if(list[idx])list[idx].photoUrl=photoUrl;
+      return fetch(SUPA+'/rest/v1/mch_photos?id=eq.supporters_list',{method:'PATCH',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({filename:JSON.stringify(list)})});
+    });
+  })
+  .then(function(){showToast('Photo changed!');loadAdminVols();loadVolunteers();})
+  .catch(function(){showToast('Photo change failed!');});
 }
 function removeVolunteer(idx){
   if(!confirm('Remove volunteer?'))return;
