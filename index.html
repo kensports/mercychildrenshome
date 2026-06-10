@@ -1058,6 +1058,24 @@ function loadStories(){
   })
   .catch(function(e){console.log('Stories load error:',e);});
 }
+var STORY_TEMPLATES=[
+  {label:'Top student',tag:'Top of Class',name:'Hope, Age 8',meta:'At Mercy since 2022',text:'"Hope came to us after losing both parents. Today she is the top student in her class and dreams of becoming a doctor one day."'},
+  {label:'Health restored',tag:'Health Restored',name:'Grace, Age 6',meta:'At Mercy since 2023',text:'"Grace arrived malnourished and weak. With daily meals, love and medical care, she is now healthy, strong and full of energy."'},
+  {label:'New confidence',tag:'Thriving',name:'Mary, Age 9',meta:'At Mercy since 2022',text:'"Mary was shy and afraid to speak when she arrived. Today she leads songs during morning assembly and helps care for the younger children."'},
+  {label:'Future leader',tag:'Future Leader',name:'David, Age 11',meta:'At Mercy since 2021',text:'"David arrived alone with nothing. Today he is a confident young boy who mentors the younger children and dreams of becoming a teacher."'},
+  {label:'Rising talent',tag:'Rising Star',name:'Sarah, Age 10',meta:'At Mercy since 2023',text:'"Sarah loves to draw and sing. With school support and daily encouragement, her talent is growing every single day."'},
+  {label:'Back in school',tag:'In School Again',name:'Joseph, Age 7',meta:'At Mercy since 2024',text:'"Joseph had never been inside a classroom before coming to Mercy. Now he reads, writes and never misses a day of school."'}
+];
+function fillStoryTemplate(i,idx){
+  if(idx==='')return;
+  var t=STORY_TEMPLATES[parseInt(idx,10)];
+  if(!t)return;
+  document.getElementById('st-tag-'+i).value=t.tag;
+  document.getElementById('st-name-'+i).value=t.name;
+  document.getElementById('st-meta-'+i).value=t.meta;
+  document.getElementById('st-text-'+i).value=t.text;
+  showToast('Template filled — edit the name & age, then Save!');
+}
 function loadAdminStories(){
   var wrap=document.getElementById('admStoriesWrap');
   if(!wrap)return;
@@ -1082,6 +1100,7 @@ function loadAdminStories(){
         +'</div>'
         +'<label style="background:var(--navy);color:var(--gold);padding:6px 12px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;margin-bottom:8px;">Upload Photo<input type="file" accept="image/*" style="display:none;" onchange="uploadStoryPhoto('+i+',this)"/></label>'
         +(photoUrl?'<button onclick="deleteStory('+i+')" style="background:#ef4444;color:#fff;border:none;padding:6px 12px;font-size:10px;font-weight:700;cursor:pointer;text-transform:uppercase;margin-bottom:8px;margin-left:6px;">Delete Story</button>':'')
+        +'<select onchange="fillStoryTemplate('+i+',this.value)" style="width:100%;box-sizing:border-box;padding:6px;font-size:12px;border:1px solid var(--gold);background:#fffbe9;margin-bottom:6px;cursor:pointer;"><option value="">✨ Pick a ready-made story...</option>'+STORY_TEMPLATES.map(function(t,ti){return '<option value="'+ti+'">'+t.label+' — '+t.tag+'</option>';}).join('')+'</select>'
         +'<input id="st-tag-'+i+'" placeholder="Tag (e.g. Top of Class)" value="'+(s.tag||'').replace(/"/g,'&quot;')+'" style="width:100%;box-sizing:border-box;padding:6px;font-size:12px;border:1px solid var(--border);margin-bottom:6px;">'
         +'<input id="st-name-'+i+'" placeholder="Name (e.g. Hope, Age 8)" value="'+(s.name||'').replace(/"/g,'&quot;')+'" style="width:100%;box-sizing:border-box;padding:6px;font-size:12px;border:1px solid var(--border);margin-bottom:6px;">'
         +'<input id="st-meta-'+i+'" placeholder="Meta (e.g. At Mercy since 2022)" value="'+(s.meta||'').replace(/"/g,'&quot;')+'" style="width:100%;box-sizing:border-box;padding:6px;font-size:12px;border:1px solid var(--border);margin-bottom:6px;">'
@@ -1106,7 +1125,7 @@ function uploadStoryPhoto(i,input){
     var url=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
     var prev=document.getElementById('admStoryPrev'+i);if(prev){prev.src=url;prev.style.display='block';}
     var si=document.getElementById('storyImg'+(i+1));
-    if(si){si.style.aspectRatio='auto';si.innerHTML='<img src="'+url+'" style="width:100%;height:auto;display:block;">';}
+    if(si){si.style.aspectRatio='auto';si.innerHTML='<img src="'+url+'" style="width:100%;height:auto;display:block;min-height:120px;background:var(--navy2);" onload="this.style.minHeight=\'0\';this.style.background=\'none\';" onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.split(\'?\')[0]+\'?t=\'+Date.now();}">';}
     var sc=document.getElementById('storyCard'+(i+1));if(sc)sc.style.display='';
     var ss=document.querySelector('.stories');if(ss)ss.style.display='block';
     if(status)status.textContent='Story photo '+(i+1)+' uploaded!';
@@ -1234,7 +1253,7 @@ function loadAllPhotos(){
         hasStories=true;
         if(card)card.style.display='';
         var si=document.getElementById('storyImg'+(i+1));
-        if(si){si.style.aspectRatio='auto';si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:auto;display:block;">';}
+        if(si){si.style.aspectRatio='auto';si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:auto;display:block;min-height:120px;background:var(--navy2);" onload="this.style.minHeight=\'0\';this.style.background=\'none\';" onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.split(\'?\')[0]+\'?t=\'+Date.now();}">';}
       }else{
         if(card)card.style.display='none';
       }
