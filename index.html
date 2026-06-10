@@ -287,9 +287,9 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
 #toast.show{transform:translateY(0);opacity:1;}
 
 /* WHATSAPP */
-.wa-float{position:fixed;bottom:28px;left:28px;z-index:500;display:flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:14px 20px;border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s,box-shadow .2s;font-family:'Manrope',sans-serif;}
-.wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(37,211,102,.5);}
-.wa-float svg{width:22px;height:22px;flex-shrink:0;}
+
+
+
 
 /* ADMIN */
 .admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:600;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(8px);}
@@ -377,6 +377,16 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
   #founder > div{grid-template-columns:1fr !important;}
   #alexPhotoWrap{aspect-ratio:4/3 !important;}
 }
+
+@media(max-width:1024px){
+  .about-img-col{min-height:320px !important;}
+  .about-grid{grid-template-columns:1fr !important;}
+}
+@media(max-width:600px){
+  .about-img-col{min-height:260px !important;}
+  #founder > div{grid-template-columns:1fr !important;}
+  #volGrid{grid-template-columns:repeat(2,1fr) !important;}
+}
 </style>
 </head>
 <body>
@@ -459,7 +469,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
       <div class="gfm-card">
         <!-- Photo -->
         <div style="position:relative;overflow:hidden;">
-          <img id="gfm-hero-img" src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_3_1776241179893.jpg" alt="Alex Ssengonzi with children at Mercy Children's Home" class="gfm-hero-photo"
+          <img id="gfm-hero-img" src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_0_1776349884076.jpg" alt="Alex Ssengonzi with children at Mercy Children's Home" class="gfm-hero-photo"
                onload="this.style.display='block';document.getElementById('gfm-ph').style.display='none';"
                onerror="this.style.display='none';">
           <div id="gfm-ph" class="gfm-photo-placeholder">
@@ -567,12 +577,85 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
       </div>
       <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="btn-gold">Support These Children</a>
     </div>
-    <div class="gallery-grid" id="galleryGrid">
-      <div class="g-item" id="gi-0"><div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="g-overlay"><p></p></div></div>
-      <div class="g-item" id="gi-1"><div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="g-overlay"><p></p></div></div>
-      <div class="g-item" id="gi-2"><div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="g-overlay"><p></p></div></div>
-      <div class="g-item" id="gi-3"><div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="g-overlay"><p></p></div></div>
-      <div class="g-item" id="gi-4"><div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="g-overlay"><p></p></div></div>
+    <div class="gallery-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 280px;gap:8px;">
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;grid-row:span 2;" onclick="openLB(0)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_0_1776349884076.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Children at Mercy Home">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">Children at Mercy Home</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(1)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_1_1776260536136.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Smiles and belonging">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">Smiles and belonging</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(2)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_2_1776349507194.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Because of your kindness">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">Because of your kindness</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(3)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_0_1776349884076.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Friends from around the world">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">Friends from around the world</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(4)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_4_1776241313598.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Standing together">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">Standing together</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(5)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_5_1776241197267.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="A family of hope">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">A family of hope</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(6)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_6_1776241401689.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Moments of joy and dignity">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">Moments of joy and dignity</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(7)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_7_1776241301058.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="A safe home for every child">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">A safe home for every child</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(8)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_8_1776332642000.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Every meal is a blessing">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">Every meal is a blessing</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(9)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_9_1776332666104.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Raising hands in joy">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">Raising hands in joy</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(10)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_10_1776332747379.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Love and guidance every day">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">Love and guidance every day</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(11)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_11_1776332789001.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Faith in action">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">Faith in action</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--navy2);cursor:pointer;" onclick="openLB(12)">
+        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_12_1776332800562.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Standing together with care">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,60,.9) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <p style="font-size:13px;color:#fff;font-weight:600;">Standing together with care</p>
+        </div>
+      </div>
     </div>
     <p id="galleryEmpty" style="font-size:14px;color:var(--text3);text-align:center;margin-top:20px;display:none;">Photos loading from Supabase...</p>
   </div>
@@ -627,9 +710,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
   <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:360px 1fr;gap:64px;align-items:center;">
     <!-- Alex Photo -->
     <div style="position:relative;" class="reveal from-left">
-      <div id="alexPhotoWrap" style="width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--navy2);">
-        <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/founder_1776258295994.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Alex Ssengonzi - Founder of Mercy Children's Home" onerror="this.parentElement.style.background='var(--navy3)'">
-      </div>
+      <div id="alexPhotoWrap" style="width:100%;aspect-ratio:2/3;overflow:hidden;background:var(--navy2);"><img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/founder_1776258295994.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;" alt="Alex Ssengonzi - Founder"></div>
       <div style="position:absolute;bottom:-20px;left:20px;background:var(--gold);padding:18px 22px;">
         <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:var(--navy);">Alex Ssengonzi</div>
         <div style="font-size:10px;font-weight:700;color:rgba(13,31,60,.7);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;">Founder & Director</div>
@@ -657,119 +738,108 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
   <div style="max-width:1100px;margin:0 auto;">
     <div style="margin-bottom:56px;">
       <div class="label reveal"><div class="label-line"></div><span>Our Team</span></div>
-      <h2 class="big-title reveal">Meet Our <em>Volunteers</em></h2>
-      <p style="font-size:16px;color:var(--text2);max-width:560px;line-height:1.8;" class="reveal">From Uganda and around the world — these dedicated people give their time and love to our 32 children every single day.</p>
+      <h2 class="big-title reveal">Meet Our <em>International Volunteers</em></h2>
+      <p style="font-size:16px;color:var(--text2);max-width:560px;line-height:1.8;" class="reveal">These incredible people from around the world — USA, Australia, Scotland and beyond — give their time and love to our children.</p>
     </div>
     <div id="volGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);">
-
-      <div style="background:#fff;overflow:hidden;text-align:center;transition:transform .3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
-        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">
-          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257126280_1776257126472.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Raymond" onerror="this.style.display='none'">
+      <div style="background:#fff;overflow:hidden;text-align:center;">
+        <div style="width:100%;padding-top:100%;position:relative;overflow:hidden;background:var(--navy2);">
+          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257126280_1776257126472.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Raymond" onerror="this.parentElement.parentElement.style.display='none'">
         </div>
-        <div style="padding:18px 14px;">
-          <div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Raymond</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Volunteer</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;">🇺🇸 USA</div>
-        </div>
-      </div>
-      <div style="background:#fff;overflow:hidden;text-align:center;transition:transform .3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
-        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">
-          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257390365_1776257390481.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Debbie" onerror="this.style.display='none'">
-        </div>
-        <div style="padding:18px 14px;">
-          <div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Debbie</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Volunteer</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;">🇺🇸 USA</div>
+        <div style="padding:16px 12px;">
+          <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:3px;">Raymond</div>
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">International Volunteer</div>
+          <div style="font-size:11px;color:var(--text3);">🇺🇸 USA</div>
         </div>
       </div>
-      <div style="background:#fff;overflow:hidden;text-align:center;transition:transform .3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
-        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">
-          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257462216_1776257462349.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Simpson" onerror="this.style.display='none'">
+      <div style="background:#fff;overflow:hidden;text-align:center;">
+        <div style="width:100%;padding-top:100%;position:relative;overflow:hidden;background:var(--navy2);">
+          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257390365_1776257390481.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Debbie" onerror="this.parentElement.parentElement.style.display='none'">
         </div>
-        <div style="padding:18px 14px;">
-          <div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Simpson</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Volunteer</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;">🇺🇸 USA</div>
-        </div>
-      </div>
-      <div style="background:#fff;overflow:hidden;text-align:center;transition:transform .3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
-        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">
-          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257506269_1776257506397.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Sheryl" onerror="this.style.display='none'">
-        </div>
-        <div style="padding:18px 14px;">
-          <div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Sheryl</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Volunteer</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;">🇺🇸 USA</div>
+        <div style="padding:16px 12px;">
+          <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:3px;">Debbie</div>
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">International Volunteer</div>
+          <div style="font-size:11px;color:var(--text3);">🇺🇸 USA</div>
         </div>
       </div>
-      <div style="background:#fff;overflow:hidden;text-align:center;transition:transform .3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
-        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">
-          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257610228_1776257610343.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Michael" onerror="this.style.display='none'">
+      <div style="background:#fff;overflow:hidden;text-align:center;">
+        <div style="width:100%;padding-top:100%;position:relative;overflow:hidden;background:var(--navy2);">
+          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257462216_1776257462349.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Simpson" onerror="this.parentElement.parentElement.style.display='none'">
         </div>
-        <div style="padding:18px 14px;">
-          <div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Michael</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Volunteer</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;">🇺🇸 USA</div>
-        </div>
-      </div>
-      <div style="background:#fff;overflow:hidden;text-align:center;transition:transform .3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
-        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">
-          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257662828_1776257662935.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Bushy Brum" onerror="this.style.display='none'">
-        </div>
-        <div style="padding:18px 14px;">
-          <div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Bushy Brum</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Volunteer</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;">🇦🇺 Australia</div>
+        <div style="padding:16px 12px;">
+          <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:3px;">Simpson</div>
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">International Volunteer</div>
+          <div style="font-size:11px;color:var(--text3);">🇺🇸 USA</div>
         </div>
       </div>
-      <div style="background:#fff;overflow:hidden;text-align:center;transition:transform .3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
-        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">
-          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257707676_1776257707784.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Jonathan" onerror="this.style.display='none'">
+      <div style="background:#fff;overflow:hidden;text-align:center;">
+        <div style="width:100%;padding-top:100%;position:relative;overflow:hidden;background:var(--navy2);">
+          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257506269_1776257506397.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Sheryl" onerror="this.parentElement.parentElement.style.display='none'">
         </div>
-        <div style="padding:18px 14px;">
-          <div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Jonathan</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Volunteer</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;">🇺🇸 USA</div>
-        </div>
-      </div>
-      <div style="background:#fff;overflow:hidden;text-align:center;transition:transform .3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
-        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">
-          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257755323_1776257755441.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Spiers" onerror="this.style.display='none'">
-        </div>
-        <div style="padding:18px 14px;">
-          <div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Spiers</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Volunteer</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland</div>
+        <div style="padding:16px 12px;">
+          <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:3px;">Sheryl</div>
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">International Volunteer</div>
+          <div style="font-size:11px;color:var(--text3);">🇺🇸 USA</div>
         </div>
       </div>
-      <div style="background:#fff;overflow:hidden;text-align:center;transition:transform .3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
-        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">
-          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257795284_1776257795378.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Scammell" onerror="this.style.display='none'">
+      <div style="background:#fff;overflow:hidden;text-align:center;">
+        <div style="width:100%;padding-top:100%;position:relative;overflow:hidden;background:var(--navy2);">
+          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257610228_1776257610343.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Michael" onerror="this.parentElement.parentElement.style.display='none'">
         </div>
-        <div style="padding:18px 14px;">
-          <div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Scammell</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Volunteer</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;">🌍 International</div>
-        </div>
-      </div>
-      <div style="background:#fff;overflow:hidden;text-align:center;transition:transform .3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
-        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">
-          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257839586_1776257839715.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Stensland" onerror="this.style.display='none'">
-        </div>
-        <div style="padding:18px 14px;">
-          <div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Stensland</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Volunteer</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;">🇺🇸 USA</div>
+        <div style="padding:16px 12px;">
+          <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:3px;">Michael</div>
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">International Volunteer</div>
+          <div style="font-size:11px;color:var(--text3);">🇺🇸 USA</div>
         </div>
       </div>
-      <div style="background:#fff;overflow:hidden;text-align:center;transition:transform .3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
-        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);">
-          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776260661845_1776260662039.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'" alt="Alex Ssengonzi" onerror="this.style.display='none'">
+      <div style="background:#fff;overflow:hidden;text-align:center;">
+        <div style="width:100%;padding-top:100%;position:relative;overflow:hidden;background:var(--navy2);">
+          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257662828_1776257662935.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Bushy Brum" onerror="this.parentElement.parentElement.style.display='none'">
         </div>
-        <div style="padding:18px 14px;">
-          <div style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;">Alex Ssengonzi</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;">Founder & Director</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;">🇺🇬 Uganda</div>
+        <div style="padding:16px 12px;">
+          <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:3px;">Bushy Brum</div>
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">International Volunteer</div>
+          <div style="font-size:11px;color:var(--text3);">🇦🇺 Australia</div>
+        </div>
+      </div>
+      <div style="background:#fff;overflow:hidden;text-align:center;">
+        <div style="width:100%;padding-top:100%;position:relative;overflow:hidden;background:var(--navy2);">
+          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257707676_1776257707784.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Jonathan" onerror="this.parentElement.parentElement.style.display='none'">
+        </div>
+        <div style="padding:16px 12px;">
+          <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:3px;">Jonathan</div>
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">International Volunteer</div>
+          <div style="font-size:11px;color:var(--text3);">🇺🇸 USA</div>
+        </div>
+      </div>
+      <div style="background:#fff;overflow:hidden;text-align:center;">
+        <div style="width:100%;padding-top:100%;position:relative;overflow:hidden;background:var(--navy2);">
+          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257755323_1776257755441.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Spiers" onerror="this.parentElement.parentElement.style.display='none'">
+        </div>
+        <div style="padding:16px 12px;">
+          <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:3px;">Spiers</div>
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">International Volunteer</div>
+          <div style="font-size:11px;color:var(--text3);">🏴 Scotland</div>
+        </div>
+      </div>
+      <div style="background:#fff;overflow:hidden;text-align:center;">
+        <div style="width:100%;padding-top:100%;position:relative;overflow:hidden;background:var(--navy2);">
+          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257795284_1776257795378.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Scammell" onerror="this.parentElement.parentElement.style.display='none'">
+        </div>
+        <div style="padding:16px 12px;">
+          <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:3px;">Scammell</div>
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">International Volunteer</div>
+          <div style="font-size:11px;color:var(--text3);">🌍 International</div>
+        </div>
+      </div>
+      <div style="background:#fff;overflow:hidden;text-align:center;">
+        <div style="width:100%;padding-top:100%;position:relative;overflow:hidden;background:var(--navy2);">
+          <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257839586_1776257839715.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Stensland" onerror="this.parentElement.parentElement.style.display='none'">
+        </div>
+        <div style="padding:16px 12px;">
+          <div style="font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:3px;">Stensland</div>
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">International Volunteer</div>
+          <div style="font-size:11px;color:var(--text3);">🇺🇸 USA</div>
         </div>
       </div>
     </div>
@@ -844,14 +914,86 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
     <div class="contact-grid">
       <div>
         <div class="c-list">
-          <div class="c-item reveal"><div class="c-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4>Location</h4><p>Kasanda Bukuya, Uganda</p></div></div>
-          <div class="c-item reveal d1"><div class="c-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18C.07.13.96-.01 2.02 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg></div><div><h4>Phone / WhatsApp</h4><p>+256 751 442 505</p></div></div>
-          <div class="c-item reveal d2"><div class="c-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><h4>Email</h4><a href="mailto:mercychildrenshome@gmail.com">mercychildrenshome@gmail.com</a></div></div>
-          <div class="c-item reveal d3"><div class="c-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><h4>Website</h4><a href="https://kensports.github.io/mercychildrenshome" target="_blank">kensports.github.io/mercychildrenshome</a></div></div>
+          <div class="c-item reveal">
+            <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><h4>Location</h4><p>Kasanda Bukuya, Mityana District, Uganda</p></div>
+          </div>
+          <div class="c-item reveal d1">
+            <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18C.07.13.96-.01 2.02 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg></div>
+            <div><h4>Phone / WhatsApp</h4><p><a href="https://wa.me/256751442505" target="_blank" style="color:var(--text2);">+256 751 442 505</a></p></div>
+          </div>
+          <div class="c-item reveal d2">
+            <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><h4>Email</h4><p><a href="mailto:mercychildrenshomeug2024@gmail.com" style="color:var(--text2);">mercychildrenshomeug2024@gmail.com</a></p></div>
+          </div>
         </div>
-        <div class="socials" style="margin-top:32px;">
-          <a href="https://wa.me/256751442505" target="_blank" class="soc"><svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-          <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="soc" style="background:#02a95c;"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></a>
+
+        <!-- FOLLOW US -->
+        <div style="margin-top:36px;">
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:18px;display:flex;align-items:center;gap:12px;"><div style="width:28px;height:1px;background:var(--gold);"></div>Follow Us</div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+
+            <!-- YouTube -->
+            <a href="https://youtube.com/@mercychidrenshomeug4969" target="_blank"
+               style="display:flex;align-items:center;gap:10px;background:var(--navy);border:1px solid var(--border-navy);padding:11px 18px;text-decoration:none;transition:border-color .2s;min-width:160px;"
+               onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border-navy)'">
+              <svg style="width:20px;height:20px;flex-shrink:0;" viewBox="0 0 24 24" fill="#ff0000"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#fff;">YouTube</div>
+                <div style="font-size:10px;color:rgba(255,255,255,.45);">@mercychidrenshomeug</div>
+              </div>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/mercychildrensfamilyuganda" target="_blank"
+               style="display:flex;align-items:center;gap:10px;background:var(--navy);border:1px solid var(--border-navy);padding:11px 18px;text-decoration:none;transition:border-color .2s;min-width:160px;"
+               onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border-navy)'">
+              <svg style="width:20px;height:20px;flex-shrink:0;" viewBox="0 0 24 24" fill="none" stroke="url(#igGrad)" stroke-width="2">
+                <defs><linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f09433"/><stop offset="25%" style="stop-color:#e6683c"/><stop offset="50%" style="stop-color:#dc2743"/><stop offset="75%" style="stop-color:#cc2366"/><stop offset="100%" style="stop-color:#bc1888"/></linearGradient></defs>
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="#dc2743" stroke="none"/>
+              </svg>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#fff;">Instagram</div>
+                <div style="font-size:10px;color:rgba(255,255,255,.45);">@mercychildrensfamilyuganda</div>
+              </div>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/TheloveofJesusfoundation" target="_blank"
+               style="display:flex;align-items:center;gap:10px;background:var(--navy);border:1px solid var(--border-navy);padding:11px 18px;text-decoration:none;transition:border-color .2s;min-width:160px;"
+               onmouseover="this.style.borderColor='var(--gold)'" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border-navy)'">
+              <svg style="width:20px;height:20px;flex-shrink:0;" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#fff;">Facebook</div>
+                <div style="font-size:10px;color:rgba(255,255,255,.45);">TheloveofJesusfoundation</div>
+              </div>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@mercy.home.ug" target="_blank"
+               style="display:flex;align-items:center;gap:10px;background:var(--navy);border:1px solid var(--border-navy);padding:11px 18px;text-decoration:none;transition:border-color .2s;min-width:160px;"
+               onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border-navy)'">
+              <svg style="width:20px;height:20px;flex-shrink:0;" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.78a4.85 4.85 0 01-1.01-.09z"/></svg>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#fff;">TikTok</div>
+                <div style="font-size:10px;color:rgba(255,255,255,.45);">@mercy.home.ug</div>
+              </div>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/256751442505?text=Hello%2C%20I%20want%20to%20know%20more%20about%20Mercy%20Children%27s%20Home" target="_blank"
+               style="display:flex;align-items:center;gap:10px;background:var(--navy);border:1px solid var(--border-navy);padding:11px 18px;text-decoration:none;transition:border-color .2s;min-width:160px;"
+               onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border-navy)'">
+              <svg style="width:20px;height:20px;flex-shrink:0;" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#fff;">WhatsApp</div>
+                <div style="font-size:10px;color:rgba(255,255,255,.45);">+256 751 442 505</div>
+              </div>
+            </a>
+
+          </div>
         </div>
       </div>
       <div class="contact-form reveal from-right">
@@ -922,279 +1064,515 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
 <div class="admin-overlay" id="adminOverlay">
   <div class="admin-panel">
     <div class="adm-handle"></div>
-    <div class="adm-hdr"><h2>Admin Panel — Mercy Children's Home</h2><button class="adm-close" onclick="closeAdmin()">✕</button></div>
+    <div class="adm-hdr">
+      <h2>Admin Panel — Mercy Children's Home</h2>
+      <button class="adm-close" onclick="closeAdmin()">✕</button>
+    </div>
     <div class="adm-tabs">
       <button class="adm-tab active" onclick="admTab('photos',this)">📷 Photos</button>
-      <button class="adm-tab" onclick="admTab('content',this)">✏️ Content</button>
+      <button class="adm-tab" onclick="admTab('gallery',this)">🖼 Gallery</button>
+      <button class="adm-tab" onclick="admTab('volunteers',this)">👥 Volunteers</button>
       <button class="adm-tab" onclick="admTab('donate',this)">💰 Donate</button>
       <button class="adm-tab" onclick="admTab('settings',this)">⚙️ Settings</button>
     </div>
     <div class="adm-body">
+
+      <!-- PHOTOS TAB -->
       <div class="adm-sec active" id="adm-photos">
-        <p style="font-size:13px;color:var(--text3);margin-bottom:20px;">Photos load automatically from Supabase. Upload here as local backup.</p>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+        <p style="font-size:13px;color:var(--text3);margin-bottom:20px;">Upload key photos — saved to Supabase automatically.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+
+          <!-- Hero Photo -->
           <div style="background:var(--cream);border:1px solid var(--border);padding:14px;">
-            <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Hero Photo</div>
-            <div id="heroThumb" style="width:100%;height:70px;background:#e2e8f0;margin-bottom:8px;overflow:hidden;"></div>
-            <label style="background:var(--navy);color:var(--gold);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;letter-spacing:1px;">Upload<input type="file" accept="image/*" style="display:none;" onchange="handleHeroImg(event)"/></label>
+            <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Hero Background</div>
+            <div style="width:100%;aspect-ratio:16/9;background:#e2e8f0;margin-bottom:8px;overflow:hidden;">
+              <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_0_1776349884076.jpg" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <label style="background:var(--navy);color:var(--gold);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;">
+              Upload New
+              <input type="file" accept="image/*" style="display:none;" onchange="uploadToSupa('gallery_0',this)"/>
+            </label>
           </div>
+
+          <!-- Founder Photo -->
           <div style="background:var(--cream);border:1px solid var(--border);padding:14px;">
-            <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">About Photo</div>
-            <div id="aboutThumb" style="width:100%;height:70px;background:#e2e8f0;margin-bottom:8px;overflow:hidden;"></div>
-            <label style="background:var(--navy);color:var(--gold);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;letter-spacing:1px;">Upload<input type="file" accept="image/*" style="display:none;" onchange="handleAboutImg(event)"/></label>
+            <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Alex (Founder Photo)</div>
+            <div style="width:100%;aspect-ratio:1;background:#e2e8f0;margin-bottom:8px;overflow:hidden;">
+              <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/founder_1776258295994.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+            </div>
+            <label style="background:var(--navy);color:var(--gold);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;">
+              Upload New
+              <input type="file" accept="image/*" style="display:none;" onchange="uploadToSupa('founder',this)"/>
+            </label>
+          </div>
+
+          <!-- Logo -->
+          <div style="background:var(--cream);border:1px solid var(--border);padding:14px;">
+            <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Logo / Nav Icon</div>
+            <div style="width:100%;aspect-ratio:1;background:#e2e8f0;margin-bottom:8px;overflow:hidden;">
+              <img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/logo_1777409225544.jpg" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <label style="background:var(--navy);color:var(--gold);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;">
+              Upload New
+              <input type="file" accept="image/*" style="display:none;" onchange="uploadToSupa('logo',this)"/>
+            </label>
           </div>
         </div>
-        <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Gallery Photos (up to 5)</div>
-        <div id="galleryAdminGrid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;"></div>
+        <div id="uploadStatus" style="margin-top:12px;font-size:13px;color:var(--text2);"></div>
       </div>
-      <div class="adm-sec" id="adm-content">
-        <div class="af"><label>Hero Description</label><textarea id="ei-hdesc">Mercy Children's Home provides shelter, food, education and unconditional love to 32 orphaned children in Kasanda Bukuya, Uganda. Founded by Alex Ssengonzi in 2020.</textarea></div>
-        <div class="af"><label>Founder Quote</label><textarea id="ei-fquote">We didn't start with money. We started with love. And love has been enough.</textarea></div>
-        <button class="adm-btn" onclick="saveContent()">Save Content</button>
+
+      <!-- GALLERY TAB -->
+      <div class="adm-sec" id="adm-gallery">
+        <p style="font-size:13px;color:var(--text3);margin-bottom:16px;">Manage gallery photos. Click photo to delete. Upload new ones below.</p>
+        <div id="admGalleryGrid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px;"></div>
+        <label style="background:var(--navy);color:var(--gold);padding:10px 20px;font-size:11px;font-weight:700;cursor:pointer;display:inline-block;text-transform:uppercase;letter-spacing:1px;">
+          + Add Gallery Photo
+          <input type="file" accept="image/*" multiple style="display:none;" onchange="uploadGalleryPhotos(this)"/>
+        </label>
+        <div id="galleryUploadStatus" style="margin-top:12px;font-size:13px;color:var(--text2);"></div>
       </div>
+
+      <!-- VOLUNTEERS TAB -->
+      <div class="adm-sec" id="adm-volunteers">
+        <p style="font-size:13px;color:var(--text3);margin-bottom:16px;">International volunteers shown on the website. These are loaded from Supabase team_data.</p>
+        <div id="admVolGrid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px;"></div>
+        <p style="font-size:12px;color:var(--text3);margin-top:8px;">To update volunteer photos, edit the Supabase team_data table directly in the Supabase dashboard.</p>
+      </div>
+
+      <!-- DONATE TAB -->
       <div class="adm-sec" id="adm-donate">
-        <p style="font-size:13px;color:var(--text3);margin-bottom:16px;">The GoFundMe link is set. Change it here if needed.</p>
-        <div class="af"><label>GoFundMe / Donation Link</label><input type="text" id="ei-donateUrl" value="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda"/></div>
+        <p style="font-size:13px;color:var(--text3);margin-bottom:16px;">GoFundMe / Donation link used on all donate buttons.</p>
+        <div class="af"><label>GoFundMe Link</label><input type="text" id="ei-donateUrl" value="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda"/></div>
         <button class="adm-btn" onclick="saveDonate()">Save Link</button>
       </div>
+
+      <!-- SETTINGS TAB -->
       <div class="adm-sec" id="adm-settings">
         <div class="af"><label>New Password</label><input type="password" id="newPwd" placeholder="Enter new password"/></div>
         <div class="af"><label>Confirm Password</label><input type="password" id="newPwd2" placeholder="Confirm new password"/></div>
         <button class="adm-btn" onclick="changePwd()" style="margin-bottom:16px;">Change Password</button>
         <div style="height:1px;background:var(--border);margin:16px 0;"></div>
-        <button class="adm-btn danger" onclick="resetAll()">⚠️ Reset All Local Data</button>
+        <button class="adm-btn danger" onclick="if(confirm('Reset all local data?')){localStorage.clear();location.reload();}">⚠️ Reset Local Data</button>
       </div>
+
     </div>
   </div>
 </div>
-
-<!-- WHATSAPP FLOAT -->
-<a class="wa-float" href="https://wa.me/256751442505?text=Hello%2C%20I%20want%20to%20know%20more%20about%20Mercy%20Children%27s%20Home" target="_blank">
-  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  Chat With Us
-</a>
 
 <!-- TOAST -->
 <div id="toast"><span id="toastMsg">Saved!</span></div>
 
 <script>
-// ═══════════════════════════════════════
-// SUPABASE CONFIG
-// ═══════════════════════════════════════
+// ═══ MERCY CHILDREN HOME — MAIN JS ═══
 var SUPA = 'https://qbyisxlqpuwowbtrying.supabase.co';
 var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFieWlzeGxxcHV3b3didHJ5aW5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NzczNDMsImV4cCI6MjA5MTE1MzM0M30.D5SKyI3Ay5uFoVvxEOYIKKPnSORxwYoP0PPqdB1OTao';
 var BUCKET = 'mercy-photos';
 
-function supaFetch(table, query){
-  return fetch(SUPA+'/rest/v1/'+table+'?'+query, {
-    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
-  }).then(function(r){return r.json();});
-}
+var GALLERY_PHOTOS = [
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_0_1776349884076.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_1_1776260536136.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_2_1776349507194.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_3_1776241179893.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_4_1776241313598.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_5_1776241197267.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_6_1776241401689.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_7_1776241301058.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_8_1776332642000.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_9_1776332666104.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_10_1776332747379.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_11_1776332789001.jpg",
+  "https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_12_1776332800562.jpg",
+];
 
-function photoUrl(filename){
-  return SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
-}
+var VOLUNTEERS_DATA = [
+  {name:"Raymond",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257126280_1776257126472.jpg"},
+  {name:"Debbie",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257390365_1776257390481.jpg"},
+  {name:"Simpson",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257462216_1776257462349.jpg"},
+  {name:"Sheryl",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257506269_1776257506397.jpg"},
+  {name:"Michael",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257610228_1776257610343.jpg"},
+  {name:"Bushy Brum",country:"Australia",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257662828_1776257662935.jpg"},
+  {name:"Jonathan",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257707676_1776257707784.jpg"},
+  {name:"Spiers",country:"Scotland",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257755323_1776257755441.jpg"},
+  {name:"Scammell",country:"International",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257795284_1776257795378.jpg"},
+  {name:"Stensland",country:"USA",photo:"https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/team_1776257839586_1776257839715.jpg"},
+];
 
-// Load all photos from Supabase
-function loadSupabasePhotos(){
-  supaFetch('mch_photos','select=id,filename&order=id')
+// ── PHOTO LOADER ──
+function loadAllPhotos() {
+  fetch(SUPA+'/rest/v1/mch_photos?select=id,filename&order=id', {
+    headers: {'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+  })
+  .then(function(r){return r.json();})
   .then(function(rows){
     if(!Array.isArray(rows)) return;
-    var photoMap = {};
-    rows.forEach(function(r){ if(r.filename) photoMap[r.id] = r.filename; });
+    var pm = {};
+    rows.forEach(function(r){if(r.filename) pm[r.id]=r.filename;});
+    function url(f){return SUPA+'/storage/v1/object/public/'+BUCKET+'/'+f;}
 
-    // Hero right side photo
-    var heroKey = photoMap['gallery_0'] || photoMap['gallery_1'];
-    if(heroKey){
-      var hw = document.getElementById('heroBgWrap');
-      if(hw) hw.innerHTML = '<img src="'+photoUrl(heroKey)+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.75;display:block;"/>';
-    }
-
-    // About section photo
-    var aboutKey = photoMap['gallery_2'] || photoMap['gallery_1'];
-    if(aboutKey){
-      var aw = document.getElementById('aboutImgWrap');
-      if(aw){ aw.style.cssText='position:absolute;inset:0;'; aw.innerHTML = '<img src="'+photoUrl(aboutKey)+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"/>'; }
-    }
-
-    // GoFundMe card - main photo (use gallery_0 = children, not gallery_1 = building)
-    var gfmKey = photoMap['gallery_0'] || photoMap['gallery_2'];
-    if(gfmKey){
-      var gi = document.getElementById('gfm-hero-img');
-      if(gi) gi.src = photoUrl(gfmKey);
-    }
-
-    // GoFundMe founder avatar
-    if(photoMap['founder']){
-      var fi = document.getElementById('gfm-founder-img');
-      if(fi) fi.src = photoUrl(photoMap['founder']);
-    }
-
-    // Nav logo
-    if(photoMap['logo'] || photoMap['gallery_0']){
-      var logoKey = photoMap['logo'] || photoMap['gallery_0'];
-      var nl = document.getElementById('navLogoWrap');
-      if(nl) nl.innerHTML = '<img src="'+photoUrl(logoKey)+'" style="width:100%;height:100%;object-fit:cover;"/>';
-    }
-
-    // Gallery - use gallery_0 through gallery_4
-    var galleryKeys = ['gallery_0','gallery_1','gallery_2','gallery_3','gallery_4',
-                       'gallery_5','gallery_6','gallery_7','gallery_8','gallery_9',
-                       'gallery_10','gallery_11','gallery_12'];
-    var galleryPhotos = [];
-    galleryKeys.forEach(function(k){ if(photoMap[k]) galleryPhotos.push(photoUrl(photoMap[k])); });
-
+    // Gallery section - load all photos
+    var gl = ['gallery_0','gallery_1','gallery_2','gallery_3','gallery_4','gallery_5',
+              'gallery_6','gallery_7','gallery_8','gallery_9','gallery_10','gallery_11','gallery_12'];
     for(var i=0;i<5;i++){
-      var el = document.getElementById('gi-'+i);
-      if(el && galleryPhotos[i]){
-        el.innerHTML = '<img src="'+galleryPhotos[i]+'" style="width:100%;height:100%;object-fit:cover;display:block;"/><div class="g-overlay"><p></p></div>';
-        (function(idx, url){
-          el.onclick = function(){ openLightbox(galleryPhotos, idx); };
-        })(i, galleryPhotos[i]);
+      var el=document.getElementById('gi-'+i);
+      if(el&&pm[gl[i]]){
+        el.innerHTML='<img src="'+url(pm[gl[i]])+'" style="width:100%;height:100%;object-fit:cover;display:block;" onclick="openLB('+i+')">';
       }
     }
 
-    // Volunteers hardcoded with real URLs
-
-    // Story images - load from Supabase story slots OR hide if not uploaded
-    var storyKeys = ['story_0','story_1','story_2','volunteer_0','volunteer_1','volunteer_2'];
-    var storyPhotos = [];
-    // Check dedicated story slots first, then fall back to volunteer photos
-    ['story_0','story_1','story_2'].forEach(function(k,idx){
-      var key = photoMap[k] || photoMap['volunteer_'+idx];
-      if(key) storyPhotos[idx] = photoUrl(key);
+    // Stories - only show if story photos uploaded
+    var storyKeys=['story_0','story_1','story_2'];
+    var hasStories=false;
+    storyKeys.forEach(function(k,i){
+      if(pm[k]){
+        hasStories=true;
+        var si=document.getElementById('storyImg'+(i+1));
+        if(si) si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;">';
+      }
     });
-    
-    var storySection = document.querySelector('.stories');
-    var hasStories = storyPhotos.filter(Boolean).length > 0;
-    
-    // If no story photos at all, hide the whole stories section
-    if(!hasStories && storySection){
-      storySection.style.display = 'none';
-    } else {
-      // Show cards that have photos, hide cards that don't
-      for(var si=0;si<3;si++){
-        var card = document.querySelector('.story-card.reveal.d'+(si+1));
-        if(storyPhotos[si]){
-          var imgDiv = document.getElementById('storyImg'+(si+1));
-          if(imgDiv) imgDiv.innerHTML = '<img src="'+storyPhotos[si]+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;inset:0;display:block;"/>';
-        } else {
-          // Hide this story card if no photo
-          if(card) card.style.display = 'none';
-        }
-      }
+    if(!hasStories){
+      var ss=document.querySelector('.stories');
+      if(ss) ss.style.display='none';
     }
-
-    var empty = document.getElementById('galleryEmpty');
-    if(empty) empty.style.display = galleryPhotos.length ? 'none' : 'block';
   })
-  .catch(function(e){ console.log('Supabase load error:', e); });
+  .catch(function(e){console.log('Photo load error:',e);});
 }
 
-// ═══════════════════════════════════════
-// ADMIN & LOCAL STORAGE
-// ═══════════════════════════════════════
-var DKEY = 'mch_data';
-var DEF = { pwd:'mercy2020', donateUrl:'https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda' };
-
-function getData(){ try{ return Object.assign({},DEF,JSON.parse(localStorage.getItem(DKEY)||'{}')); }catch(e){ return Object.assign({},DEF); } }
-function setData(d){ localStorage.setItem(DKEY,JSON.stringify(d)); }
-
-function setAmt(v,btn){ document.querySelectorAll('.amt-btn').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); document.getElementById('donateAmt').value=v; }
-function goDonate(){ var d=getData(); window.open(d.donateUrl,'_blank'); }
-function submitForm(){ showToast("Message sent! We'll reply soon 🙏"); }
-
-// LIGHTBOX
-function openLightbox(photos, idx){
-  window._lbPhotos = photos; window._lbIdx = idx;
-  document.getElementById('lightbox').style.display='flex';
-  document.getElementById('lightboxImg').src = photos[idx];
-  document.getElementById('lightboxCounter').textContent = (idx+1)+' / '+photos.length;
+// ── GALLERY LIGHTBOX ──
+function openLB(idx){
+  window._lbIdx=idx;
+  var lb=document.getElementById('lightbox');
+  var img=document.getElementById('lightboxImg');
+  var ctr=document.getElementById('lightboxCounter');
+  if(!lb||!img) return;
+  lb.style.display='flex';
+  img.src=GALLERY_PHOTOS[idx];
+  if(ctr) ctr.textContent=(idx+1)+' / '+GALLERY_PHOTOS.length;
   document.body.style.overflow='hidden';
 }
-function closeLightbox(){ document.getElementById('lightbox').style.display='none'; document.body.style.overflow=''; }
-function closeLightboxBg(e){ if(e.target===document.getElementById('lightbox'))closeLightbox(); }
-function lightboxNav(dir){ var p=window._lbPhotos||[]; var i=((window._lbIdx||0)+dir+p.length)%p.length; openLightbox(p,i); }
-document.addEventListener('keydown',function(e){ if(document.getElementById('lightbox').style.display==='flex'){ if(e.key==='Escape')closeLightbox(); if(e.key==='ArrowRight')lightboxNav(1); if(e.key==='ArrowLeft')lightboxNav(-1); } });
+function closeLightbox(){
+  document.getElementById('lightbox').style.display='none';
+  document.body.style.overflow='';
+}
+function closeLightboxBg(e){if(e.target===document.getElementById('lightbox'))closeLightbox();}
+function lightboxNav(dir){
+  var i=((window._lbIdx||0)+dir+GALLERY_PHOTOS.length)%GALLERY_PHOTOS.length;
+  window._lbIdx=i;
+  document.getElementById('lightboxImg').src=GALLERY_PHOTOS[i];
+  var ctr=document.getElementById('lightboxCounter');
+  if(ctr) ctr.textContent=(i+1)+' / '+GALLERY_PHOTOS.length;
+}
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('lightbox').style.display==='flex'){
+    if(e.key==='Escape') closeLightbox();
+    if(e.key==='ArrowRight') lightboxNav(1);
+    if(e.key==='ArrowLeft') lightboxNav(-1);
+  }
+});
 
-// NAV
-window.addEventListener('scroll',function(){ document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50); },{passive:true});
-function openMobMenu(){ document.getElementById('mobMenu').classList.add('open'); }
-function closeMobMenu(){ document.getElementById('mobMenu').classList.remove('open'); }
+// ── NAV & SCROLL ──
+window.addEventListener('scroll',function(){
+  var nav=document.getElementById('navbar');
+  if(nav) nav.classList.toggle('scrolled',window.scrollY>50);
+},{passive:true});
+window.addEventListener('scroll',function(){
+  var b=document.getElementById('scrollProgress');
+  if(!b) return;
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  b.style.width=(h>0?window.scrollY/h*100:0)+'%';
+},{passive:true});
+function openMobMenu(){document.getElementById('mobMenu').classList.add('open');}
+function closeMobMenu(){document.getElementById('mobMenu').classList.remove('open');}
 
-var tapCount=0,tapTimer=null,unlocked=false;
-function secretTap(){ tapCount++; if(tapTimer)clearTimeout(tapTimer); tapTimer=setTimeout(function(){tapCount=0;},2000); if(tapCount>=5){tapCount=0;openAdmin();} }
-
-// ADMIN
-function openAdmin(){ if(!unlocked){ document.getElementById('pwdOverlay').style.display='flex'; setTimeout(function(){document.getElementById('pwdInput').focus();},100); }else{ document.getElementById('adminOverlay').classList.add('open'); renderGalleryAdmin(); } }
-function closeAdmin(){ document.getElementById('adminOverlay').classList.remove('open'); }
-function checkPwd(){ var v=document.getElementById('pwdInput').value; if(v===getData().pwd){ unlocked=true; document.getElementById('pwdOverlay').style.display='none'; document.getElementById('pwdInput').value=''; document.getElementById('adminOverlay').classList.add('open'); renderGalleryAdmin(); }else{ showToast('Wrong password!'); document.getElementById('pwdInput').value=''; } }
-function admTab(tab,el){ document.querySelectorAll('.adm-tab').forEach(function(t){t.classList.remove('active');}); document.querySelectorAll('.adm-sec').forEach(function(s){s.classList.remove('active');}); el.classList.add('active'); document.getElementById('adm-'+tab).classList.add('active'); if(tab==='photos')renderGalleryAdmin(); }
-function saveContent(){ showToast('Content saved! ✅'); }
-function saveDonate(){ var d=getData(); var url=document.getElementById('ei-donateUrl'); if(url)d.donateUrl=url.value; setData(d); showToast('Donate link saved! ✅'); }
-function changePwd(){ var np=document.getElementById('newPwd').value; var cp=document.getElementById('newPwd2').value; if(np.length<6){showToast('Min 6 characters');return;} if(np!==cp){showToast('Passwords do not match!');return;} var d=getData(); d.pwd=np; setData(d); document.getElementById('newPwd').value=''; document.getElementById('newPwd2').value=''; showToast('Password changed! ✅'); }
-function resetAll(){ if(!confirm('Reset all local data?'))return; localStorage.clear(); location.reload(); }
-
-// PHOTO UPLOADS (local backup)
-function handleHeroImg(e){ var file=e.target.files[0]; if(!file)return; var r=new FileReader(); r.onload=function(ev){ var w=document.getElementById('heroBgWrap'); if(w)w.innerHTML='<img src="'+ev.target.result+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.75;display:block;"/>'; showToast('Hero photo updated! ✅'); }; r.readAsDataURL(file); }
-function handleAboutImg(e){ var file=e.target.files[0]; if(!file)return; var r=new FileReader(); r.onload=function(ev){ var w=document.getElementById('aboutImgWrap'); if(w)w.innerHTML='<img src="'+ev.target.result+'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;"/>'; showToast('About photo updated! ✅'); }; r.readAsDataURL(file); }
-
-var gPhotos=[];
-function renderGalleryAdmin(){ var grid=document.getElementById('galleryAdminGrid'); if(!grid)return; grid.innerHTML=''; for(var i=0;i<5;i++){var div=document.createElement('div'); div.style.cssText='aspect-ratio:1;background:var(--border);position:relative;overflow:hidden;'; if(gPhotos[i]){div.innerHTML='<img src="'+gPhotos[i]+'" style="width:100%;height:100%;object-fit:cover;"/><button onclick="removeGP('+i+')" style="position:absolute;top:3px;right:3px;background:#ef4444;border:none;color:#fff;width:20px;height:20px;font-size:11px;cursor:pointer;">✕</button>';}else{div.innerHTML='<label style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:#94a3b8;">+<input type="file" accept="image/*" style="display:none;" onchange="addGP('+i+',event)"/></label>';} grid.appendChild(div);} }
-function addGP(idx,e){ var file=e.target.files[0]; if(!file)return; var r=new FileReader(); r.onload=function(ev){gPhotos[idx]=ev.target.result; renderGalleryAdmin(); showToast('Photo added!'); }; r.readAsDataURL(file); }
-function removeGP(idx){ gPhotos[idx]=null; renderGalleryAdmin(); showToast('Removed.'); }
-
-// SCROLL ANIMATIONS
-function initScrollAnimations(){
-  var obs=new IntersectionObserver(function(entries){ entries.forEach(function(entry){ if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target);} }); },{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+// ── SCROLL REVEAL ANIMATIONS ──
+function initReveal(){
+  if(!window.IntersectionObserver) {
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});
+    return;
+  }
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}
+    });
+  },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 }
 
-// SCROLL PROGRESS
-window.addEventListener('scroll',function(){ var bar=document.getElementById('scrollProgress'); if(!bar)return; var st=window.scrollY; var dh=document.documentElement.scrollHeight-window.innerHeight; bar.style.width=(st/dh*100)+'%'; },{passive:true});
+// ── PAGE LOADER HIDE ──
+window.addEventListener('load',function(){
+  var loader=document.getElementById('pageLoader');
+  setTimeout(function(){
+    if(loader){
+      loader.classList.add('hidden');
+      setTimeout(function(){if(loader)loader.style.display='none';},600);
+    }
+  },1000);
+  loadAllPhotos();
+  initReveal();
+});
+// Also hide loader after 3 seconds no matter what
+setTimeout(function(){
+  var loader=document.getElementById('pageLoader');
+  if(loader&&loader.style.display!=='none'){
+    loader.classList.add('hidden');
+    setTimeout(function(){if(loader)loader.style.display='none';},600);
+  }
+},3000);
 
-// NAV ACTIVE
-(function(){
-  var sections=['home','about','mission','gallery','stories','donate','contact'];
-  var links=document.querySelectorAll('.nav-links a[href^="#"]');
-  window.addEventListener('scroll',function(){
-    var current='';
-    sections.forEach(function(id){var el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-100)current=id;});
-    links.forEach(function(a){a.style.color=a.getAttribute('href')==='#'+current?'var(--gold)':'';});
-  },{passive:true});
-})();
-
-// NEWSLETTER
+// ── DONATE BUTTON ──
+function setAmt(v,btn){
+  document.querySelectorAll('.amt-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById('donateAmt').value=v;
+}
+function goDonate(){
+  var url=localStorage.getItem('mch_donate_url')||'https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda';
+  window.open(url,'_blank');
+}
+function submitForm(){showToast('Message sent! Thank you.');}
 function submitNewsletter(){
   var name=document.getElementById('nlName').value.trim();
   var email=document.getElementById('nlEmail').value.trim();
   if(!email||!email.includes('@')){showToast('Please enter a valid email');return;}
-  var subs=[];try{subs=JSON.parse(localStorage.getItem('mch_newsletter')||'[]');}catch(e){}
-  if(subs.find(function(s){return s.email===email;})){showToast('Already subscribed! 🙏');return;}
+  var subs=[];
+  try{subs=JSON.parse(localStorage.getItem('mch_newsletter')||'[]');}catch(e){}
+  if(subs.find(function(s){return s.email===email;})){showToast('Already subscribed!');return;}
   subs.push({name:name,email:email,date:new Date().toISOString()});
   localStorage.setItem('mch_newsletter',JSON.stringify(subs));
   document.getElementById('nlName').value='';
   document.getElementById('nlEmail').value='';
-  showToast('Subscribed! Thank you 🙏');
+  showToast('Subscribed! Thank you.');
 }
 
-// TOAST
-function showToast(msg){ document.getElementById('toastMsg').textContent=msg; var t=document.getElementById('toast'); t.classList.add('show'); setTimeout(function(){t.classList.remove('show');},3000); }
+// ── SECRET ADMIN TAP ──
+var tapCount=0,tapTimer=null,unlocked=false;
+function secretTap(){
+  tapCount++;
+  if(tapTimer) clearTimeout(tapTimer);
+  tapTimer=setTimeout(function(){tapCount=0;},2000);
+  if(tapCount>=5){tapCount=0;openAdmin();}
+}
 
-// PAGE LOADER
-window.addEventListener('load',function(){
-  var loader=document.getElementById('pageLoader');
-  setTimeout(function(){ if(loader)loader.classList.add('hidden'); setTimeout(function(){if(loader)loader.style.display='none';},600); },1400);
-});
+// ── ADMIN PANEL ──
+function openAdmin(){
+  if(!unlocked){
+    document.getElementById('pwdOverlay').style.display='flex';
+    setTimeout(function(){var p=document.getElementById('pwdInput');if(p)p.focus();},100);
+  }else{
+    document.getElementById('adminOverlay').classList.add('open');
+    loadAdminGallery();
+    loadAdminVols();
+  }
+}
+function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');}
+function checkPwd(){
+  var v=document.getElementById('pwdInput').value;
+  var stored=localStorage.getItem('mch_pwd')||'mercy2020';
+  if(v===stored){
+    unlocked=true;
+    document.getElementById('pwdOverlay').style.display='none';
+    document.getElementById('pwdInput').value='';
+    document.getElementById('adminOverlay').classList.add('open');
+    loadAdminGallery();
+    loadAdminVols();
+  }else{
+    showToast('Wrong password!');
+    document.getElementById('pwdInput').value='';
+  }
+}
+function admTab(tab,el){
+  document.querySelectorAll('.adm-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.adm-sec').forEach(function(s){s.classList.remove('active');});
+  el.classList.add('active');
+  document.getElementById('adm-'+tab).classList.add('active');
+  if(tab==='gallery') loadAdminGallery();
+  if(tab==='volunteers') loadAdminVols();
+}
+function saveDonate(){
+  var url=document.getElementById('ei-donateUrl').value;
+  localStorage.setItem('mch_donate_url',url);
+  showToast('Donate link saved!');
+}
+function changePwd(){
+  var np=document.getElementById('newPwd').value;
+  var cp=document.getElementById('newPwd2').value;
+  if(np.length<6){showToast('Min 6 characters');return;}
+  if(np!==cp){showToast('Passwords do not match!');return;}
+  localStorage.setItem('mch_pwd',np);
+  document.getElementById('newPwd').value='';
+  document.getElementById('newPwd2').value='';
+  showToast('Password changed!');
+}
 
-// FOOTER YEAR
+// ── UPLOAD TO SUPABASE ──
+function uploadToSupa(id,input){
+  var file=input.files[0];
+  if(!file) return;
+  var status=document.getElementById('uploadStatus');
+  if(status) status.textContent='Uploading...';
+  var ext=file.name.split('.').pop();
+  var filename=id+'_'+Date.now()+'.'+ext;
+  fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{
+    method:'POST',
+    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},
+    body:file
+  })
+  .then(function(r){
+    if(r.ok||r.status===200||r.status===201){
+      return fetch(SUPA+'/rest/v1/mch_photos',{
+        method:'POST',
+        headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},
+        body:JSON.stringify({id:id,filename:filename})
+      });
+    }
+    throw new Error('Upload failed: '+r.status);
+  })
+  .then(function(){
+    var url=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
+    if(id==='founder'){
+      var ap=document.getElementById('alexPhotoWrap');
+      if(ap){var img=ap.querySelector('img');if(img)img.src=url;}
+      var gf=document.getElementById('gfm-founder-img');
+      if(gf) gf.src=url;
+    }
+    if(id==='logo'){
+      var nl=document.getElementById('navLogoWrap');
+      if(nl){var img=nl.querySelector('img');if(img)img.src=url;}
+    }
+    if(status) status.textContent=id+' uploaded!';
+    showToast('Photo uploaded!');
+    // Update preview in admin
+    var prev=input.parentElement.previousElementSibling;
+    if(prev){var pi=prev.querySelector('img');if(pi)pi.src=url;}
+  })
+  .catch(function(e){
+    if(status) status.textContent='Upload failed: '+e.message;
+    showToast('Upload failed!');
+  });
+}
+
+// ── ADMIN GALLERY ──
+function loadAdminGallery(){
+  var grid=document.getElementById('admGalleryGrid');
+  if(!grid) return;
+  grid.innerHTML='<p style="font-size:12px;color:var(--text3);">Loading...</p>';
+  fetch(SUPA+'/rest/v1/mch_photos?id=like.gallery_*&select=id,filename&order=id',{
+    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+  })
+  .then(function(r){return r.json();})
+  .then(function(rows){
+    if(!Array.isArray(rows)||!rows.length){
+      grid.innerHTML='<p style="color:var(--text3);">No gallery photos</p>';
+      return;
+    }
+    grid.innerHTML='';
+    rows.forEach(function(row){
+      var imgUrl=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+row.filename;
+      var div=document.createElement('div');
+      div.style.cssText='position:relative;aspect-ratio:1;overflow:hidden;background:#e2e8f0;';
+      var img=document.createElement('img');
+      img.src=imgUrl;
+      img.style.cssText='width:100%;height:100%;object-fit:cover;';
+      var btn=document.createElement('button');
+      btn.textContent='X';
+      btn.style.cssText='position:absolute;top:3px;right:3px;background:#ef4444;border:none;color:#fff;width:22px;height:22px;font-size:11px;cursor:pointer;border-radius:3px;';
+      var rowId=row.id;
+      var rowFile=row.filename;
+      btn.onclick=function(){deleteGalleryPhoto(rowId,rowFile,div);};
+      var lbl=document.createElement('div');
+      lbl.textContent=row.id;
+      lbl.style.cssText='position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;font-size:9px;padding:3px 5px;';
+      div.appendChild(img);
+      div.appendChild(btn);
+      div.appendChild(lbl);
+      grid.appendChild(div);
+    });
+  })
+  .catch(function(){grid.innerHTML='<p style="color:red;">Failed to load</p>';});
+}
+function deleteGalleryPhoto(id,filename,cardEl){
+  if(!confirm('Delete '+id+'?')) return;
+  fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{
+    method:'DELETE',
+    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+  })
+  .then(function(){
+    return fetch(SUPA+'/rest/v1/mch_photos?id=eq.'+id,{
+      method:'DELETE',
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+    });
+  })
+  .then(function(){if(cardEl)cardEl.remove();showToast('Photo deleted!');  })
+  .catch(function(){showToast('Delete failed!');});
+}
+function uploadGalleryPhotos(input){
+  var files=Array.from(input.files);
+  var status=document.getElementById('galleryUploadStatus');
+  if(!files.length) return;
+  fetch(SUPA+'/rest/v1/mch_photos?id=like.gallery_*&select=id&order=id',{
+    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+  })
+  .then(function(r){return r.json();})
+  .then(function(rows){
+    var used=rows.map(function(r){return parseInt(r.id.replace('gallery_',''));});
+    var nextId=0;
+    while(used.indexOf(nextId)!==-1) nextId++;
+    var uploaded=0;
+    files.forEach(function(file,i){
+      var gid='gallery_'+(nextId+i);
+      var ext=file.name.split('.').pop();
+      var fname=gid+'_'+Date.now()+'.'+ext;
+      fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+fname,{
+        method:'POST',
+        headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},
+        body:file
+      })
+      .then(function(){
+        return fetch(SUPA+'/rest/v1/mch_photos',{
+          method:'POST',
+          headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},
+          body:JSON.stringify({id:gid,filename:fname})
+        });
+      })
+      .then(function(){
+        uploaded++;
+        if(status) status.textContent=uploaded+'/'+files.length+' uploaded';
+        if(uploaded===files.length){loadAdminGallery();showToast('Gallery updated!');}
+      })
+      .catch(function(){if(status) status.textContent='Upload failed';});
+    });
+  });
+}
+function loadAdminVols(){
+  var grid=document.getElementById('admVolGrid');
+  if(!grid) return;
+  grid.innerHTML='';
+  VOLUNTEERS_DATA.forEach(function(v){
+    var div=document.createElement('div');
+    div.style.cssText='text-align:center;';
+    var img=document.createElement('img');
+    img.src=v.photo;
+    img.style.cssText='width:100%;aspect-ratio:1;object-fit:cover;object-position:center top;display:block;margin-bottom:6px;';
+    var name=document.createElement('div');
+    name.textContent=v.name;
+    name.style.cssText='font-size:11px;font-weight:700;color:var(--navy);';
+    var country=document.createElement('div');
+    country.textContent=v.country;
+    country.style.cssText='font-size:10px;color:var(--text3);';
+    div.appendChild(img);div.appendChild(name);div.appendChild(country);
+    grid.appendChild(div);
+  });
+}
+
+// ── TOAST ──
+function showToast(msg){
+  var t=document.getElementById('toast');
+  if(!t) return;
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},3000);
+}
+
+// ── FOOTER YEAR ──
 document.querySelectorAll('.footer-year').forEach(function(el){el.textContent=new Date().getFullYear();});
-
-// INIT
-(function(){
-  loadSupabasePhotos();
-  initScrollAnimations();
-})();
+// ═══ END MAIN JS ═══
 </script>
-</body>
-</html>
