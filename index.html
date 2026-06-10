@@ -1090,15 +1090,15 @@ function loadVolunteers(){
         list.forEach(function(v){
       var isFounder=v.category==='Director & Founder'||v.name.toLowerCase().indexOf('alex ssengonzi')!==-1;
       var roleText=isFounder?'Founder & Director':'International Volunteer';
-      var roleColor=isFounder?'#c9a84c':'var(--gold)';
+      var roleColor=isFounder?'#c9a84c':'var(--navy)';
       var country=(v.country||'').trim();
       var flags={'USA':'us','United States':'us','America':'us','Australia':'au','Canada':'ca','Uganda':'ug','Scotland':'gb-sct','UK':'gb','United Kingdom':'gb','England':'gb-eng','Wales':'gb-wls','Ireland':'ie','Germany':'de','France':'fr','Italy':'it','Spain':'es','Portugal':'pt','Netherlands':'nl','Belgium':'be','Switzerland':'ch','Austria':'at','Sweden':'se','Norway':'no','Denmark':'dk','Finland':'fi','Iceland':'is','Poland':'pl','Czech Republic':'cz','Czechia':'cz','Slovakia':'sk','Hungary':'hu','Romania':'ro','Bulgaria':'bg','Greece':'gr','Croatia':'hr','Serbia':'rs','Slovenia':'si','Ukraine':'ua','Russia':'ru','Estonia':'ee','Latvia':'lv','Lithuania':'lt','Luxembourg':'lu','Malta':'mt','Cyprus':'cy','Albania':'al','Bosnia':'ba','Macedonia':'mk','Montenegro':'me','Moldova':'md','Belarus':'by','Monaco':'mc','Kenya':'ke','Tanzania':'tz','Rwanda':'rw','Nigeria':'ng','Ghana':'gh','South Africa':'za','Ethiopia':'et','Egypt':'eg','India':'in','China':'cn','Japan':'jp','Brazil':'br','Mexico':'mx','New Zealand':'nz','International':''};
       var countryNorm=country.charAt(0).toUpperCase()+country.slice(1).toLowerCase();if(country.toUpperCase()==='USA'||country.toUpperCase()==='UK')countryNorm=country.toUpperCase();var code=flags[country]||flags[countryNorm];
       var flagHtml=code?'<img src="https://flagcdn.com/20x15/'+code+'.png" style="vertical-align:middle;margin-right:4px;" alt="'+country+'">':'';
       var card=document.createElement('div');
       card.style.cssText='background:#fff;overflow:hidden;text-align:center;border:1px solid var(--border);';
-      card.innerHTML='<div style="width:100%;height:220px;overflow:hidden;background:var(--navy2);">'
-        +'<img src="'+v.photoUrl+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="'+v.name+'">'
+      card.innerHTML='<div style="width:100%;height:240px;overflow:hidden;background:var(--cream);display:flex;align-items:center;justify-content:center;">'
+        +'<img src="'+v.photoUrl+'" style="max-width:100%;max-height:100%;object-fit:contain;display:block;" alt="'+v.name+'">'
         +'</div><div style="padding:14px 8px;">'
         +'<div style="font-family:Fraunces,serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px;">'+v.name+'</div>'
         +'<div style="font-size:10px;font-weight:700;color:'+roleColor+';text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">'+roleText+'</div>'
@@ -1120,6 +1120,11 @@ function loadAllPhotos(){
     var pm={};
     rows.forEach(function(r){if(r.filename)pm[r.id]=r.filename;});
     function url(f){return SUPA+'/storage/v1/object/public/'+BUCKET+'/'+f;}
+    var galKeys=Object.keys(pm).filter(function(k){return k.indexOf('gallery_')===0;});
+    if(galKeys.length){
+      galKeys.sort(function(a,b){return parseInt(a.split('_')[1],10)-parseInt(b.split('_')[1],10);});
+      GALLERY_PHOTOS=galKeys.map(function(k){return url(pm[k]);});
+    }
     var nl=document.getElementById('navLogoWrap');
     if(nl&&pm['logo']){nl.innerHTML='<img src="'+url(pm['logo'])+'" style="width:100%;height:100%;object-fit:cover;">';}
     if(pm['gallery_0']){
