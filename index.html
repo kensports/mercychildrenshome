@@ -1125,7 +1125,7 @@ function uploadStoryPhoto(i,input){
     var url=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
     var prev=document.getElementById('admStoryPrev'+i);if(prev){prev.src=url;prev.style.display='block';}
     var si=document.getElementById('storyImg'+(i+1));
-    if(si){si.style.aspectRatio='auto';si.innerHTML='<img src="'+url+'" style="width:100%;height:auto;display:block;min-height:120px;background:var(--navy2);" onload="this.style.minHeight=\'0\';this.style.background=\'none\';" onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.split(\'?\')[0]+\'?t=\'+Date.now();}">';}
+    if(si){si.style.cssText='width:100%;aspect-ratio:auto;height:auto;display:block;overflow:visible;background:none;position:static;';si.innerHTML='<img src="'+url+'" style="width:100%;height:auto;display:block;min-height:120px;background:var(--navy2);" onload="this.style.minHeight=\'0\';this.style.background=\'none\';" onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.split(\'?\')[0]+\'?t=\'+Date.now();}">';}
     var sc=document.getElementById('storyCard'+(i+1));if(sc)sc.style.display='';
     var ss=document.querySelector('.stories');if(ss)ss.style.display='block';
     if(status)status.textContent='Story photo '+(i+1)+' uploaded!';
@@ -1253,7 +1253,7 @@ function loadAllPhotos(){
         hasStories=true;
         if(card)card.style.display='';
         var si=document.getElementById('storyImg'+(i+1));
-        if(si){si.style.aspectRatio='auto';si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:auto;display:block;min-height:120px;background:var(--navy2);" onload="this.style.minHeight=\'0\';this.style.background=\'none\';" onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.split(\'?\')[0]+\'?t=\'+Date.now();}">';}
+        if(si){si.style.cssText='width:100%;aspect-ratio:auto;height:auto;display:block;overflow:visible;background:none;position:static;';si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:auto;display:block;min-height:120px;background:var(--navy2);" onload="this.style.minHeight=\'0\';this.style.background=\'none\';" onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.split(\'?\')[0]+\'?t=\'+Date.now();}">';}
       }else{
         if(card)card.style.display='none';
       }
