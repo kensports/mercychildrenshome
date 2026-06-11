@@ -627,6 +627,17 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
 </section>
 
 
+
+<!-- DAILY LIFE VIDEOS -->
+<section class="videos" id="videos" style="display:none;background:var(--cream);padding:90px 5%;">
+  <div class="section-inner" style="max-width:1100px;margin:0 auto;">
+    <div class="label reveal"><div class="label-line"></div><span>Life at Mercy</span></div>
+    <h2 class="big-title reveal" style="max-width:600px;">Daily <em>Life</em></h2>
+    <p style="font-size:16px;color:var(--text2);max-width:500px;line-height:1.8;margin-bottom:40px;" class="reveal">A glimpse into everyday moments at the home.</p>
+    <div id="videosGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;"></div>
+  </div>
+</section>
+
 <!-- MEET ALEX -->
 <section id="founder" style="background:var(--navy);padding:100px 5%;">
   <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:380px 1fr;gap:64px;align-items:start;">
@@ -896,6 +907,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
       <button class="adm-tab" onclick="admTab('gallery',this)">Gallery</button>
       <button class="adm-tab" onclick="admTab('volunteers',this)">Volunteers</button>
       <button class="adm-tab" onclick="admTab('stories',this)">Stories</button>
+      <button class="adm-tab" onclick="admTab('videos',this)">Videos</button>
       <button class="adm-tab" onclick="admTab('settings',this)">Settings</button>
     </div>
     <div class="adm-body">
@@ -971,6 +983,16 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
         <div id="admStoriesWrap" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;"></div>
         <button onclick="saveStories()" style="margin-top:14px;background:var(--navy);color:var(--gold);border:none;padding:10px 24px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">Save All Stories</button>
         <div id="storiesStatus" style="margin-top:10px;font-size:13px;color:var(--text2);"></div>
+      </div>
+
+      <!-- VIDEOS -->
+      <div class="adm-sec" id="adm-videos">
+        <p style="font-size:13px;color:var(--text3);margin-bottom:16px;">Paste a YouTube or TikTok video link, add a short caption, and tap Add. Videos appear in the Life at Mercy section instantly.</p>
+        <input id="newVideoUrl" placeholder="Paste YouTube or TikTok link here" style="width:100%;box-sizing:border-box;padding:10px;font-size:13px;border:1px solid var(--border);margin-bottom:8px;">
+        <input id="newVideoCaption" placeholder="Short caption (optional)" style="width:100%;box-sizing:border-box;padding:10px;font-size:13px;border:1px solid var(--border);margin-bottom:8px;">
+        <button onclick="addVideo()" style="background:var(--navy);color:var(--gold);border:none;padding:10px 24px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">Add Video</button>
+        <div id="videoStatus" style="margin-top:10px;font-size:13px;color:var(--text2);"></div>
+        <div id="admVideosWrap" style="margin-top:20px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;"></div>
       </div>
 
       <!-- SETTINGS -->
@@ -1150,7 +1172,7 @@ function uploadStoryPhoto(i,input){
     var url=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
     var prev=document.getElementById('admStoryPrev'+i);if(prev){prev.src=url;prev.style.display='block';}
     var si=document.getElementById('storyImg'+(i+1));
-    if(si){si.style.cssText='width:100%;height:auto;display:block;';si.innerHTML='<img src="'+url+'" style="width:100%;height:auto;display:block;">';}
+    if(si){si.style.cssText='width:200px;height:200px;margin:24px auto 8px;border-radius:50%;overflow:hidden;border:4px solid var(--gold);';si.innerHTML='<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">';}
     var sc=document.getElementById('storyCard'+(i+1));if(sc)sc.style.display='';
     var ss=document.querySelector('.stories');if(ss)ss.style.display='block';
     if(status)status.textContent='Story photo '+(i+1)+' uploaded!';
@@ -1199,6 +1221,106 @@ function saveStories(){
   fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'stories_data',filename:JSON.stringify(list)})})
   .then(function(){if(status)status.textContent='Stories saved!';showToast('Stories saved!');loadStories();})
   .catch(function(){if(status)status.textContent='Save failed!';showToast('Save failed!');});
+}
+
+
+function parseVideo(rawUrl){
+  var u=(rawUrl||'').trim();
+  if(!u)return null;
+  // YouTube
+  var yt=u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  if(yt)return {type:'youtube',id:yt[1],embed:'https://www.youtube.com/embed/'+yt[1]};
+  // TikTok
+  var tk=u.match(/tiktok\.com\/.*\/video\/(\d+)/);
+  if(tk)return {type:'tiktok',id:tk[1],embed:'https://www.tiktok.com/embed/v2/'+tk[1]};
+  if(u.indexOf('tiktok.com')!==-1)return {type:'tiktok',id:'',embed:'',raw:u};
+  return null;
+}
+function fetchVideos(){
+  return fetch(SUPA+'/rest/v1/mch_photos?id=eq.videos_data&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+  .then(function(r){return r.json();})
+  .then(function(rows){
+    if(!rows||!rows[0])return [];
+    try{return JSON.parse(rows[0].filename);}catch(e){return [];}
+  });
+}
+function saveVideos(list){
+  return fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'videos_data',filename:JSON.stringify(list)})});
+}
+function loadVideos(){
+  fetchVideos().then(function(list){
+    var grid=document.getElementById('videosGrid');
+    var sec=document.getElementById('videos');
+    if(!grid)return;
+    if(!list.length){if(sec)sec.style.display='none';return;}
+    if(sec)sec.style.display='block';
+    grid.innerHTML='';
+    list.forEach(function(v){
+      var info=parseVideo(v.url);
+      var box=document.createElement('div');
+      box.style.cssText='background:#000;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);';
+      var inner='';
+      if(info&&info.type==='youtube'){
+        inner='<div style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="'+info.embed+'" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>';
+      }else if(info&&info.type==='tiktok'&&info.embed){
+        inner='<div style="position:relative;width:100%;aspect-ratio:9/16;max-height:560px;"><iframe src="'+info.embed+'" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="autoplay;encrypted-media;fullscreen" allowfullscreen></iframe></div>';
+      }else{
+        inner='<a href="'+(v.url||'#')+'" target="_blank" style="display:block;padding:40px 20px;text-align:center;color:#fff;text-decoration:none;background:var(--navy);">▶ Watch video</a>';
+      }
+      box.innerHTML=inner+(v.caption?'<div style="padding:12px 14px;background:#fff;font-size:14px;color:var(--text);">'+v.caption.replace(/</g,'&lt;')+'</div>':'');
+      grid.appendChild(box);
+    });
+  });
+}
+function addVideo(){
+  var urlEl=document.getElementById('newVideoUrl');
+  var capEl=document.getElementById('newVideoCaption');
+  var url=(urlEl.value||'').trim();
+  var status=document.getElementById('videoStatus');
+  if(!url){if(status)status.textContent='Please paste a link first.';return;}
+  var info=parseVideo(url);
+  if(!info){if(status)status.textContent='That does not look like a YouTube or TikTok link.';return;}
+  if(status)status.textContent='Adding...';
+  fetchVideos().then(function(list){
+    list.push({url:url,caption:(capEl.value||'').trim()});
+    return saveVideos(list);
+  }).then(function(){
+    urlEl.value='';capEl.value='';
+    if(status)status.textContent='Video added!';
+    showToast('Video added!');
+    loadAdminVideos();loadVideos();
+  }).catch(function(){if(status)status.textContent='Failed to add.';});
+}
+function deleteVideo(idx){
+  if(!confirm('Remove this video?'))return;
+  var status=document.getElementById('videoStatus');
+  fetchVideos().then(function(list){
+    list.splice(idx,1);
+    return saveVideos(list);
+  }).then(function(){
+    if(status)status.textContent='Video removed.';
+    showToast('Video removed!');
+    loadAdminVideos();loadVideos();
+  }).catch(function(){if(status)status.textContent='Failed.';});
+}
+function loadAdminVideos(){
+  var wrap=document.getElementById('admVideosWrap');
+  if(!wrap)return;
+  wrap.innerHTML='<p style="font-size:12px;color:var(--text3);">Loading...</p>';
+  fetchVideos().then(function(list){
+    if(!list.length){wrap.innerHTML='<p style="font-size:12px;color:var(--text3);">No videos yet.</p>';return;}
+    wrap.innerHTML='';
+    list.forEach(function(v,i){
+      var info=parseVideo(v.url);
+      var box=document.createElement('div');
+      box.style.cssText='background:var(--cream);border:1px solid var(--border);padding:10px;font-size:12px;';
+      box.innerHTML='<div style="font-weight:700;color:var(--navy);text-transform:uppercase;font-size:10px;margin-bottom:4px;">'+(info?info.type:'unknown')+'</div>'
+        +'<div style="word-break:break-all;color:var(--text2);margin-bottom:6px;">'+v.url.replace(/</g,'&lt;')+'</div>'
+        +(v.caption?'<div style="color:var(--text);margin-bottom:6px;">"'+v.caption.replace(/</g,'&lt;')+'"</div>':'')
+        +'<button onclick="deleteVideo('+i+')" style="background:#ef4444;color:#fff;border:none;padding:5px 12px;font-size:10px;font-weight:700;cursor:pointer;text-transform:uppercase;">Delete</button>';
+      wrap.appendChild(box);
+    });
+  });
 }
 
 function loadVolunteers(){
@@ -1279,7 +1401,7 @@ function loadAllPhotos(){
         hasStories=true;
         if(card)card.style.display='';
         var si=document.getElementById('storyImg'+(i+1));
-        if(si){si.style.cssText='width:100%;height:auto;display:block;';si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:auto;display:block;">';}
+        if(si){si.style.cssText='width:200px;height:200px;margin:24px auto 8px;border-radius:50%;overflow:hidden;border:4px solid var(--gold);';si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">';}
       }else{
         if(card)card.style.display='none';
       }
@@ -1378,6 +1500,7 @@ window.addEventListener('load',function(){
   loadAllPhotos();
   loadVolunteers();
   loadStories();
+  loadVideos();
   initReveal();
 });
 setTimeout(function(){
@@ -1443,6 +1566,7 @@ function admTab(tab,el){
   if(tab==='gallery')loadAdminGallery();
   if(tab==='volunteers')loadAdminVols();
   if(tab==='stories')loadAdminStories();
+  if(tab==='videos')loadAdminVideos();
 }
 function saveDonate(){
   var url=document.getElementById('ei-donateUrl').value;
