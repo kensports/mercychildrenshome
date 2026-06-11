@@ -301,8 +301,9 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
 .goog-te-banner-frame,.skiptranslate{display:none !important;}
 body{top:0 !important;}
 #google_translate_element select{background:var(--navy3);color:#fff;border:1px solid var(--border-navy);border-radius:6px;padding:5px 8px;font-size:12px;font-family:'Manrope',sans-serif;cursor:pointer;}
-.goog-te-gadget{color:transparent !important;font-size:0 !important;}
-.goog-logo-link,.goog-te-gadget span{display:none !important;}
+.goog-te-gadget{font-size:0 !important;}
+.goog-te-gadget>span{display:none !important;}
+.goog-te-gadget .goog-te-combo{font-size:13px !important;color:#fff !important;margin:0 !important;}
 
 /* TOAST */
 #toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--navy);border-left:4px solid var(--gold);color:#fff;padding:14px 20px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,.3);transform:translateY(100px);opacity:0;transition:transform .3s,opacity .3s;max-width:300px;pointer-events:none;}
@@ -2002,5 +2003,6 @@ document.querySelectorAll('.footer-year').forEach(function(el){el.textContent=ne
 function googleTranslateElementInit(){
   new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'en,fr,de,es,nl,sw,ar,zh-CN,pt,it,sv',layout:google.translate.TranslateElement.InlineLayout.SIMPLE,autoDisplay:false},'google_translate_element');
 }
+window.googleTranslateElementInit=googleTranslateElementInit;
 </script>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
