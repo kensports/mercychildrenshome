@@ -911,8 +911,8 @@ font[style]{background:none !important;box-shadow:none !important;}
     </div>
   </div>
   <div class="footer-lang" style="border-top:1px solid var(--border-navy);padding-top:18px;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
-    <span style="font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.5px;"><i class="fa-solid fa-globe" style="margin-right:6px;color:var(--gold);"></i>Language</span>
-    <select onchange="translateSite(this.value)" style="background:var(--navy3);color:#fff;border:1px solid var(--border-navy);border-radius:6px;padding:6px 10px;font-size:12px;font-family:'Manrope',sans-serif;cursor:pointer;">
+    <span style="font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.5px;display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Language</span>
+    <select id="langSelect" onchange="translateSite(this.value)" style="background:var(--navy3);color:#fff;border:1px solid var(--border-navy);border-radius:6px;padding:6px 10px;font-size:12px;font-family:'Manrope',sans-serif;cursor:pointer;">
       <option value="">English</option>
       <option value="fr">Français</option>
       <option value="de">Deutsch</option>
@@ -2010,21 +2010,32 @@ function showToast(msg){
 document.querySelectorAll('.footer-year').forEach(function(el){el.textContent=new Date().getFullYear();});
 
 function setTransCookie(lang){
-  var val=lang?('/en/'+lang):'';
   var domain=location.hostname;
+  if(!lang){
+    // Delete the cookie in every variant so it fully reverts to English
+    var expire=';expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie='googtrans=;path=/'+expire;
+    document.cookie='googtrans=;path=/;domain='+domain+expire;
+    document.cookie='googtrans=;path=/;domain=.'+domain+expire;
+    return;
+  }
+  var val='/en/'+lang;
   document.cookie='googtrans='+val+';path=/';
   document.cookie='googtrans='+val+';path=/;domain='+domain;
   document.cookie='googtrans='+val+';path=/;domain=.'+domain;
 }
 function translateSite(lang){
-  if(!lang){
-    setTransCookie('');
-    location.reload();
-    return;
-  }
   setTransCookie(lang);
   location.reload();
 }
+(function syncLangSelect(){
+  try{
+    var m=document.cookie.match(/googtrans=\/en\/([a-zA-Z-]+)/);
+    var cur=m?m[1]:'';
+    var sel=document.getElementById('langSelect');
+    if(sel)sel.value=cur;
+  }catch(e){}
+})();
 window.googleTranslateElementInit=function(){
   new google.translate.TranslateElement({pageLanguage:'en',autoDisplay:false},'google_translate_hidden');
 };
