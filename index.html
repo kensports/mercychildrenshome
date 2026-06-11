@@ -204,6 +204,9 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.3);}
 .story-card{border:1px solid var(--border);}
 .story-card{background:var(--cream);overflow:hidden;transition:transform .3s;}
 .story-card:hover{transform:translateY(-4px);}
+.skel{position:relative;overflow:hidden;background:#e8eaed;border-radius:8px;}
+.skel::after{content:'';position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:shimmer 1.4s infinite;}
+@keyframes shimmer{100%{transform:translateX(100%);}}
 .story-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,var(--navy2),var(--navy4));position:relative;display:flex;align-items:center;justify-content:center;}
 .story-img svg{width:50px;height:50px;fill:none;stroke:rgba(201,168,76,.25);stroke-width:1.5;stroke-linecap:round;}
 .story-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;}
@@ -579,7 +582,8 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
       <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="btn-gold">Support These Children</a>
     </div>
     <div class="gallery-grid" id="galleryGrid" style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:280px;gap:6px;"></div>
-    <p id="galleryEmpty" style="font-size:14px;color:var(--text3);text-align:center;margin-top:20px;display:none;">Photos loading from Supabase...</p>
+    <div id="gallerySkeleton" style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:280px;gap:6px;margin-top:0;"><div class="skel" style="grid-row:span 2;"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+    <p id="galleryEmpty" style="font-size:14px;color:var(--text3);text-align:center;margin-top:20px;display:none;">No photos yet.</p>
   </div>
 </section>
 
@@ -675,7 +679,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
     </div>
     <div id="volGrid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">
       <!-- Loaded from Supabase supporters_list -->
-      <div style="background:#fff;padding:40px;text-align:center;grid-column:span 5;color:var(--text3);font-size:14px;">Loading volunteers...</div>
+      <div class="skel" style="height:280px;"></div><div class="skel" style="height:280px;"></div><div class="skel" style="height:280px;"></div><div class="skel" style="height:280px;"></div><div class="skel" style="height:280px;"></div>
     </div>
   </div>
 </section>
@@ -834,11 +838,11 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
         <h3>Send a Message</h3>
         <p>We'll reply within 24 hours 🙏</p>
         <div class="form-row">
-          <div class="fg"><label>First Name</label><input type="text" placeholder="John"/></div>
-          <div class="fg"><label>Last Name</label><input type="text" placeholder="Doe"/></div>
+          <div class="fg"><label for="cfFirst">First Name</label><input id="cfFirst" name="firstName" type="text" placeholder="John"/></div>
+          <div class="fg"><label for="cfLast">Last Name</label><input id="cfLast" name="lastName" type="text" placeholder="Doe"/></div>
         </div>
-        <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com"/></div>
-        <div class="fg"><label>Message</label><textarea placeholder="How can we help?"></textarea></div>
+        <div class="fg"><label for="cfEmail">Email</label><input id="cfEmail" name="email" type="email" placeholder="your@email.com"/></div>
+        <div class="fg"><label for="cfMsg">Message</label><textarea id="cfMsg" name="message" placeholder="How can we help?"></textarea></div>
         <button class="form-btn" onclick="submitForm()">
           <svg style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           Send Message
@@ -1042,6 +1046,7 @@ var GALLERY_PHOTOS = [
 
 function renderGallery(){
   var g=document.getElementById('galleryGrid');
+  var sk=document.getElementById('gallerySkeleton');if(sk)sk.style.display='none';
   if(!g||!GALLERY_PHOTOS.length)return;
   g.innerHTML='';
   GALLERY_PHOTOS.forEach(function(src,i){
@@ -1544,15 +1549,38 @@ setTimeout(function(){
 
 function setAmt(v,btn){document.querySelectorAll('.amt-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');document.getElementById('donateAmt').value=v;}
 function goDonate(){window.open(localStorage.getItem('mch_donate_url')||GFM_URL,'_blank');}
-function submitForm(){showToast('Message sent! Thank you.');}
+var FORMSPREE_ID='YOUR_FORM_ID';
+function submitForm(){
+  var first=(document.getElementById('cfFirst')||{}).value||'';
+  var last=(document.getElementById('cfLast')||{}).value||'';
+  var email=(document.getElementById('cfEmail')||{}).value||'';
+  var msg=(document.getElementById('cfMsg')||{}).value||'';
+  if(!email||email.indexOf('@')===-1){showToast('Please enter a valid email');return;}
+  if(!msg.trim()){showToast('Please write a message');return;}
+  if(FORMSPREE_ID==='YOUR_FORM_ID'){showToast('Form not connected yet');return;}
+  showToast('Sending...');
+  fetch('https://formspree.io/f/'+FORMSPREE_ID,{
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({name:(first+' '+last).trim(),email:email,message:msg,_subject:'New message from Mercy website'})
+  })
+  .then(function(r){
+    if(r.ok){
+      showToast('Message sent! Thank you 🙏');
+      ['cfFirst','cfLast','cfEmail','cfMsg'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+    }else{showToast('Could not send. Try WhatsApp instead.');}
+  })
+  .catch(function(){showToast('Could not send. Try WhatsApp instead.');});
+}
 function submitNewsletter(){
   var name=document.getElementById('nlName').value.trim();
   var email=document.getElementById('nlEmail').value.trim();
   if(!email||!email.includes('@')){showToast('Please enter a valid email');return;}
-  var subs=[];try{subs=JSON.parse(localStorage.getItem('mch_newsletter')||'[]');}catch(e){}
-  if(subs.find(function(s){return s.email===email;})){showToast('Already subscribed!');return;}
-  subs.push({name:name,email:email,date:new Date().toISOString()});
-  localStorage.setItem('mch_newsletter',JSON.stringify(subs));
+  if(FORMSPREE_ID!=='YOUR_FORM_ID'){
+    fetch('https://formspree.io/f/'+FORMSPREE_ID,{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name:name,email:email,_subject:'New newsletter signup'})
+    }).catch(function(){});
+  }
   document.getElementById('nlName').value='';
   document.getElementById('nlEmail').value='';
   showToast('Subscribed! Thank you.');
