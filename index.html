@@ -6,6 +6,8 @@
 <title>Mercy Children's Home | Kasanda Bukuya, Uganda</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%230d1f3c'/%3E%3Cpath d='M20 55 L50 25 L80 55 L80 80 L60 80 L60 62 L40 62 L40 80 L20 80Z' fill='%23c9a84c'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/logo_1777409225544.jpg">
+<link rel="preconnect" href="https://qbyisxlqpuwowbtrying.supabase.co" crossorigin>
+<link rel="preload" as="image" href="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_0_1776349884076.jpg">
 <meta name="apple-mobile-web-app-title" content="Mercy Children's Home">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -476,7 +478,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
       <div class="gfm-card">
         <!-- Photo -->
         <div style="position:relative;overflow:hidden;">
-          <img loading="lazy" decoding="async" id="gfm-hero-img" src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_0_1776349884076.jpg" alt="Alex Ssengonzi with children at Mercy Children's Home" class="gfm-hero-photo"
+          <img loading="lazy" decoding="async" id="gfm-hero-img" src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/gallery_3_1781170278228.jpg" alt="Children at Mercy Children's Home" class="gfm-hero-photo"
                onload="this.style.display='block';document.getElementById('gfm-ph').style.display='none';"
                onerror="if(!this.dataset.retry){this.dataset.retry=1;var s=this.src.split('?')[0];var self=this;setTimeout(function(){self.src=s+'?r='+Date.now();},1500);}else{this.style.display='none';}">
           <div id="gfm-ph" class="gfm-photo-placeholder">
@@ -518,6 +520,9 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
           </div>
           <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="gfm-donate-btn">Donate now</a>
           <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda/fm/s?utm_campaign=fp_sharesheet&utm_medium=customer&utm_source=copy_link" target="_blank" class="gfm-share-btn">Share</a>
+          <div style="margin-top:14px;padding:12px 14px;background:rgba(13,31,60,.04);border-radius:8px;font-size:11px;line-height:1.6;color:#5a6577;">
+            <strong style="color:#0d1f3c;">ℹ️ About this fundraiser:</strong> Our GoFundMe is managed by our trusted U.S.-based partner, <strong>Sheryl Wombacher</strong>, who transfers all funds directly to Mercy Children's Home. International donations cannot be withdrawn directly in Uganda, so this ensures every gift safely reaches the children.
+          </div>
         </div>
       </div>
     </div>
@@ -1419,10 +1424,10 @@ function loadAllPhotos(){
       renderGallery();
     }
     var nl=document.getElementById('navLogoWrap');
-    if(nl&&pm['logo']){nl.innerHTML='<img loading="lazy" decoding="async" src="'+url(pm['logo'])+'" style="width:100%;height:100%;object-fit:cover;">';}
+    if(nl&&pm['logo']){var li=nl.querySelector('img');var lu=url(pm['logo']);if(li){if(li.src!==lu)li.src=lu;}else{nl.innerHTML='<img loading="lazy" decoding="async" src="'+lu+'" style="width:100%;height:100%;object-fit:cover;">';}}
     if(pm['gallery_0']){
       var hw=document.getElementById('heroBgWrap');
-      if(hw){hw.innerHTML='<img loading="lazy" decoding="async" src="'+url(pm['gallery_0'])+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.75;display:block;">';}
+      if(hw){var hi=hw.querySelector('img');var nu=url(pm['gallery_0']);if(hi){if(hi.src!==nu)hi.src=nu;}else{hw.innerHTML='<img loading="lazy" decoding="async" src="'+nu+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.75;display:block;">';}}
     }
     var aw=document.getElementById('aboutImgWrap');
     if(aw&&pm['gallery_2']){aw.innerHTML='<img loading="lazy" decoding="async" src="'+url(pm['gallery_2'])+'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">';}
