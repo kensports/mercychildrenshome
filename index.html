@@ -297,6 +297,10 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
 .footer-bottom{border-top:1px solid var(--border-navy);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
 .footer-bottom p{font-size:12px;color:rgba(255,255,255,.3);}
 .footer-bottom a{color:var(--gold);text-decoration:none;}
+.goog-te-banner-frame,.skiptranslate iframe{display:none !important;}
+body{top:0 !important;position:static !important;}
+#goog-gt-tt,.goog-te-balloon-frame{display:none !important;}
+font[style]{background:none !important;box-shadow:none !important;}
 
 /* TOAST */
 #toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--navy);border-left:4px solid var(--gold);color:#fff;padding:14px 20px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,.3);transform:translateY(100px);opacity:0;transition:transform .3s,opacity .3s;max-width:300px;pointer-events:none;}
@@ -2005,9 +2009,25 @@ function showToast(msg){
 }
 document.querySelectorAll('.footer-year').forEach(function(el){el.textContent=new Date().getFullYear();});
 
-function translateSite(lang){
-  if(!lang)return;
-  var url=location.href.split('#')[0];
-  window.open('https://translate.google.com/translate?sl=en&tl='+lang+'&u='+encodeURIComponent(url),'_blank');
+function setTransCookie(lang){
+  var val=lang?('/en/'+lang):'';
+  var domain=location.hostname;
+  document.cookie='googtrans='+val+';path=/';
+  document.cookie='googtrans='+val+';path=/;domain='+domain;
+  document.cookie='googtrans='+val+';path=/;domain=.'+domain;
 }
+function translateSite(lang){
+  if(!lang){
+    setTransCookie('');
+    location.reload();
+    return;
+  }
+  setTransCookie(lang);
+  location.reload();
+}
+window.googleTranslateElementInit=function(){
+  new google.translate.TranslateElement({pageLanguage:'en',autoDisplay:false},'google_translate_hidden');
+};
 </script>
+<div id="google_translate_hidden" style="display:none;"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
