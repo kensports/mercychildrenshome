@@ -1109,13 +1109,39 @@ function loadAdminStories(){
     }
   }).catch(function(){wrap.innerHTML='<p style="color:red;">Failed to load</p>';});
 }
+function compressImage(file){
+  return new Promise(function(resolve){
+    if(!file.type||file.type.indexOf('image/')!==0){resolve(file);return;}
+    var img=new Image();
+    var fr=new FileReader();
+    fr.onload=function(){img.src=fr.result;};
+    fr.onerror=function(){resolve(file);};
+    img.onload=function(){
+      try{
+        var MAX=1280;
+        var w=img.width,h=img.height;
+        if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}
+        if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}
+        var c=document.createElement('canvas');
+        c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0,w,h);
+        c.toBlob(function(blob){
+          if(blob&&blob.size<file.size){resolve(blob);}else{resolve(file);}
+        },'image/jpeg',0.82);
+      }catch(e){resolve(file);}
+    };
+    img.onerror=function(){resolve(file);};
+    fr.readAsDataURL(file);
+  });
+}
 function uploadStoryPhoto(i,input){
   var file=input.files[0];if(!file)return;
   var status=document.getElementById('storiesStatus');
+  if(status)status.textContent='Compressing photo...';
+  compressImage(file).then(function(blob){
   if(status)status.textContent='Uploading photo...';
-  var ext=file.name.split('.').pop();
-  var filename='story_'+i+'_'+Date.now()+'.'+ext;
-  fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},body:file})
+  var filename='story_'+i+'_'+Date.now()+'.jpg';
+  fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'image/jpeg'},body:blob})
   .then(function(r){
     if(!r.ok&&r.status!==200&&r.status!==201)throw new Error('Upload failed');
     return fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'story_'+i,filename:filename})});
@@ -1131,6 +1157,7 @@ function uploadStoryPhoto(i,input){
     showToast('Story photo uploaded!');
   })
   .catch(function(e){if(status)status.textContent='Failed: '+e.message;showToast('Upload failed!');});
+  });
 }
 function deleteStory(i){
   if(!confirm('Delete story '+(i+1)+'? The photo and text will be removed from the website.'))return;
@@ -1412,11 +1439,12 @@ function changePwd(){
 function uploadKeyPhoto(id,input,previewId){
   var file=input.files[0];if(!file)return;
   var status=document.getElementById('photoUploadStatus');
+  if(status)status.textContent='Compressing...';
+  compressImage(file).then(function(blob){
   if(status)status.textContent='Uploading...';
-  var ext=file.name.split('.').pop();
-  var filename=id+'_'+Date.now()+'.'+ext;
+  var filename=id+'_'+Date.now()+'.jpg';
   fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{
-    method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},body:file
+    method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'image/jpeg'},body:blob
   })
   .then(function(r){
     if(!r.ok&&r.status!==200&&r.status!==201)throw new Error('Upload failed '+r.status);
@@ -1440,6 +1468,7 @@ function uploadKeyPhoto(id,input,previewId){
     showToast('Photo updated!');
   })
   .catch(function(e){if(status)status.textContent='Failed: '+e.message;showToast('Upload failed!');});
+  });
 }
 
 function loadAdminGallery(){
@@ -1496,9 +1525,9 @@ function uploadGalleryPhotos(input){
     var uploaded=0;
     files.forEach(function(file,i){
       var gid='gallery_'+(nextId+i);
-      var ext=file.name.split('.').pop();
-      var fname=gid+'_'+Date.now()+'.'+ext;
-      fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+fname,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},body:file})
+      var fname=gid+'_'+Date.now()+'.jpg';
+      compressImage(file).then(function(blob){
+      return fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+fname,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'image/jpeg'},body:blob});})
       .then(function(){return fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:gid,filename:fname})});})
       .then(function(){uploaded++;if(status)status.textContent=uploaded+'/'+files.length+' uploaded';if(uploaded===files.length){loadAdminGallery();showToast('Gallery updated!');}})
       .catch(function(){if(status)status.textContent='Upload failed';});
@@ -1559,9 +1588,9 @@ function editVolunteer(idx){
 function changeVolunteerPhoto(idx,input){
   var file=input.files[0];if(!file)return;
   showToast('Uploading photo...');
-  var ext=file.name.split('.').pop();
-  var filename='supporter_'+Date.now()+'_'+Date.now()+'.'+ext;
-  fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},body:file})
+  var filename='supporter_'+Date.now()+'_'+Date.now()+'.jpg';
+  compressImage(file).then(function(blob){
+  return fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'image/jpeg'},body:blob});})
   .then(function(r){
     if(!r.ok&&r.status!==200&&r.status!==201)throw new Error('Upload failed');
     var photoUrl=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
@@ -1595,10 +1624,11 @@ function uploadNewVolunteer(input){
   var flag='';
   var displayCountry=country;
   var status=document.getElementById('volUploadStatus');
+  if(status)status.textContent='Compressing...';
+  var filename='supporter_'+Date.now()+'_'+Date.now()+'.jpg';
+  compressImage(file).then(function(blob){
   if(status)status.textContent='Uploading...';
-  var ext=file.name.split('.').pop();
-  var filename='supporter_'+Date.now()+'_'+Date.now()+'.'+ext;
-  fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},body:file})
+  return fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'image/jpeg'},body:blob});})
   .then(function(r){
     if(!r.ok&&r.status!==200&&r.status!==201)throw new Error('Upload failed');
     var photoUrl=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
