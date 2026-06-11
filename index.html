@@ -1150,7 +1150,7 @@ function uploadStoryPhoto(i,input){
     var url=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
     var prev=document.getElementById('admStoryPrev'+i);if(prev){prev.src=url;prev.style.display='block';}
     var si=document.getElementById('storyImg'+(i+1));
-    if(si){si.style.cssText='width:100%;aspect-ratio:auto;height:auto;display:block;overflow:visible;background:none;position:static;';si.innerHTML='<img src="'+url+'" style="width:100%;height:auto;display:block;min-height:120px;background:var(--navy2);" onload="this.style.minHeight=\'0\';this.style.background=\'none\';" onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.split(\'?\')[0]+\'?t=\'+Date.now();}">';}
+    if(si){si.style.cssText='width:100%;height:auto;display:block;';si.innerHTML='<img src="'+url+'" style="width:100%;height:auto;display:block;">';}
     var sc=document.getElementById('storyCard'+(i+1));if(sc)sc.style.display='';
     var ss=document.querySelector('.stories');if(ss)ss.style.display='block';
     if(status)status.textContent='Story photo '+(i+1)+' uploaded!';
@@ -1279,7 +1279,7 @@ function loadAllPhotos(){
         hasStories=true;
         if(card)card.style.display='';
         var si=document.getElementById('storyImg'+(i+1));
-        if(si){si.style.cssText='width:100%;aspect-ratio:auto;height:auto;display:block;overflow:visible;background:none;position:static;';si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:auto;display:block;min-height:120px;background:var(--navy2);" onload="this.style.minHeight=\'0\';this.style.background=\'none\';" onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.split(\'?\')[0]+\'?t=\'+Date.now();}">';}
+        if(si){si.style.cssText='width:100%;height:auto;display:block;';si.innerHTML='<img src="'+url(pm[k])+'" style="width:100%;height:auto;display:block;">';}
       }else{
         if(card)card.style.display='none';
       }
@@ -1345,6 +1345,30 @@ document.addEventListener('click',function(e){
   var el=document.getElementById(id);
   if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
 });
+window.__errs=[];window.addEventListener('error',function(e){window.__errs.push(e.message+' @'+(e.lineno||''));});
+if(location.search.indexOf('debug=1')!==-1){
+  setTimeout(function(){
+    var si=document.getElementById('storyImg1');
+    var im=si?si.querySelector('img'):null;
+    var card=document.getElementById('storyCard1');
+    var sec=document.querySelector('.stories');
+    function rect(el){if(!el)return '-';var r=el.getBoundingClientRect();return Math.round(r.width)+'x'+Math.round(r.height);}
+    var info=[
+      'SECTION display: '+(sec?getComputedStyle(sec).display:'-'),
+      'CARD1 display: '+(card?getComputedStyle(card).display:'-')+' size: '+rect(card),
+      'IMG BOX size: '+rect(si),
+      'IMG exists: '+(!!im),
+      'IMG loaded: '+(im?im.complete+' natural:'+im.naturalWidth+'x'+im.naturalHeight:'-'),
+      'IMG size on page: '+rect(im),
+      'IMG src: ...'+(im?im.src.slice(-35):'-'),
+      'JS ERRORS: '+(window.__errs.length?window.__errs.join(' | '):'none')
+    ].join('\n');
+    var d=document.createElement('div');
+    d.style.cssText='position:fixed;top:10px;left:10px;right:10px;z-index:999999;background:#000;color:#0f0;font-family:monospace;font-size:13px;padding:14px;white-space:pre-wrap;border:2px solid #0f0;';
+    d.textContent='MERCY DEBUG\n'+info;
+    document.body.appendChild(d);
+  },5000);
+}
 window.addEventListener('load',function(){
   var loader=document.getElementById('pageLoader');
   setTimeout(function(){
