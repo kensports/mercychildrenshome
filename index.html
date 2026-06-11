@@ -1706,7 +1706,19 @@ function openAdmin(){
 function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');}
 function checkPwd(){
   var v=document.getElementById('pwdInput').value;
-  var stored=localStorage.getItem('mch_pwd')||'mercy2020';
+  fetch(SUPA+'/rest/v1/mch_photos?id=eq.admin_pwd&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+  .then(function(r){return r.json();})
+  .then(function(rows){
+    var stored=(rows&&rows[0]&&rows[0].filename)?rows[0].filename:(localStorage.getItem('mch_pwd')||'mercy2020');
+    if(stored)localStorage.setItem('mch_pwd',stored);
+    doPwdCheck(v,stored);
+  })
+  .catch(function(){
+    var stored=localStorage.getItem('mch_pwd')||'mercy2020';
+    doPwdCheck(v,stored);
+  });
+}
+function doPwdCheck(v,stored){
   if(v===stored){
     unlocked=true;
     document.getElementById('pwdOverlay').style.display='none';
@@ -1741,10 +1753,16 @@ function changePwd(){
   var cp=document.getElementById('newPwd2').value;
   if(np.length<6){showToast('Min 6 characters');return;}
   if(np!==cp){showToast('Passwords do not match!');return;}
-  localStorage.setItem('mch_pwd',np);
-  document.getElementById('newPwd').value='';
-  document.getElementById('newPwd2').value='';
-  showToast('Password changed!');
+  showToast('Updating...');
+  fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'admin_pwd',filename:np})})
+  .then(function(r){
+    if(!r.ok)throw new Error('save failed');
+    localStorage.setItem('mch_pwd',np);
+    document.getElementById('newPwd').value='';
+    document.getElementById('newPwd2').value='';
+    showToast('Password changed on all devices!');
+  })
+  .catch(function(){showToast('Failed to update password. Try again.');});
 }
 
 function uploadKeyPhoto(id,input,previewId){
