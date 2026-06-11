@@ -1229,12 +1229,23 @@ function parseVideo(rawUrl){
   if(!u)return null;
   // YouTube
   var yt=u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
-  if(yt)return {type:'youtube',id:yt[1],embed:'https://www.youtube.com/embed/'+yt[1]};
-  // TikTok
+  if(yt)return {type:'youtube',id:yt[1],embed:'https://www.youtube.com/embed/'+yt[1]+'?autoplay=1',thumb:'https://i.ytimg.com/vi/'+yt[1]+'/hqdefault.jpg'};
+  // TikTok full link with numeric id
   var tk=u.match(/tiktok\.com\/.*\/video\/(\d+)/);
   if(tk)return {type:'tiktok',id:tk[1],embed:'https://www.tiktok.com/embed/v2/'+tk[1]};
+  // TikTok short link (vt.tiktok.com / vm.tiktok.com) - id resolved later via oEmbed
   if(u.indexOf('tiktok.com')!==-1)return {type:'tiktok',id:'',embed:'',raw:u};
   return null;
+}
+// TikTok oEmbed: works for ANY tiktok link including short vt.tiktok.com ones.
+// Returns {thumb, embedId} via the official oembed endpoint.
+function tiktokOEmbed(url){
+  return fetch('https://www.tiktok.com/oembed?url='+encodeURIComponent(url))
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var idm=(d&&d.html||'').match(/data-video-id=\"(\d+)\"/)||(d&&d.embed_product_id?[null,d.embed_product_id]:null);
+      return {thumb:d&&d.thumbnail_url||'',id:idm?idm[1]:'',title:d&&d.title||''};
+    }).catch(function(){return {thumb:'',id:'',title:''};});
 }
 function fetchVideos(){
   return fetch(SUPA+'/rest/v1/mch_photos?id=eq.videos_data&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
@@ -1247,6 +1258,43 @@ function fetchVideos(){
 function saveVideos(list){
   return fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'videos_data',filename:JSON.stringify(list)})});
 }
+function makeVideoCard(v){
+  var box=document.createElement('div');
+  box.style.cssText='border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);background:#000;';
+  var info=parseVideo(v.url);
+  function thumbHTML(thumbUrl,ratio){
+    return '<div class="vthumb" style="position:relative;width:100%;aspect-ratio:'+ratio+';max-height:560px;cursor:pointer;background:#0d1f3c center/cover no-repeat'+(thumbUrl?" url(\'"+thumbUrl+"\')":'')+';">'
+      +'<div style="position:absolute;inset:0;background:rgba(0,0,0,.25);"></div>'
+      +'<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.4);">'
+      +'<div style="width:0;height:0;border-left:22px solid var(--navy);border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:5px;"></div></div></div>';
+  }
+  function wireClick(embedSrc,ratio){
+    var t=box.querySelector('.vthumb');
+    if(t)t.onclick=function(){
+      t.parentNode.innerHTML='<div style="position:relative;width:100%;aspect-ratio:'+ratio+';max-height:560px;"><iframe src="'+embedSrc+'" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;fullscreen" allowfullscreen></iframe></div>'+(t.parentNode.querySelector('.vcap')?'':'');
+    };
+  }
+  var cap=v.caption?'<div class="vcap" style="padding:12px 14px;background:#fff;font-size:14px;color:var(--text);">'+v.caption.replace(/</g,'&lt;')+'</div>':'';
+  if(info&&info.type==='youtube'){
+    box.innerHTML=thumbHTML(info.thumb,'16/9')+cap;
+    wireClick(info.embed,'16/9');
+  }else if(info&&info.type==='tiktok'&&info.id){
+    box.innerHTML=thumbHTML('','9/16')+cap;
+    wireClick('https://www.tiktok.com/embed/v2/'+info.id,'9/16');
+  }else if(info&&info.type==='tiktok'){
+    // short link: resolve thumb + id via oEmbed
+    box.innerHTML=thumbHTML('','9/16')+cap;
+    tiktokOEmbed(v.url).then(function(o){
+      var t=box.querySelector('.vthumb');
+      if(t&&o.thumb)t.style.background="#0d1f3c center/cover no-repeat url('"+o.thumb+"')";
+      if(o.id){wireClick('https://www.tiktok.com/embed/v2/'+o.id,'9/16');}
+      else if(t){t.onclick=function(){window.open(v.url,'_blank');};}
+    });
+  }else{
+    box.innerHTML='<a href="'+(v.url||'#')+'" target="_blank" style="display:block;padding:40px 20px;text-align:center;color:#fff;text-decoration:none;background:var(--navy);">▶ Watch video</a>'+cap;
+  }
+  return box;
+}
 function loadVideos(){
   fetchVideos().then(function(list){
     var grid=document.getElementById('videosGrid');
@@ -1255,21 +1303,7 @@ function loadVideos(){
     if(!list.length){if(sec)sec.style.display='none';return;}
     if(sec)sec.style.display='block';
     grid.innerHTML='';
-    list.forEach(function(v){
-      var info=parseVideo(v.url);
-      var box=document.createElement('div');
-      box.style.cssText='background:#000;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);';
-      var inner='';
-      if(info&&info.type==='youtube'){
-        inner='<div style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="'+info.embed+'" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>';
-      }else if(info&&info.type==='tiktok'&&info.embed){
-        inner='<div style="position:relative;width:100%;aspect-ratio:9/16;max-height:560px;"><iframe src="'+info.embed+'" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="autoplay;encrypted-media;fullscreen" allowfullscreen></iframe></div>';
-      }else{
-        inner='<a href="'+(v.url||'#')+'" target="_blank" style="display:block;padding:40px 20px;text-align:center;color:#fff;text-decoration:none;background:var(--navy);">▶ Watch video</a>';
-      }
-      box.innerHTML=inner+(v.caption?'<div style="padding:12px 14px;background:#fff;font-size:14px;color:var(--text);">'+v.caption.replace(/</g,'&lt;')+'</div>':'');
-      grid.appendChild(box);
-    });
+    list.forEach(function(v){grid.appendChild(makeVideoCard(v));});
   });
 }
 function addVideo(){
