@@ -297,6 +297,12 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
 .footer-bottom{border-top:1px solid var(--border-navy);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
 .footer-bottom p{font-size:12px;color:rgba(255,255,255,.3);}
 .footer-bottom a{color:var(--gold);text-decoration:none;}
+/* Google Translate cleanup */
+.goog-te-banner-frame,.skiptranslate{display:none !important;}
+body{top:0 !important;}
+#google_translate_element select{background:var(--navy3);color:#fff;border:1px solid var(--border-navy);border-radius:6px;padding:5px 8px;font-size:12px;font-family:'Manrope',sans-serif;cursor:pointer;}
+.goog-te-gadget{color:transparent !important;font-size:0 !important;}
+.goog-logo-link,.goog-te-gadget span{display:none !important;}
 
 /* TOAST */
 #toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--navy);border-left:4px solid var(--gold);color:#fff;padding:14px 20px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,.3);transform:translateY(100px);opacity:0;transition:transform .3s,opacity .3s;max-width:300px;pointer-events:none;}
@@ -905,6 +911,10 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:64
       <a href="#contact">Sponsor a Child</a>
       <a href="https://wa.me/256751442505" target="_blank">WhatsApp Us</a>
     </div>
+  </div>
+  <div class="footer-lang" style="border-top:1px solid var(--border-navy);padding-top:18px;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+    <span style="font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.5px;"><i class="fa-solid fa-globe" style="margin-right:6px;color:var(--gold);"></i>Language</span>
+    <div id="google_translate_element"></div>
   </div>
   <div class="footer-bottom">
     <p>© <span class="footer-year"></span> Mercy Children's Home Uganda. All rights reserved. · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="safeguarding.html">Child Safeguarding</a></p>
@@ -1989,4 +1999,8 @@ function showToast(msg){
 }
 document.querySelectorAll('.footer-year').forEach(function(el){el.textContent=new Date().getFullYear();});
 
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'en,fr,de,es,nl,sw,ar,zh-CN,pt,it,sv',layout:google.translate.TranslateElement.InlineLayout.SIMPLE,autoDisplay:false},'google_translate_element');
+}
 </script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
