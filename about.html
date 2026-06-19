@@ -129,9 +129,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
 <!-- NAV -->
 <nav id="navbar">
   <a class="nav-logo" href="index.html">
-    <div class="nav-logo-img" id="navLogoWrap">
-      <svg style="width:20px;height:20px;fill:none;stroke:var(--gold);stroke-width:2;" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    </div>
+    <div class="nav-logo-img" id="navLogoWrap"><img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/logo_1777409225544.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Mercy Logo"></div>
     <div class="nav-logo-name">Mercy Children's Home<small>Kasanda Bukuya · Uganda</small></div>
   </a>
   <div class="nav-links">
@@ -225,7 +223,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
   <div class="footer-top">
     <div>
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-        <div style="width:32px;height:32px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;"><svg style="width:16px;height:16px;fill:none;stroke:var(--gold);stroke-width:2;" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div id="footerLogoWrap" style="width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0;background:var(--navy2);"><img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/logo_1777409225544.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Mercy Logo"></div>
         <span style="font-family:'Fraunces',serif;font-size:17px;color:#fff;">Mercy Children's Home</span>
       </div>
       <div class="footer-brand"><p>Shelter, love and opportunity for 32 orphaned children in Kasanda Bukuya, Uganda since 2020.</p></div>
@@ -274,7 +272,9 @@ function loadAllPhotos(){
 
     // Nav logo
     var nl=document.getElementById('navLogoWrap');
-    if(nl&&(pm['logo']||pm['gallery_0'])){nl.innerHTML='<img src="'+photoUrl(pm['logo']||pm['gallery_0'])+'" style="width:100%;height:100%;object-fit:cover;">';}
+    if(nl&&pm['logo']){var li=nl.querySelector('img');if(li)li.src=photoUrl(pm['logo']);else nl.innerHTML='<img src="'+photoUrl(pm['logo'])+'" style="width:100%;height:100%;object-fit:cover;" alt="Mercy Logo">';}
+    var fl=document.getElementById('footerLogoWrap');if(fl&&pm['logo']){var fi=fl.querySelector('img');if(fi)fi.src=photoUrl(pm['logo']);}
+    var fav=document.querySelector("link[rel~='icon']");if(fav&&pm['logo']){fav.href=photoUrl(pm['logo']);fav.type='image/jpeg';}
 
     // Our Story text
     if(pm['about_story']){

@@ -1029,7 +1029,7 @@ font[style]{background:none !important;box-shadow:none !important;}
   <div class="footer-top">
     <div>
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-        <div class="nav-logo-mark"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div id="footerLogoWrap" style="width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0;background:var(--navy2);"><img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/logo_1777409225544.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Mercy Logo"></div>
         <span style="font-family:'Fraunces',serif;font-size:18px;color:#fff;letter-spacing:-.5px;">Mercy Children's Home</span>
       </div>
       <div class="footer-brand"><p>Providing shelter, love and opportunity to 32 orphaned children in Kasanda Bukuya, Uganda since 2020. Every child deserves a future.</p></div>
@@ -2204,7 +2204,9 @@ function loadAllPhotos(){
       if(galSec)galSec.style.display='none';
     }
     var nl=document.getElementById('navLogoWrap');
-    if(nl&&pm['logo']){var li=nl.querySelector('img');var lu=url(pm['logo']);if(li){if(li.src!==lu)li.src=lu;}else{nl.innerHTML='<img loading="lazy" decoding="async" src="'+lu+'" style="width:100%;height:100%;object-fit:cover;">';}}
+    if(nl&&pm['logo']){var li=nl.querySelector('img');var lu=url(pm['logo']);if(li){if(li.src!==lu)li.src=lu;}else{nl.innerHTML='<img loading="lazy" decoding="async" src="'+lu+'" style="width:100%;height:100%;object-fit:cover;" alt="Mercy Logo">';}}
+    var fl=document.getElementById('footerLogoWrap');if(fl&&pm['logo']){var fi=fl.querySelector('img');if(fi)fi.src=url(pm['logo']);}
+    var fav=document.querySelector("link[rel~='icon']");if(fav&&pm['logo']){fav.href=url(pm['logo']);fav.type='image/jpeg';}
     if(pm['gallery_0']){
       var hw=document.getElementById('heroBgWrap');
       if(hw){var hi=hw.querySelector('img');var nu=url(pm['gallery_0']);if(hi){if(hi.src!==nu)hi.src=nu;}else{hw.innerHTML='<img loading="lazy" decoding="async" src="'+nu+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.75;display:block;">';}}
@@ -2553,7 +2555,7 @@ function uploadKeyPhoto(id,input,previewId){
       if(ap){var img=ap.querySelector('img');if(img){img.src=url;img.style.objectPosition='center 60%';}}
       var gf=document.getElementById('gfm-founder-img');if(gf)gf.src=url;
     }
-    if(id==='logo'){var nl=document.getElementById('navLogoWrap');if(nl){var img=nl.querySelector('img');if(img)img.src=url;}}
+    if(id==='logo'){var nl=document.getElementById('navLogoWrap');if(nl){var img=nl.querySelector('img');if(img)img.src=url;}var fl=document.getElementById('footerLogoWrap');if(fl){var fi=fl.querySelector('img');if(fi)fi.src=url;}var fav=document.querySelector("link[rel~='icon']");if(fav){fav.href=url;fav.type='image/jpeg';}}
     if(id==='gallery_0'){var hw=document.getElementById('heroBgWrap');if(hw){var img=hw.querySelector('img');if(img)img.src=url;}}
     if(status)status.textContent=id+' updated!';
     showToast('Photo updated!');
