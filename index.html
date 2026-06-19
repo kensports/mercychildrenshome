@@ -72,8 +72,20 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.3);}
 .hamburger{display:none;cursor:pointer;color:#fff;font-size:22px;border:none;background:none;}
 
 /* MOBILE MENU */
-.mob-menu{display:none;position:fixed;inset:0;background:var(--navy);z-index:200;flex-direction:column;}
-.mob-menu.open{display:flex;}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--navy);z-index:200;flex-direction:column;overflow:hidden;}
+.mob-menu.open{display:flex;animation:mobMenuIn .3s cubic-bezier(.4,0,.2,1) both;}
+.mob-menu.closing{animation:mobMenuOut .28s cubic-bezier(.4,0,.2,1) both;}
+@keyframes mobMenuIn{from{opacity:0;transform:translateX(100%);}to{opacity:1;transform:translateX(0);}}
+@keyframes mobMenuOut{from{opacity:1;transform:translateX(0);}to{opacity:0;transform:translateX(100%);}}
+.mob-menu.open a{animation:mobItemIn .35s ease both;opacity:0;}
+.mob-menu.open a:nth-child(2){animation-delay:.10s;}
+.mob-menu.open a:nth-child(3){animation-delay:.15s;}
+.mob-menu.open a:nth-child(4){animation-delay:.20s;}
+.mob-menu.open a:nth-child(5){animation-delay:.25s;}
+.mob-menu.open a:nth-child(6){animation-delay:.29s;}
+.mob-menu.open a:nth-child(7){animation-delay:.33s;}
+.mob-menu.open a:nth-child(8){animation-delay:.37s;}
+@keyframes mobItemIn{from{opacity:0;transform:translateX(24px);}to{opacity:1;transform:translateX(0);}}
 .mob-top{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border-navy);}
 .mob-close{background:none;border:none;font-size:26px;cursor:pointer;color:rgba(255,255,255,.6);}
 .mob-menu a{text-decoration:none;color:#fff;font-size:18px;font-weight:600;padding:20px 28px;border-bottom:1px solid var(--border-navy);}
@@ -479,7 +491,7 @@ font[style]{background:none !important;box-shadow:none !important;}
 <div class="mob-menu" id="mobMenu">
   <div class="mob-top">
     <span style="font-family:'Fraunces',serif;font-size:17px;color:#fff;">Mercy Children's Home</span>
-    <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open')">✕</button>
+    <button class="mob-close" onclick="closeMobMenu()">✕</button>
   </div>
   <a href="#home" onclick="closeMobMenu()">Home</a>
   <a href="about.html" onclick="closeMobMenu()">About</a>
@@ -2223,8 +2235,8 @@ window.addEventListener('scroll',function(){
   var h=document.documentElement.scrollHeight-window.innerHeight;
   b.style.width=(h>0?window.scrollY/h*100:0)+'%';
 },{passive:true});
-function openMobMenu(){document.getElementById('mobMenu').classList.add('open');}
-function closeMobMenu(){document.getElementById('mobMenu').classList.remove('open');}
+function openMobMenu(){var m=document.getElementById('mobMenu');m.classList.remove('closing');m.classList.add('open');}
+function closeMobMenu(){var m=document.getElementById('mobMenu');m.classList.add('closing');setTimeout(function(){m.classList.remove('open','closing');},290);}
 
 function initReveal(){
   if(!window.IntersectionObserver){document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});return;}
