@@ -407,6 +407,49 @@ font[style]{background:none !important;box-shadow:none !important;}
   #founder > div{grid-template-columns:1fr !important;}
   #volGrid{grid-template-columns:repeat(2,1fr) !important;}
 }
+
+/* PROGRESS BAR */
+.prog-bar-wrap{border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin-bottom:20px;}
+.prog-label-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;flex-wrap:wrap;gap:6px;}
+.prog-raised{font-family:'Fraunces',serif;font-size:26px;font-weight:900;color:var(--navy);line-height:1;}
+.prog-goal{font-size:12px;color:var(--text3);}
+.prog-track{height:10px;background:var(--border);border-radius:5px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,#22c55e,#16a34a);border-radius:5px;transition:width 1.4s cubic-bezier(.4,0,.2,1);width:0;}
+.prog-meta{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;}
+.prog-meta-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);}
+.prog-meta-val{font-weight:700;color:var(--text);}
+
+/* TESTIMONIALS */
+.testi-sec{background:var(--navy);padding:90px 5%;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+.testi-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:28px;display:flex;flex-direction:column;gap:16px;transition:border-color .3s;}
+.testi-card:hover{border-color:rgba(201,168,76,.4);}
+.testi-stars{display:flex;gap:3px;}
+.testi-star{color:var(--gold);font-size:15px;}
+.testi-quote{font-family:'Fraunces',serif;font-size:17px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.7;flex:1;}
+.testi-author{display:flex;align-items:center;gap:12px;border-top:1px solid rgba(255,255,255,.08);padding-top:16px;}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);flex-shrink:0;}
+.testi-name{font-size:13px;font-weight:700;color:#fff;}
+.testi-loc{font-size:11px;color:rgba(255,255,255,.4);margin-top:1px;}
+@media(max-width:900px){.testi-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.testi-grid{grid-template-columns:1fr;}}
+
+/* TRANSPARENCY CHART */
+.trans-sec{background:var(--cream);padding:90px 5%;}
+.trans-layout{display:grid;grid-template-columns:300px 1fr;gap:64px;align-items:center;margin-top:48px;}
+.trans-donut-wrap{position:relative;width:260px;height:260px;margin:0 auto;flex-shrink:0;}
+.trans-donut{width:260px;height:260px;border-radius:50%;}
+.trans-donut-center{position:absolute;top:52px;left:52px;right:52px;bottom:52px;background:var(--cream);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;}
+.trans-bars{display:flex;flex-direction:column;gap:18px;flex:1;}
+.trans-row{display:flex;flex-direction:column;gap:6px;}
+.trans-row-top{display:flex;justify-content:space-between;align-items:center;}
+.trans-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;display:inline-block;margin-right:8px;}
+.trans-name{font-size:14px;font-weight:600;color:var(--text);display:flex;align-items:center;}
+.trans-pct{font-size:14px;font-weight:700;color:var(--text);}
+.trans-track{height:8px;background:var(--border);border-radius:4px;overflow:hidden;}
+.trans-fill{height:100%;border-radius:4px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+@media(max-width:900px){.trans-layout{grid-template-columns:1fr;gap:32px;}}
+@media(max-width:600px){.trans-donut-wrap{width:220px;height:220px;}.trans-donut{width:220px;height:220px;}.trans-donut-center{top:44px;left:44px;right:44px;bottom:44px;}}
 </style>
 </head>
 <body>
@@ -431,6 +474,8 @@ font[style]{background:none !important;box-shadow:none !important;}
   <a href="#volunteers" onclick="closeMobMenu()">Volunteers</a>
   <a href="#mission" onclick="closeMobMenu()">Mission</a>
   <a href="#gallery" onclick="closeMobMenu()">Gallery</a>
+  <a href="#testimonials" onclick="closeMobMenu()">Donor Stories</a>
+  <a href="#transparency" onclick="closeMobMenu()">Where Money Goes</a>
   <a href="#contact" onclick="closeMobMenu()">Contact</a>
   <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="mob-donate-btn">Donate on GoFundMe</a>
 </div>
@@ -446,6 +491,7 @@ font[style]{background:none !important;box-shadow:none !important;}
     <a href="#founder">Founder</a>
     <a href="#mission">Mission</a>
     <a href="#gallery">Gallery</a>
+    <a href="impact.html">Impact</a>
     <a href="#contact">Contact</a>
     <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="nav-donate">Donate Now</a>
   </div>
@@ -636,6 +682,36 @@ font[style]{background:none !important;box-shadow:none !important;}
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="testi-sec" id="testimonials" style="display:none">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="label reveal" style="justify-content:center;text-align:center;"><div class="label-line"></div><span style="color:var(--gold);">Donor Stories</span></div>
+    <h2 class="big-title reveal" style="text-align:center;color:#fff;max-width:700px;margin:0 auto 12px;">What Our<br><em>Donors Say</em></h2>
+    <p class="reveal" style="text-align:center;color:rgba(255,255,255,.55);font-size:16px;max-width:540px;margin:0 auto;line-height:1.8;">Real donors. Real experiences. Real lives changed.</p>
+    <div class="testi-grid" id="testiGrid"></div>
+  </div>
+</section>
+
+<!-- TRANSPARENCY CHART -->
+<section class="trans-sec" id="transparency">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="label reveal" style="justify-content:center;text-align:center;"><div class="label-line"></div><span>Financial Transparency</span></div>
+    <h2 class="big-title reveal" style="text-align:center;max-width:700px;margin:0 auto 12px;">Where Your<br><em>Money Goes</em></h2>
+    <p class="reveal" style="text-align:center;color:var(--text2);font-size:16px;max-width:540px;margin:0 auto;line-height:1.8;">Every shilling is accounted for. Here is exactly how your donations are used to care for our 32 children.</p>
+    <div class="trans-layout reveal">
+      <div class="trans-donut-wrap">
+        <div class="trans-donut" id="transDonut"></div>
+        <div class="trans-donut-center">
+          <div style="font-family:'Fraunces',serif;font-size:36px;font-weight:900;color:var(--navy);line-height:1;">100%</div>
+          <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">To Children</div>
+        </div>
+      </div>
+      <div class="trans-bars" id="transBars"></div>
+    </div>
+    <p id="transUpdated" style="text-align:center;color:var(--text3);font-size:12px;margin-top:28px;"></p>
+  </div>
+</section>
+
 <!-- STORIES -->
 <section class="stories" id="stories" style="display:none;">
   <div class="section-inner">
@@ -732,6 +808,14 @@ font[style]{background:none !important;box-shadow:none !important;}
         <div class="donate-box">
           <h3>Choose Your Gift</h3>
           <p>Every contribution makes a real, lasting difference to our 32 children.</p>
+          <!-- FREQUENCY TOGGLE -->
+          <div style="display:flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;margin-bottom:20px;overflow:hidden;">
+            <button id="freqOnce" onclick="setFreq('once')" style="flex:1;padding:10px;border:none;background:var(--gold);color:var(--navy);font-size:12px;font-weight:800;cursor:pointer;font-family:'Manrope',sans-serif;text-transform:uppercase;letter-spacing:1px;transition:background .2s,color .2s;">Give Once</button>
+            <button id="freqMonthly" onclick="setFreq('monthly')" style="flex:1;padding:10px;border:none;background:transparent;color:rgba(255,255,255,.6);font-size:12px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;text-transform:uppercase;letter-spacing:1px;transition:background .2s,color .2s;">Give Monthly</button>
+          </div>
+          <div id="freqNote" style="display:none;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);border-radius:4px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:rgba(255,255,255,.8);line-height:1.6;">
+            <strong style="color:var(--gold);">Monthly giving</strong> is the most powerful way to help — it gives Alex the stability to plan meals, school fees and healthcare all year round. Select "Monthly" on the GoFundMe page after clicking below.
+          </div>
           <div class="amt-grid">
             <div class="amt-btn" onclick="setAmt(10,this)">$10</div>
             <div class="amt-btn active" onclick="setAmt(25,this)">$25</div>
@@ -741,7 +825,35 @@ font[style]{background:none !important;box-shadow:none !important;}
             <div class="amt-btn" onclick="setAmt(500,this)">$500</div>
           </div>
           <div class="amt-input-wrap"><span class="amt-symbol">$</span><input type="number" class="amt-input" id="donateAmt" value="25"/></div>
-          <button class="donate-btn" onclick="goDonate()">
+          <!-- PROGRESS BAR -->
+          <div class="prog-bar-wrap" id="progWrap">
+            <div class="prog-label-row">
+              <div>
+                <div style="font-size:9px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;">Campaign Progress</div>
+                <div class="prog-raised" id="progRaised">$0</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="prog-goal">Goal: <strong id="progGoal">$10,000</strong></div>
+                <div id="progPct" style="font-size:18px;font-weight:800;color:#16a34a;margin-top:2px;">0%</div>
+              </div>
+            </div>
+            <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+            <div class="prog-meta">
+              <div class="prog-meta-item">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                <span><span class="prog-meta-val" id="progDonors">0</span> donors</span>
+              </div>
+              <div class="prog-meta-item">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>100% to the children</span>
+              </div>
+              <div class="prog-meta-item">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>Updated by Alex</span>
+              </div>
+            </div>
+          </div>
+          <button class="donate-btn" id="donateCta" onclick="goDonate()">
             <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
             Donate on GoFundMe
           </button>
@@ -894,11 +1006,13 @@ font[style]{background:none !important;box-shadow:none !important;}
     </div>
     <div class="footer-col">
       <h4>Navigate</h4>
-      <a href="#about">About Us</a>
-      <a href="#mission">Our Mission</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#stories">Stories</a>
-      <a href="#donate">Donate</a>
+      <a href="about.html">About Us</a>
+      <a href="mission.html">Our Mission</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="impact.html">Our Impact</a>
+      <a href="#testimonials">Donor Stories</a>
+      <a href="#transparency">Where Money Goes</a>
+      <a href="donate.html">Donate</a>
       <a href="#contact">Contact</a>
     </div>
     <div class="footer-col">
@@ -910,6 +1024,39 @@ font[style]{background:none !important;box-shadow:none !important;}
       <a href="https://wa.me/256751442505" target="_blank">WhatsApp Us</a>
     </div>
   </div>
+  <!-- NGO TRUST BADGES -->
+  <div id="ngoBadgeStrip" style="border-top:1px solid var(--border-navy);padding:20px 5%;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2px;">Registered Organization</div>
+        <div id="ngoRegLine" style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.4;">Community Based Organization · Uganda · Est. 2020</div>
+      </div>
+    </div>
+    <div style="width:1px;height:32px;background:var(--border-navy);flex-shrink:0;"></div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2px;">Child Welfare</div>
+        <div id="ngoNoteLine" style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.4;">Licensed to care for children under Uganda Child Welfare Framework</div>
+      </div>
+    </div>
+    <div style="width:1px;height:32px;background:var(--border-navy);flex-shrink:0;"></div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2px;">100% Transparent</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.4;">Every donation tracked · Photo updates sent to donors</div>
+      </div>
+    </div>
+  </div>
+
   <div class="footer-lang" style="border-top:1px solid var(--border-navy);padding-top:18px;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
     <span style="font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.5px;display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Language</span>
     <select id="langSelect" onchange="translateSite(this.value)" style="background:var(--navy3);color:#fff;border:1px solid var(--border-navy);border-radius:6px;padding:6px 10px;font-size:12px;font-family:'Manrope',sans-serif;cursor:pointer;">
@@ -959,6 +1106,9 @@ font[style]{background:none !important;box-shadow:none !important;}
       <button class="adm-tab" onclick="admTab('volunteers',this)">Volunteers</button>
       <button class="adm-tab" onclick="admTab('stories',this)">Stories</button>
       <button class="adm-tab" onclick="admTab('videos',this)">Videos</button>
+      <button class="adm-tab" onclick="admTab('transparency',this)">Transparency</button>
+      <button class="adm-tab" onclick="admTab('testimonials',this)">Testimonials</button>
+      <button class="adm-tab" onclick="admTab('progress',this)">Progress</button>
       <button class="adm-tab" onclick="admTab('settings',this)">Settings</button>
     </div>
     <div class="adm-body">
@@ -1054,12 +1204,56 @@ font[style]{background:none !important;box-shadow:none !important;}
         <div id="impactStatus" style="margin-top:10px;font-size:13px;color:var(--text2);"></div>
       </div>
 
+      <!-- PROGRESS BAR -->
+      <div class="adm-sec" id="adm-progress">
+        <p style="font-size:13px;color:var(--text3);margin-bottom:16px;">Update the donation progress bar manually after checking GoFundMe. This shows donors how close you are to the goal.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;">
+          <div class="af" style="margin:0;"><label>Amount Raised ($)</label><input type="number" id="prog-raised" placeholder="e.g. 3250" min="0"/></div>
+          <div class="af" style="margin:0;"><label>Goal ($)</label><input type="number" id="prog-goal" placeholder="e.g. 10000" min="1"/></div>
+          <div class="af" style="margin:0;"><label>Number of Donors</label><input type="number" id="prog-donors" placeholder="e.g. 87" min="0"/></div>
+        </div>
+        <button onclick="saveProgress()" style="background:var(--navy);color:var(--gold);border:none;padding:10px 24px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">Update Progress Bar</button>
+        <div id="progStatus" style="margin-top:10px;font-size:13px;color:var(--text2);"></div>
+      </div>
+
+      <!-- TESTIMONIALS -->
+      <div class="adm-sec" id="adm-testimonials">
+        <p style="font-size:13px;color:var(--text3);margin-bottom:4px;">Add real donor quotes. The "What Our Donors Say" section is <strong>hidden on the site</strong> until you save at least one testimonial here.</p>
+        <p style="font-size:12px;color:var(--gold);margin-bottom:16px;font-weight:600;">Each card: photo (optional) · star rating · their words · name · country</p>
+        <div id="admTestiWrap" style="display:flex;flex-direction:column;gap:12px;"></div>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+          <button onclick="addTestiCard()" style="background:var(--cream);color:var(--navy);border:1px solid var(--border);padding:8px 16px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">+ Add Testimonial</button>
+          <button onclick="saveTestimonials()" style="background:var(--navy);color:var(--gold);border:none;padding:10px 24px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">Save All</button>
+        </div>
+        <div id="testiStatus" style="margin-top:10px;font-size:13px;color:var(--text2);"></div>
+      </div>
+
+      <!-- TRANSPARENCY -->
+      <div class="adm-sec" id="adm-transparency">
+        <p style="font-size:13px;color:var(--text3);margin-bottom:4px;">Edit the donation breakdown chart shown to donors. Percentages must add up to exactly 100.</p>
+        <p style="font-size:12px;color:var(--gold);margin-bottom:16px;font-weight:600;">Default: Food 40% · Education 25% · Healthcare 15% · Shelter 12% · Spiritual Care 8%</p>
+        <div id="admTransWrap" style="display:flex;flex-direction:column;gap:8px;"></div>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center;">
+          <button onclick="addTransRow()" style="background:var(--cream);color:var(--navy);border:1px solid var(--border);padding:8px 16px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">+ Add Row</button>
+          <button onclick="saveTransparency()" style="background:var(--navy);color:var(--gold);border:none;padding:10px 24px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">Save Chart</button>
+        </div>
+        <div id="transStatus" style="margin-top:10px;font-size:13px;color:var(--text2);"></div>
+      </div>
+
       <!-- SETTINGS -->
       <div class="adm-sec" id="adm-settings">
         <div style="margin-bottom:24px;">
           <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Donation Link</div>
           <div class="af"><label>GoFundMe URL</label><input type="text" id="ei-donateUrl" value="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda"/></div>
           <button class="adm-btn" onclick="saveDonate()">Save Link</button>
+        </div>
+        <div style="margin-bottom:24px;border-top:1px solid var(--border);padding-top:20px;">
+          <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">NGO Registration Badge (Footer)</div>
+          <p style="font-size:12px;color:var(--text3);margin-bottom:10px;">These two lines appear in the trust badges at the bottom of the website. Update them to match your official registration details.</p>
+          <div class="af"><label>Registration Line</label><input type="text" id="ei-ngoReg" placeholder="e.g. Community Based Organization · Uganda · Est. 2020"/></div>
+          <div class="af"><label>Child Welfare Note</label><input type="text" id="ei-ngoNote" placeholder="e.g. Licensed to care for children under Uganda Child Welfare Framework"/></div>
+          <button class="adm-btn" onclick="saveNgoBadge()">Save Badge</button>
+          <div id="ngoStatus" style="margin-top:8px;font-size:13px;color:var(--text2);"></div>
         </div>
         <div style="margin-bottom:24px;border-top:1px solid var(--border);padding-top:20px;">
           <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Change Password</div>
@@ -1420,6 +1614,288 @@ function saveImpact(){
   .catch(function(){if(status)status.textContent='Save failed!';showToast('Save failed!');});
 }
 
+var DEFAULT_PROGRESS={raised:0,goal:10000,donors:0};
+function fetchProgress(){
+  return fetch(SUPA+'/rest/v1/mch_photos?id=eq.progress_data&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+  .then(function(r){return r.json();})
+  .then(function(rows){
+    if(!rows||!rows[0])return DEFAULT_PROGRESS;
+    try{return JSON.parse(rows[0].filename);}catch(e){return DEFAULT_PROGRESS;}
+  }).catch(function(){return DEFAULT_PROGRESS;});
+}
+function renderProgress(d){
+  var raised=Number(d.raised)||0;
+  var goal=Number(d.goal)||10000;
+  var donors=Number(d.donors)||0;
+  var pct=goal>0?Math.min(100,Math.round(raised/goal*100)):0;
+  var r=document.getElementById('progRaised');
+  var g=document.getElementById('progGoal');
+  var p=document.getElementById('progPct');
+  var f=document.getElementById('progFill');
+  var dn=document.getElementById('progDonors');
+  if(r)r.textContent='$'+raised.toLocaleString();
+  if(g)g.textContent='$'+goal.toLocaleString();
+  if(p)p.textContent=pct+'%';
+  if(dn)dn.textContent=donors.toLocaleString();
+  if(f)setTimeout(function(){f.style.width=pct+'%';},200);
+}
+function loadProgress(){
+  fetchProgress().then(function(d){renderProgress(d);});
+}
+function loadAdminProgress(){
+  fetchProgress().then(function(d){
+    var r=document.getElementById('prog-raised');
+    var g=document.getElementById('prog-goal');
+    var dn=document.getElementById('prog-donors');
+    if(r)r.value=d.raised||0;
+    if(g)g.value=d.goal||10000;
+    if(dn)dn.value=d.donors||0;
+  });
+}
+function saveProgress(){
+  var raised=parseInt(document.getElementById('prog-raised').value)||0;
+  var goal=parseInt(document.getElementById('prog-goal').value)||10000;
+  var donors=parseInt(document.getElementById('prog-donors').value)||0;
+  var status=document.getElementById('progStatus');
+  if(status)status.textContent='Saving...';
+  var data={raised:raised,goal:goal,donors:donors};
+  fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'progress_data',filename:JSON.stringify(data)})})
+  .then(function(r){if(!r.ok)throw new Error('failed');renderProgress(data);if(status)status.textContent='Progress bar updated!';showToast('Progress updated!');})
+  .catch(function(){if(status)status.textContent='Save failed!';showToast('Save failed!');});
+}
+
+function fetchTestimonials(){
+  return fetch(SUPA+'/rest/v1/mch_photos?id=eq.testi_data&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+  .then(function(r){return r.json();})
+  .then(function(rows){
+    if(!rows||!rows[0])return [];
+    try{var d=JSON.parse(rows[0].filename);return Array.isArray(d)?d:[];}catch(e){return [];}
+  }).catch(function(){return [];});
+}
+function renderTestiCard(t){
+  var initials=((t.name||'?').split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2)).toUpperCase();
+  var avatarHTML=t.photo
+    ?'<div class="testi-avatar" style="padding:0;overflow:hidden;"><img src="'+t.photo+'" style="width:100%;height:100%;object-fit:cover;display:block;" alt="" onerror="this.style.display=\'none\'"></div>'
+    :'<div class="testi-avatar">'+initials+'</div>';
+  var stars='';for(var i=0;i<(t.stars||5);i++)stars+='<span class="testi-star">★</span>';
+  var card=document.createElement('div');card.className='testi-card reveal';
+  card.innerHTML='<div class="testi-stars">'+stars+'</div>'
+    +'<div class="testi-quote">"'+(t.quote||'').replace(/</g,'&lt;')+'"</div>'
+    +'<div class="testi-author">'+avatarHTML
+    +'<div><div class="testi-name">'+(t.name||'').replace(/</g,'&lt;')+'</div>'
+    +'<div class="testi-loc">'+(t.location||'').replace(/</g,'&lt;')+'</div></div></div>';
+  return card;
+}
+function loadTestimonials(){
+  fetchTestimonials().then(function(list){
+    var sec=document.getElementById('testimonials');
+    var grid=document.getElementById('testiGrid');
+    if(!grid)return;
+    grid.innerHTML='';
+    if(!list.length){if(sec)sec.style.display='none';return;}
+    if(sec)sec.style.display='';
+    list.forEach(function(t){grid.appendChild(renderTestiCard(t));});
+    initReveal();
+  });
+}
+function loadAdminTestimonials(){
+  var wrap=document.getElementById('admTestiWrap');
+  if(!wrap)return;
+  wrap.innerHTML='<p style="font-size:12px;color:var(--text3);">Loading...</p>';
+  fetchTestimonials().then(function(list){
+    wrap.innerHTML='';
+    if(!list.length){
+      wrap.innerHTML='<p style="font-size:12px;color:var(--text3);padding:14px;border:1px dashed var(--border);text-align:center;">No testimonials yet — click "+ Add Testimonial" to add your first one. The section is hidden on the site until at least one is saved.</p>';
+      return;
+    }
+    list.forEach(function(t){wrap.appendChild(makeTestiAdminCard(t));});
+  });
+}
+function pickStar(el){
+  var card=el.closest('.testi-adm-card');
+  var val=parseInt(el.getAttribute('data-v'));
+  card.querySelector('.testi-stars-val').value=val;
+  card.querySelectorAll('.testi-star-btn').forEach(function(s){
+    s.style.color=parseInt(s.getAttribute('data-v'))<=val?'#c9a84c':'#ccc';
+  });
+}
+function uploadTestiPhoto(input){
+  var file=input.files[0];if(!file)return;
+  var card=input.closest('.testi-adm-card');
+  var status=document.getElementById('testiStatus');
+  if(status)status.textContent='Uploading photo...';
+  compressImage(file).then(function(blob){
+    var filename='testi_'+Date.now()+'.jpg';
+    fetch(SUPA+'/storage/v1/object/'+BUCKET+'/'+filename,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'image/jpeg'},body:blob})
+    .then(function(r){
+      if(!r.ok&&r.status!==200&&r.status!==201)throw new Error('Upload failed');
+      var url=SUPA+'/storage/v1/object/public/'+BUCKET+'/'+filename;
+      card.querySelector('.testi-photo-url').value=url;
+      var img=card.querySelector('.testi-prev-img');
+      var init=card.querySelector('.testi-prev-init');
+      if(img){img.src=url;img.style.display='block';}
+      if(init)init.style.display='none';
+      if(status)status.textContent='Photo uploaded!';
+    }).catch(function(){if(status)status.textContent='Photo upload failed.';});
+  });
+}
+function makeTestiAdminCard(t){
+  var div=document.createElement('div');
+  div.className='testi-adm-card';
+  div.style.cssText='border:1px solid var(--border);padding:14px;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:10px;';
+  var stars=t.stars||5;
+  var starsHTML='';
+  for(var i=1;i<=5;i++)starsHTML+='<span class="testi-star-btn" data-v="'+i+'" onclick="pickStar(this)" style="color:'+(i<=stars?'#c9a84c':'#ccc')+';font-size:24px;cursor:pointer;line-height:1;">★</span>';
+  var photoSrc=t.photo||'';
+  var initials=((t.name||'?').split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2)||'?').toUpperCase();
+  div.innerHTML=
+    '<div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">'
+    +'<div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;">Testimonial</div>'
+    +'<button onclick="this.closest(\'.testi-adm-card\').remove()" style="background:#ef4444;color:#fff;border:none;padding:3px 10px;font-size:11px;cursor:pointer;border-radius:3px;">Remove</button>'
+    +'</div>'
+    // Photo upload
+    +'<div style="grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:10px;border:1px dashed var(--border);background:#fff;">'
+    +'<div style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2px solid var(--gold);">'
+    +'<img class="testi-prev-img" src="'+photoSrc+'" style="width:100%;height:100%;object-fit:cover;display:'+(photoSrc?'block':'none')+';" alt="">'
+    +'<span class="testi-prev-init" style="font-family:Fraunces,serif;font-size:18px;font-weight:700;color:var(--navy);display:'+(photoSrc?'none':'flex')+';">'+initials+'</span>'
+    +'</div>'
+    +'<div><label style="display:inline-block;background:var(--navy);color:var(--gold);padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;border-radius:3px;">Upload Photo<input type="file" accept="image/*" style="display:none" onchange="uploadTestiPhoto(this)"></label>'
+    +'<div style="font-size:10px;color:var(--text3);margin-top:4px;">Optional · replaces initials with a circle photo</div></div>'
+    +'<input type="hidden" class="testi-photo-url" value="'+photoSrc+'">'
+    +'</div>'
+    // Stars
+    +'<div class="af" style="margin:0;grid-column:1/-1;"><label style="font-size:10px;color:var(--text3);">Star Rating</label>'
+    +'<div style="display:flex;gap:4px;margin-top:4px;">'+starsHTML+'</div>'
+    +'<input type="hidden" class="testi-stars-val" value="'+stars+'"></div>'
+    // Quote
+    +'<div class="af" style="margin:0;grid-column:1/-1;"><label style="font-size:10px;color:var(--text3);">Their Words</label><textarea placeholder="What did this donor say?" style="width:100%;padding:8px;font-size:13px;border:1px solid var(--border);font-family:Manrope,sans-serif;resize:vertical;min-height:70px;box-sizing:border-box;">'+(t.quote||'').replace(/</g,'&lt;')+'</textarea></div>'
+    // Name + Location
+    +'<div class="af" style="margin:0;"><label style="font-size:10px;color:var(--text3);">Name</label><input type="text" class="testi-name-in" placeholder="e.g. Sarah M." value="'+(t.name||'').replace(/"/g,'&quot;')+'" style="width:100%;padding:8px;font-size:13px;border:1px solid var(--border);box-sizing:border-box;"></div>'
+    +'<div class="af" style="margin:0;"><label style="font-size:10px;color:var(--text3);">Country (optional)</label><input type="text" class="testi-loc-in" placeholder="e.g. United Kingdom 🇬🇧" value="'+(t.location||'').replace(/"/g,'&quot;')+'" style="width:100%;padding:8px;font-size:13px;border:1px solid var(--border);box-sizing:border-box;"></div>';
+  return div;
+}
+function addTestiCard(){
+  var wrap=document.getElementById('admTestiWrap');
+  if(!wrap)return;
+  var empty=wrap.querySelector('p');
+  if(empty&&!wrap.querySelector('.testi-adm-card'))empty.remove();
+  wrap.appendChild(makeTestiAdminCard({stars:5,quote:'',name:'',location:'',photo:''}));
+}
+function saveTestimonials(){
+  var wrap=document.getElementById('admTestiWrap');
+  var status=document.getElementById('testiStatus');
+  if(!wrap)return;
+  var items=[];
+  wrap.querySelectorAll('.testi-adm-card').forEach(function(card){
+    var ta=card.querySelector('textarea');
+    var nameIn=card.querySelector('.testi-name-in');
+    var locIn=card.querySelector('.testi-loc-in');
+    var starsIn=card.querySelector('.testi-stars-val');
+    var photoIn=card.querySelector('.testi-photo-url');
+    var quote=(ta?ta.value:'').trim();
+    var name=(nameIn?nameIn.value:'').trim();
+    var location=(locIn?locIn.value:'').trim();
+    var stars=parseInt(starsIn?starsIn.value:'5')||5;
+    var photo=(photoIn?photoIn.value:'').trim();
+    if(quote)items.push({stars:stars,quote:quote,name:name,location:location,photo:photo});
+  });
+  if(!items.length){if(status)status.textContent='Add at least one testimonial.';return;}
+  if(status)status.textContent='Saving...';
+  fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'testi_data',filename:JSON.stringify(items)})})
+  .then(function(r){if(!r.ok)throw new Error('failed');if(status)status.textContent='Saved '+items.length+' testimonial(s)!';showToast('Testimonials updated!');loadTestimonials();})
+  .catch(function(){if(status)status.textContent='Save failed!';showToast('Save failed!');});
+}
+
+var DEFAULT_TRANSPARENCY=[
+  {label:'Food & Nutrition',pct:40,color:'#c9a84c'},
+  {label:'Education',pct:25,color:'#4f9cf9'},
+  {label:'Healthcare',pct:15,color:'#34d399'},
+  {label:'Shelter & Utilities',pct:12,color:'#f97316'},
+  {label:'Spiritual Care',pct:8,color:'#a78bfa'}
+];
+function fetchTransparency(){
+  return fetch(SUPA+'/rest/v1/mch_photos?id=eq.transparency_data&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+  .then(function(r){return r.json();})
+  .then(function(rows){
+    if(!rows||!rows[0])return {items:DEFAULT_TRANSPARENCY,updated:''};
+    try{var d=JSON.parse(rows[0].filename);return {items:d.items&&d.items.length?d.items:DEFAULT_TRANSPARENCY,updated:d.updated||''};}catch(e){return {items:DEFAULT_TRANSPARENCY,updated:''};}
+  }).catch(function(){return {items:DEFAULT_TRANSPARENCY,updated:''};});
+}
+function buildConic(items){
+  var stops=[];var c=0;
+  items.forEach(function(it){var s=c;var e=c+(Number(it.pct)||0);stops.push(it.color+' '+s+'% '+e+'%');c=e;});
+  return 'conic-gradient('+stops.join(',')+')';
+}
+function loadTransparency(){
+  fetchTransparency().then(function(d){
+    var donut=document.getElementById('transDonut');
+    var bars=document.getElementById('transBars');
+    if(!donut||!bars)return;
+    donut.style.background=buildConic(d.items);
+    bars.innerHTML='';
+    d.items.forEach(function(it){
+      var row=document.createElement('div');row.className='trans-row';
+      row.innerHTML='<div class="trans-row-top">'
+        +'<div class="trans-name"><span class="trans-dot" style="background:'+it.color+'"></span>'+it.label.replace(/</g,'&lt;')+'</div>'
+        +'<div class="trans-pct">'+it.pct+'%</div>'
+        +'</div>'
+        +'<div class="trans-track"><div class="trans-fill" data-pct="'+it.pct+'" style="background:'+it.color+'"></div></div>';
+      bars.appendChild(row);
+    });
+    var up=document.getElementById('transUpdated');
+    if(up)up.textContent=d.updated?('Last updated: '+d.updated):'';
+    setTimeout(function(){
+      if(bars)bars.querySelectorAll('.trans-fill').forEach(function(el){el.style.width=(el.dataset.pct||0)+'%';});
+    },200);
+  });
+}
+function loadAdminTransparency(){
+  var wrap=document.getElementById('admTransWrap');
+  if(!wrap)return;
+  wrap.innerHTML='<p style="font-size:12px;color:var(--text3);">Loading...</p>';
+  fetchTransparency().then(function(d){
+    wrap.innerHTML='';
+    d.items.forEach(function(it){wrap.appendChild(makeTransRow(it));});
+  });
+}
+var TRANS_COLORS=['#c9a84c','#4f9cf9','#34d399','#f97316','#a78bfa','#f43f5e'];
+function makeTransRow(it){
+  var row=document.createElement('div');
+  row.style.cssText='display:flex;gap:8px;align-items:center;';
+  row.innerHTML='<input type="color" value="'+(it.color||'#c9a84c')+'" style="width:36px;height:36px;border:none;padding:2px;cursor:pointer;border-radius:4px;flex-shrink:0;">'
+    +'<input type="text" placeholder="Category (e.g. Food & Nutrition)" value="'+(it.label||'').replace(/"/g,'&quot;')+'" style="flex:1;padding:8px;font-size:13px;border:1px solid var(--border);">'
+    +'<input type="number" placeholder="%" min="0" max="100" value="'+(it.pct||0)+'" style="width:72px;padding:8px;font-size:13px;border:1px solid var(--border);">'
+    +'<button onclick="this.parentNode.remove()" style="background:#ef4444;color:#fff;border:none;width:30px;height:30px;cursor:pointer;font-size:16px;flex-shrink:0;border-radius:3px;">×</button>';
+  return row;
+}
+function addTransRow(){
+  var wrap=document.getElementById('admTransWrap');
+  if(!wrap)return;
+  var idx=wrap.querySelectorAll('div').length;
+  wrap.appendChild(makeTransRow({label:'',pct:0,color:TRANS_COLORS[idx%TRANS_COLORS.length]}));
+}
+function saveTransparency(){
+  var wrap=document.getElementById('admTransWrap');
+  var status=document.getElementById('transStatus');
+  if(!wrap)return;
+  var items=[];
+  wrap.querySelectorAll('div').forEach(function(row){
+    var inputs=row.querySelectorAll('input');
+    if(inputs.length<3)return;
+    var color=inputs[0].value;
+    var label=(inputs[1].value||'').trim();
+    var pct=parseInt(inputs[2].value)||0;
+    if(label&&pct>0)items.push({label:label,pct:pct,color:color});
+  });
+  var total=items.reduce(function(s,it){return s+it.pct;},0);
+  if(total!==100){if(status)status.textContent='Percentages add up to '+total+'% — must be exactly 100. Adjust and try again.';showToast('Total must equal 100%');return;}
+  var today=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  if(status)status.textContent='Saving...';
+  fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'transparency_data',filename:JSON.stringify({items:items,updated:today})})})
+  .then(function(r){if(!r.ok)throw new Error('save failed');if(status)status.textContent='Chart saved! Total: 100%.';showToast('Chart updated!');loadTransparency();})
+  .catch(function(){if(status)status.textContent='Save failed. Try again.';showToast('Save failed!');});
+}
+
 function loadVideos(){
   fetchVideos().then(function(list){
     var grid=document.getElementById('videosGrid');
@@ -1661,6 +2137,10 @@ window.addEventListener('load',function(){
   loadStories();
   loadVideos();
   loadImpact();
+  loadProgress();
+  loadTestimonials();
+  loadTransparency();
+  loadNgoBadge();
   initReveal();
 });
 setTimeout(function(){
@@ -1669,6 +2149,25 @@ setTimeout(function(){
 },3000);
 
 function setAmt(v,btn){document.querySelectorAll('.amt-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');document.getElementById('donateAmt').value=v;}
+var _donateFreq='once';
+function setFreq(f){
+  _donateFreq=f;
+  var once=document.getElementById('freqOnce');
+  var monthly=document.getElementById('freqMonthly');
+  var note=document.getElementById('freqNote');
+  var cta=document.getElementById('donateCta');
+  if(f==='monthly'){
+    if(once){once.style.background='transparent';once.style.color='rgba(255,255,255,.6)';}
+    if(monthly){monthly.style.background='var(--gold)';monthly.style.color='var(--navy)';}
+    if(note)note.style.display='block';
+    if(cta)cta.textContent='Give Monthly on GoFundMe';
+  }else{
+    if(once){once.style.background='var(--gold)';once.style.color='var(--navy)';}
+    if(monthly){monthly.style.background='transparent';monthly.style.color='rgba(255,255,255,.6)';}
+    if(note)note.style.display='none';
+    if(cta){cta.innerHTML='<svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> Donate on GoFundMe';}
+  }
+}
 function goDonate(){window.open(localStorage.getItem('mch_donate_url')||GFM_URL,'_blank');}
 var MCH_WHATSAPP='256751442505';
 var MCH_EMAIL='mercychildrenshomeug2024@gmail.com';
@@ -1753,6 +2252,10 @@ function doPwdCheck(v,stored){
 }
 function admTab(tab,el){
   if(tab==='impact')setTimeout(loadAdminImpact,10);
+  if(tab==='transparency')setTimeout(loadAdminTransparency,10);
+  if(tab==='testimonials')setTimeout(loadAdminTestimonials,10);
+  if(tab==='progress')setTimeout(loadAdminProgress,10);
+  if(tab==='settings')setTimeout(loadNgoBadge,10);
   document.querySelectorAll('.adm-tab').forEach(function(t){t.classList.remove('active');});
   document.querySelectorAll('.adm-sec').forEach(function(s){s.classList.remove('active');});
   if(el)el.classList.add('active');
@@ -1767,6 +2270,35 @@ function saveDonate(){
   var url=document.getElementById('ei-donateUrl').value;
   localStorage.setItem('mch_donate_url',url);
   showToast('Donate link saved!');
+}
+var DEFAULT_NGO={regLine:'Community Based Organization · Uganda · Est. 2020',noteLine:'Licensed to care for children under Uganda Child Welfare Framework'};
+function loadNgoBadge(){
+  fetch(SUPA+'/rest/v1/mch_photos?id=eq.ngo_data&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+  .then(function(r){return r.json();})
+  .then(function(rows){
+    var d=DEFAULT_NGO;
+    if(rows&&rows[0]){try{d=JSON.parse(rows[0].filename);}catch(e){}}
+    var r1=document.getElementById('ngoRegLine');
+    var r2=document.getElementById('ngoNoteLine');
+    if(r1)r1.textContent=d.regLine||DEFAULT_NGO.regLine;
+    if(r2)r2.textContent=d.noteLine||DEFAULT_NGO.noteLine;
+    var f1=document.getElementById('ei-ngoReg');
+    var f2=document.getElementById('ei-ngoNote');
+    if(f1)f1.value=d.regLine||DEFAULT_NGO.regLine;
+    if(f2)f2.value=d.noteLine||DEFAULT_NGO.noteLine;
+  }).catch(function(){});
+}
+function saveNgoBadge(){
+  var regLine=(document.getElementById('ei-ngoReg')||{}).value||DEFAULT_NGO.regLine;
+  var noteLine=(document.getElementById('ei-ngoNote')||{}).value||DEFAULT_NGO.noteLine;
+  var status=document.getElementById('ngoStatus');
+  if(status)status.textContent='Saving...';
+  fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'ngo_data',filename:JSON.stringify({regLine:regLine.trim(),noteLine:noteLine.trim()})})})
+  .then(function(r){if(!r.ok)throw new Error('failed');
+    var r1=document.getElementById('ngoRegLine');var r2=document.getElementById('ngoNoteLine');
+    if(r1)r1.textContent=regLine;if(r2)r2.textContent=noteLine;
+    if(status)status.textContent='Badge saved!';showToast('NGO badge updated!');
+  }).catch(function(){if(status)status.textContent='Save failed.';showToast('Save failed!');});
 }
 function changePwd(){
   var np=document.getElementById('newPwd').value;
