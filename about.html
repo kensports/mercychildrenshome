@@ -82,18 +82,17 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.3);}
 /* VOLUNTEERS */
 .volunteers{background:var(--cream);padding:100px 5%;}
 .vol-header{max-width:1100px;margin:0 auto 56px;}
-.vol-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);}
-.vol-card{background:#fff;overflow:hidden;text-align:center;transition:transform .3s;}
-.vol-card:hover{transform:translateY(-4px);}
-.vol-photo{width:100%;aspect-ratio:1;overflow:hidden;background:var(--navy2);position:relative;}
-.vol-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s;}
-.vol-card:hover .vol-photo img{transform:scale(1.05);}
+.vol-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px;}
+.vol-card{background:#fff;border-radius:12px;border:1px solid var(--border);box-shadow:0 2px 14px rgba(13,31,60,.06);padding:32px 20px 28px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .3s,box-shadow .3s;}
+.vol-card:hover{transform:translateY(-6px);box-shadow:0 14px 44px rgba(13,31,60,.13);}
+.vol-photo-wrap{width:100px;height:100px;border-radius:50%;overflow:hidden;border:3px solid var(--gold);margin-bottom:18px;background:var(--navy2);flex-shrink:0;}
+.vol-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 .vol-photo-placeholder{width:100%;height:100%;background:linear-gradient(135deg,var(--navy2),var(--navy3));display:flex;align-items:center;justify-content:center;}
-.vol-photo-placeholder svg{width:40px;height:40px;fill:none;stroke:rgba(201,168,76,.3);stroke-width:1.5;}
-.vol-info{padding:20px 16px;}
-.vol-name{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.vol-photo-placeholder svg{width:36px;height:36px;fill:none;stroke:rgba(201,168,76,.5);stroke-width:1.5;}
+.vol-name{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:5px;}
 .vol-role{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;}
-.vol-country{font-size:12px;color:var(--text3);margin-top:4px;}
+.vol-country{font-size:12px;color:var(--text3);margin-top:6px;}
+.vol-bio{font-size:13px;color:var(--text2);line-height:1.65;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);width:100%;}
 
 /* VALUES */
 .values{background:var(--navy);padding:100px 5%;}
@@ -124,8 +123,8 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
 .wa-float:hover{transform:translateY(-3px);}
 .wa-float svg{width:20px;height:20px;flex-shrink:0;}
 
-@media(max-width:900px){.nav-links{display:none;}.hamburger{display:block;}.about-split{grid-template-columns:1fr;}.alex-grid{grid-template-columns:1fr;}.vol-grid{grid-template-columns:repeat(2,1fr);}.values-grid{grid-template-columns:1fr 1fr;}.footer-top{grid-template-columns:1fr;}}
-@media(max-width:600px){.about-text-side{padding:48px 24px;}.vol-grid{grid-template-columns:repeat(2,1fr);}.values-grid{grid-template-columns:1fr;}.alex-stat-row{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){.nav-links{display:none;}.hamburger{display:block;}.about-split{grid-template-columns:1fr;}.alex-grid{grid-template-columns:1fr;}.values-grid{grid-template-columns:1fr 1fr;}.footer-top{grid-template-columns:1fr;}}
+@media(max-width:600px){.about-text-side{padding:48px 24px;}.values-grid{grid-template-columns:1fr;}.alex-stat-row{grid-template-columns:1fr 1fr;}.vol-grid{grid-template-columns:repeat(2,1fr);}.vol-card{padding:24px 14px 20px;}.vol-photo-wrap{width:80px;height:80px;}}
 </style>
 </head>
 <body>
@@ -143,7 +142,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
   <a href="mission.html">Mission</a>
   <a href="gallery.html">Gallery</a>
   <a href="impact.html">Impact</a>
-  <a href="index.html#contact">Contact</a>
+  <a href="contact.html">Contact</a>
   <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="mob-donate-link">Donate Now</a>
 </div>
 
@@ -161,7 +160,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
     <a href="mission.html">Mission</a>
     <a href="gallery.html">Gallery</a>
     <a href="impact.html">Impact</a>
-    <a href="index.html#contact">Contact</a>
+    <a href="contact.html">Contact</a>
     <a href="donate.html" class="nav-donate">Donate</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('mobMenu').classList.add('open')"><i class="fas fa-bars"></i></button>
@@ -243,15 +242,38 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
     <p style="font-size:16px;color:var(--text2);max-width:560px;line-height:1.8;" class="reveal">From Uganda and around the world — these dedicated people give their time and love to our 32 children every day.</p>
   </div>
   <div class="vol-grid" id="volGrid">
-    <!-- Volunteers load from Supabase -->
-    <div class="vol-card reveal d1"><div class="vol-photo"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div><div class="vol-info"><div class="vol-name">Debbie</div><div class="vol-role">International Volunteer</div><div class="vol-country">🇺🇸 United States</div></div></div>
-    <div class="vol-card reveal d2"><div class="vol-photo"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div><div class="vol-info"><div class="vol-name">Raymond</div><div class="vol-role">Care & Education</div><div class="vol-country">🇺🇬 Uganda</div></div></div>
-    <div class="vol-card reveal d3"><div class="vol-photo"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div><div class="vol-info"><div class="vol-name">Simpson</div><div class="vol-role">Community Outreach</div><div class="vol-country">🇺🇬 Uganda</div></div></div>
-    <div class="vol-card reveal d4"><div class="vol-photo"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div><div class="vol-info"><div class="vol-name">Ann</div><div class="vol-role">Nutrition & Care</div><div class="vol-country">🇺🇬 Uganda</div></div></div>
-    <div class="vol-card reveal d1"><div class="vol-photo"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div><div class="vol-info"><div class="vol-name">Michael</div><div class="vol-role">International Volunteer</div><div class="vol-country">🌍 International</div></div></div>
-    <div class="vol-card reveal d2"><div class="vol-photo"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div><div class="vol-info"><div class="vol-name">Jonathan</div><div class="vol-role">Education Support</div><div class="vol-country">🌍 International</div></div></div>
-    <div class="vol-card reveal d3"><div class="vol-photo"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div><div class="vol-info"><div class="vol-name">Stensland</div><div class="vol-role">International Volunteer</div><div class="vol-country">🌍 International</div></div></div>
-    <div class="vol-card reveal d4"><div class="vol-photo"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div><div class="vol-info"><div class="vol-name">Sheldon</div><div class="vol-role">International Volunteer</div><div class="vol-country">🌍 International</div></div></div>
+    <div class="vol-card reveal d1">
+      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
+      <div class="vol-name">Debbie</div><div class="vol-role">International Volunteer</div><div class="vol-country">🇺🇸 United States</div>
+    </div>
+    <div class="vol-card reveal d2">
+      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
+      <div class="vol-name">Raymond</div><div class="vol-role">Care & Education</div><div class="vol-country">🇺🇬 Uganda</div>
+    </div>
+    <div class="vol-card reveal d3">
+      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
+      <div class="vol-name">Simpson</div><div class="vol-role">Community Outreach</div><div class="vol-country">🇺🇬 Uganda</div>
+    </div>
+    <div class="vol-card reveal d4">
+      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
+      <div class="vol-name">Ann</div><div class="vol-role">Nutrition & Care</div><div class="vol-country">🇺🇬 Uganda</div>
+    </div>
+    <div class="vol-card reveal d1">
+      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
+      <div class="vol-name">Michael</div><div class="vol-role">International Volunteer</div><div class="vol-country">🌍 International</div>
+    </div>
+    <div class="vol-card reveal d2">
+      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
+      <div class="vol-name">Jonathan</div><div class="vol-role">Education Support</div><div class="vol-country">🌍 International</div>
+    </div>
+    <div class="vol-card reveal d3">
+      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
+      <div class="vol-name">Stensland</div><div class="vol-role">International Volunteer</div><div class="vol-country">🌍 International</div>
+    </div>
+    <div class="vol-card reveal d4">
+      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
+      <div class="vol-name">Sheldon</div><div class="vol-role">International Volunteer</div><div class="vol-country">🌍 International</div>
+    </div>
   </div>
 </section>
 
@@ -288,7 +310,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
       <div class="footer-brand"><p>Shelter, love and opportunity for 32 orphaned children in Kasanda Bukuya, Uganda since 2020.</p></div>
     </div>
     <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="mission.html">Our Mission</a><a href="gallery.html">Gallery</a><a href="impact.html">Our Impact</a><a href="donate.html">Donate</a><a href="privacy.html">Privacy Policy</a></div>
-    <div class="footer-col"><h4>Get Involved</h4><a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank">Donate on GoFundMe</a><a href="donate.html">All Donation Methods</a><a href="index.html#contact">Contact Us</a><a href="https://wa.me/256751442505" target="_blank">WhatsApp Us</a></div>
+    <div class="footer-col"><h4>Get Involved</h4><a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank">Donate on GoFundMe</a><a href="donate.html">All Donation Methods</a><a href="contact.html">Contact Us</a><a href="https://wa.me/256751442505" target="_blank">WhatsApp Us</a></div>
   </div>
   <div class="footer-bottom">
     <p>© 2020 – <span class="footer-year"></span> Mercy Children's Home Uganda. All rights reserved.</p>
@@ -338,7 +360,7 @@ function loadAllPhotos(){
     volCards.forEach(function(card,i){
       var key=volKeys[i];
       if(pm[key]){
-        var photoDiv=card.querySelector('.vol-photo');
+        var photoDiv=card.querySelector('.vol-photo-wrap');
         if(photoDiv){
           photoDiv.innerHTML='<img src="'+photoUrl(pm[key])+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="'+volNames[i]+'">';
         }
