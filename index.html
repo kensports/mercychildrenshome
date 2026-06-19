@@ -431,6 +431,19 @@ font[style]{background:none !important;box-shadow:none !important;}
 .testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--navy);flex-shrink:0;}
 .testi-name{font-size:13px;font-weight:700;color:#fff;}
 .testi-loc{font-size:11px;color:rgba(255,255,255,.4);margin-top:1px;}
+/* Impact statement card */
+.testi-impact-card{border-left:3px solid var(--gold) !important;background:rgba(201,168,76,.06) !important;}
+.testi-impact-body{font-family:'Fraunces',serif;font-size:19px;font-style:italic;color:rgba(255,255,255,.92);line-height:1.75;flex:1;}
+.testi-impact-foot{display:flex;align-items:center;gap:8px;margin-top:4px;}
+.testi-impact-icon{color:var(--gold);font-size:16px;}
+.testi-impact-label{font-size:9px;font-weight:700;color:rgba(201,168,76,.7);text-transform:uppercase;letter-spacing:2px;}
+/* Founder card */
+.testi-founder-card{background:rgba(201,168,76,.08) !important;border-color:rgba(201,168,76,.35) !important;}
+.testi-founder-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.testi-founder-avatar{width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0;background:var(--gold);}
+.testi-founder-badge{font-size:9px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:3px;}
+.testi-founder-name{font-size:13px;font-weight:700;color:#fff;line-height:1.2;}
+.testi-founder-role{font-size:11px;color:rgba(255,255,255,.45);}
 @media(max-width:900px){.testi-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:600px){.testi-grid{grid-template-columns:1fr;}}
 
@@ -469,15 +482,12 @@ font[style]{background:none !important;box-shadow:none !important;}
     <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open')">✕</button>
   </div>
   <a href="#home" onclick="closeMobMenu()">Home</a>
-  <a href="#about" onclick="closeMobMenu()">About</a>
-  <a href="#founder" onclick="closeMobMenu()">Meet Alex</a>
-  <a href="#volunteers" onclick="closeMobMenu()">Volunteers</a>
-  <a href="#mission" onclick="closeMobMenu()">Mission</a>
-  <a href="#gallery" onclick="closeMobMenu()">Gallery</a>
-  <a href="#testimonials" onclick="closeMobMenu()">Donor Stories</a>
-  <a href="#transparency" onclick="closeMobMenu()">Where Money Goes</a>
+  <a href="about.html" onclick="closeMobMenu()">About</a>
+  <a href="mission.html" onclick="closeMobMenu()">Mission</a>
+  <a href="gallery.html" onclick="closeMobMenu()">Gallery</a>
+  <a href="impact.html" onclick="closeMobMenu()">Impact</a>
   <a href="#contact" onclick="closeMobMenu()">Contact</a>
-  <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="mob-donate-btn">Donate on GoFundMe</a>
+  <a href="donate.html" class="mob-donate-btn">Donate</a>
 </div>
 <!-- NAV -->
 <nav id="navbar">
@@ -487,10 +497,9 @@ font[style]{background:none !important;box-shadow:none !important;}
     <div class="nav-logo-name">Mercy Children's Home<small>Kasanda Bukuya · Uganda</small></div>
   </a>
   <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#founder">Founder</a>
-    <a href="#mission">Mission</a>
-    <a href="#gallery">Gallery</a>
+    <a href="about.html">About</a>
+    <a href="mission.html">Mission</a>
+    <a href="gallery.html">Gallery</a>
     <a href="impact.html">Impact</a>
     <a href="#contact">Contact</a>
     <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="nav-donate">Donate Now</a>
@@ -685,9 +694,9 @@ font[style]{background:none !important;box-shadow:none !important;}
 <!-- TESTIMONIALS -->
 <section class="testi-sec" id="testimonials" style="display:none">
   <div style="max-width:1100px;margin:0 auto;">
-    <div class="label reveal" style="justify-content:center;text-align:center;"><div class="label-line"></div><span style="color:var(--gold);">Donor Stories</span></div>
-    <h2 class="big-title reveal" style="text-align:center;color:#fff;max-width:700px;margin:0 auto 12px;">What Our<br><em>Donors Say</em></h2>
-    <p class="reveal" style="text-align:center;color:rgba(255,255,255,.55);font-size:16px;max-width:540px;margin:0 auto;line-height:1.8;">Real donors. Real experiences. Real lives changed.</p>
+    <div class="label reveal" style="justify-content:center;text-align:center;"><div class="label-line"></div><span style="color:var(--gold);">Our Promise</span></div>
+    <h2 class="big-title reveal" style="text-align:center;color:#fff;max-width:700px;margin:0 auto 12px;">What We<br><em>Stand For</em></h2>
+    <p class="reveal" style="text-align:center;color:rgba(255,255,255,.55);font-size:16px;max-width:540px;margin:0 auto;line-height:1.8;">Our values, our founder's words, and the real difference your support makes.</p>
     <div class="testi-grid" id="testiGrid"></div>
   </div>
 </section>
@@ -1218,12 +1227,26 @@ font[style]{background:none !important;box-shadow:none !important;}
 
       <!-- TESTIMONIALS -->
       <div class="adm-sec" id="adm-testimonials">
-        <p style="font-size:13px;color:var(--text3);margin-bottom:4px;">Add real donor quotes. The "What Our Donors Say" section is <strong>hidden on the site</strong> until you save at least one testimonial here.</p>
-        <p style="font-size:12px;color:var(--gold);margin-bottom:16px;font-weight:600;">Each card: photo (optional) · star rating · their words · name · country</p>
+        <p style="font-size:13px;color:var(--text3);margin-bottom:4px;">Build the <strong>"What We Stand For"</strong> section. It stays <strong>hidden</strong> until you save at least one card.</p>
+        <p style="font-size:12px;color:var(--gold);margin-bottom:12px;font-weight:600;">3 types: ✦ Impact Statement · Founder Message · Donor Testimonial</p>
+        <!-- Quick preset picker -->
+        <div style="background:#f8f6f0;border:1px solid var(--border);padding:12px;margin-bottom:12px;border-radius:3px;">
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Quick-add a ready statement</div>
+          <select id="testiPresetSel" style="width:100%;padding:8px;font-size:13px;border:1px solid var(--border);background:#fff;margin-bottom:8px;box-sizing:border-box;">
+            <option value="">— Pick a statement —</option>
+            <option value="100% of every donation goes directly to the children — for food, school, and a safe home.">100% goes directly to the children</option>
+            <option value="Your support helps provide daily meals, education, and care for 32 orphaned children in Uganda.">Daily meals, education &amp; care for 32 children</option>
+            <option value="Every gift, big or small, changes a child's life at Mercy Children's Home.">Every gift changes a child's life</option>
+            <option value="With your help, these children are nourished, learning, and loved.">Nourished, learning and loved</option>
+          </select>
+          <button onclick="addImpactFromPreset()" style="background:var(--gold);color:var(--navy);border:none;padding:8px 18px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;border-radius:3px;">Add This Statement</button>
+        </div>
         <div id="admTestiWrap" style="display:flex;flex-direction:column;gap:12px;"></div>
         <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
-          <button onclick="addTestiCard()" style="background:var(--cream);color:var(--navy);border:1px solid var(--border);padding:8px 16px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">+ Add Testimonial</button>
-          <button onclick="saveTestimonials()" style="background:var(--navy);color:var(--gold);border:none;padding:10px 24px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">Save All</button>
+          <button onclick="addImpactCard()" style="background:rgba(201,168,76,.12);color:var(--navy);border:1px solid var(--gold);padding:8px 14px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:1px;border-radius:3px;">✦ Custom Statement</button>
+          <button onclick="addFounderCard()" style="background:rgba(201,168,76,.12);color:var(--navy);border:1px solid var(--gold);padding:8px 14px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:1px;border-radius:3px;">👤 Founder Message</button>
+          <button onclick="addDonorCard()" style="background:var(--cream);color:var(--navy);border:1px solid var(--border);padding:8px 14px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:1px;border-radius:3px;">+ Donor Testimonial</button>
+          <button onclick="saveTestimonials()" style="background:var(--navy);color:var(--gold);border:none;padding:10px 24px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;border-radius:3px;">Save All</button>
         </div>
         <div id="testiStatus" style="margin-top:10px;font-size:13px;color:var(--text2);"></div>
       </div>
@@ -1664,6 +1687,29 @@ function saveProgress(){
   .catch(function(){if(status)status.textContent='Save failed!';showToast('Save failed!');});
 }
 
+/* ── TESTIMONIALS / IMPACT SECTION ── */
+var TESTI_COUNTRIES=[
+  ['Uganda','🇺🇬'],['United Kingdom','🇬🇧'],['United States','🇺🇸'],['Australia','🇦🇺'],
+  ['Canada','🇨🇦'],['Germany','🇩🇪'],['Sweden','🇸🇪'],['Netherlands','🇳🇱'],
+  ['Norway','🇳🇴'],['Denmark','🇩🇰'],['Finland','🇫🇮'],['France','🇫🇷'],
+  ['Switzerland','🇨🇭'],['Ireland','🇮🇪'],['New Zealand','🇳🇿'],['South Africa','🇿🇦'],
+  ['Kenya','🇰🇪'],['Rwanda','🇷🇼'],['Tanzania','🇹🇿'],['Japan','🇯🇵'],['Other','🌍']
+];
+var TESTI_PRESETS=[
+  '100% of every donation goes directly to the children — for food, school, and a safe home.',
+  'Your support helps provide daily meals, education, and care for 32 orphaned children in Uganda.',
+  'Every gift, big or small, changes a child\'s life at Mercy Children\'s Home.',
+  'With your help, these children are nourished, learning, and loved.'
+];
+var FOUNDER_PHOTO_URL='https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/founder_1781077498252.jpg';
+function testiCountryOpts(current){
+  var html='<option value="">Select country (optional)...</option>';
+  TESTI_COUNTRIES.forEach(function(c){
+    var val=c[0]+' '+c[1];
+    html+='<option value="'+val+'"'+(current===val?' selected':'')+'>'+val+'</option>';
+  });
+  return html;
+}
 function fetchTestimonials(){
   return fetch(SUPA+'/rest/v1/mch_photos?id=eq.testi_data&select=filename',{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
   .then(function(r){return r.json();})
@@ -1672,7 +1718,26 @@ function fetchTestimonials(){
     try{var d=JSON.parse(rows[0].filename);return Array.isArray(d)?d:[];}catch(e){return [];}
   }).catch(function(){return [];});
 }
-function renderTestiCard(t){
+function renderImpactCard(t){
+  var card=document.createElement('div');
+  card.className='testi-card testi-impact-card reveal';
+  card.innerHTML='<div class="testi-impact-body">“'+(t.quote||'').replace(/</g,'&lt;')+'”</div>'
+    +'<div class="testi-impact-foot"><span class="testi-impact-icon">✦</span><span class="testi-impact-label">Mercy Children\'s Home · Uganda</span></div>';
+  return card;
+}
+function renderFounderCard(t){
+  var photo=t.photo||FOUNDER_PHOTO_URL;
+  var card=document.createElement('div');
+  card.className='testi-card testi-founder-card reveal';
+  card.innerHTML='<div class="testi-founder-head">'
+    +'<div class="testi-founder-avatar"><img src="'+photo+'" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Alex" onerror="this.style.display=\'none\'"></div>'
+    +'<div><div class="testi-founder-badge">Message from our Founder</div>'
+    +'<div class="testi-founder-name">Alex Ssengonzi</div>'
+    +'<div class="testi-founder-role">Founder, Mercy Children\'s Home</div></div></div>'
+    +'<div class="testi-quote">“'+(t.message||'').replace(/</g,'&lt;')+'”</div>';
+  return card;
+}
+function renderDonorCard(t){
   var initials=((t.name||'?').split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2)).toUpperCase();
   var avatarHTML=t.photo
     ?'<div class="testi-avatar" style="padding:0;overflow:hidden;"><img src="'+t.photo+'" style="width:100%;height:100%;object-fit:cover;display:block;" alt="" onerror="this.style.display=\'none\'"></div>'
@@ -1680,11 +1745,16 @@ function renderTestiCard(t){
   var stars='';for(var i=0;i<(t.stars||5);i++)stars+='<span class="testi-star">★</span>';
   var card=document.createElement('div');card.className='testi-card reveal';
   card.innerHTML='<div class="testi-stars">'+stars+'</div>'
-    +'<div class="testi-quote">"'+(t.quote||'').replace(/</g,'&lt;')+'"</div>'
+    +'<div class="testi-quote">“'+(t.quote||'').replace(/</g,'&lt;')+'”</div>'
     +'<div class="testi-author">'+avatarHTML
     +'<div><div class="testi-name">'+(t.name||'').replace(/</g,'&lt;')+'</div>'
     +'<div class="testi-loc">'+(t.location||'').replace(/</g,'&lt;')+'</div></div></div>';
   return card;
+}
+function renderTestiCard(t){
+  if(t.type==='impact')return renderImpactCard(t);
+  if(t.type==='founder')return renderFounderCard(t);
+  return renderDonorCard(t);
 }
 function loadTestimonials(){
   fetchTestimonials().then(function(list){
@@ -1705,10 +1775,14 @@ function loadAdminTestimonials(){
   fetchTestimonials().then(function(list){
     wrap.innerHTML='';
     if(!list.length){
-      wrap.innerHTML='<p style="font-size:12px;color:var(--text3);padding:14px;border:1px dashed var(--border);text-align:center;">No testimonials yet — click "+ Add Testimonial" to add your first one. The section is hidden on the site until at least one is saved.</p>';
+      wrap.innerHTML='<p class="testi-empty" style="font-size:12px;color:var(--text3);padding:14px;border:1px dashed var(--border);text-align:center;">No cards yet — use the quick-add above or the buttons below. The section is hidden until you save at least one.</p>';
       return;
     }
-    list.forEach(function(t){wrap.appendChild(makeTestiAdminCard(t));});
+    list.forEach(function(t){
+      if(t.type==='impact')wrap.appendChild(makeImpactAdminCard(t));
+      else if(t.type==='founder')wrap.appendChild(makeFounderAdminCard(t));
+      else wrap.appendChild(makeDonorAdminCard(t));
+    });
   });
 }
 function pickStar(el){
@@ -1739,7 +1813,45 @@ function uploadTestiPhoto(input){
     }).catch(function(){if(status)status.textContent='Photo upload failed.';});
   });
 }
-function makeTestiAdminCard(t){
+function clearAdminEmptyState(){
+  var wrap=document.getElementById('admTestiWrap');
+  if(!wrap)return;
+  var p=wrap.querySelector('p.testi-empty');
+  if(p)p.remove();
+}
+function makeImpactAdminCard(t){
+  var div=document.createElement('div');
+  div.className='testi-adm-card';
+  div.style.cssText='border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px;background:var(--cream);';
+  div.innerHTML='<input type="hidden" class="testi-type-val" value="impact">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">'
+    +'<span style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;">✦ Impact Statement</span>'
+    +'<button onclick="this.closest(\'.testi-adm-card\').remove()" style="background:#ef4444;color:#fff;border:none;padding:3px 10px;font-size:11px;cursor:pointer;border-radius:3px;">Remove</button>'
+    +'</div>'
+    +'<textarea class="testi-impact-ta" placeholder="Type or edit the statement..." style="width:100%;padding:8px;font-size:13px;border:1px solid var(--border);font-family:Manrope,sans-serif;resize:vertical;min-height:60px;box-sizing:border-box;">'+(t.quote||'').replace(/</g,'&lt;')+'</textarea>';
+  return div;
+}
+function makeFounderAdminCard(t){
+  var photo=t.photo||FOUNDER_PHOTO_URL;
+  var div=document.createElement('div');
+  div.className='testi-adm-card';
+  div.style.cssText='border:2px solid var(--gold);padding:14px;background:#fffbf0;';
+  div.innerHTML='<input type="hidden" class="testi-type-val" value="founder">'
+    +'<input type="hidden" class="testi-photo-url" value="'+photo+'">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">'
+    +'<span style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;">Message from our Founder</span>'
+    +'<button onclick="this.closest(\'.testi-adm-card\').remove()" style="background:#ef4444;color:#fff;border:none;padding:3px 10px;font-size:11px;cursor:pointer;border-radius:3px;">Remove</button>'
+    +'</div>'
+    +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:8px;background:#fff;border:1px dashed var(--border);">'
+    +'<img src="'+photo+'" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);flex-shrink:0;" alt="Alex" onerror="this.style.display=\'none\'">'
+    +'<div><div style="font-size:12px;font-weight:700;color:var(--navy);">Alex Ssengonzi</div>'
+    +'<div style="font-size:11px;color:var(--text3);">Uses your founder photo from the Photos tab</div></div>'
+    +'</div>'
+    +'<label style="font-size:10px;color:var(--text3);">Alex\'s Message</label>'
+    +'<textarea class="testi-founder-ta" placeholder="Write Alex\'s personal message to donors..." style="width:100%;margin-top:4px;padding:8px;font-size:13px;border:1px solid var(--border);font-family:Manrope,sans-serif;resize:vertical;min-height:80px;box-sizing:border-box;">'+(t.message||'').replace(/</g,'&lt;')+'</textarea>';
+  return div;
+}
+function makeDonorAdminCard(t){
   var div=document.createElement('div');
   div.className='testi-adm-card';
   div.style.cssText='border:1px solid var(--border);padding:14px;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:10px;';
@@ -1748,38 +1860,53 @@ function makeTestiAdminCard(t){
   for(var i=1;i<=5;i++)starsHTML+='<span class="testi-star-btn" data-v="'+i+'" onclick="pickStar(this)" style="color:'+(i<=stars?'#c9a84c':'#ccc')+';font-size:24px;cursor:pointer;line-height:1;">★</span>';
   var photoSrc=t.photo||'';
   var initials=((t.name||'?').split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2)||'?').toUpperCase();
-  div.innerHTML=
-    '<div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">'
-    +'<div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;">Testimonial</div>'
+  div.innerHTML='<input type="hidden" class="testi-type-val" value="donor">'
+    +'<div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">'
+    +'<span style="font-size:10px;font-weight:700;color:#4a5568;text-transform:uppercase;letter-spacing:1px;">Donor Testimonial</span>'
     +'<button onclick="this.closest(\'.testi-adm-card\').remove()" style="background:#ef4444;color:#fff;border:none;padding:3px 10px;font-size:11px;cursor:pointer;border-radius:3px;">Remove</button>'
     +'</div>'
-    // Photo upload
     +'<div style="grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:10px;border:1px dashed var(--border);background:#fff;">'
     +'<div style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2px solid var(--gold);">'
     +'<img class="testi-prev-img" src="'+photoSrc+'" style="width:100%;height:100%;object-fit:cover;display:'+(photoSrc?'block':'none')+';" alt="">'
     +'<span class="testi-prev-init" style="font-family:Fraunces,serif;font-size:18px;font-weight:700;color:var(--navy);display:'+(photoSrc?'none':'flex')+';">'+initials+'</span>'
     +'</div>'
     +'<div><label style="display:inline-block;background:var(--navy);color:var(--gold);padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;border-radius:3px;">Upload Photo<input type="file" accept="image/*" style="display:none" onchange="uploadTestiPhoto(this)"></label>'
-    +'<div style="font-size:10px;color:var(--text3);margin-top:4px;">Optional · replaces initials with a circle photo</div></div>'
+    +'<div style="font-size:10px;color:var(--text3);margin-top:4px;">Optional · circle photo replaces initials</div></div>'
     +'<input type="hidden" class="testi-photo-url" value="'+photoSrc+'">'
     +'</div>'
-    // Stars
     +'<div class="af" style="margin:0;grid-column:1/-1;"><label style="font-size:10px;color:var(--text3);">Star Rating</label>'
     +'<div style="display:flex;gap:4px;margin-top:4px;">'+starsHTML+'</div>'
     +'<input type="hidden" class="testi-stars-val" value="'+stars+'"></div>'
-    // Quote
-    +'<div class="af" style="margin:0;grid-column:1/-1;"><label style="font-size:10px;color:var(--text3);">Their Words</label><textarea placeholder="What did this donor say?" style="width:100%;padding:8px;font-size:13px;border:1px solid var(--border);font-family:Manrope,sans-serif;resize:vertical;min-height:70px;box-sizing:border-box;">'+(t.quote||'').replace(/</g,'&lt;')+'</textarea></div>'
-    // Name + Location
-    +'<div class="af" style="margin:0;"><label style="font-size:10px;color:var(--text3);">Name</label><input type="text" class="testi-name-in" placeholder="e.g. Sarah M." value="'+(t.name||'').replace(/"/g,'&quot;')+'" style="width:100%;padding:8px;font-size:13px;border:1px solid var(--border);box-sizing:border-box;"></div>'
-    +'<div class="af" style="margin:0;"><label style="font-size:10px;color:var(--text3);">Country (optional)</label><input type="text" class="testi-loc-in" placeholder="e.g. United Kingdom 🇬🇧" value="'+(t.location||'').replace(/"/g,'&quot;')+'" style="width:100%;padding:8px;font-size:13px;border:1px solid var(--border);box-sizing:border-box;"></div>';
+    +'<div class="af" style="margin:0;grid-column:1/-1;"><label style="font-size:10px;color:var(--text3);">Their Words</label>'
+    +'<textarea placeholder="What did this donor say?" style="width:100%;padding:8px;font-size:13px;border:1px solid var(--border);font-family:Manrope,sans-serif;resize:vertical;min-height:70px;box-sizing:border-box;">'+(t.quote||'').replace(/</g,'&lt;')+'</textarea></div>'
+    +'<div class="af" style="margin:0;"><label style="font-size:10px;color:var(--text3);">Name</label>'
+    +'<input type="text" class="testi-name-in" placeholder="e.g. Sarah M." value="'+(t.name||'').replace(/"/g,'&quot;')+'" style="width:100%;padding:8px;font-size:13px;border:1px solid var(--border);box-sizing:border-box;"></div>'
+    +'<div class="af" style="margin:0;"><label style="font-size:10px;color:var(--text3);">Country</label>'
+    +'<select class="testi-loc-in" style="width:100%;padding:8px;font-size:13px;border:1px solid var(--border);background:#fff;box-sizing:border-box;">'+testiCountryOpts(t.location||'')+'</select></div>';
   return div;
 }
-function addTestiCard(){
+function addImpactFromPreset(){
+  var sel=document.getElementById('testiPresetSel');
+  var val=sel?sel.value.trim():'';
+  if(!val)return;
+  clearAdminEmptyState();
+  document.getElementById('admTestiWrap').appendChild(makeImpactAdminCard({quote:val}));
+  if(sel)sel.value='';
+}
+function addImpactCard(){
+  clearAdminEmptyState();
+  document.getElementById('admTestiWrap').appendChild(makeImpactAdminCard({quote:''}));
+}
+function addFounderCard(){
   var wrap=document.getElementById('admTestiWrap');
   if(!wrap)return;
-  var empty=wrap.querySelector('p');
-  if(empty&&!wrap.querySelector('.testi-adm-card'))empty.remove();
-  wrap.appendChild(makeTestiAdminCard({stars:5,quote:'',name:'',location:'',photo:''}));
+  if(wrap.querySelector('.testi-type-val[value="founder"]')){showToast('Only one founder message allowed.');return;}
+  clearAdminEmptyState();
+  wrap.appendChild(makeFounderAdminCard({message:''}));
+}
+function addDonorCard(){
+  clearAdminEmptyState();
+  document.getElementById('admTestiWrap').appendChild(makeDonorAdminCard({stars:5,quote:'',name:'',location:'',photo:''}));
 }
 function saveTestimonials(){
   var wrap=document.getElementById('admTestiWrap');
@@ -1787,22 +1914,35 @@ function saveTestimonials(){
   if(!wrap)return;
   var items=[];
   wrap.querySelectorAll('.testi-adm-card').forEach(function(card){
-    var ta=card.querySelector('textarea');
-    var nameIn=card.querySelector('.testi-name-in');
-    var locIn=card.querySelector('.testi-loc-in');
-    var starsIn=card.querySelector('.testi-stars-val');
-    var photoIn=card.querySelector('.testi-photo-url');
-    var quote=(ta?ta.value:'').trim();
-    var name=(nameIn?nameIn.value:'').trim();
-    var location=(locIn?locIn.value:'').trim();
-    var stars=parseInt(starsIn?starsIn.value:'5')||5;
-    var photo=(photoIn?photoIn.value:'').trim();
-    if(quote)items.push({stars:stars,quote:quote,name:name,location:location,photo:photo});
+    var typeEl=card.querySelector('.testi-type-val');
+    var type=typeEl?typeEl.value:'donor';
+    if(type==='impact'){
+      var ta=card.querySelector('.testi-impact-ta');
+      var q=(ta?ta.value:'').trim();
+      if(q)items.push({type:'impact',quote:q});
+    } else if(type==='founder'){
+      var ta=card.querySelector('.testi-founder-ta');
+      var photoIn=card.querySelector('.testi-photo-url');
+      var m=(ta?ta.value:'').trim();
+      if(m)items.push({type:'founder',message:m,photo:(photoIn?photoIn.value:'')});
+    } else {
+      var ta=card.querySelector('textarea');
+      var nameIn=card.querySelector('.testi-name-in');
+      var locIn=card.querySelector('.testi-loc-in');
+      var starsIn=card.querySelector('.testi-stars-val');
+      var photoIn=card.querySelector('.testi-photo-url');
+      var q=(ta?ta.value:'').trim();
+      var name=(nameIn?nameIn.value:'').trim();
+      var location=(locIn?locIn.value:'').trim();
+      var stars=parseInt(starsIn?starsIn.value:'5')||5;
+      var photo=(photoIn?photoIn.value:'').trim();
+      if(q)items.push({type:'donor',stars:stars,quote:q,name:name,location:location,photo:photo});
+    }
   });
-  if(!items.length){if(status)status.textContent='Add at least one testimonial.';return;}
+  if(!items.length){if(status)status.textContent='Add at least one card first.';return;}
   if(status)status.textContent='Saving...';
   fetch(SUPA+'/rest/v1/mch_photos',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify({id:'testi_data',filename:JSON.stringify(items)})})
-  .then(function(r){if(!r.ok)throw new Error('failed');if(status)status.textContent='Saved '+items.length+' testimonial(s)!';showToast('Testimonials updated!');loadTestimonials();})
+  .then(function(r){if(!r.ok)throw new Error('failed');if(status)status.textContent='Saved '+items.length+' card(s)!';showToast('Section updated!');loadTestimonials();})
   .catch(function(){if(status)status.textContent='Save failed!';showToast('Save failed!');});
 }
 
