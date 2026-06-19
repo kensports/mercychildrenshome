@@ -64,35 +64,15 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.3);}
 .check-mark{width:22px;height:22px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .check-mark svg{width:11px;height:11px;fill:none;stroke:var(--gold);stroke-width:3;stroke-linecap:round;}
 
-/* MEET ALEX */
-.meet-alex{background:var(--navy);padding:100px 5%;}
-.alex-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:380px 1fr;gap:64px;align-items:center;}
-.alex-photo{position:relative;}
-.alex-photo-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;background:var(--navy2);}
-.alex-photo-placeholder{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,var(--navy2),var(--navy3));display:flex;align-items:center;justify-content:center;}
-.alex-badge{position:absolute;bottom:-20px;left:20px;background:var(--gold);padding:18px 22px;}
-.alex-badge .name{font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:var(--navy);}
-.alex-badge .role{font-size:10px;font-weight:700;color:rgba(13,31,60,.7);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;}
-.alex-text{color:#fff;}
-.alex-text p{font-size:16px;color:rgba(255,255,255,.65);line-height:1.9;margin-bottom:18px;}
-.alex-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0;padding:28px 0;border-top:1px solid var(--border-navy);border-bottom:1px solid var(--border-navy);}
-.alex-stat-num{font-family:'Fraunces',serif;font-size:36px;font-weight:900;color:var(--gold);line-height:1;}
-.alex-stat-lbl{font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
-
-/* VOLUNTEERS */
-.volunteers{background:var(--cream);padding:100px 5%;}
-.vol-header{max-width:1100px;margin:0 auto 56px;}
-.vol-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px;}
-.vol-card{background:#fff;border-radius:12px;border:1px solid var(--border);box-shadow:0 2px 14px rgba(13,31,60,.06);padding:32px 20px 28px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .3s,box-shadow .3s;}
-.vol-card:hover{transform:translateY(-6px);box-shadow:0 14px 44px rgba(13,31,60,.13);}
-.vol-photo-wrap{width:100px;height:100px;border-radius:50%;overflow:hidden;border:3px solid var(--gold);margin-bottom:18px;background:var(--navy2);flex-shrink:0;}
-.vol-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
-.vol-photo-placeholder{width:100%;height:100%;background:linear-gradient(135deg,var(--navy2),var(--navy3));display:flex;align-items:center;justify-content:center;}
-.vol-photo-placeholder svg{width:36px;height:36px;fill:none;stroke:rgba(201,168,76,.5);stroke-width:1.5;}
-.vol-name{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:5px;}
-.vol-role{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;}
-.vol-country{font-size:12px;color:var(--text3);margin-top:6px;}
-.vol-bio{font-size:13px;color:var(--text2);line-height:1.65;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);width:100%;}
+/* OUR STORY */
+.our-story{background:#fff;padding:100px 5%;}
+.story-inner{max-width:860px;margin:0 auto;}
+.story-text{font-size:20px;font-family:'Fraunces',serif;font-weight:300;font-style:italic;color:var(--text2);line-height:1.9;margin-top:28px;}
+/* GOOGLE TRANSLATE SUPPRESS */
+.goog-te-banner-frame,.skiptranslate iframe{display:none !important;}
+body{top:0 !important;position:static !important;}
+#goog-gt-tt,.goog-te-balloon-frame{display:none !important;}
+font[style]{background:none !important;box-shadow:none !important;}
 
 /* VALUES */
 .values{background:var(--navy);padding:100px 5%;}
@@ -119,12 +99,12 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
 .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border-navy);padding-top:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .footer-bottom p{font-size:12px;color:rgba(255,255,255,.3);}
 .footer-bottom a{color:var(--gold);text-decoration:none;}
-.wa-float{position:fixed;bottom:28px;left:28px;z-index:500;display:flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:13px 18px;border-radius:100px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s;}
-.wa-float:hover{transform:translateY(-3px);}
-.wa-float svg{width:20px;height:20px;flex-shrink:0;}
+.wa-float{position:fixed;bottom:20px;right:20px;z-index:500;display:flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:9px 14px;border-radius:100px;font-size:12px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);transition:transform .2s;}
+.wa-float:hover{transform:translateY(-2px);}
+.wa-float svg{width:18px;height:18px;flex-shrink:0;}
 
-@media(max-width:900px){.nav-links{display:none;}.hamburger{display:block;}.about-split{grid-template-columns:1fr;}.alex-grid{grid-template-columns:1fr;}.values-grid{grid-template-columns:1fr 1fr;}.footer-top{grid-template-columns:1fr;}}
-@media(max-width:600px){.about-text-side{padding:48px 24px;}.values-grid{grid-template-columns:1fr;}.alex-stat-row{grid-template-columns:1fr 1fr;}.vol-grid{grid-template-columns:repeat(2,1fr);}.vol-card{padding:24px 14px 20px;}.vol-photo-wrap{width:80px;height:80px;}}
+@media(max-width:900px){.nav-links{display:none;}.hamburger{display:block;}.about-split{grid-template-columns:1fr;}.values-grid{grid-template-columns:1fr 1fr;}.footer-top{grid-template-columns:1fr;}}
+@media(max-width:600px){.about-text-side{padding:48px 24px;}.values-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -206,73 +186,14 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
   </div>
 </section>
 
-<!-- MEET ALEX -->
-<section class="meet-alex">
-  <div class="alex-grid">
-    <div class="alex-photo reveal from-left">
-      <div class="alex-photo-placeholder" id="alexPhotoWrap">
-        <svg style="width:80px;height:80px;fill:none;stroke:rgba(201,168,76,.3);stroke-width:1.5;" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </div>
-      <div class="alex-badge">
-        <div class="name">Alex Ssengonzi</div>
-        <div class="role">Founder & Director</div>
-      </div>
-    </div>
-    <div class="alex-text reveal from-right">
-      <div class="label" style="margin-bottom:20px;"><div class="label-line"></div><span style="color:var(--gold);">Meet the Founder</span></div>
-      <h2 class="big-title" style="color:#fff;margin-bottom:20px;">The Heart<br>Behind <em>Mercy</em></h2>
-      <p>Alex Ssengonzi grew up understanding poverty. When he saw children on the streets of Uganda with nowhere to go, he opened his own home — with no funding, no grants, just love and faith.</p>
-      <p>Today he leads a team of dedicated volunteers and staff to care for 32 children in Kasanda Bukuya. His dream is to secure permanent land so these children can have a forever home.</p>
-      <p>"Every child I see on the street reminds me why I can never stop. Until every child has a home, I will keep going."</p>
-      <div class="alex-stat-row">
-        <div><div class="alex-stat-num">32</div><div class="alex-stat-lbl">Children in Care</div></div>
-        <div><div class="alex-stat-num">6+</div><div class="alex-stat-lbl">Years of Service</div></div>
-        <div><div class="alex-stat-num">100%</div><div class="alex-stat-lbl">Dedicated</div></div>
-      </div>
-      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="btn-gold">Help Alex's Mission</a>
-    </div>
-  </div>
-</section>
-
-<!-- VOLUNTEERS -->
-<section class="volunteers">
-  <div class="vol-header">
-    <div class="label reveal"><div class="label-line"></div><span>Our Team</span></div>
-    <h2 class="big-title reveal">Meet Our <em>Volunteers</em></h2>
-    <p style="font-size:16px;color:var(--text2);max-width:560px;line-height:1.8;" class="reveal">From Uganda and around the world — these dedicated people give their time and love to our 32 children every day.</p>
-  </div>
-  <div class="vol-grid" id="volGrid">
-    <div class="vol-card reveal d1">
-      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
-      <div class="vol-name">Debbie</div><div class="vol-role">International Volunteer</div><div class="vol-country">🇺🇸 United States</div>
-    </div>
-    <div class="vol-card reveal d2">
-      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
-      <div class="vol-name">Raymond</div><div class="vol-role">Care & Education</div><div class="vol-country">🇺🇬 Uganda</div>
-    </div>
-    <div class="vol-card reveal d3">
-      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
-      <div class="vol-name">Simpson</div><div class="vol-role">Community Outreach</div><div class="vol-country">🇺🇬 Uganda</div>
-    </div>
-    <div class="vol-card reveal d4">
-      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
-      <div class="vol-name">Ann</div><div class="vol-role">Nutrition & Care</div><div class="vol-country">🇺🇬 Uganda</div>
-    </div>
-    <div class="vol-card reveal d1">
-      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
-      <div class="vol-name">Michael</div><div class="vol-role">International Volunteer</div><div class="vol-country">🌍 International</div>
-    </div>
-    <div class="vol-card reveal d2">
-      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
-      <div class="vol-name">Jonathan</div><div class="vol-role">Education Support</div><div class="vol-country">🌍 International</div>
-    </div>
-    <div class="vol-card reveal d3">
-      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
-      <div class="vol-name">Stensland</div><div class="vol-role">International Volunteer</div><div class="vol-country">🌍 International</div>
-    </div>
-    <div class="vol-card reveal d4">
-      <div class="vol-photo-wrap"><div class="vol-photo-placeholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
-      <div class="vol-name">Sheldon</div><div class="vol-role">International Volunteer</div><div class="vol-country">🌍 International</div>
+<!-- OUR STORY -->
+<section class="our-story">
+  <div class="story-inner">
+    <div class="label reveal"><div class="label-line"></div><span>Our Story</span></div>
+    <h2 class="big-title reveal">How It All <em>Began</em></h2>
+    <p class="story-text reveal" id="ourStoryText">Mercy Children's Home was founded in 2020 in Kasanda Bukuya, Uganda, to give orphaned children a safe home, food, education, and love. Today we care for 32 children.</p>
+    <div style="margin-top:40px;" class="reveal d1">
+      <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="btn-gold">Support Our Mission</a>
     </div>
   </div>
 </section>
@@ -312,6 +233,12 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
     <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="mission.html">Our Mission</a><a href="gallery.html">Gallery</a><a href="impact.html">Our Impact</a><a href="donate.html">Donate</a><a href="privacy.html">Privacy Policy</a></div>
     <div class="footer-col"><h4>Get Involved</h4><a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank">Donate on GoFundMe</a><a href="donate.html">All Donation Methods</a><a href="contact.html">Contact Us</a><a href="https://wa.me/256751442505" target="_blank">WhatsApp Us</a></div>
   </div>
+  <div style="border-top:1px solid var(--border-navy);padding-top:18px;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+    <span style="font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.5px;display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Language</span>
+    <select id="langSelect" onchange="translateSite(this.value)" style="background:var(--navy3);color:#fff;border:1px solid var(--border-navy);border-radius:6px;padding:6px 10px;font-size:12px;font-family:'Manrope',sans-serif;cursor:pointer;">
+      <option value="">English</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option><option value="nl">Nederlands</option><option value="sw">Kiswahili</option><option value="ar">العربية</option><option value="zh-CN">中文</option><option value="pt">Português</option><option value="it">Italiano</option><option value="sv">Svenska</option>
+    </select>
+  </div>
   <div class="footer-bottom">
     <p>© 2020 – <span class="footer-year"></span> Mercy Children's Home Uganda. All rights reserved.</p>
     <p>Built by <a href="https://kenprotech.pro" target="_blank">KENPRO UG</a></p>
@@ -345,27 +272,18 @@ function loadAllPhotos(){
     var aw=document.getElementById('aboutImgWrap');
     if(aw&&pm['gallery_2']){aw.innerHTML='<img src="'+photoUrl(pm['gallery_2'])+'" style="width:100%;height:100%;object-fit:cover;display:block;">';}
 
-    // Alex founder photo
-    var af=document.getElementById('alexPhotoWrap');
-    if(af&&pm['founder']){af.innerHTML='<img src="'+photoUrl(pm['founder'])+'" class="alex-photo-img" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">';}
-
     // Nav logo
     var nl=document.getElementById('navLogoWrap');
     if(nl&&(pm['logo']||pm['gallery_0'])){nl.innerHTML='<img src="'+photoUrl(pm['logo']||pm['gallery_0'])+'" style="width:100%;height:100%;object-fit:cover;">';}
 
-    // Volunteers - load all volunteer_X photos
-    var volNames=['Debbie','Raymond','Simpson','Ann','Michael','Jonathan','Stensland','Sheldon','Spiers','Bushy','Alex'];
-    var volKeys=['volunteer_0','volunteer_1','volunteer_2','volunteer_3','volunteer_4','volunteer_5','volunteer_6','volunteer_7','volunteer_8','volunteer_9','volunteer_10'];
-    var volCards=document.querySelectorAll('.vol-card');
-    volCards.forEach(function(card,i){
-      var key=volKeys[i];
-      if(pm[key]){
-        var photoDiv=card.querySelector('.vol-photo-wrap');
-        if(photoDiv){
-          photoDiv.innerHTML='<img src="'+photoUrl(pm[key])+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="'+volNames[i]+'">';
-        }
-      }
-    });
+    // Our Story text
+    if(pm['about_story']){
+      try{
+        var sd=JSON.parse(pm['about_story']);
+        var st=document.getElementById('ourStoryText');
+        if(st&&sd.text)st.textContent=sd.text;
+      }catch(e){}
+    }
   }).catch(function(e){console.log('Supabase error:',e);});
 }
 
@@ -379,6 +297,12 @@ window.addEventListener('scroll',function(){document.getElementById('navbar').cl
 window.addEventListener('scroll',function(){var b=document.getElementById('scrollProgress');if(!b)return;b.style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';},{passive:true});
 document.querySelectorAll('.footer-year').forEach(function(el){el.textContent=new Date().getFullYear();});
 window.addEventListener('load',function(){loadAllPhotos();initReveal();});
+function setTransCookie(lang){var domain=location.hostname;if(!lang){var e=';expires=Thu, 01 Jan 1970 00:00:00 GMT';document.cookie='googtrans=;path=/'+e;document.cookie='googtrans=;path=/;domain='+domain+e;document.cookie='googtrans=;path=/;domain=.'+domain+e;return;}var v='/en/'+lang;document.cookie='googtrans='+v+';path=/';document.cookie='googtrans='+v+';path=/;domain='+domain;document.cookie='googtrans='+v+';path=/;domain=.'+domain;}
+function translateSite(lang){setTransCookie(lang);location.reload();}
+(function(){try{var m=document.cookie.match(/googtrans=\/en\/([a-zA-Z-]+)/);var s=document.getElementById('langSelect');if(s)s.value=m?m[1]:'';}catch(e){}})();
+window.googleTranslateElementInit=function(){new google.translate.TranslateElement({pageLanguage:'en',autoDisplay:false},'google_translate_hidden');};
 </script>
+<div id="google_translate_hidden" style="display:none;"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

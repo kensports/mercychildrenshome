@@ -112,8 +112,9 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
 .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border-navy);padding-top:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .footer-bottom p{font-size:12px;color:rgba(255,255,255,.3);}
 .footer-bottom a{color:var(--gold);text-decoration:none;}
-.wa-float{position:fixed;bottom:28px;left:28px;z-index:500;display:flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:13px 18px;border-radius:100px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s;}
-.wa-float:hover{transform:translateY(-3px);}.wa-float svg{width:20px;height:20px;flex-shrink:0;}
+.wa-float{position:fixed;bottom:20px;right:20px;z-index:500;display:flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:9px 14px;border-radius:100px;font-size:12px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);transition:transform .2s;}
+.wa-float:hover{transform:translateY(-2px);}.wa-float svg{width:18px;height:18px;flex-shrink:0;}
+.goog-te-banner-frame,.skiptranslate iframe{display:none !important;}body{top:0 !important;position:static !important;}#goog-gt-tt,.goog-te-balloon-frame{display:none !important;}font[style]{background:none !important;box-shadow:none !important;}
 #toast{position:fixed;bottom:28px;right:28px;background:var(--navy);color:#fff;padding:14px 22px;font-size:13px;font-weight:600;border-left:3px solid var(--gold);z-index:9999;opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s;pointer-events:none;}
 #toast.show{opacity:1;transform:none;}
 
@@ -316,6 +317,22 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
       <a href="https://wa.me/256751442505" target="_blank">WhatsApp Us</a>
     </div>
   </div>
+  <div style="border-top:1px solid var(--border-navy);padding-top:18px;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+    <span style="font-size:11px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:6px;"><svg style="width:13px;height:13px;fill:none;stroke:rgba(255,255,255,.4);stroke-width:2;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>Language</span>
+    <select id="langSelect" onchange="translateSite(this.value)" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:5px 10px;font-size:12px;font-family:'Manrope',sans-serif;border-radius:4px;cursor:pointer;outline:none;">
+      <option value="">🇬🇧 English</option>
+      <option value="fr">🇫🇷 Français</option>
+      <option value="de">🇩🇪 Deutsch</option>
+      <option value="es">🇪🇸 Español</option>
+      <option value="nl">🇳🇱 Nederlands</option>
+      <option value="sw">🇰🇪 Kiswahili</option>
+      <option value="ar">🇸🇦 العربية</option>
+      <option value="zh-CN">🇨🇳 中文</option>
+      <option value="pt">🇧🇷 Português</option>
+      <option value="it">🇮🇹 Italiano</option>
+      <option value="sv">🇸🇪 Svenska</option>
+    </select>
+  </div>
   <div class="footer-bottom">
     <p>© 2020 – <span class="footer-year"></span> Mercy Children's Home Uganda. All rights reserved.</p>
     <p>Built by <a href="https://kenprotech.pro" target="_blank">KENPRO UG</a></p>
@@ -397,5 +414,11 @@ window.addEventListener('load',function(){
   }).catch(function(){});
   initReveal();
 });
+function setTransCookie(lang){var domain=location.hostname;if(!lang){var e=';expires=Thu, 01 Jan 1970 00:00:00 GMT';document.cookie='googtrans=;path=/'+e;document.cookie='googtrans=;path=/;domain='+domain+e;document.cookie='googtrans=;path=/;domain=.'+domain+e;return;}var v='/en/'+lang;document.cookie='googtrans='+v+';path=/';document.cookie='googtrans='+v+';path=/;domain='+domain;document.cookie='googtrans='+v+';path=/;domain=.'+domain;}
+function translateSite(lang){setTransCookie(lang);location.reload();}
+(function(){try{var m=document.cookie.match(/googtrans=\/en\/([a-zA-Z-]+)/);var s=document.getElementById('langSelect');if(s)s.value=m?m[1]:'';}catch(e){}})();
+window.googleTranslateElementInit=function(){new google.translate.TranslateElement({pageLanguage:'en',autoDisplay:false},'google_translate_hidden');};
 </script>
+<div id="google_translate_hidden" style="display:none;"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body></html>

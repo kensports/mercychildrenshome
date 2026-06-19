@@ -73,8 +73,9 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
 .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border-navy);padding-top:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .footer-bottom p{font-size:12px;color:rgba(255,255,255,.3);}
 .footer-bottom a{color:var(--gold);text-decoration:none;}
-.wa-float{position:fixed;bottom:28px;left:28px;z-index:500;display:flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:13px 18px;border-radius:100px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s;}
-.wa-float:hover{transform:translateY(-3px);}.wa-float svg{width:20px;height:20px;flex-shrink:0;}
+.wa-float{position:fixed;bottom:20px;right:20px;z-index:500;display:flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:9px 14px;border-radius:100px;font-size:12px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);transition:transform .2s;}
+.wa-float:hover{transform:translateY(-2px);}.wa-float svg{width:18px;height:18px;flex-shrink:0;}
+.goog-te-banner-frame,.skiptranslate iframe{display:none !important;}body{top:0 !important;position:static !important;}#goog-gt-tt,.goog-te-balloon-frame{display:none !important;}font[style]{background:none !important;box-shadow:none !important;}
 @media(max-width:900px){.nav-links{display:none;}.hamburger{display:block;}.stats-big-grid{grid-template-columns:1fr 1fr;}.footer-top{grid-template-columns:1fr;}}
 @media(max-width:600px){.stats-big-grid{grid-template-columns:1fr;}}
 </style>
@@ -146,6 +147,22 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
     <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="mission.html">Our Mission</a><a href="gallery.html">Gallery</a><a href="impact.html">Our Impact</a><a href="donate.html">Donate</a><a href="privacy.html">Privacy Policy</a></div>
     <div class="footer-col"><h4>Get Involved</h4><a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank">Donate on GoFundMe</a><a href="donate.html">All Donation Methods</a><a href="contact.html">Contact Us</a><a href="https://wa.me/256751442505" target="_blank">WhatsApp Us</a></div>
   </div>
+  <div style="border-top:1px solid var(--border-navy);padding-top:18px;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+    <span style="font-size:11px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:6px;"><svg style="width:13px;height:13px;fill:none;stroke:rgba(255,255,255,.4);stroke-width:2;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>Language</span>
+    <select id="langSelect" onchange="translateSite(this.value)" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:5px 10px;font-size:12px;font-family:'Manrope',sans-serif;border-radius:4px;cursor:pointer;outline:none;">
+      <option value="">🇬🇧 English</option>
+      <option value="fr">🇫🇷 Français</option>
+      <option value="de">🇩🇪 Deutsch</option>
+      <option value="es">🇪🇸 Español</option>
+      <option value="nl">🇳🇱 Nederlands</option>
+      <option value="sw">🇰🇪 Kiswahili</option>
+      <option value="ar">🇸🇦 العربية</option>
+      <option value="zh-CN">🇨🇳 中文</option>
+      <option value="pt">🇧🇷 Português</option>
+      <option value="it">🇮🇹 Italiano</option>
+      <option value="sv">🇸🇪 Svenska</option>
+    </select>
+  </div>
   <div class="footer-bottom"><p>© 2020 – <span class="footer-year"></span> Mercy Children's Home Uganda. All rights reserved.</p><p>Built by <a href="https://kenprotech.pro" target="_blank">KENPRO UG</a></p></div>
 </footer>
 <a class="wa-float" href="https://wa.me/256751442505?text=Hello" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Chat With Us</a>
@@ -166,5 +183,11 @@ window.addEventListener('load',function(){
   });
   initReveal();
 });
+function setTransCookie(lang){var domain=location.hostname;if(!lang){var e=';expires=Thu, 01 Jan 1970 00:00:00 GMT';document.cookie='googtrans=;path=/'+e;document.cookie='googtrans=;path=/;domain='+domain+e;document.cookie='googtrans=;path=/;domain=.'+domain+e;return;}var v='/en/'+lang;document.cookie='googtrans='+v+';path=/';document.cookie='googtrans='+v+';path=/;domain='+domain;document.cookie='googtrans='+v+';path=/;domain=.'+domain;}
+function translateSite(lang){setTransCookie(lang);location.reload();}
+(function(){try{var m=document.cookie.match(/googtrans=\/en\/([a-zA-Z-]+)/);var s=document.getElementById('langSelect');if(s)s.value=m?m[1]:'';}catch(e){}})();
+window.googleTranslateElementInit=function(){new google.translate.TranslateElement({pageLanguage:'en',autoDisplay:false},'google_translate_hidden');};
 </script>
+<div id="google_translate_hidden" style="display:none;"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body></html>
