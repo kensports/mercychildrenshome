@@ -80,7 +80,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
 <div class="mob-menu" id="mobMenu">
   <div class="mob-top"><span style="font-family:'Fraunces',serif;font-size:17px;color:#fff;">Mercy Children's Home</span><button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open')">✕</button></div>
   <a href="index.html">Home</a><a href="about.html">About</a><a href="mission.html">Mission</a><a href="gallery.html" style="color:var(--gold);">Gallery</a><a href="impact.html">Impact</a><a href="contact.html">Contact</a>
-  <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="mob-donate-link">Donate Now</a>
+  <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" rel="noopener noreferrer" class="mob-donate-link">Donate Now</a>
 </div>
 <nav id="navbar">
   <a class="nav-logo" href="index.html">
@@ -110,7 +110,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
       <div class="label reveal"><div class="label-line"></div><span>All Photos</span></div>
       <h2 class="big-title reveal" style="margin-bottom:0;">Children, Volunteers<br>& <em>Daily Life</em></h2>
     </div>
-    <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" class="btn-gold reveal">Support These Children</a>
+    <a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" rel="noopener noreferrer" class="btn-gold reveal">Support These Children</a>
   </div>
   <div class="gallery-masonry" id="galleryGrid">
     <!-- Photos load from Supabase -->
@@ -127,7 +127,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
 <div id="lightbox" onclick="if(event.target===this)closeLB()">
   <button onclick="closeLB()" style="position:absolute;top:20px;right:24px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:44px;height:44px;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
   <button onclick="lbNav(-1)" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:48px;height:48px;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
-  <img id="lightboxImg"/><div id="lightboxCounter"></div>
+  <img id="lightboxImg" alt="Enlarged photo from Mercy Children&#39;s Home"/><div id="lightboxCounter"></div>
   <button onclick="lbNav(1)" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:48px;height:48px;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;">›</button>
 </div>
 
@@ -140,7 +140,7 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
   <div class="footer-top">
     <div><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;"><div id="footerLogoWrap" style="width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0;background:var(--navy2);"><img src="https://qbyisxlqpuwowbtrying.supabase.co/storage/v1/object/public/mercy-photos/logo_1777409225544.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Mercy Logo"></div><span style="font-family:'Fraunces',serif;font-size:17px;color:#fff;">Mercy Children's Home</span></div><div class="footer-brand"><p>Shelter, love and opportunity for 32 orphaned children in Kasanda Bukuya, Uganda since 2020.</p></div></div>
     <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="mission.html">Our Mission</a><a href="gallery.html">Gallery</a><a href="impact.html">Our Impact</a><a href="donate.html">Donate</a><a href="privacy.html">Privacy Policy</a></div>
-    <div class="footer-col"><h4>Get Involved</h4><a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank">Donate on GoFundMe</a><a href="donate.html">All Donation Methods</a><a href="contact.html">Contact Us</a><a href="https://wa.me/256751442505" target="_blank">WhatsApp Us</a></div>
+    <div class="footer-col"><h4>Get Involved</h4><a href="https://www.gofundme.com/f/secure-a-safe-home-for-orphaned-children-in-uganda" target="_blank" rel="noopener noreferrer">Donate on GoFundMe</a><a href="donate.html">All Donation Methods</a><a href="contact.html">Contact Us</a><a href="https://wa.me/256751442505" target="_blank" rel="noopener noreferrer">WhatsApp Us</a></div>
   </div>
   <div style="border-top:1px solid var(--border-navy);padding-top:18px;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
     <span style="font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.5px;display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Language</span>
@@ -148,9 +148,9 @@ footer{background:var(--navy);border-top:1px solid var(--border-navy);padding:48
       <option value="">English</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option><option value="nl">Nederlands</option><option value="sw">Kiswahili</option><option value="ar">العربية</option><option value="zh-CN">中文</option><option value="pt">Português</option><option value="it">Italiano</option><option value="sv">Svenska</option>
     </select>
   </div>
-  <div class="footer-bottom"><p>© 2020 – <span class="footer-year"></span> Mercy Children's Home Uganda. All rights reserved.</p><p>Built by <a href="https://kenprotech.pro" target="_blank">KENPRO UG</a></p></div>
+  <div class="footer-bottom"><p>© 2020 – <span class="footer-year"></span> Mercy Children's Home Uganda. All rights reserved.</p><p>Built by <a href="https://kenprotech.pro" target="_blank" rel="noopener noreferrer">KENPRO UG</a></p></div>
 </footer>
-<a class="wa-float" href="https://wa.me/256751442505?text=Hello" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Chat With Us</a>
+<a class="wa-float" href="https://wa.me/256751442505?text=Hello" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Chat With Us</a>
 <script>
 
 var SUPA='https://qbyisxlqpuwowbtrying.supabase.co';var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFieWlzeGxxcHV3b3didHJ5aW5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NzczNDMsImV4cCI6MjA5MTE1MzM0M30.D5SKyI3Ay5uFoVvxEOYIKKPnSORxwYoP0PPqdB1OTao';var BUCKET='mercy-photos';
